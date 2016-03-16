@@ -199,7 +199,7 @@ JHtml::_('formbehavior.chosen', '.chosen-select');
      <td>
        <?php echo $row->payment_name?>
      </td>
-     <?php }?>
+     <?php }?> 
      <?php if (!$jshopConfig->without_shipping){?>
      <td>
        <?php echo $row->shipping_name?>
