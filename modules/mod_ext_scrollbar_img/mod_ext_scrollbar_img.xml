@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="2.5"
+	client="site"
+	method="upgrade">
+	<name>EXT Scrollbar Images</name>
+	<author>Ext-Joom.com</author>
+	<creationDate>20/03/2012</creationDate>
+	<copyright>Copyright (C) 2011-2014 Ext-Joom.com. All Rights Reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>extjoom@gmail.com</authorEmail>
+	<authoralt>http://www.ext-joom.com</authoralt>
+	<version>2.0</version>
+	<description>The module displays a scrollbar of images</description>
+	<files>	
+		<filename module="mod_ext_scrollbar_img">mod_ext_scrollbar_img.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_ext_scrollbar_img.php</filename>
+		<filename>mod_ext_scrollbar_img.xml</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+		<folder>tmpl</folder>
+		<folder>js</folder>	       
+    </files>
+	
+	<languages>	
+		<language tag="en-GB">en-GB.mod_ext_scrollbar_img.ini</language>
+		<language tag="en-GB">en-GB.mod_ext_scrollbar_img.sys.ini</language>
+	</languages>
+		
+	<config>
+		<fields name="params">
+			
+			<fieldset name="basic">
+				
+				
+				<field
+					name="ext_load_core"
+					type="list"
+					default="1"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_LOAD_CORE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_LOAD_CORE_DESC">
+					<option	value="0">JNO</option>
+					<option	value="1">JYES</option>
+				</field>
+				
+				<field
+					name="ext_load_more"
+					type="list"
+					default="1"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_LOAD_MORE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_LOAD_MORE_DESC">
+					<option	value="0">JNO</option>
+					<option	value="1">JYES</option>
+				</field>			
+			
+			
+				<field 
+					name="width" 
+					type="text" 
+					default="200"
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_WIDTH_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_WIDTH_DESC"/>
+						
+				<field 
+					name="sum_width" 
+					type="text" 
+					default="2000"
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_SUM_WIDTH_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_SUM_WIDTH_DESC"/>
+				<field 
+					name="height" 
+					type="text" 
+					default="300"
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_HEIGHT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_HEIGHT_DESC"/>
+				<field 
+					name="width_knob" 
+					type="text" 
+					default="100"
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_WIDTH_KNOB_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_WIDTH_KNOB_DESC"/>	
+				<field 
+					name="height_knob" 
+					type="text" 
+					default="15"
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_HEIGHT_KNOB_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_HEIGHT_KNOB_DESC"/>
+								
+				<field 
+					name="color_knob"
+					type="color"
+					default="#FFFFFF"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_COLOR_KNOB_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_COLOR_KNOB_DESC"/>
+				
+				
+				<field 
+					name="height_bar" 
+					type="text" 
+					default="17"
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_HEIGHT_BAR_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_HEIGHT_BAR_DESC"/>
+						
+				<field 
+					name="color_bar"
+					type="color"
+					default="#333333"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_COLOR_BAR_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_COLOR_BAR_DESC"/>
+				
+				<field 
+					name="duration_scroll" 
+					type="text" 
+					default="2000"
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_DURATION_SCROLL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_DURATION_SCROLL_DESC"/>
+				<field 
+					name="duration_knob" 
+					type="text" 
+					default="1000" 
+					filter="int"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_DURATION_KNOB_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_DURATION_KNOB_DESC"/>
+			
+			</fieldset>
+			
+			<fieldset name="OPTIONS_IMG">
+				<field type="spacer" label="IMAGE_SPACER1" />
+				<field 
+					name="img1"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt1" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url1" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target1"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+			
+			<field type="spacer" label="IMAGE_SPACER2" />
+				<field 
+					name="img2"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt2" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url2" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target2"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field> 
+			
+			<field type="spacer" label="IMAGE_SPACER3" />
+				<field 
+					name="img3"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt3" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url3" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target3"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field> 
+			
+			<field type="spacer" label="IMAGE_SPACER4" />
+				<field 
+					name="img4"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt4" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url4" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target4"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+			<field type="spacer" label="IMAGE_SPACER5" />
+				<field 
+					name="img5"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt5" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url5" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target5"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+			
+<field type="spacer" label="IMAGE_SPACER6" />
+				<field 
+					name="img6"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt6" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url6" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target6"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+
+<field type="spacer" label="IMAGE_SPACER7" />
+				<field 
+					name="img7"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt7" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url7" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target7"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+			<field type="spacer" label="IMAGE_SPACER8" />
+				<field 
+					name="img8"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt8" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url8" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target8"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+			
+			<field type="spacer" label="IMAGE_SPACER9" />
+				<field 
+					name="img9"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt9" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url9" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target9"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+			
+			<field type="spacer" label="IMAGE_SPACER10" />
+				<field 
+					name="img10"					
+					default="" 
+					type="media"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_IMAGE_DESC" />
+					
+				<field 
+					name="alt10" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_ALT_DESC"/>
+				
+				<field 
+					name="url10" 
+					type="text" 
+					default="" 
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_LABEL" 
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_URL_DESC"/>	
+				<field
+					name="target10"
+					type="list"
+					default="_self"
+					label="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_LABEL"
+					description="MOD_EXT_SCROLLBAR_IMG_FIELD_TARGET_DESC">
+					<option	value="_blank">_blank</option>
+					<option	value="_self">_self</option>
+					<option	value="_parent">_parent</option>
+					<option	value="_top">_top</option>
+				</field>
+
+			</fieldset>
+			
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+					
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option
+						value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="search" method="upgrade">
+	<name>adminajax</name>
+	<author>v.repij</author>
+	<creationDate>08.01.2016</creationDate>
+	<copyright></copyright>
+	<license>Open Source License, GNU GPL</license>
+	<authorEmail>v.repij@gmail.com</authorEmail>
+	<version>4.0.1</version>
+	<description>adminajax</description>
+	<files>
+		<filename plugin="adminajax">adminajax.php</filename>
+	</files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

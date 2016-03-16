@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5.0" method="upgrade">
+    <name>kassa</name>
+    <author>VRepij</author>
+    <creationDate>11/08/2014</creationDate>
+    <license>Copyright (c) 2012 VRepij - All Rights Reserved</license>
+    <version>1.0.1</version>
+    <description>Joomla kassa Component</description>
+
+    <!-- administration part -->
+<administration>
+
+    <files folder="admin">
+		<filename>kassa.php</filename>
+		<filename>index.html</filename>
+    </files>
+	
+</administration>
+
+    <params>
+	
+    </params>
+
+</extension>

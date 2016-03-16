@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="basic" label="basic" >
+
+        <field name="typesearch" type="hidden" />
+
+        <field name="name" type="text" label="Название"
+               description="JFIELD_TITLE_DESC"
+               class="input-xxlarge input-large-text"
+               size="50"
+               required="true" />
+
+        <field name="enabled" type="list" label="JSTATUS"
+               description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+            <option value="1">
+                JYES</option>
+            <option value="0">
+                JNO</option>
+        </field>
+
+        <field name="url" type="text" label="url"
+               description="url"
+               class="input-xxlarge input-large-text"
+               size="50"
+         />
+
+        <field name="type" type="list" label="Тип акции"
+               description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+               filter="intval" size="1" required="true"
+                >
+            <option value="0">
+                Выберите тип акции</option>
+            <option value="10">
+                Баннер</option>
+            <option value="1">
+                Беспроцентный кредит</option>
+            <option value="7">
+                бесплатная доставка</option>
+            <!--<option value="2">
+                купи 2 шт и заплати за 2-й 50% + вместе дешевле</option>-->
+            <option value="4">
+                + подарок</option>
+            <option value="6">
+                супер цена</option>
+        </field>
+
+        <field name="banner" type="list" label="Статический Баннер"
+               description="Статический Баннер" class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+            <option value="1">
+                JYES</option>
+            <option value="0">
+                JNO</option>
+        </field>
+
+        <field name="category_parent_id" type="list" label="Выберите корневую категорию:"
+               description="Выберите корневую категорию:" class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+        </field>
+
+        <field name="image" type="media" label="Выберите изображение"
+               description ="Выберите изображение"/>
+
+        <field name="date_start" type="calendar" format="%Y-%m-%d %H:%M:%S" size="22" label="Дата старта" />
+
+        <field name="date_end" type="calendar" format="%Y-%m-%d %H:%M:%S" size="22" label="Дата окончания" />
+
+        <field name="show_home" type="list" label="Показывать баннер на главной:"
+               description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+            <option value="1">
+                JYES</option>
+            <option value="0">
+                JNO</option>
+        </field>
+
+        <field name="typeeffect" type="list" label="Тип еффекта:"
+               class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+            <option value="1">
+                Еффект 1</option>
+            <option value="2">
+                Картинка</option>
+            <option value="3">
+                Видео</option>
+        </field>
+
+        <field name="home_banner" type="media" label="Изображение на главной"
+               description ="Баннер на главной"/>
+
+        <field name="home_banner_name" type="text" label="Название для баннера"
+               class="input-xxlarge input-large-text"
+               size="50"
+               description ="Название для баннера"/>
+
+        <field name="home_banner_description" type="text" label="Описание для баннера"
+               class="input-xxlarge input-large-text"
+               size="50"
+               description ="Описание для баннера"/>
+
+        <field name="backgroundcolor" type="color" default="#eee"
+               label="Бекграунд для баннера"
+               description="Бекграунд для баннера" />
+
+        <field name="show_category" type="list" label="Показывать баннер в категории:"
+               description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+            <option value="1">
+                JYES</option>
+            <option value="0">
+                JNO</option>
+        </field>
+
+        <field name="category_banner_id" type="list" label="Выберите категорию:"
+               description="Выберите категорию:" class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+        </field>
+
+        <field name="link_enabled" type="list" label="Ссылка? :"
+               description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+               filter="intval" size="1" default="1"
+                >
+            <option value="1">
+                JYES</option>
+            <option value="0">
+                JNO</option>
+        </field>
+
+        <field name="custom_link" type="text" label="ссылка"
+               description="url"
+               class="input-xxlarge input-large-text"
+               size="50" />
+
+        <field name="category_banner" type="media" label="Баннер в категории"
+               description ="Баннер в категории"/>
+
+        <field name="description" type="textarea"
+               label="Описание акции" description="Описание акции"/>
+
+        <field name="meta_title" type="text" label="meta_title"
+               description="url"
+               class="input-xxlarge input-large-text"
+               size="50" />
+
+        <field name="meta_description" type="textarea"
+               label="meta_description" description="meta_description"/>
+
+        <field name="meta_keywords" type="textarea"
+               label="meta_description" description="meta_keywords"/>
+
+        <field name="text" type="editor"
+               label="Текст акции" description="Текст акции"
+               filter="JComponentHelper::filterText" buttons="false" />
+
+        <field name="id"  type="text" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
+               description ="JGLOBAL_FIELD_ID_DESC" size="10" default="0"
+               readonly="true" />
+	</fieldset>
+
+</form>

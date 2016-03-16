@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5.0" type="plugin" group="jshoppingproducts" method="upgrade">
+	<name>vrfilter</name>
+	<author>v.repij</author>
+	<creationDate>October, 2014</creationDate>
+	<copyright>Copyright © v.repij.</copyright>
+	<authorEmail>v.repij@gmail.com</authorEmail>
+    <version>1.0.0</version>
+	<description>vrfilter</description>
+	<files>
+		<filename plugin="vrfilter">vrfilter.php</filename>
+		<filename>index.html</filename>
+	</files>
+</extension>

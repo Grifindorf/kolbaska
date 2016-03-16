@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" version="2.5" method="upgrade">
+    <name>EXT Owl Carousel content for K2</name>
+    <author>Eco-Joom.com</author>
+	<creationDate>06/12/2013</creationDate>
+	<copyright>Copyright (C) 2011-2015 Eco-Joom.com. All Rights Reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>extjoom@gmail.com</authorEmail>
+	<authoralt>https://eco-joom.com/</authoralt>
+	<version>1.1</version>
+    <description>EXT Owl Carousel content for K2 </description>
+   
+   <files>
+        <filename module="mod_ext_owl_carousel_k2_content">mod_ext_owl_carousel_k2_content.php</filename>
+        <filename>helper.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_ext_owl_carousel_k2_content.php</filename>
+		<filename>mod_ext_owl_carousel_k2_content.xml</filename>
+		<folder>assets</folder>
+		<folder>tmpl</folder>  
+    </files>
+	
+	<languages>	
+		<language tag="en-GB">en-GB.mod_ext_owl_carousel_k2_content.ini</language>
+		<language tag="en-GB">en-GB.mod_ext_owl_carousel_k2_content.sys.ini</language>
+		<language tag="ru-RU">ru-RU.mod_ext_owl_carousel_k2_content.ini</language>
+		<language tag="ru-RU">ru-RU.mod_ext_owl_carousel_k2_content.sys.ini</language>
+	</languages>
+	
+	
+    <config>
+        <fields name="params">
+           
+		   <fieldset name="basic" addfieldpath="/administrator/components/com_k2/elements/">
+               
+				<field 
+					name="ext_generate_id" 
+					type="radio"
+					class="btn-group"
+					default="1"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_GENERATE_ID_LABEL"
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_GENERATE_ID_DESC"
+					filter="int">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				
+				<field 
+					name="ext_id" 
+					type="text" 
+					default="id" 
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_ID_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_ID_DESC"/>
+				
+				<field
+					name="ext_load_jquery"
+					type="radio"
+					default="1"
+					class="btn-group"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_LOAD_JQ_LABEL"
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_LOAD_JQ_DESC" >
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				
+				<field
+					name="ext_jquery_ver"
+					type="text"
+					default="1.9.1"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_JQUERYVER_LABEL"
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_JQUERYVER_DESC" />
+
+				<field
+					name="ext_load_base"
+					type="radio"
+					default="1"
+					class="btn-group"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_LOAD_BASE_LABEL"
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_LOAD_BASE_DESC" >
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>			
+				
+				
+				<field
+					name="ext_navigation"
+					type="radio"
+					default="true"
+					class="btn-group"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_NAVIGATION_LABEL"
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_NAVIGATION_DESC" >
+					<option value="false">JNO</option>
+					<option value="true">JYES</option>
+				</field>
+				<field
+					name="ext_pagination"
+					type="radio"
+					default="true"
+					class="btn-group"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_PAGINATION_LABEL"
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_PAGINATION_DESC" >
+					<option value="false">JNO</option>
+					<option value="true">JYES</option>
+				</field>
+				<field
+					name="ext_paginationnumbers"
+					type="radio"
+					default="false"
+					class="btn-group"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_PAGINATIONNUMBERS_LABEL"
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_PAGINATIONNUMBERS_DESC" >
+					<option value="false">JNO</option>
+					<option value="true">JYES</option>
+				</field>
+				
+				
+				<field 
+					name="ext_items" 
+					type="text" 
+					default="4" 
+					filter="int"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMS_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMS_DESC"/>
+
+
+			   
+             
+                <field name="source" type="list" default="filter" label="K2_SOURCE" description="">
+                    <option value="filter">K2_RETRIEVE_ITEMS_FROM_CATEGORIES</option>
+                    <option value="specific">K2_SELECT_SPECIFIC_ITEMS</option>
+                </field>
+                <field name="" type="header" default="K2_RETRIEVE_ITEMS_FROM_CATEGORIES" label="" description=""/>
+                <field name="catfilter" type="radio" default="0" label="K2_CATEGORY_FILTER" description="">
+                    <option value="0">K2_ALL</option>
+                    <option value="1">K2_SELECT</option>
+                </field>
+                <field name="category_id" type="categoriesmultiple" default="" label="K2_SELECT_ONE_OR_MORE_CATEGORIES" description="K2_SELECT_ONE_ORE_MORE_CATEGORIES_FOR_WHICH_YOU_WANT_TO_FILTER_AN_ITEMS_LIST_SELECT_NONE_TO_FETCH_ITEMS_FROM_ALL_CATEGORIES"/>
+                <field
+					name="getChildren" 
+					type="radio"
+					class="btn-group"
+					default="0"
+					label="K2_FETCH_ITEMS_FROM_CHILDREN_CATEGORIES" 
+					description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itemCount" type="text" default="10" label="K2_ITEM_COUNT" description=""/>
+                <field name="itemsOrdering" type="list" default="" label="K2_ITEM_ORDERING" description="">
+                    <option value="">K2_DEFAULT</option>
+                    <option value="date">K2_OLDEST_FIRST</option>
+                    <option value="rdate">K2_MOST_RECENT_FIRST</option>
+                    <option value="publishUp">K2_RECENTLY_PUBLISHED</option>
+                    <option value="alpha">K2_TITLE_ALPHABETICAL</option>
+                    <option value="ralpha">K2_TITLE_REVERSEALPHABETICAL</option>
+                    <option value="order">K2_ORDERING</option>
+                    <option value="rorder">K2_ORDERING_REVERSE</option>
+                    <option value="hits">K2_MOST_POPULAR</option>
+                    <option value="best">K2_HIGHEST_RATED</option>
+                    <option value="comments">K2_MOST_COMMENTED</option>
+                    <option value="modified">K2_LATEST_MODIFIED</option>
+                    <option value="rand">K2_RANDOM_ORDERING</option>
+                </field>
+                <field name="FeaturedItems" type="list" default="1" label="K2_FEATURED_ITEMS" description="">
+                    <option value="0">K2_HIDE</option>
+                    <option value="1">K2_SHOW</option>
+                    <option value="2">K2_SHOW_ONLY_FEATURED_ITEMS</option>
+                </field>
+                <field name="popularityRange" type="list" default="" label="K2_TIME_RANGE_IF_ORDERING_IS_SET_TO_MOST_POPULAR_OR_MOST_COMMENTED" description="">
+                    <option value="">K2_ALL_TIME</option>
+                    <option value="1">K2_1_DAY</option>
+                    <option value="3">K2_3_DAYS</option>
+                    <option value="7">K2_1_WEEK</option>
+                    <option value="15">K2_2_WEEKS</option>
+                    <option value="30">K2_1_MONTH</option>
+                    <option value="90">K2_3_MONTHS</option>
+                    <option value="180">K2_6_MONTHS</option>
+                </field>
+                <field 
+					name="videosOnly"
+					type="radio"
+					class="btn-group"
+					default="0"
+					label="K2_FETCH_ONLY_ITEMS_WITH_VIDEOS"
+					description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="" type="header" default="K2_SELECT_SPECIFIC_ITEMS" label="" description=""/>
+                <field name="item" type="item" default="" label="K2_ADD_ITEMS" description="K2_USE_THIS_TO_ADD_ITEMS_TO_THE_LIST_BELOW"/>
+                <field name="items" type="items" default="" label="K2_DRAG_AND_DROP_TO_REORDER_ITEMS" description="K2_DRAG_AND_DROP_TO_REORDER_ITEMS_CLICK_THE_REMOVE_ICON_TO_REMOVE_AN_ITEM_FROM_THE_LIST"/>                
+				<field name="" type="header" default="K2_ITEM_VIEW_OPTIONS_COMMON_FOR_EITHER_SOURCE" label="" description=""/>
+                
+				
+				<field 
+					name="itemTitle" 
+					type="radio"
+					class="btn-group"
+					default="1" 
+					label="K2_TITLE" 
+					description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+					name="itemIntroText"
+					class="btn-group"
+					type="radio"
+					default="0"
+					label="K2_INTROTEXT"
+					description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itemIntroTextWordLimit" type="text" size="4" default="" label="K2_INTROTEXT_WORD_LIMIT" description="K2_LEAVE_BLANK_TO_DIASBLE_IF_YOU_ENABLE_THIS_OPTION_ALL_HTML_TAGS_FROM_THE_TEXT_WILL_BE_CLEANED_UP_TO_MAKE_SURE_THE_HTML_STRUCTURE_OF_THE_SITE_DOES_NOT_BRAKE"/>
+                <field 
+					name="itemImage"
+					type="radio" 
+					class="btn-group"
+					default="1"
+					label="K2_IMAGE"
+					description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itemImgSize" type="list" default="Small" label="K2_IMAGE_SIZE" description="">
+                    <option value="XSmall">K2_XSMALL</option>
+                    <option value="Small">K2_SMALL</option>
+                    <option value="Medium">K2_MEDIUM</option>
+                    <option value="Large">K2_LARGE</option>
+                    <option value="XLarge">K2_XLARGE</option>
+                </field>
+                <field 
+					name="itemCategory"
+					type="radio"
+					class="btn-group"
+					default="1"
+					label="K2_CATEGORY"
+					description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>       
+                <field
+					name="itemReadMore" 
+					type="radio"
+					class="btn-group"
+					default="0"
+					label="K2_READ_MORE_LINK"
+					description="K2_THIS_OPTION_IS_NOT_APPLICABLE_FOR_AN_ITEM_IN_WHICH_THE_FULLTEXT_BLOCK_IS_EMPTY">
+                    <option value="0">JNO</option>
+					<option value="1">JYES</option>
+                </field>
+                <field 
+					name="itemExtraFields"
+					type="radio" 
+					class="btn-group"
+					default="0"
+					label="K2_EXTRA_FIELDS"
+					description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>               
+            </fieldset>
+           
+		   
+		   
+			<fieldset name="OPTIONS_OWL">
+				<field type="spacer" label="OPTIONS_OWL_PRO_SPACER" />
+				<field type="spacer" label="OPTIONS_OWL_PRO_INFO_SPACER" />
+				
+				
+				<field 
+					name="ext_itemsdesktop" 
+					type="text"
+					disabled="true"
+					default="false"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSDESKTOP_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSDESKTOP_DESC"/>
+				<field 
+					name="ext_itemsdesktopsmall" 
+					type="text"
+					disabled="true"
+					default="false"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSDESKTOPSMALL_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSDESKTOP_DESC"/>
+				<field 
+					name="ext_itemstablet" 
+					type="text"
+					disabled="true"
+					default="[768,2]"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSTABLET_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSDESKTOP_DESC"/>
+				<field 
+					name="ext_itemstabletsmall" 
+					type="text"
+					disabled="true"
+					default="false"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSTABLETSMALL_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSDESKTOP_DESC"/>
+				<field 
+					name="ext_itemsmobile" 
+					type="text"
+					disabled="true"
+					default="[479,1]"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSMOBILE_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSDESKTOP_DESC"/>
+				
+				<field 
+					name="ext_itemscustom" 
+					type="textarea"
+					disabled="true"
+					default="false"
+					label="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSCUSTOM_LABEL" 
+					description="MOD_EXT_OWL_CAROUSEL_K2_CONTENT_FIELD_EXT_ITEMSCUSTOM_DESC"/>	
+				
+				
+				<field type="spacer" label="OPTIONS_OWL_PRO_INFO_BAY_SPACER" />
+				
+				
+				
+				
+				
+				
+			</fieldset>	
+			
+			
+		   
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+					
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					class="btn-group"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option
+						value="static"></option>
+				</field>
+			</fieldset>
+			
+        </fields>
+    </config>
+</extension>

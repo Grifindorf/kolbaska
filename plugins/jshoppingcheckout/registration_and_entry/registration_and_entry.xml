@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="1.7" method="upgrade" group="jshoppingcheckout">
+    <name>JoomShopping Plugin for Registration and entry</name>
+    <creationDate>16.10.2012</creationDate>
+    <version>1.0.1</version>
+    <author>MAXXmarketing</author>
+    <authorEmail>marketing@maxx-marketing.net</authorEmail>
+    <authorUrl>http://www.webdesigner-profi.de</authorUrl>
+    <copyright></copyright>
+    <license>2012. MAXXmarketing GmbH. All rights reserved.</license>
+    <description>Plugin for Registration and entry</description> 
+    <files>
+        <filename plugin="registration_and_entry">registration_and_entry.php</filename>
+		<filename>index.html</filename>
+    </files>
+	<params>
+		<param name="remember" type="radio" default="1" label="remember">
+			<option value="0">Off</option>
+			<option value="1">On</option>
+		</param> 
+		<param name="redirect" type="text" label="redirect" size='70' description='default: index.php?option=com_jshopping'/>
+	</params>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="remember" type="radio" default="1" label="remember">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</field>
+				<field name="redirect" type="text" label="redirect" size='70' description='default: index.php?option=com_jshopping'/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

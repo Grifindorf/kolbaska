@@ -1,0 +1,70 @@
+#extcarousel {
+border-top: 1px solid #dadada;
+border-bottom: 1px solid #dadada;
+width: 100% !important;
+height: 150px;
+padding: 10px 0;
+}
+#extcarousel ul{
+display:block;
+}
+#extcarousel ul li {
+list-style: none;
+width: 150px !important;
+height: 150px !important;
+text-align: center;
+display:block;
+}
+#extcarousel ul li a{
+    display:-moz-inline-box;
+    display:inline-block;
+    vertical-align:middle;
+    zoom:1;
+    *display:inline;
+}
+#extcarousel img{
+max-width:140px;
+}
+#extcarousel .iefix {
+    display:-moz-inline-box;
+    display:inline-block;
+    vertical-align:middle;
+    height:100%;
+    width:0px;
+    zoom:1;
+    *display:inline;
+}
+.js_mf {
+position: relative;
+margin-top: 10px;
+width:100%;
+}
+.js_mf .next, .js_mf .prev  {
+width: 32px;
+height: 32px;
+position: absolute;
+top: -40px;
+cursor: pointer;
+z-index: 10;
+display: block;
+}
+.js_mf .next {
+background: transparent url(../images/next.png) no-repeat -7px -7px !important;
+right: 0;
+}
+.js_mf .prev {
+background: url(../images/prev.png) no-repeat -7px -7px;
+right: 35px;
+}
+.js_mf .name {
+display:block;
+font-weight:bold;
+margin-top:7px;
+}
+#jext{
+text-align: right;
+font-size: 10px;
+}
+#jext a{
+color: #ccc;
+}

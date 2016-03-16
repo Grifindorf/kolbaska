@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<extension type="module" version="1.6.0" client="site" method="upgrade">
+<name>VR vrcategories</name>
+	<creationDate>23.12.2014</creationDate>
+    <author>V.Repij</author>
+    <authorEmail>v.repij@gmail.com</authorEmail>
+    <copyright></copyright>
+    <license>Open Source License, GNU GPL</license>
+    <version>1.0.4</version>
+	<description>Displays vrcategories</description>
+	<files>
+	<filename module="mod_vrcategories">mod_vrcategories.php</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>element/categories.php</filename>
+	</files>        
+</extension>

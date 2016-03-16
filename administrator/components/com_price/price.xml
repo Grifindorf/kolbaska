@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5.0" method="upgrade">
+    <name>Price</name>
+    <author>VRepij</author>
+    <creationDate>11/08/2014</creationDate>
+    <license>Copyright (c) 2012 VRepij - All Rights Reserved</license>
+    <version>1.0.1</version>
+    <description>Joomla Price Component</description>
+
+    <!-- user part -->
+    <files folder="site">
+        <filename>price.php</filename>
+		<filename>index.html</filename>
+
+		<filename>views/index.html</filename>		
+		<filename>views/price/index.html</filename>
+		<filename>views/price/metadata.xml</filename>
+	</files>
+
+    <!-- administration part -->
+<administration>
+
+    <files folder="admin">
+        <folder>tables</folder>
+		<filename>rrice.php</filename>
+		<filename>index.html</filename>
+    </files>
+	
+</administration>
+
+    <params>
+	
+    </params>
+
+</extension>

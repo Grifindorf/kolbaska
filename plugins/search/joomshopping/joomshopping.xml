@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="search" method="upgrade">
+	<name>Search - JoomShopping</name>
+	<author>MAXXmarketing GmbH</author>
+	<creationDate>12.10.2012</creationDate>
+	<copyright></copyright>
+	<license>Open Source License, GNU GPL</license>
+	<authorEmail>marketing@maxx-marketing.net</authorEmail>
+	<authorUrl>http://www.webdesigner-profi.de</authorUrl>
+	<version>4.0.1</version>
+	<description>Allows Searching of JoomShopping Component</description>
+	<files>
+		<filename plugin="joomshopping">joomshopping.php</filename>
+	</files>
+    <languages>
+       <language tag="en-GB">en-GB.plg_search_joomshopping.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+
+            <fieldset name="basic">
+
+                <field name="search_limit" type="text"
+                    default="50"
+                    description="JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC"
+                    label="JFIELD_PLG_SEARCH_SEARCHLIMIT_LABEL"
+                    size="5"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

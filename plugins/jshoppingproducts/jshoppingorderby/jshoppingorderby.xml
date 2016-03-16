@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="jshoppingproducts">
+	<name>Additional sort of products for JoomShopping</name>
+	<author>Nevigen.com</author>
+	<creationDate>May, 2012</creationDate>
+	<copyright>Copyright (C) 2012 Nevigen.com. All rights reserved.</copyright>
+	<license>GNU General Public License</license>
+	<authorEmail>support@nevigen.com</authorEmail>
+	<authorUrl>http://nevigen.com</authorUrl>
+    <version>1.1.0</version>
+	<description>Additional sort of products for JoomShopping</description>
+	<files>
+		<filename plugin="jshoppingorderby">jshoppingorderby.php</filename>
+	</files>
+</extension>

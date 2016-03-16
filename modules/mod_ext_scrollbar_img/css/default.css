@@ -1,0 +1,18 @@
+/*
+# ------------------------------------------------------------------------
+# Extensions for Joomla 2.5.x - Joomla 3.x
+# ------------------------------------------------------------------------
+# Copyright (C) 2011-2014 Ext-Joom.com. All Rights Reserved.
+# @license - PHP files are GNU/GPL V2.
+# Author: Ext-Joom.com
+# Websites:  http://www.ext-joom.com 
+# Date modified: 02/04/2014 - 13:00
+# ------------------------------------------------------------------------
+*/
+
+.ext_scrollbar {overflow: hidden; position: relative; margin: 0; padding: 0;}
+.ext_scrollbar ul {position: relative; margin: 0 !important; padding: 0 !important;}
+.ext_scrollbar li {float: left;	position: relative;	list-style-type: none; background:#FFF;	margin: 0 !important; padding: 0 !important;}
+.ext_bar {position: relative; top: 0;}
+.ext_knob {top: 1px; background:url("../images/knob.png") no-repeat scroll 50% 50% transparent;}
+

@@ -1,0 +1,19 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+	width: 100%;
+	font-family: Verdana, Sans Serif;
+}
+
+img {
+	border: none;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: #2e84c8;
+}

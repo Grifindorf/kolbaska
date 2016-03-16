@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5.0" type="module" client="site" method="upgrade">
+	<name>vrfilter</name>
+	<author>v.repij</author>
+	<creationDate>October, 2014</creationDate>
+	<copyright>Copyright © v.repij</copyright>
+	<authorEmail>v.repij@gmail.com</authorEmail>
+    <version>1.0.0</version>
+	<description>vrfilter</description>
+	<files>
+		<filename module="mod_vrfilter">mod_vrfilter.php</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		
+	</config>	   
+</extension>

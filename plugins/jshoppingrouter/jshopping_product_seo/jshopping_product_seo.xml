@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="1.7" method="upgrade" group="jshoppingrouter">
+    <name>JoomShopping Product Seo</name>
+    <creationDate>15.05.2013</creationDate>
+    <version>1.0.0</version>
+    <author>MAXXmarketing GmbH</author>
+    <authorEmail>marketing@maxx-marketing.net</authorEmail>
+    <authorUrl>http://www.webdesigner-profi.de</authorUrl>
+    <copyright></copyright>
+    <license>2013. MAXXmarketing GmbH. All rights reserved.</license>
+    <description>JoomShopping Save Cart</description> 
+    <files>
+        <filename plugin="jshopping_product_seo">jshopping_product_seo.php</filename>
+    </files>
+</extension>
