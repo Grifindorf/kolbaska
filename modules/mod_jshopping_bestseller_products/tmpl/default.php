@@ -32,9 +32,9 @@
 <?php 	print $product->_tmp_var_bottom_foto;?>
 		
 		<div class="name">
-            <a href="<?php print $product->product_link?>"><?php print $product->name?></a>
-            <?php if ($jshopConfig->product_list_show_product_code){?><span class="jshop_code_prod">(<?php print _JSHOP_EAN?>: <span><?php print $product->product_ean;?></span>)</span><?php }?>
-        </div>
+            <?php if ($jshopConfig->product_list_show_product_code){?><div class="jshop_code_prod"><!-- (<?php print _JSHOP_EAN?>: --><span><?php print $product->product_ean;?></div><!-- ) --></span><?php }?>
+			<a href="<?php print $product->product_link?>"><?php print $product->name?></a>
+		</div>
 		
 <?php	if($short_description){	// option modul short_description ?>		
 		 <div class="description">
@@ -113,11 +113,11 @@
 
         <div class="buttons">
 <?php 		if ($product->buy_link && $show_button_buy){?>
-            <a class="button_buy" href="<?php print $product->buy_link?>"><?php print _JSHOP_BUY?></a> &nbsp;
+            <a class="button_buy" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><!--href="<?php print $product->buy_link?>"--><?php print _JSHOP_BUY?></a> &nbsp;
 <?php 		}?>
-<?php 		if ($show_button_detal){?>
-            <a class="button_detail" href="<?php print $product->product_link?>"><?php print _JSHOP_DETAIL?></a>
-<?php		}?>
+<?php 		/*if ($show_button_detal){ */?>
+            <!--<a class="button_detail" href="<?php print $product->product_link?>"><?php print _JSHOP_DETAIL?></a>-->
+<?php		/*}*/ ?>
 <?php 		print $product->_tmp_var_buttons;?>
         </div>
 		

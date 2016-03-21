@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
         <div class="default-heading">
             <!-- Crown image -->
             <!-- Heading -->
-            <h1><?=_JSHOP_PRODUCTS_CATEGORY?></h1>
+            <!--<h1><?=_JSHOP_PRODUCTS_CATEGORY?></h1>-->
             <!-- Paragraph -->
             <!-- Border -->
             <div class="border"></div>

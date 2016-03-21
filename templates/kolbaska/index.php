@@ -257,44 +257,82 @@ foreach($results as $result){
 
         <!-- Dishes Start -->
 
-        <?php if ($this->countModules( 'breadcrumbspos' )) : ?>
-            <div class="banner">
-                <div class="container">
-                    <!-- Image -->
-                    <jdoc:include type="modules" style="none" name="breadcrumbspos" />
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        <?php endif; ?>
-
-        <jdoc:include type="component" />
+	    <?php if ($this->countModules( 'breadcrumbspos' )) : ?>
+		    <div class="banner">
+			    <div class="container">
+				    <!-- Image -->
+				    <jdoc:include type="modules" style="none" name="breadcrumbspos" />
+				    <div class="clearfix"></div>
+			    </div>
+		    </div>
+	    <?php endif; ?>
 
         <!-- Pricing Start -->
 
+	    <!-- Start Bestseller-block1-->
+	    <div class="testimonial padd">
+		    <div class="container">
+			    <div class="row">
+					    <!-- BLock heading -->
+					    <jdoc:include type="modules" style="none" name="bestseller-block1" />
+			    </div>
+		    </div>
+	    </div>
+	    <!-- Start Bestseller-block1-->
+
+	    <!-- Showcase Start -->
+	    <div class="showcase customReviews">
+		    <div class="container">
+			    <div class="row">
+				    <div class="col-md-6 col-sm-6">
+					    <!-- Showcase section item -->
+					    <div class="showcase-item">
+						    <jdoc:include type="modules" style="none" name="bottom-block1" />
+						    <div class="clearfix"></div>
+					    </div>
+				    </div>
+				    <div class="col-md-6 col-sm-6">
+					    <!-- Showcase section item -->
+					    <div class="showcase-item">
+						    <jdoc:include type="modules" style="none" name="bottom-block2" />
+						    <div class="clearfix"></div>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
+	    <!-- Showcase End -->
+
         <!-- Showcase Start -->
-        <div class="showcase">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <!-- Showcase section item -->
-                        <div class="showcase-item">
-                            <jdoc:include type="modules" style="none" name="bottom-block1" />
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <!-- Showcase section item -->
-                        <div class="showcase-item">
-                            <jdoc:include type="modules" style="none" name="bottom-block2" />
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	    <div class="showcase">
+		    <div class="container">
+			    <div class="row">
+				    <div class="col-md-6 col-sm-6">
+					    <!-- Showcase section item -->
+					    <div class="showcase-item">
+						    <jdoc:include type="modules" style="none" name="bottom-block3" />
+						    <div class="clearfix"></div>
+					    </div>
+				    </div>
+				    <div class="col-md-6 col-sm-6">
+					    <!-- Showcase section item -->
+					    <div class="showcase-item">
+						    <jdoc:include type="modules" style="none" name="bottom-block4" />
+						    <div class="clearfix"></div>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
         <!-- Showcase End -->
 
         <!-- Pricing End -->
+
+	    <!-- Text Start -->
+
+	    <jdoc:include type="component" />
+
+	    <!-- Text End -->
 
         <!-- Testimonial Start -->
 
@@ -326,14 +364,18 @@ foreach($results as $result){
                 <div class="col-md-3 col-sm-6">
                     <!-- Footer widget -->
                     <div class="footer-widget">
-                        <!-- Logo area -->
-                        <div class="logo">
-                            <img class="img-responsive" src="/images/kolbaska.com.ua.png" alt="" />
-                            <!-- Heading -->
-                        </div>
-                        <!-- Paragraph -->
-                        <p></p>
-                        <hr />
+	                    <h4>Наши магазины</h4>
+	                    <div class="custom">
+		                    <div class="contact-details shops">
+			                    <span>Оптово-розничный склад</span>
+			                    <span>Киев, ул. Волинская 34/1</span>
+			                    <div class="clearfix">&nbsp;</div>
+			                    <span>Магазин “Kolbaska.com.ua"</span>
+			                    <span>ст. м. Лесовая, ”Bazar” (выход со</span>
+			                    <span>стороны ул. Попудренко)</span>
+			                    <div class="clearfix">&nbsp;</div>
+		                    </div>
+	                    </div>
                         <!-- Heading -->
                         <jdoc:include type="modules" style="none" name="onlinepayments" />
                     </div> <!--/ Footer widget end -->

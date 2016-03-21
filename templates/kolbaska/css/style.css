@@ -15,6 +15,7 @@ Designed by : http://responsivewebinc.com
 
 body{
 	/*background: #fff url('../img/crossword.png') repeat;*/
+	height: 100%;
 	font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	color: #5a533b;
@@ -66,7 +67,7 @@ form select, form textarea{ box-shadow: none !important; }
 table { background: #fff; }
 
 .padd{
-	padding: 50px 0;
+	padding: 45px 0;
 }
 
 .social a i{
@@ -565,7 +566,7 @@ table { background: #fff; }
  * Default Heading
  */
 
-.default-heading { margin-bottom: 40px; text-align: center; }
+.default-heading {display: none; margin-bottom: 40px; text-align: center; }
 
 .default-heading img { margin: 0 auto; margin-bottom: 12px; }
 
@@ -724,7 +725,7 @@ table { background: #fff; }
 	color: #5a533b;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 700;
-	font-size: 18px;
+	font-size: 12px;
 	text-transform: uppercase;
 }
 
@@ -938,11 +939,11 @@ table { background: #fff; }
  * Showcase Section
  */
  
-.showcase { padding-top: 80px; }
+.showcase { margin-top: 80px; }
  
 .showcase .showcase-item{
 	position: relative;
-	background: #fff;
+	/*background: #fff;*/
 }
 
 .showcase .showcase-item img {
@@ -963,7 +964,23 @@ table { background: #fff; }
 .showcase .showcase-item p {
 	padding-bottom: 25px;
 	font-size: 13px;
-	color: #5a533b;
+	color: #FFF; /*#5a533b;*/
+}
+
+/*
+ * customReviews
+ */
+
+.customReviews{
+	/*height: 485px;*/
+	background: #3e1a06;
+	background-image: url(../images/ReviewsBackTop.png), url(../images/ReviewsBack.png),  url(../images/ReviewsBackBottom.png);
+	background-repeat: repeat-x, no-repeat, repeat-x;
+	background-position: top, center, bottom;
+}
+
+.customReviews h4{
+	color: #fff;
 }
 
 /*
@@ -1051,6 +1068,10 @@ table { background: #fff; }
 .testimonial .flexslider-recent li .slider-content p { 
 	color: #fff;
 	text-shadow: 1px 1px 5px rgba(0,0,0,0.2);	
+}
+
+.testimonial .container:first-of-type{
+	padding-bottom: 110px;
 }
 
 /*
@@ -1899,16 +1920,20 @@ div.ppt { display:none !important; }
  * Footer Section
  */
  
-.footer { background: #fff; border-top: 1px solid #eaeaea; margin-top:20px;}
-.footer .footer-widget { margin-bottom: 40px;}
+.footer {position: absolute; left: 0; bottom: 0; width: 100%; height: 275px; background: #794526; border-top: 1px solid #eaeaea; margin-top:20px; color: #fff; }
+.footer .footer-widget { /*margin-bottom: 40px;*/}
 .footer .footer-widget .logo{ margin-top: 0; margin-bottom: 10px; }
 .footer .footer-widget .logo h1{ top: 10px; font-size: 30px; }
 .footer .footer-widget h4 {
 	margin-top: 0;
 	margin-bottom: 15px;
 	padding-bottom: 8px;
-	font-size: 16px;
-	border-bottom: 1px solid #eaeaea;
+	font-size: 20px;
+	/*border-bottom: 1px solid #eaeaea;*/
+}
+
+.footer .footer-widget h4 {
+	color: #fff;
 }
 
 .footer .footer-widget h6 {
@@ -1920,6 +1945,10 @@ div.ppt { display:none !important; }
 .footer .footer-widget p {
 	font-size: 13px;
 	color: #5a533b;
+}
+
+.footer .footer-widget .contact-details.shops span{
+	font-size: 14px;
 }
 
 .footer .footer-widget img.payment {
@@ -1942,7 +1971,8 @@ div.ppt { display:none !important; }
 
 .footer .footer-widget form{ margin-top: 15px; }
 .footer .footer-widget .contact-details i {
-	display: block;
+	display: none;
+	/*display: block;
 	margin-bottom: 15px;
 	width: 25px;
 	height: 25px;
@@ -1951,19 +1981,23 @@ div.ppt { display:none !important; }
 	font-size: 12px;
 	color: #fff;
 	text-align: center;
-	border-radius: 30px;
+	border-radius: 30px;*/
 }
 
 .footer .footer-widget .contact-details span{
 	display: inline-block;
-	margin-left: 10px;
-	margin-bottom: 15px;
-	font-size: 13px;
+	/*margin-left: 10px;*/
+	/*margin-bottom: 15px;*/
+	font-size: 16px;
 	line-height: 20px;
-	color: #5a533b;
+	color: #fff;
 }
 
-.footer .footer-widget .social { margin-top: 10px; }
+.footer .footer-widget .contact-details span:first-of-type{
+	font-weight: bold;
+}
+
+.footer .footer-widget .social {/* margin-top: 10px;*/ }
 .footer .footer-widget .social a i {
 	width: 35px;
 	height: 35px;
@@ -1974,7 +2008,7 @@ div.ppt { display:none !important; }
 	border-radius: 50px;
 }
 
-.footer .footer-copyright { padding-top: 40px; border-top: 1px solid #ddd; }
+.footer .footer-copyright { display: none; padding-top: 40px; border-top: 1px solid #ddd; }
 .foot-error .footer-copyright { padding-top: 0; border-top: 0; }
  
 .footer .footer-copyright p {

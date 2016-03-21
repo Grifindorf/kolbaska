@@ -10,6 +10,7 @@
 /* General */
 /***********/
 body {
+	height: 100%;
   color: #5a533b;
 }
 h1,
