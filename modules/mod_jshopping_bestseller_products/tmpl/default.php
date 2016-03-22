@@ -1,5 +1,5 @@
 <div class="bestseller_products  jshop">
-
+<a href="<?php echo substr(JSFactory::getLang()->lang, 0, -3);?>/category/<?=$rows[0]->category_alias?>"><span class="bestseller_block"><?=$rows[0]->category_name?></span></a>
 <?php foreach($rows as $product){ ?>
 	 <div class="block_item">
 <?php 	if ($show_image && $product->image){// option modul  show_image ?>

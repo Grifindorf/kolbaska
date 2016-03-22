@@ -270,7 +270,7 @@ foreach($results as $result){
         <!-- Pricing Start -->
 
 	    <!-- Start Bestseller-block1-->
-	    <div class="testimonial padd">
+	    <div class="testimonial padd bestseller-block1">
 		    <div class="container">
 			    <div class="row">
 					    <!-- BLock heading -->
@@ -279,6 +279,17 @@ foreach($results as $result){
 		    </div>
 	    </div>
 	    <!-- Start Bestseller-block1-->
+
+	    <!-- Start Bestseller-block2-->
+	    <div class="testimonial padd bestseller-block2">
+		    <div class="container ">
+			    <div class="row">
+				    <!-- BLock heading -->
+				    <jdoc:include type="modules" style="none" name="bestseller-block2" />
+			    </div>
+		    </div>
+	    </div>
+	    <!-- Start Bestseller-block2-->
 
 	    <!-- Showcase Start -->
 	    <div class="showcase customReviews">

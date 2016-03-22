@@ -658,6 +658,13 @@ span.prod_attr_img img{
 	overflow: hidden;
 }
 
+.bestseller_products .bestseller_block{
+	display: block;
+	font-size: 32px;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
 .bestseller_products .block_item{
 	width: 20%;
 	float: left;

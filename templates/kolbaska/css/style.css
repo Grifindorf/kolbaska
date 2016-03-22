@@ -3217,3 +3217,10 @@ ul.category-menu > li > a {
 	color: #f75353 !important;
 	font-size: 14px !important;
 }
+
+.bestseller-block2{
+	min-height: 825px;
+	background-image: url(../images/Grape.png);
+	background-repeat: no-repeat;
+	background-position-y: 10px;
+}

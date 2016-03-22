@@ -929,6 +929,7 @@ class jshopProduct extends JTableAvto{
     function getBestSellers($count, $array_categories = null, $filters = array()){
         $jshopConfig = JSFactory::getConfig();
         $db = JFactory::getDBO();
+	    $lang = JSFactory::getLang();
 
         $adv_query = ""; $adv_from = ""; $adv_result = $this->getBuildQueryListProductDefaultResult();
         $this->getBuildQueryListProductSimpleList("best", $array_categories, $filters, $adv_query, $adv_from, $adv_result);
@@ -936,7 +937,7 @@ class jshopProduct extends JTableAvto{
         $dispatcher = JDispatcher::getInstance();
         $dispatcher->trigger( 'onBeforeQueryGetProductList', array("bestseller_products", &$adv_result, &$adv_from, &$adv_query, &$order_query, &$filters) );
  
-        $query = "SELECT SUM(OI.product_quantity) as max_num, $adv_result FROM #__jshopping_order_item AS OI
+        $query = "SELECT SUM(OI.product_quantity) as max_num, cat.`".$lang->get("name")."` as category_name, cat.`".$lang->get('alias')."` as category_alias, $adv_result FROM #__jshopping_order_item AS OI
                   INNER JOIN `#__jshopping_products` AS prod   ON prod.product_id=OI.product_id
                   INNER JOIN `#__jshopping_products_to_categories` AS pr_cat ON pr_cat.product_id = prod.product_id
                   LEFT JOIN `#__jshopping_categories` AS cat ON pr_cat.category_id = cat.category_id
