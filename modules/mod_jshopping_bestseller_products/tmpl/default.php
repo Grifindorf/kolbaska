@@ -1,6 +1,8 @@
 <div class="bestseller_products  jshop">
 <a href="<?php echo substr(JSFactory::getLang()->lang, 0, -3);?>/category/<?=$rows[0]->category_alias?>"><span class="bestseller_block"><?=$rows[0]->category_name?></span></a>
-<?php foreach($rows as $product){ ?>
+	<a class="button_buy yellowButton middleButton catalogLink"  href="<?php echo substr(JSFactory::getLang()->lang, 0, -3);?>/category/<?=$rows[0]->category_alias?>"><?php print _JSHOP_TO_CATALOG?></a> &nbsp;
+	<div class="bestseller_container">
+	<?php foreach($rows as $product){ ?>
 	 <div class="block_item">
 <?php 	if ($show_image && $product->image){// option modul  show_image ?>
 		<div class="image">
@@ -113,7 +115,7 @@
 
         <div class="buttons">
 <?php 		if ($product->buy_link && $show_button_buy){?>
-            <a class="button_buy" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><!--href="<?php print $product->buy_link?>"--><?php print _JSHOP_BUY?></a> &nbsp;
+            <a class="button_buy yellowButton middleButton" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><!--href="<?php print $product->buy_link?>"--><?php print _JSHOP_BUY?></a> &nbsp;
 <?php 		}?>
 <?php 		/*if ($show_button_detal){ */?>
             <!--<a class="button_detail" href="<?php print $product->product_link?>"><?php print _JSHOP_DETAIL?></a>-->
@@ -128,4 +130,8 @@
 <?php print $product->_tmp_var_end?>
 
 <?php } ?>
+	</div>
+	<div>
+		<a href="<?php echo substr(JSFactory::getLang()->lang, 0, -3);?>/category/<?=$rows[0]->category_alias?>"><span class="bestseller_block show_more"><?php print _JSHOP_SHOW_MORE?></span></a>
+	</div>
 </div>

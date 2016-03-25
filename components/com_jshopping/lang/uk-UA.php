@@ -366,6 +366,8 @@ define('_JSHOP_ERROR_EXIST_QTY_PRODUCT', 'Продукт неможливо за
 define('_JSHOP_ERROR_EXIST_QTY_PRODUCT_IN_CART', 'Продукт неможливо замовити в даній кількості<br/>Кошик вже містить %s найменувань товарів.<br/>Максимальна кількість: %s.');
 define('_JSHOP_ERROR_EXIST_QTY_PRODUCT_BASKET', 'Для продукту "%s" максимальна кількість до замовлення %s.');
 define('_JSHOP_BUY', 'Придбати');
+define('_JSHOP_TO_CATALOG', 'Перейти в розділ');
+define('_JSHOP_SHOW_MORE', 'Показати більше');
 define('_JSHOP_PRODUCT_NOT_AVAILABLE', 'Немає в наявності');
 define('_JSHOP_PRODUCT_NOT_AVAILABLE_THIS_OPTION', 'Немає в наявності обраної опції');
 define('_JSHOP_X_COMENTAR', 'Відгуків (%s)');

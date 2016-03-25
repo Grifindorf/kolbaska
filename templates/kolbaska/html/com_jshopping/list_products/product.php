@@ -47,8 +47,10 @@ defined('_JEXEC') or die('Restricted access');
             <a class="btn btn-danger btn-sm <?=($product->in_cart==1 ? 'br-green' : 'br-red')?>" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><?=($product->in_cart==1 ? JText::_('INCART') : _JSHOP_BUY)?></a>
         </div>
         <!-- Shopping item hover block & link -->
-        <div class="item-hover <?=($product->in_cart==1 ? 'br-green' : 'br-red')?> hidden-xs buttonbuycategory" ></div>
-        <a class="link hidden-xs" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><?=($product->in_cart==1 ? JText::_('INCART') : _JSHOP_BUY)?></a>
+        <div class="buttonbuycategoryWrap">
+	        <div class="item-hover <?=($product->in_cart==1 ? 'br-green' : 'br-red')?> hidden-xs buttonbuycategory" ></div>
+            <a class="link hidden-xs" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><?=($product->in_cart==1 ? JText::_('INCART') : _JSHOP_BUY)?></a>
+        </div>
     </div>
 
 <?php print $product->_tmp_var_end?>

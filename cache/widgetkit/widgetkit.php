@@ -1,1 +1,1 @@
-{"update_check":"ed5c913939d5ab7382ec1177e430f14a","update_data":"{\"status\":\"update-available\",\"message\":\"New version available! <a href=\\\"http:\\\/\\\/www.yootheme.com\\\/widgetkit\\\/downloads\\\" target=\\\"_blank\\\">Download Widgetkit 1.5.6<\\\/a>\",\"version\":\"1.5.6\"}"}
+{"update_check":"83d00aebedd56a901a10685e7fff431f","update_data":"{\"status\":\"update-available\",\"message\":\"New version available! <a href=\\\"http:\\\/\\\/www.yootheme.com\\\/widgetkit\\\/downloads\\\" target=\\\"_blank\\\">Download Widgetkit 1.5.6<\\\/a>\",\"version\":\"1.5.6\"}"}

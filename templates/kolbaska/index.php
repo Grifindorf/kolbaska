@@ -205,14 +205,12 @@ foreach($results as $result){
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 col-sm-5">
+                <div class="col-md-4 col-sm-5 logo_area">
                     <!-- Link -->
                     <a href="<?=JRoute::_('/')?>">
                         <!-- Logo area -->
-                        <div class="logo">
-                            <!--<img class="img-responsive" src="/images/logo-kolbaska.com.ua.png" alt="" />
-                            <!-- Heading -->
-                        </div>
+                        <div class="logo"></div>
+	                    <div class="home_link">kolbaska.com.ua</div>
                     </a>
                 </div>
                 <div class="col-md-8 col-sm-7">
@@ -269,6 +267,14 @@ foreach($results as $result){
 
         <!-- Pricing Start -->
 
+	    <div class="testimonial padd menu-top">
+		    <div class="container">
+			    <div class="row">
+				    <jdoc:include type="modules" style="none" name="menu-top" />
+		        </div>
+			</div>
+	    </div>
+
 	    <!-- Start Bestseller-block1-->
 	    <div class="testimonial padd bestseller-block1">
 		    <div class="container">
@@ -277,6 +283,9 @@ foreach($results as $result){
 					    <jdoc:include type="modules" style="none" name="bestseller-block1" />
 			    </div>
 		    </div>
+		    <!--<div class="inner_bb1_1">
+			    <img src="/templates/kolbaska/images/wood.png">
+		    </div>-->
 	    </div>
 	    <!-- Start Bestseller-block1-->
 
@@ -288,12 +297,18 @@ foreach($results as $result){
 				    <jdoc:include type="modules" style="none" name="bestseller-block2" />
 			    </div>
 		    </div>
+		    <!--<div class="inner_bb2_1">
+			    <img src="/templates/kolbaska/images/grape.png">
+		    </div>-->
 	    </div>
 	    <!-- Start Bestseller-block2-->
 
 	    <!-- Showcase Start -->
 	    <div class="showcase customReviews">
 		    <div class="container">
+			    <div>
+
+				</div>
 			    <div class="row">
 				    <div class="col-md-6 col-sm-6">
 					    <!-- Showcase section item -->
@@ -347,13 +362,17 @@ foreach($results as $result){
 
         <!-- Testimonial Start -->
 
-        <div class="testimonial padd">
+	    <div class="testimonial padd menu-bottom">
+		    <div class="container">
+			    <div class="row">
+				    <jdoc:include type="modules" style="none" name="menu-bottom" />
+			    </div>
+		    </div>
+	    </div>
+
+	    <div class="testimonial padd">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <!-- BLock heading -->
-                        <jdoc:include type="modules" style="none" name="recentlyadded" />
-                    </div>
                     <div class="col-md-6">
                         <!-- BLock heading -->
                         <jdoc:include type="modules" style="none" name="reviews" />
