@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="plugin" version="1.6.0" group="system" method="upgrade">
+
+	<title>eorisis: jQuery</title>
+	<name>eorisis_jquery</name>
+	<author>eorisis.com</author>
+	<authorUrl>https://eorisis.com</authorUrl>
+	<authorEmail>info@eorisis.com</authorEmail>
+	<copyright>Copyright (C) 2012-2016 eorisis. All Rights Reserved.</copyright>
+	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<version>1.4.6</version>
+	<creationDate>25 March 2016</creationDate>
+	<compatibility>Joomla! 1.6 or higher</compatibility>
+	<short_url>jquery</short_url>
+	<created>30 October 2012</created>
+	<min_php_version>5.2.0</min_php_version>
+	<jquery_version>1.11.3</jquery_version>
+	<migrate_version>1.2.1</migrate_version>
+	<description>PLG_SYSTEM_EORISIS_JQUERY_XML_DESCRIPTION</description>
+	<scriptfile>framework/install/eorisis_installer.php</scriptfile>
+
+	<files>
+		<filename plugin="eorisis_jquery">eorisis_jquery.php</filename>
+		<folder>framework</folder>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_system_eorisis_jquery.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_system_eorisis_jquery.sys.ini</language>
+		<language tag="el-GR">el-GR/el-GR.plg_system_eorisis_jquery.ini</language>
+		<language tag="el-GR">el-GR/el-GR.plg_system_eorisis_jquery.sys.ini</language>
+	</languages>
+
+	<media destination="eorisis-jquery" folder="media">
+		<folder>bootstrap</folder>
+		<folder>lib</folder>
+		<folder>plugins</folder>
+		<folder>ui</folder>
+		<filename>htaccess.txt</filename>
+		<filename>jquery-noconflict.js</filename>
+	</media>
+
+	<config>
+		<fields name="params">
+
+			<!-- Info -->
+			<fieldset name="EO_INFO" addfieldpath="/plugins/system/eorisis_jquery/framework/admin/html/fields">
+				<field name="info" type="info" />
+			</fieldset>
+
+			<!-- jQuery Library -->
+			<fieldset name="EO_JQUERY">
+
+				<!-- Area -->
+				<field name="jq_lib_area" label="EO_AREA_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_AREA_DESC">
+					<option value="1">EO_SITE</option>
+					<option value="2">EO_ADMIN</option>
+					<option value="3">JALL</option>
+				</field>
+
+				<!-- State -->
+				<field name="jq_lib_state" label="EO_STATE_LBL" default="2" type="radio" filter="int" class="btn-group" description="EO_JQ_LIB_STATE_DESC">
+					<option value="1">EO_AUTO_LOAD</option>
+					<option value="2">EO_ALWAYS_LOAD</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Version to Use -->
+				<field name="jq_lib_version_choice" label="EO_VERSION_CHOICE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_JQ_LIB_VERSION_CHOICE_DESC">
+					<option value="1">EO_AUTO</option>
+					<option value="2">EO_SPECIFIC</option>
+					<option value="3">EO_CUSTOM</option>
+				</field>
+
+				<!-- Version (Specific) -->
+				<field name="jq_lib_version" label="EO_VERSION_LBL" default="1.11.3" type="list" showon="jq_lib_version_choice:2" description="EO_VERSION_SPECIFIC_DESC">
+					<option value="2.2.2">2.2.2</option>
+					<option value="2.2.1">2.2.1</option>
+					<option value="2.2.0">2.2.0</option>
+					<option value="2.1.4">2.1.4</option>
+					<option value="1.12.2">1.12.2</option>
+					<option value="1.12.1">1.12.1</option>
+					<option value="1.12.0">1.12.0</option>
+					<option value="1.11.3">1.11.3 (Joomla 3.4.4-RC2 to 3.5.0)</option>
+					<option value="1.11.2">1.11.2 (Joomla 3.4.0-B1 to 3.4.4-RC)</option>
+					<option value="1.11.1">1.11.1 (Joomla 3.3.1 to 3.4.0-Alpha)</option>
+					<option value="1.11.0">1.11.0 (Joomla 3.2.3 to 3.3.0)</option>
+					<option value="1.10.2">1.10.2 (Joomla 3.2.0 to 3.2.2)</option>
+					<option value="1.8.3">1.8.3 (Joomla 3.1.0 to 3.1.6)</option>
+					<option value="1.8.1">1.8.1 (Joomla 3.0.0 to 3.0.4)</option>
+				</field>
+
+				<!-- Version (Custom) -->
+				<field name="jq_lib_custom_version" label="EO_VERSION_CUSTOM_LBL" size="5" type="text" class="span1" showon="jq_lib_version_choice:3" description="EO_VERSION_CUSTOM_DESC" />
+				<field name="jq_lib_custom_version_type" label="EO_VERSION_CUSTOM_TYPE_LBL" default="1" type="radio" filter="int" class="btn-group" showon="jq_lib_version_choice:3" description="EO_VERSION_CUSTOM_TYPE_DESC">
+					<option value="1">EO_MINIFIED</option>
+					<option value="0">EO_UNCOMPRESSED</option>
+				</field>
+				<field name="jq_lib_custom_local_path" label="EO_VERSION_CUSTOM_LOCAL_PATH_LBL" size="70" class="span4" type="text" showon="jq_lib_version_choice:3" description="EO_VERSION_CUSTOM_LOCAL_PATH_DESC" />
+
+				<!-- Source -->
+				<field name="jq_lib_source" label="EO_SOURCE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_SOURCE_SPECIFIC_DESC">
+					<option value="1">EO_CDN</option>
+					<option value="2">EO_LOCAL</option>
+				</field>
+
+				<!-- CDN -->
+				<field name="jq_lib_source_cdn" label="EO_CDN_LBL" default="1" type="list" filter="int" showon="jq_lib_source:1" description="EO_SOURCE_SPECIFIC_CDN_DESC">
+					<option value="1">EO_JQUERY_CDN</option>
+					<option value="2">EO_GOOGLE_AJAX_API_CDN</option>
+					<option value="3">EO_CDNJS_CDN</option>
+				</field>
+
+				<!-- CDN Fallback -->
+				<field name="jq_lib_cdn_fallback" label="EO_CDN_FALLBACK_LBL" default="0" type="radio" class="btn-group" filter="int" showon="jq_lib_source:1" description="EO_CDN_FALLBACK_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /jQuery Library -->
+
+
+			<!-- Migrate -->
+			<fieldset name="EO_MIGRATE">
+
+				<field name="migrate" label="EO_STATE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_MIGRATE_DESC">
+					<option value="1">EO_AUTO_LOAD</option>
+					<option value="2">EO_ALWAYS_LOAD</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Version to Use -->
+				<field name="migrate_version_choice" label="EO_VERSION_CHOICE_LBL" default="1" type="radio" filter="int" class="btn-group">
+					<option value="1">EO_AUTO</option>
+					<option value="2">EO_SPECIFIC</option>
+				</field>
+
+				<!-- Version -->
+				<field name="migrate_version" label="EO_VERSION_LBL" default="1.2.1" type="list" showon="migrate_version_choice:2">
+					<option value="1.4.0">1.4.0</option>
+					<option value="1.3.0">1.3.0</option>
+					<option value="1.2.1">1.2.1 (Joomla 3.2.0 to 3.5.0)</option>
+				</field>
+
+				<!-- Source -->
+				<field name="migrate_source" label="EO_SOURCE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_SOURCE_DESC">
+					<option value="1">EO_CDN</option>
+					<option value="2">EO_LOCAL</option>
+				</field>
+
+				<!-- CDN Source -->
+				<field name="migrate_source_cdn" label="EO_CDN_LBL" default="1" type="list" filter="int" showon="migrate_source:1">
+					<option value="1">EO_JQUERY_CDN</option>
+					<option value="2">EO_CDNJS_CDN</option>
+				</field>
+
+				<!-- CDN Fallback -->
+				<field name="migrate_cdn_fallback" label="EO_CDN_FALLBACK_LBL" default="0" type="radio" class="btn-group" filter="int" showon="migrate_source:1" description="EO_CDN_FALLBACK_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /Migrate -->
+
+
+			<!-- jQuery UI -->
+			<fieldset name="EO_UI">
+
+				<!-- Area -->
+				<field name="ui_area" label="EO_AREA_LBL" default="0" type="radio" filter="int" class="btn-group" description="EO_AREA_DESC">
+					<option value="1">EO_SITE</option>
+					<option value="2">EO_ADMIN</option>
+					<option value="3">JALL</option>
+					<option value="0">JNONE</option>
+				</field>
+
+				<!-- State -->
+				<field name="ui_state" label="EO_STATE_LBL" default="2" type="radio" filter="int" class="btn-group" description="EO_STATE_DESC">
+					<option value="1">EO_AUTO_LOAD</option>
+					<option value="2">EO_ALWAYS_LOAD</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Elements -->
+				<field name="ui_elem" label="EO_ELEM_LBL" default="js" type="radio" filter="word" class="btn-group" description="EO_UI_ELEM_DESC">
+					<option value="js">EO_JS</option>
+					<option value="css">EO_CSS</option>
+					<option value="all">JALL</option>
+				</field>
+
+				<!-- Theme (CSS) -->
+				<field name="ui_theme" label="EO_THEME_LBL" default="ui-lightness" type="list" showon="ui_elem:css,all" description="EO_UI_THEME_DESC">
+					<option value="ui-lightness">UI Lightness</option>
+					<option value="ui-darkness">UI Darkness</option>
+					<option value="smoothness">Smoothness</option>
+					<option value="start">Start</option>
+					<option value="redmond">Redmond</option>
+					<option value="sunny">Sunny</option>
+					<option value="overcast">Overcast</option>
+					<option value="le-frog">Le Frog</option>
+					<option value="flick">Flick</option>
+					<option value="pepper-grinder">Pepper Grinder</option>
+					<option value="eggplant">Eggplant</option>
+					<option value="dark-hive">Dark Hive</option>
+					<option value="cupertino">Cupertino</option>
+					<option value="south-street">South Street</option>
+					<option value="blitzer">Blitzer</option>
+					<option value="humanity">Humanity</option>
+					<option value="hot-sneaks">Hot Sneaks</option>
+					<option value="excite-bike">Excite Bike</option>
+					<option value="vader">Vader</option>
+					<option value="dot-luv">Dot Luv</option>
+					<option value="mint-choc">Mint Choc</option>
+					<option value="black-tie">Black Tie</option>
+					<option value="trontastic">Trontastic</option>
+					<option value="swanky-purse">Swanky Purse</option>
+					<option value="base">Base</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Version to Use -->
+				<field name="ui_version_choice" label="EO_VERSION_CHOICE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_VERSION_CHOICE_DESC">
+					<option value="1">EO_AUTO</option>
+					<option value="2">EO_SPECIFIC</option>
+				</field>
+
+				<!-- Version -->
+				<field name="ui_version" label="EO_VERSION_LBL" default="1.9.2" type="list" showon="ui_version_choice:2" description="EO_UI_VERSION_DESC">
+					<option value="1.11.4">1.11.4</option>
+					<option value="1.9.2">1.9.2 (Joomla 3.2.0 to 3.5.0)</option>
+					<option value="1.8.23">1.8.23 (Joomla 3.0.0 to 3.1.6)</option>
+				</field>
+
+				<!-- Source -->
+				<field name="ui_source" label="EO_SOURCE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_SOURCE_DESC">
+					<option value="1">EO_CDN</option>
+					<option value="2">EO_LOCAL</option>
+				</field>
+
+				<!-- CDN Source -->
+				<field name="ui_source_cdn" label="EO_CDN_LBL" default="1" type="list" filter="int" showon="ui_source:1">
+					<option value="1">EO_JQUERY_CDN</option>
+					<option value="2">EO_GOOGLE_AJAX_API_CDN</option>
+				</field>
+
+				<!-- CDN Fallback -->
+				<field name="ui_cdn_fallback" label="EO_CDN_FALLBACK_LBL" default="0" type="radio" class="btn-group" filter="int" showon="ui_source:1" description="EO_CDN_FALLBACK_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Custom -->
+				<field name="ui_custom" label="EO_UI_CUSTOM_LBL" default="0" type="radio" class="btn-group" filter="int" description="EO_UI_CUSTOM_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="ui_custom_js" label="EO_CUSTOM_JS_URLS_LBL" rows="5" cols="55" class="span5" type="textarea" showon="ui_custom:1" description="EO_CUSTOM_URLS_DESC" />
+				<field name="ui_custom_css" label="EO_CUSTOM_CSS_URLS_LBL" rows="5" cols="55" class="span5" type="textarea" showon="ui_custom:1" description="EO_CUSTOM_URLS_DESC" />
+
+			</fieldset><!-- /jQuery UI -->
+
+
+			<!-- Twitter Bootstrap -->
+			<fieldset name="EO_TWITTER_BOOTSTRAP" description="EO_BOOTSTRAP_DESC">
+
+				<!-- Area -->
+				<field name="tb_area" label="EO_AREA_LBL" default="0" type="radio" filter="int" class="btn-group" description="EO_AREA_DESC">
+					<option value="1">EO_SITE</option>
+					<option value="2">EO_ADMIN</option>
+					<option value="3">JALL</option>
+					<option value="0">JNONE</option>
+				</field>
+
+				<!-- State -->
+				<field name="tb_state" label="EO_STATE_LBL" default="2" type="radio" filter="int" class="btn-group" description="EO_STATE_DESC">
+					<option value="1">EO_AUTO_LOAD</option>
+					<option value="2">EO_ALWAYS_LOAD</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Elements -->
+				<field name="tb_elem" label="EO_ELEM_LBL" default="js" type="radio" filter="word" class="btn-group">
+					<option value="js">EO_JS</option>
+					<option value="css">EO_CSS</option>
+					<option value="all">JALL</option>
+				</field>
+
+				<!-- Theme (CSS) -->
+				<field name="tb_theme" label="EO_THEME_LBL" default="0" type="radio" filter="int" class="btn-group" showon="tb_elem:css,all" description="EO_BOOTSTRAP_THEME_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Version to Use -->
+				<field name="tb_version_choice" label="EO_VERSION_CHOICE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_VERSION_CHOICE_DESC">
+					<option value="1">EO_AUTO</option>
+					<option value="2">EO_SPECIFIC</option>
+				</field>
+
+				<!-- Version -->
+				<field name="tb_version" label="EO_VERSION_LBL" default="2.3.2" type="list" showon="tb_version_choice:2" description="EO_BOOTSTRAP_DESC">
+					<option value="3.3.6">3.3.6</option>
+					<option value="2.3.2">2.3.2 (Default)</option>
+				</field>
+
+				<!-- Source -->
+				<field name="tb_source" label="EO_SOURCE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_SOURCE_DESC">
+					<option value="1">EO_CDN</option>
+					<option value="2">EO_LOCAL</option>
+				</field>
+
+				<!-- CDN -->
+				<field name="tb_source_cdn" label="EO_CDN_LBL" default="1" type="list" filter="int" showon="tb_source:1">
+					<option value="1">EO_BOOTSTRAP_MAXCDN</option>
+					<option value="2">EO_BOOTSTRAP_NETDNA</option>
+				</field>
+
+				<!-- CDN Fallback -->
+				<field name="tb_cdn_fallback" label="EO_CDN_FALLBACK_LBL" default="0" type="radio" class="btn-group" filter="int" showon="tb_source:1" description="EO_CDN_FALLBACK_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /Twitter Bootstrap -->
+
+
+			<!-- Chosen -->
+			<fieldset name="EO_CHOSEN">
+
+				<!-- Area -->
+				<field name="chosen_area" label="EO_AREA_LBL" default="0" type="radio" filter="int" class="btn-group" description="EO_AREA_DESC">
+					<option value="1">EO_SITE</option>
+					<option value="2">EO_ADMIN</option>
+					<option value="3">JALL</option>
+					<option value="0">JNONE</option>
+				</field>
+
+				<!-- State -->
+				<field name="chosen_state" label="EO_STATE_LBL" default="2" type="radio" filter="int" class="btn-group" description="EO_STATE_DESC">
+					<option value="1">EO_AUTO_LOAD</option>
+					<option value="2">EO_ALWAYS_LOAD</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Version to Use -->
+				<field name="chosen_version_choice" label="EO_VERSION_CHOICE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_VERSION_CHOICE_DESC">
+					<option value="1">EO_AUTO</option>
+					<option value="2">EO_SPECIFIC</option>
+				</field>
+
+				<!-- Version -->
+				<field name="chosen_version" label="EO_VERSION_LBL" default="0.9.12" type="list" showon="chosen_version_choice:2" description="EO_CHOSEN_JS_VERSION_DESC">
+					<option value="1.5.1">1.5.1</option>
+					<option value="0.9.12">0.9.12 (Joomla 3.2.2 to 3.5.0)</option>
+				</field>
+
+				<!-- Source -->
+				<field name="chosen_source" label="EO_SOURCE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_SOURCE_DESC">
+					<option value="1">EO_CDN</option>
+					<option value="2">EO_LOCAL</option>
+				</field>
+
+				<!-- CDN Source -->
+				<field name="chosen_source_cdn" label="EO_CDN_LBL" default="1" type="radio" filter="int" class="btn-group" showon="chosen_source:1">
+					<option value="1">EO_CDNJS_CDN</option>
+				</field>
+
+				<!-- CDN Fallback -->
+				<field name="chosen_cdn_fallback" label="EO_CDN_FALLBACK_LBL" default="0" type="radio" class="btn-group" filter="int" showon="chosen_source:1" description="EO_CDN_FALLBACK_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /Chosen -->
+
+
+			<!-- Easing -->
+			<fieldset name="EO_EASING">
+
+				<!-- Area -->
+				<field name="easing_area" label="EO_AREA_LBL" default="0" type="radio" filter="int" class="btn-group" description="EO_AREA_DESC">
+					<option value="1">EO_SITE</option>
+					<option value="2">EO_ADMIN</option>
+					<option value="3">JALL</option>
+					<option value="0">JNONE</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Version -->
+				<field name="easing_version" label="EO_VERSION_LBL" default="1.3" type="radio" class="btn-group">
+					<option value="1.3">1.3</option>
+				</field>
+
+				<!-- Source -->
+				<field name="easing_source" label="EO_SOURCE_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_SOURCE_DESC">
+					<option value="1">EO_CDN</option>
+					<option value="2">EO_LOCAL</option>
+				</field>
+
+				<!-- CDN Source -->
+				<field name="easing_source_cdn" label="EO_CDN_LBL" default="1" type="radio" filter="int" class="btn-group" showon="easing_source:1">
+					<option value="1">EO_CDNJS_CDN</option>
+				</field>
+
+				<!-- CDN Fallback -->
+				<field name="easing_cdn_fallback" label="EO_CDN_FALLBACK_LBL" default="0" type="radio" class="btn-group" filter="int" showon="easing_source:1" description="EO_CDN_FALLBACK_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /Easing -->
+
+
+			<!-- Custom Media -->
+			<fieldset name="EO_CUSTOM_MEDIA">
+
+				<!-- Area -->
+				<field name="custom_area" label="EO_AREA_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_AREA_DESC">
+					<option value="1">EO_SITE</option>
+					<option value="2">EO_ADMIN</option>
+					<option value="3">JALL</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Custom JS -->
+				<field name="custom_js" label="EO_CUSTOM_JS_LBL" default="0" type="radio" class="btn-group" filter="int" description="EO_CUSTOM_MEDIA_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+				<field name="custom_js_urls" label="EO_CUSTOM_JS_URLS_LBL" rows="10" cols="55" class="span5" type="textarea" showon="custom_js:1" description="EO_CUSTOM_URLS_DESC" />
+				<field type="spacer" hr="true" class="eo-hr" showon="custom_js:1" />
+
+				<!-- Custom CSS -->
+				<field name="custom_css" label="EO_CUSTOM_CSS_LBL" default="0" type="radio" class="btn-group" filter="int" description="EO_CUSTOM_MEDIA_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+				<field name="custom_css_urls" label="EO_CUSTOM_CSS_URLS_LBL" rows="10" cols="55" class="span5" type="textarea" showon="custom_css:1" description="EO_CUSTOM_URLS_DESC" />
+
+			</fieldset><!-- /Custom Media -->
+
+
+			<!-- Remove Media -->
+			<fieldset name="EO_REMOVE_MEDIA">
+
+				<!-- Area -->
+				<field name="remove_area" label="EO_AREA_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_AREA_REMOVE_DESC">
+					<option value="1">EO_SITE</option>
+					<option value="2">EO_ADMIN</option>
+					<option value="3">JALL</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Remove JS -->
+				<field name="remove_js" label="EO_REMOVE_JS_LBL" default="0" type="radio" class="btn-group" filter="int" description="EO_REMOVE_URLS_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+				<field name="remove_js_urls" label="EO_REMOVE_JS_URLS_LBL" rows="10" cols="55" class="span5" type="textarea" showon="remove_js:1" description="EO_REMOVE_URLS_DESC" />
+				<field type="spacer" hr="true" class="eo-hr" showon="remove_js:1" />
+
+				<!-- Remove CSS -->
+				<field name="remove_css" label="EO_REMOVE_CSS_LBL" default="0" type="radio" class="btn-group" filter="int" description="EO_REMOVE_URLS_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+				<field name="remove_css_urls" label="EO_REMOVE_CSS_URLS_LBL" rows="10" cols="55" class="span5" type="textarea" showon="remove_css:1" description="EO_REMOVE_URLS_DESC" />
+
+			</fieldset><!-- /Remove Media -->
+
+
+			<!-- Advanced -->
+			<fieldset name="advanced">
+
+				<!-- jQuery noConflict -->
+				<field name="no_conflict" label="EO_NOCONFLICT_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_NOCONFLICT_DESC">
+					<option value="1">EO_AUTO_LOAD</option>
+					<option value="2">EO_ALWAYS_LOAD</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- CSS Order -->
+				<field name="css_order" label="EO_CSS_ORDER_LBL" default="1" type="radio" class="btn-group" filter="int" description="EO_CSS_ORDER_DESC">
+					<option value="1">EO_FIRST</option>
+					<option value="2">EO_LAST</option>
+				</field>
+
+				<!-- CSS Media -->
+				<field name="css_media_type" label="EO_CSS_MEDIA_TYPE_LBL" default="null" type="radio" class="btn-group" filter="word" description="EO_CSS_MEDIA_TYPE_DESC">
+					<option value="all">All</option>
+					<option value="screen">Screen</option>
+					<option value="null">Omitted</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Custom CDN -->
+				<field name="custom_cdn" label="EO_CUSTOM_CDN_LBL" default="0" type="radio" filter="int" class="btn-group" description="EO_CUSTOM_CDN_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- Custom CDN URL -->
+				<field name="custom_cdn_url" label="EO_CUSTOM_CDN_URL_LBL" size="70" class="span4" type="text" showon="custom_cdn:1" description="EO_CUSTOM_CDN_URL_DESC" />
+
+				<!-- Custom CDN URLs (JS/CSS Files) -->
+				<field name="custom_cdn_urls" label="EO_CUSTOM_CDN_URLS_LBL" default="1" type="radio" filter="int" class="btn-group" showon="custom_cdn:1" description="EO_CUSTOM_CDN_URLS_DESC">
+					<option value="1">EO_SCHEME_RELATIVE</option>
+					<option value="2">EO_ABSOLUTE</option>
+				</field>
+
+				<!-- Local URLs (JS/CSS Files) -->
+				<field name="local_urls" label="EO_LOCAL_URLS_LBL" default="1" type="radio" filter="int" class="btn-group" showon="custom_cdn:0" description="EO_LOCAL_URLS_DESC">
+					<option value="1">EO_RELATIVE</option>
+					<option value="2">EO_SCHEME_RELATIVE</option>
+					<option value="3">EO_ABSOLUTE</option>
+				</field>
+
+				<!-- Absolute URLs Scheme -->
+				<field name="scheme" label="EO_SCHEME_LBL" default="auto" type="radio" filter="word" class="btn-group" description="EO_SCHEME_DESC">
+					<option value="auto">EO_AUTO</option>
+					<option value="http">http</option>
+					<option value="https">https</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- Domain (FQDN) -->
+				<field name="domain_fqdn" label="EO_FQDN_LBL" default="1" type="radio" filter="int" class="btn-group" description="EO_FQDN_DESC">
+					<option value="1">EO_AUTO</option>
+					<option value="2">EO_CUSTOM</option>
+				</field>
+				<field name="domain_fqdn_custom" label="EO_FQDN_CUSTOM_LBL" size="70" class="span4" type="text" showon="domain_fqdn:2" description="EO_FQDN_CUSTOM_DESC" />
+
+				<field type="spacer" hr="true" class="eo-hr" />
+
+				<!-- CDN Fallback UA -->
+				<field name="curl_useragent" label="EO_CDN_FALLBACK_UA_LBL" default="0" type="radio" class="btn-group" filter="int" description="EO_CDN_FALLBACK_UA_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+				<field name="curl_useragent_txt" label="EO_UA_TXT_LBL" default="CDN Fallback Check" size="75" type="text" class="span5" showon="curl_useragent:1" description="EO_UA_TXT_DESC" />
+
+			</fieldset><!-- /Advanced -->
+
+		</fields>
+	</config>
+
+	<updateservers>
+		<server type="extension" priority="1" name="eorisis: jQuery">https://eorisis.com/updates/eorisis-jquery/extension.xml</server>
+	</updateservers>
+
+</extension>

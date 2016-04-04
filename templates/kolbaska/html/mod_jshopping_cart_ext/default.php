@@ -3,7 +3,7 @@
         <!-- Image -->
         <img class="img-responsive" src="/templates/kolbaska/img/cart.png" alt="" />
         <!-- Heading -->
-        <h4><?php print _JSHOP_CART?></h4>
+        <!--<h4><?php print _JSHOP_CART?></h4>-->
         <span><?php print formatprice($cart->getSum(0,1))?></span>
         <div class="clearfix"></div>
     </a>

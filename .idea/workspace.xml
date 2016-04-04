@@ -2,21 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="237e7f93-424d-478e-a31e-2b59a7a14e45" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\OpenServer\domains\kolbaska\components\com_jshopping\files\img_products\thumb_24570_-_Landana_GREEN_PESTO.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\OpenServer\domains\kolbaska\components\com_jshopping\files\img_products\thumb_883067.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\OpenServer\domains\kolbaska\components\com_jshopping\files\img_products\thumb_image_24830_-_landana_geitenkaas_honing-tijm_normal-228x228.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\OpenServer\domains\kolbaska\components\com_jshopping\files\img_products\thumb_image_landana_geitenkaas_bosvrucht_198x200_v3_normal.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/images/ReviewsBack.png" afterPath="$PROJECT_DIR$/templates/kolbaska/images/ReviewsBack.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/images/backgroundReviews.png" afterPath="$PROJECT_DIR$/templates/kolbaska/images/backgroundReviews.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/img/cart.png" afterPath="$PROJECT_DIR$/templates/kolbaska/img/cart.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/com_jshopping/css/default.css" afterPath="$PROJECT_DIR$/components/com_jshopping/css/default.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/tmpl/default.php" afterPath="$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/tmpl/default.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php" afterPath="$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/html/mod_acymailing/default.php" afterPath="$PROJECT_DIR$/templates/kolbaska/html/mod_acymailing/default.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php" afterPath="$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php" afterPath="$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/index.php" afterPath="$PROJECT_DIR$/templates/kolbaska/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kassa/css/less-style.css" afterPath="$PROJECT_DIR$/templates/kassa/css/less-style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/css/less-style.css" afterPath="$PROJECT_DIR$/templates/kolbaska/css/less-style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/list_products/product.php" afterPath="$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/list_products/product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/com_jshopping/lang/ru-RU.php" afterPath="$PROJECT_DIR$/components/com_jshopping/lang/ru-RU.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/css/style.css" afterPath="$PROJECT_DIR$/templates/kolbaska/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/com_jshopping/lang/uk-UA.php" afterPath="$PROJECT_DIR$/components/com_jshopping/lang/uk-UA.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cache/widgetkit/widgetkit.php" afterPath="$PROJECT_DIR$/cache/widgetkit/widgetkit.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kolbaska.com.ua.iws" />
@@ -42,82 +39,102 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="product.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/com_jshopping/tables/product.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-42.53846" vertical-offset="14942" max-vertical-offset="20995">
-              <caret line="944" column="92" selection-start-line="944" selection-start-column="82" selection-end-line="944" selection-end-column="92" />
-              <folding>
-                <marker date="1458568013335" expanded="true" signature="1393:1511" placeholder="select PA.* ..." />
-                <marker date="1458568013335" expanded="true" signature="2296:2504" placeholder="select addpr..#__jshopping_products_attr2..." />
-                <marker date="1458568013335" expanded="true" signature="5528:5638" placeholder="SELECT * FRO..." />
-                <marker date="1458568013335" expanded="true" signature="5816:5914" placeholder="SELECT * FRO..." />
-                <marker date="1458568013335" expanded="true" signature="10355:10460" placeholder="SELECT * FRO..." />
-                <marker date="1458568013335" expanded="true" signature="12986:13251" placeholder="SELECT I.*, ..." />
-                <marker date="1458568013335" expanded="true" signature="13896:14050" placeholder="SELECT video..." />
-                <marker date="1458568013335" expanded="true" signature="14529:14655" placeholder="SELECT * FRO..." />
-                <marker date="1458568013335" expanded="true" signature="15135:15274" placeholder="SELECT * FRO..." />
-                <marker date="1458568013335" expanded="true" signature="15766:15924" placeholder="SELECT id, f..." />
-                <marker date="1458568013335" expanded="true" signature="16875:17192" placeholder="SELECT pr_ca..." />
-                <marker date="1458568013335" expanded="true" signature="17453:17588" placeholder="select count..." />
-                <marker date="1458568013335" expanded="true" signature="17973:18114" placeholder="select count..." />
-                <marker date="1458568013335" expanded="true" signature="18293:18390" placeholder="select * fro..." />
-                <marker date="1458568013335" expanded="true" signature="19350:19476" placeholder="select MAX(d..." />
-                <marker date="1458568013335" expanded="true" signature="36432:37052" placeholder="SELECT :_adv..." />
-                <marker date="1458568013335" expanded="true" signature="38263:38725" placeholder="SELECT :_adv..." />
-                <marker date="1458568013335" expanded="true" signature="39524:39942" placeholder="SELECT count..." />
-                <marker date="1458568013335" expanded="true" signature="40432:40916" placeholder="SELECT :_adv..." />
-                <marker date="1458568013335" expanded="true" signature="43416:43894" placeholder="SELECT :_adv..." />
-                <marker date="1458568013335" expanded="true" signature="44701:45180" placeholder="SELECT :_adv..." />
-                <marker date="1458568013335" expanded="true" signature="45980:46449" placeholder="SELECT :_adv..." />
-                <marker date="1458568013335" expanded="true" signature="47342:47760" placeholder="SELECT :_adv..." />
-                <marker date="1458568013335" expanded="true" signature="48582:48961" placeholder="SELECT COUNT..." />
-                <marker date="1458568013335" expanded="true" signature="49122:49270" placeholder="SELECT * FRO..." />
-                <marker date="1458568013335" expanded="true" signature="49580:49719" placeholder="SELECT count..." />
-                <marker date="1458568013335" expanded="true" signature="49981:50135" placeholder="SELECT ROUND..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/kolbaska/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.388889" vertical-offset="4386" max-vertical-offset="11203">
-              <caret line="309" column="0" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.33224756" vertical-offset="4879" max-vertical-offset="11390">
+              <caret line="317" column="39" selection-start-line="317" selection-start-column="35" selection-end-line="317" selection-end-column="39" />
               <folding>
-                <marker date="1458833137722" expanded="true" signature="10784:10900" placeholder="SELECT COUNT..." />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#3;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1459416457197" expanded="true" signature="11671:11787" placeholder="SELECT COUNT..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="748">
+              <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46364883" vertical-offset="55949" max-vertical-offset="57885">
-              <caret line="3311" column="38" selection-start-line="3311" selection-start-column="20" selection-end-line="3311" selection-end-column="38" />
+            <state vertical-scroll-proportion="-3.2641509" vertical-offset="18867" max-vertical-offset="61183">
+              <caret line="1120" column="42" selection-start-line="1120" selection-start-column="42" selection-end-line="1120" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/com_jshopping/css/default.css">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_products_wfl/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.857143" vertical-offset="10969" max-vertical-offset="21675">
-              <caret line="673" column="22" selection-start-line="673" selection-start-column="22" selection-end-line="673" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="2414">
+              <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/list_products/product.php">
+      <file leaf-file-name="font-awesome.min.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.851851" vertical-offset="0" max-vertical-offset="952">
-              <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="41" />
+            <state vertical-scroll-proportion="-1.8214285" vertical-offset="0" max-vertical-offset="153">
+              <caret line="3" column="3136" selection-start-line="3" selection-start-column="3136" selection-end-line="3" selection-end-column="3136" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="less-style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/less-style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="8559" max-vertical-offset="9452">
+              <caret line="517" column="28" selection-start-line="517" selection-start-column="28" selection-end-line="517" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/mod_languages/tmpl/default.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.3846154" vertical-offset="234" max-vertical-offset="833">
+              <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.3461537" vertical-offset="234" max-vertical-offset="833">
+              <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createpricetmrubak.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/administrator/components/com_update/views/update/tmpl/createpricetmrubak.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="34.807693" vertical-offset="1636" max-vertical-offset="2550">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding>
+                <marker date="1455550349470" expanded="true" signature="2890:3159" placeholder="SELECT `cate..." />
+                <marker date="1455550349470" expanded="true" signature="3577:3889" placeholder="SELECT `prod..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,18 +142,8 @@
       <file leaf-file-name="product_default.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/product/product_default.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.574074" vertical-offset="0" max-vertical-offset="6970">
-              <caret line="59" column="62" selection-start-line="59" selection-start-column="62" selection-end-line="59" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-42.185184" vertical-offset="0" max-vertical-offset="2414">
-              <caret line="134" column="143" selection-start-line="134" selection-start-column="143" selection-end-line="134" selection-end-column="152" />
+            <state vertical-scroll-proportion="15.740741" vertical-offset="1530" max-vertical-offset="6970">
+              <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -156,7 +163,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/administrator/components/com_update/views/update/tmpl/createpricesxls.php" />
-        <option value="$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/tmpl/default.php" />
         <option value="$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/mod_ext_owl_carousel_k2_content.php" />
         <option value="$PROJECT_DIR$/administrator/components/com_jshopping/views/orders/tmpl/list.php" />
         <option value="$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/category/maincategory.php" />
@@ -166,7 +172,6 @@
         <option value="$PROJECT_DIR$/modules/mod_vrcategories/tmpl/default.php" />
         <option value="$PROJECT_DIR$/templates/kolbaska/html/com_content/article/default.php" />
         <option value="$PROJECT_DIR$/templates/kolbaska/css/flexslider.css" />
-        <option value="$PROJECT_DIR$/templates/kolbaska/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/components/com_jshopping/lib/jtableauto.php" />
         <option value="$PROJECT_DIR$/components/com_jshopping/tables/product.php" />
         <option value="$PROJECT_DIR$/modules/mod_breadcrumbs/tmpl/default.php" />
@@ -178,13 +183,20 @@
         <option value="$PROJECT_DIR$/templates/kassa/html/com_jshopping/list_products/product.php" />
         <option value="$PROJECT_DIR$/templates/kassa/css/less-style.css" />
         <option value="$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/list_products/product.php" />
-        <option value="$PROJECT_DIR$/templates/kolbaska/css/less-style.css" />
         <option value="$PROJECT_DIR$/components/com_jshopping/lang/ru-RU.php" />
         <option value="$PROJECT_DIR$/components/com_jshopping/lang/uk-UA.php" />
+        <option value="$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/tmpl/default.php" />
+        <option value="$PROJECT_DIR$/modules/mod_jshopping_products_wfl/tmpl/default.php" />
         <option value="$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php" />
         <option value="$PROJECT_DIR$/components/com_jshopping/css/default.css" />
-        <option value="$PROJECT_DIR$/templates/kolbaska/css/style.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php" />
         <option value="$PROJECT_DIR$/templates/kolbaska/index.php" />
+        <option value="$PROJECT_DIR$/modules/mod_jshopping_products_wfl/style.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/css/less-style.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/css/style.css" />
       </list>
     </option>
   </component>
@@ -308,68 +320,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kolbaska.com.ua" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kolbaska" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mod_jshopping_bestseller_products" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kolbaska.com.ua" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kolbaska" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mod_jshopping_bestseller_products" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tmpl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kolbaska.com.ua" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kolbaska" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mod_jshopping_bestseller_products" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="element" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -379,17 +329,37 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="ToolWindowManager">
-    <frame x="1" y="3" width="1915" height="1046" extended-state="1" />
+    <frame x="1" y="3" width="1915" height="1046" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11086718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19648738" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -412,7 +382,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2766191" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26673985" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -451,104 +421,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/flexslider.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4095" max-vertical-offset="4760">
-          <caret line="274" column="0" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11543" max-vertical-offset="102476">
-          <caret line="696" column="37" selection-start-line="696" selection-start-column="37" selection-end-line="696" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/mod_jshopping_bestseller_products.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5950">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libraries/joomla/event/dispatcher.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.17293233" vertical-offset="2172" max-vertical-offset="4726">
-          <caret line="127" column="20" selection-start-line="127" selection-start-column="20" selection-end-line="127" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/mod_vrcategories/tmpl/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29057187" vertical-offset="101" max-vertical-offset="1003">
-          <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/com_jshopping/templates/default/list_products/product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26226416" vertical-offset="2530" max-vertical-offset="3060">
-          <caret line="157" column="42" selection-start-line="157" selection-start-column="42" selection-end-line="157" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="655">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/com_jshopping/lib/multilangfield.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33442622" vertical-offset="272" max-vertical-offset="3944">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding>
-            <marker date="1455552997449" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libraries/vendor/joomla/registry/src/Registry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34870848" vertical-offset="3024" max-vertical-offset="13362">
-          <caret line="194" column="47" selection-start-line="194" selection-start-column="47" selection-end-line="194" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libraries/joomla/object/object.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34867257" vertical-offset="1231" max-vertical-offset="4131">
-          <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administrator/components/com_jce/views/profiles/tmpl/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0923913" vertical-offset="570" max-vertical-offset="2448">
-          <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administrator/components/com_banners/views/clients/tmpl/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.50442475" vertical-offset="540" max-vertical-offset="2380">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/mod_breadcrumbs/mod_breadcrumbs.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51403886" vertical-offset="0" max-vertical-offset="463">
@@ -561,22 +433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2222223" vertical-offset="81" max-vertical-offset="4165">
           <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/mod_languages/tmpl/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="833">
-          <caret line="22" column="125" selection-start-line="22" selection-start-column="125" selection-end-line="22" selection-end-column="140" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6296296" vertical-offset="207" max-vertical-offset="833">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -764,14 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kassa/css/less-style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26081732" vertical-offset="1143" max-vertical-offset="9112">
-          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="95" selection-end-column="117" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/kassa/html/com_jshopping/product/product_default.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4494519" vertical-offset="447" max-vertical-offset="6902">
@@ -784,14 +632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.72511846" vertical-offset="0" max-vertical-offset="844">
           <caret line="36" column="91" selection-start-line="36" selection-start-column="85" selection-end-line="36" selection-end-column="91" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/less-style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="9503">
-          <caret line="79" column="1" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -828,14 +668,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/com_jshopping/css/default.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.857143" vertical-offset="10969" max-vertical-offset="21675">
-          <caret line="673" column="22" selection-start-line="673" selection-start-column="22" selection-end-line="673" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/mod_jshopping_bestseller_products.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8095238" vertical-offset="0" max-vertical-offset="1360">
@@ -844,48 +676,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.388889" vertical-offset="4386" max-vertical-offset="11203">
-          <caret line="309" column="0" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
-          <folding>
-            <marker date="1458833137722" expanded="true" signature="10784:10900" placeholder="SELECT COUNT..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/com_jshopping/tables/product.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-42.53846" vertical-offset="14942" max-vertical-offset="20995">
           <caret line="944" column="92" selection-start-line="944" selection-start-column="82" selection-end-line="944" selection-end-column="92" />
           <folding>
-            <marker date="1458568013335" expanded="true" signature="1393:1511" placeholder="select PA.* ..." />
-            <marker date="1458568013335" expanded="true" signature="2296:2504" placeholder="select addpr..#__jshopping_products_attr2..." />
-            <marker date="1458568013335" expanded="true" signature="5528:5638" placeholder="SELECT * FRO..." />
-            <marker date="1458568013335" expanded="true" signature="5816:5914" placeholder="SELECT * FRO..." />
-            <marker date="1458568013335" expanded="true" signature="10355:10460" placeholder="SELECT * FRO..." />
-            <marker date="1458568013335" expanded="true" signature="12986:13251" placeholder="SELECT I.*, ..." />
-            <marker date="1458568013335" expanded="true" signature="13896:14050" placeholder="SELECT video..." />
-            <marker date="1458568013335" expanded="true" signature="14529:14655" placeholder="SELECT * FRO..." />
-            <marker date="1458568013335" expanded="true" signature="15135:15274" placeholder="SELECT * FRO..." />
-            <marker date="1458568013335" expanded="true" signature="15766:15924" placeholder="SELECT id, f..." />
-            <marker date="1458568013335" expanded="true" signature="16875:17192" placeholder="SELECT pr_ca..." />
-            <marker date="1458568013335" expanded="true" signature="17453:17588" placeholder="select count..." />
-            <marker date="1458568013335" expanded="true" signature="17973:18114" placeholder="select count..." />
-            <marker date="1458568013335" expanded="true" signature="18293:18390" placeholder="select * fro..." />
-            <marker date="1458568013335" expanded="true" signature="19350:19476" placeholder="select MAX(d..." />
-            <marker date="1458568013335" expanded="true" signature="36432:37052" placeholder="SELECT :_adv..." />
-            <marker date="1458568013335" expanded="true" signature="38263:38725" placeholder="SELECT :_adv..." />
-            <marker date="1458568013335" expanded="true" signature="39524:39942" placeholder="SELECT count..." />
-            <marker date="1458568013335" expanded="true" signature="40432:40916" placeholder="SELECT :_adv..." />
-            <marker date="1458568013335" expanded="true" signature="43416:43894" placeholder="SELECT :_adv..." />
-            <marker date="1458568013335" expanded="true" signature="44701:45180" placeholder="SELECT :_adv..." />
-            <marker date="1458568013335" expanded="true" signature="45980:46449" placeholder="SELECT :_adv..." />
-            <marker date="1458568013335" expanded="true" signature="47342:47760" placeholder="SELECT :_adv..." />
-            <marker date="1458568013335" expanded="true" signature="48582:48961" placeholder="SELECT COUNT..." />
-            <marker date="1458568013335" expanded="true" signature="49122:49270" placeholder="SELECT * FRO..." />
-            <marker date="1458568013335" expanded="true" signature="49580:49719" placeholder="SELECT count..." />
-            <marker date="1458568013335" expanded="true" signature="49981:50135" placeholder="SELECT ROUND..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="select PA.* ..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="select addpr..#__jshopping_products_attr2..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT I.*, ..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT video..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT id, f..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT pr_ca..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="select count..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="select count..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="select * fro..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="select MAX(d..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT :_adv..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT :_adv..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT count..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT :_adv..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT :_adv..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT :_adv..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT :_adv..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT :_adv..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT count..." />
+            <marker date="1458568013335" expanded="true" signature="-1:-1" placeholder="SELECT ROUND..." />
           </folding>
         </state>
       </provider>
@@ -898,35 +720,193 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php">
+    <entry file="file://$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/tmpl/default.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-42.185184" vertical-offset="0" max-vertical-offset="2414">
-          <caret line="134" column="143" selection-start-line="134" selection-start-column="143" selection-end-line="134" selection-end-column="152" />
+        <state vertical-scroll-proportion="0.34343433" vertical-offset="153" max-vertical-offset="2023">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding>
+            <element signature="e#6#476#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_products_wfl/tmpl/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.0" vertical-offset="834" max-vertical-offset="1513">
+          <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/mod_k2_comments/tmpl/comments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="31.384615" vertical-offset="816" max-vertical-offset="1377">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/product/product_default.php">
+    <entry file="file://$PROJECT_DIR$/blog/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.574074" vertical-offset="0" max-vertical-offset="6970">
-          <caret line="59" column="62" selection-start-line="59" selection-start-column="62" selection-end-line="59" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <caret line="4" column="3037" selection-start-line="4" selection-start-column="3037" selection-end-line="4" selection-end-column="3037" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/com_jshopping/templates/kolbaska/list_products/product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6153846" vertical-offset="2497" max-vertical-offset="3060">
+          <caret line="157" column="42" selection-start-line="157" selection-start-column="42" selection-end-line="157" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23178808" vertical-offset="4297" max-vertical-offset="108069">
+          <caret line="261" column="21" selection-start-line="261" selection-start-column="21" selection-end-line="261" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/list_products/product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.851851" vertical-offset="0" max-vertical-offset="952">
-          <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="41" />
+        <state vertical-scroll-proportion="-3.7777777" vertical-offset="0" max-vertical-offset="952">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/com_jshopping/css/default.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.107142" vertical-offset="11941" max-vertical-offset="22372">
+          <caret line="724" column="4" selection-start-line="724" selection-start-column="4" selection-end-line="724" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.185185" vertical-offset="0" max-vertical-offset="2482">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="19591" max-vertical-offset="102476">
+          <caret line="1182" column="12" selection-start-line="1182" selection-start-column="12" selection-end-line="1182" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_cart_ext/tmpl/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
+          <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="748">
+          <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kassa/css/less-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="7552" max-vertical-offset="9112">
+          <caret line="455" column="1" selection-start-line="455" selection-start-column="1" selection-end-line="455" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8214285" vertical-offset="0" max-vertical-offset="153">
+          <caret line="3" column="3136" selection-start-line="3" selection-start-column="3136" selection-end-line="3" selection-end-column="3136" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administrator/components/com_update/views/update/tmpl/createpricetmrubak.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="34.807693" vertical-offset="1636" max-vertical-offset="2550">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <marker date="1455550349470" expanded="true" signature="2890:3159" placeholder="SELECT `cate..." />
+            <marker date="1455550349470" expanded="true" signature="3577:3889" placeholder="SELECT `prod..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/product/product_default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="15.740741" vertical-offset="1530" max-vertical-offset="6970">
+          <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/mod_languages/tmpl/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.3846154" vertical-offset="234" max-vertical-offset="833">
+          <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.3461537" vertical-offset="234" max-vertical-offset="833">
+          <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_products_wfl/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="2414">
+          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/less-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8559" max-vertical-offset="9452">
+          <caret line="517" column="28" selection-start-line="517" selection-start-column="28" selection-end-line="517" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46364883" vertical-offset="55949" max-vertical-offset="57885">
-          <caret line="3311" column="38" selection-start-line="3311" selection-start-column="20" selection-end-line="3311" selection-end-column="38" />
+        <state vertical-scroll-proportion="-3.2641509" vertical-offset="18867" max-vertical-offset="61183">
+          <caret line="1120" column="42" selection-start-line="1120" selection-start-column="42" selection-end-line="1120" selection-end-column="42" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33224756" vertical-offset="4879" max-vertical-offset="11390">
+          <caret line="317" column="39" selection-start-line="317" selection-start-column="35" selection-end-line="317" selection-end-column="39" />
+          <folding>
+            <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#3;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1459416457197" expanded="true" signature="11671:11787" placeholder="SELECT COUNT..." />
+          </folding>
         </state>
       </provider>
     </entry>

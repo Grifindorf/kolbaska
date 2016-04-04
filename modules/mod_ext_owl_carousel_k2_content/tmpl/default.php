@@ -19,6 +19,7 @@ if(!defined('DS')){
 ?>
 
 <script type="text/javascript">
+	jQuery.noConflict();
 jQuery(document).ready(function(){
 	jQuery("#owl-example-<?php echo $ext_id;?>").owlCarousel({
 		items : <?php echo $ext_items; ?>,
@@ -31,12 +32,12 @@ jQuery(document).ready(function(){
 
 		navigation : <?php echo $ext_navigation; ?>,
 		pagination : <?php echo $ext_pagination; ?>,		
-		paginationNumbers : <?php echo $ext_paginationnumbers; ?>	
-		
-		
+		paginationNumbers : <?php echo $ext_paginationnumbers; ?>
+
+
 	});
-	
-  
+
+
 });
 </script>
 

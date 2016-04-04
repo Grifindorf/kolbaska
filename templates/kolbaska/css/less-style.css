@@ -454,7 +454,7 @@ a:hover {
 /****************/
 /* Navigation Menu */
 .header .navbar-default .navbar-nav li a {
-  color: #5a533b;
+  color: #FFF;
 }
 .header .navbar-default .navbar-nav li a:hover {
 	color: #f75353;
@@ -488,13 +488,10 @@ a:hover {
 .btn-cart-sm a.cart-link:hover {
   color: #555555;
 }
-.btn-cart-md .cart-dropdown,
-.btn-cart-sm .cart-dropdown {
-  border-top: 3px solid #f75353 !important;
-}
+
 .btn-cart-sm .cart-dropdown:before,
 .btn-cart-md .cart-dropdown:before {
-  border-bottom-color: #f75353 !important;
+  border-bottom-color: #fff !important;
 }
 /****************/
 /* flex-slider  */

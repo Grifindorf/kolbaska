@@ -150,56 +150,35 @@ foreach($results as $result){
     <!-- Header Start -->
 
     <div class="header">
+	    <div class="header-background"></div>
         <div class="container">
             <!-- Header top area content -->
             <div class="header-top">
                 <div class="row">
-                    <div class="col-md-5 col-sm-3">
-                        <!-- Header top left content contact -->
-                        <div class="header-contact">
-                            <!-- Contact number -->
-                            <table>
-                                <tr>
-                                    <td style="padding-right: 5px;">&nbsp;<i class="fa fa-phone red"> <span class="phonetext">Київ</span></i></td>
-                                    <td><b>(044) 578-21-33</b></td>
-                                    <td style="padding-left: 10px; padding-right: 5px;"><img src="/templates/kolbaska/images/logo-kyivstar.jpg"></td>
-                                    <td>(096) 578-21-33</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-right: 5px;"><img src="/templates/kolbaska/images/logo-lifecell.jpg"></td>
-                                    <td>(063) 578-21-33</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                            <!--<jdoc:include type="modules" style="none" name="contacts" />-->
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <!-- Header top right content search box -->
-                        <div class=" header-search">
-                            <jdoc:include type="modules" style="none" name="search-pos" />
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-2">
+	                <div class="col-md-8 col-sm-7">
+		                <!-- Navigation -->
+		                <nav class="navbar navbar-default navbar-right" role="navigation">
+			                <div class="container-fluid">
+				                <!-- Brand and toggle get grouped for better mobile display -->
+				                <div class="navbar-header">
+					                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						                <span class="sr-only">Toggle navigation</span>
+						                <span class="icon-bar"></span>
+						                <span class="icon-bar"></span>
+						                <span class="icon-bar"></span>
+					                </button>
+				                </div>
+				                <!-- Collect the nav links, forms, and other content for toggling -->
+				                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+					                <jdoc:include type="modules" style="none" name="menu" />
+
+				                </div><!-- /.navbar-collapse -->
+			                </div><!-- /.container-fluid -->
+		                </nav>
+	                </div>
+                    <div class="col-md-3 col-sm-2">
                         <jdoc:include type="modules" style="none" name="lanquage" />
-                        <div class="clearfix"></div>
-                    </div>
-                    <!--<div class="col-md-2 col-sm-2" style="line-height: 40px;">
-                        <div class="mod-countproducts">
-                            <?php
-                            $db = JFactory::getDbo();
-                            $query = "SELECT COUNT(`product_id`) FROM `#__jshopping_products` WHERE `product_publish` = 1 AND `product_original_price` > 0";
-                            $db->setQuery($query);
-                            $count_products = $db->loadResult();
-                            ?>
-                            Количество товаров: <?=$count_products?>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>-->
-                    <div class="col-md-2 col-sm-2">
-                        <!-- Button Kart -->
-                        <jdoc:include type="modules" style="none" name="cart" />
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -213,29 +192,50 @@ foreach($results as $result){
 	                    <div class="home_link">kolbaska.com.ua</div>
                     </a>
                 </div>
-                <div class="col-md-8 col-sm-7">
-                    <!-- Navigation -->
-                    <nav class="navbar navbar-default navbar-right" role="navigation">
-                        <div class="container-fluid">
-                            <!-- Brand and toggle get grouped for better mobile display -->
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                                <jdoc:include type="modules" style="none" name="menu" />
-
-                            </div><!-- /.navbar-collapse -->
-                        </div><!-- /.container-fluid -->
-                    </nav>
-                </div>
+	            <div class="col-md-4 col-sm-3">
+		            <!-- Header top right content search box -->
+		            <div class=" header-search">
+			            <jdoc:include type="modules" style="none" name="search-pos" />
+		            </div>
+	            </div>
+	            <div class="col-md-2 col-sm-3">
+		            <!-- Header top left content contact -->
+		            <div class="header-contact">
+			            <!-- Contact number -->
+						<div class="contact_table">
+							<div class="contact_row">
+								<div class="contact_cell tel_codes">
+									<ul>
+										<li>044</li>
+										<li>096</li>
+										<li>063</li>
+									</ul>
+								</div>
+								<div class="contact_cell main_tel">
+									578-21-33
+								</div>
+							</div>
+						</div>
+			            <!--<jdoc:include type="modules" style="none" name="contacts" />-->
+		            </div>
+	            </div>
+	            <!--<div class="col-md-2 col-sm-2" style="line-height: 40px;">
+                        <div class="mod-countproducts">
+                            <?php
+	            $db = JFactory::getDbo();
+	            $query = "SELECT COUNT(`product_id`) FROM `#__jshopping_products` WHERE `product_publish` = 1 AND `product_original_price` > 0";
+	            $db->setQuery($query);
+	            $count_products = $db->loadResult();
+	            ?>
+                            Количество товаров: <?=$count_products?>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>-->
+	            <div class="col-md-2 col-sm-2">
+		            <!-- Button Kart -->
+		            <jdoc:include type="modules" style="none" name="cart" />
+		            <div class="clearfix"></div>
+	            </div>
             </div>
         </div> <!-- / .container -->
     </div>
@@ -273,6 +273,17 @@ foreach($results as $result){
 				    <jdoc:include type="modules" style="none" name="menu-top" />
 		        </div>
 			</div>
+	    </div>
+
+
+	    <!-- Carousel -->
+	    <div class="testimonial carousel">
+		    <div class="container">
+			    <div class="row">
+				    <!-- BLock heading -->
+				    <jdoc:include type="modules" style="none" name="carousel" />
+			    </div>
+		    </div>
 	    </div>
 
 	    <!-- Start Bestseller-block1-->

@@ -1,0 +1,48 @@
+## Software:	eorisis jQuery
+## @author		eorisis https://eorisis.com
+## @copyright	Copyright (C) 2012-2016 eorisis. All Rights Reserved.
+## @license		GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+##
+## This file should be used by advanced users.
+## If used the wrong way it may cause errors to your site.
+## mod_rewrite must be enabled on your server.
+## If editing this file via FTP, you should use Binary mode.
+
+
+## Deny Hotlinking of JavaScript (JS) and StyleSheet (CSS) files
+##
+## To enable this file, first rename it from htaccess.txt to .htaccess and then open the .htaccess for edit.
+## Read the rest of the instructions to allow your website to use the libraries contained
+## in this directory and deny from the rest of the sites.
+## Note: The .htaccess file will not be overwritten with updates, the htaccess.txt will.
+
+
+<IfModule mod_rewrite.c>
+
+	## mod_rewrite in use
+	RewriteEngine On
+
+	## Allow Blank Referrers
+	RewriteCond %{HTTP_REFERER} !^$
+
+
+	## Set your website's domain to be allowed (important).
+	## To do this replace the word 'yourdomain' of the given line below, with your website's domain (without adding www or http:// in the front).
+	## Do the same with the 'com' in case it is 'net' or other.
+	## Always place a backslash \ before any dot (.) on the domain or a subdomain i.e., yourdomain\.com or subdomain\.yourdomain\.co\.uk
+	## You can also allow multiple domains. Simply repeat this line, one below the other, for each domain or subdomain you want allowed.
+	## Example 1: RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain\.com [NC]
+	## Example 2: RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?other-domain\.com [NC]
+	## Example 3: RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?subdomain\.yourdomain\.co\.uk [NC]
+	## Or, you may add multiple subdomains in one line by separating them with a pipe (|) inside the (www\.) parenthesis:
+	## Example: RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.|blog\.|other\.)?yourdomain\.com [NC]
+	## Leave the rest of the line intact.
+
+	## Domains allowed to hotlink.
+	RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain\.com [NC]
+
+
+	## The following line will return the '403 Forbidden' to all sites not listed above.
+	RewriteRule \.(js|css)$ - [F]
+
+</IfModule>

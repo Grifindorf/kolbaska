@@ -4,6 +4,7 @@
 	<div class="bestseller_container">
 	<?php foreach($rows as $product){ ?>
 	 <div class="block_item">
+		 <div class="block_item_inner">
 <?php 	if ($show_image && $product->image){// option modul  show_image ?>
 		<div class="image">
 			<div class="image_block">
@@ -35,8 +36,9 @@
 		
 		<div class="name">
             <?php if ($jshopConfig->product_list_show_product_code){?><div class="jshop_code_prod"><!-- (<?php print _JSHOP_EAN?>: --><span><?php print $product->product_ean;?></div><!-- ) --></span><?php }?>
-			<a href="<?php print $product->product_link?>"><?php print $product->name?></a>
+			<span class="product_name""><a href="<?php print $product->product_link?>"><?php print $product->name?></a></span>
 		</div>
+		 <div class="product_info">
 		
 <?php	if($short_description){	// option modul short_description ?>		
 		 <div class="description">
@@ -115,7 +117,7 @@
 
         <div class="buttons">
 <?php 		if ($product->buy_link && $show_button_buy){?>
-            <a class="button_buy yellowButton middleButton" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><!--href="<?php print $product->buy_link?>"--><?php print _JSHOP_BUY?></a> &nbsp;
+            <a class="button_buy yellowButton middleButton" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><!--href="<?php print $product->buy_link?> <?php print _JSHOP_BUY?>"--><?=($product->in_cart==1 ? JText::_('INCART') : _JSHOP_BUY)?></a> &nbsp;
 <?php 		}?>
 <?php 		/*if ($show_button_detal){ */?>
             <!--<a class="button_detail" href="<?php print $product->product_link?>"><?php print _JSHOP_DETAIL?></a>-->
@@ -125,6 +127,8 @@
 		
 <?php 	print $product->_tmp_var_bottom_buttons;?>
 <?php	}?>
+	</div>
+	</div>
 	</div>	
 	
 <?php print $product->_tmp_var_end?>
@@ -132,6 +136,6 @@
 <?php } ?>
 	</div>
 	<div>
-		<a href="<?php echo substr(JSFactory::getLang()->lang, 0, -3);?>/category/<?=$rows[0]->category_alias?>"><span class="bestseller_block show_more"><?php print _JSHOP_SHOW_MORE?></span></a>
+		<a href="<?php echo substr(JSFactory::getLang()->lang, 0, -3);?>/category/<?=$rows[0]->category_alias?>"><span class="show_more"><?php print _JSHOP_SHOW_MORE?></span></a>
 	</div>
 </div>

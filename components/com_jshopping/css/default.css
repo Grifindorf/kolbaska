@@ -668,8 +668,9 @@ span.prod_attr_img img{
 }
 
 .bestseller_products .show_more{
-	margin: 40px 0 0 0;
+	display: block;
 	text-decoration: underline;
+	text-align: center;
 	font-size: 16px;
 	font-weight: bold;
 }
@@ -682,7 +683,7 @@ span.prod_attr_img img{
 	border-radius: 10px;
 }
 
-.bestseller-block1 .bestseller_products .block_item{
+.bestseller-block1 .bestseller_products .block_item_inner{
 	box-shadow: 0 0 16px 0 rgba(16,18,17,.18);
 }
 
@@ -700,6 +701,38 @@ span.prod_attr_img img{
 
 .bestseller-block1 .bestseller_products .block_item{
 	background: #fff;
+	height: 450px;
+	-webkit-transition: 0.1s;
+	-moz-transition: 0.1s;
+	-o-transition: 0.1s;
+	transition: 0.1s;
+}
+
+.bestseller-block1 .bestseller_products .block_item_inner{
+	height: 350px;
+	-webkit-transition: 0.1s;
+	-moz-transition: 0.1s;
+	-o-transition: 0.1s;
+	transition: 0.1s;
+}
+
+
+.bestseller-block1 .bestseller_products .block_item_inner:hover {
+	height: 450px;
+}
+
+.product_info{
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: visibility 0.1s, opacity 0.2s linear;
+	-moz-transition: visibility 0.1s, opacity 0.2s linear;
+	-o-transition: visibility 0.1s, opacity 0.2s linear;
+	transition: visibility 0.1s, opacity 0.2s linear;
+}
+
+.block_item:hover .product_info{
+	visibility: visible;
+	opacity: 1;
 }
 
 .bestseller_products .block_item .name a, .bestseller_products .block_item .jshop_price{
@@ -707,6 +740,14 @@ span.prod_attr_img img{
 	font-family: Open Sans;
 	font-weight: bold;
 	color: #000;
+}
+
+.bestseller-block1 .bestseller_products .block_info{
+	display: none;
+}
+
+.bestseller_products .block_item .jshop_price{
+	color: #ff9d00;
 }
 
 .bestseller_products .block_item img{

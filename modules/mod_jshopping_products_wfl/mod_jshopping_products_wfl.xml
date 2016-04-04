@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension   type="module" version="2.5" client="site" method="upgrade">
+    <name>MOD_JSHOPPING_PRODUCTS_WFL</name>
+	<creationDate>2013-11-09</creationDate>
+	<author>Web Face Laboratory</author>
+	<authorEmail>wfl@wflab.ru</authorEmail>
+	<authorUrl>wflab.ru</authorUrl>
+	<copyright>(C) Web Face Laboratory 2013</copyright>
+	<license>Open Source License, GNU GPL v.3</license>
+	<version>1.1.2</version>
+	<description>MOD_JSHOPPING_PRODUCTS_WFL_DESCR</description>
+	<files>
+	    <filename module="mod_jshopping_products_wfl">mod_jshopping_products_wfl.php</filename>
+	    <filename>index.html</filename>
+	    <filename>style.css</filename>
+	    <folder>tmpl</folder>
+	    <folder>js</folder>
+	    <folder>fields</folder>
+	    <folder>images</folder>
+	</files>
+    <languages>
+        <language tag="en-GB">en-GB.mod_jshopping_products_wfl.ini</language>
+        <language tag="en-GB">en-GB.mod_jshopping_products_wfl.sys.ini</language>        
+        <language tag="ru-RU">ru-RU.mod_jshopping_products_wfl.ini</language>
+        <language tag="ru-RU">ru-RU.mod_jshopping_products_wfl.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params" addfieldpath="/modules/mod_jshopping_products_wfl/fields">
+            <fieldset name="basic">
+		<field name="wfljs" type="wfljs" />
+		<field name="products_source" type="list" default="random" label="JSPU_PRODUCTS_SOURCE" description="JSPU_PRODUCTS_SOURCE_DESCR">
+                    <option value="random">JSPU_RANDOM</option>
+                    <option value="latest">JSPU_LATEST</option>
+		    <option value="toprated">JSPU_TOPRATED</option>
+		    <option value="bestsellers">JSPU_BESTSELLERS</option>
+                    <option value="label">JSPU_LABEL</option>
+		    <option value="categories">JSPU_CATEGORIES</option>
+		    <option value="id">JSPU_ID</option>
+		    <option value="manufacturer">JSPU_MANUF</option>
+		    <option value="manuf_logo">JSPU_MANUF_LOGO</option>
+                </field>
+		<field name="category_tree" type="Categorytree" default="" label="JSPU_CATEGORY_TREE" multiple='true' description="JSPU_CATEGORY_TREE_DESCR" />
+		<field name="products_search" type="Productsearch" default="" label="JSPU_PRODUCTSEARCH" description="JSPU_PRODUCTSEARCH" />
+		<field name="labels_list" type="SQL" default="" label="JSPU_LABEL" multiple='true' query="SELECT id, name FROM #__jshopping_product_labels" key_field="id" value_field="name" description="JSPU_LABEL_DESCR" />
+		<field name="manuf_list" type="Manufacturers" default="0" label="JSPU_MANUF" multiple='true' description="JSPU_MANUF_DESCR" />
+		<field name="count_products" type="text" default="0" label="JSPU_COUNT_PRODUCTS" description="JSPU_COUNT_PRODUCTS_DESCR" />
+		<field type="spacer" hr="true"/>
+		<field name="ribbon_orientation" type="radio"  default="hor" label="JSPU_RIBBON_ORIENTATION" description="JSPU_RIBBON_ORIENTATION_DESCR">
+                    <option value="hor">JSPU_HORISONTAL</option>
+                    <option value="vert">JSPU_VERTICAL</option>
+                </field>
+		<field name="block_width" type="text" default="150" label="JSPU_BLOCK_WIDTH" description="JSPU_BLOCK_WIDTH_DESCR" />
+		<field name="block_height" type="text" default="150" label="JSPU_BLOCK_HEIGHT" description="JSPU_BLOCK_HEIGHT_DESCR" />
+		<field type="spacer" hr="true"/>
+		<field name="ribbon_behavior" type="radio"  default="static" label="JSPU_RIBBON_BEHAVIOR" description="JSPU_RIBBON_BEHAVIOR_DESCR">
+                    <option value="static">JSPU_STATIC</option>
+                    <option value="scroll">JSPU_SCROLLABLE</option>
+                </field>
+		<field name="effect_speed" type="text" default="500" label="JSPU_EFFECT_SPEED" description="JSPU_EFFECT_SPEED_DESCR" />
+		<field name="effect_block" type="radio"  default="single" label="JSPU_EFFECT_BLOCK" description="JSPU_EFFECT_BLOCK_DESCR">
+                    <option value="single">JSPU_SINGLE</option>
+                    <option value="block">JSPU_BLOCK</option>
+                </field>
+		<field type="spacer" hr="true"/>
+		<field name="on_image_click_behavior" type="radio"  default="link" label="JSPU_CLICK_BEHAVIOR" description="JSPU_CLICK_BEHAVIOR_DESCR">
+                    <option value="lightbox">JSPU_LIGHTBOX</option>
+                    <option value="link">JSPU_LINK</option>
+                </field>
+		<field name="additional_params" type="checkboxes" default="" label="JSPU_ADDITIONAL_PARAMS">
+		    <option value="caption">JSPU_CAPTION</option>
+		    <option value="description">JSPU_DESCRIPTION</option>
+		    <option value="price">JSPU_PRICE</option>
+		    <option value="add_label">JSPU_ADD_LABEL</option>
+		    <option value="add_manufacturer_name">JSPU_MANUFACTURER_NAME</option>
+		    <option value="add_old_price">JSPU_OLD_PRICE</option>
+		</field>
+	    </fieldset>
+	    <fieldset name="advanced">
+		<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+	    </fieldset>
+	</fields>
+    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="WFLab development">http://wflab.ru/downloads/updates.xml</server>
+    </updateservers>
+</extension>
