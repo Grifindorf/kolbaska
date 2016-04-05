@@ -145,7 +145,7 @@ foreach($results as $result){
 <!-- Model End -->
 
 <!-- Page Wrapper -->
-<div class="wrapper">
+<div class="wrapper" style="padding-top: <?=$_SERVER['REQUEST_URI'] == '/' ? '0' : '150px'?> ">
 
     <!-- Header Start -->
 
@@ -497,7 +497,7 @@ foreach($results as $result){
         jQuery('.tp-banner').revolution(
             {
                 delay:9000,
-                startheight:282,
+                startheight:570,
 
                 hideThumbs:10,
 

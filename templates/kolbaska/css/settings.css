@@ -673,10 +673,10 @@ border-style:none;
 .tp-caption.large_bold_grey {
 font-size:44px;
 font-weight:600;
-font-family:"Open Sans";
+font-family:"PFAgoraSlabPro-Black";
 color:rgb(102, 102, 102);
 text-decoration:none;
-background-color:#f75353;
+/*background-color:#f75353;*/
 text-shadow:none;
 margin:0px;
 text-transform: uppercase;

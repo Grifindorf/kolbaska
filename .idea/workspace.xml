@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="237e7f93-424d-478e-a31e-2b59a7a14e45" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/images/ReviewsBack.png" afterPath="$PROJECT_DIR$/templates/kolbaska/images/ReviewsBack.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/images/backgroundReviews.png" afterPath="$PROJECT_DIR$/templates/kolbaska/images/backgroundReviews.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/img/cart.png" afterPath="$PROJECT_DIR$/templates/kolbaska/img/cart.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/com_jshopping/css/default.css" afterPath="$PROJECT_DIR$/components/com_jshopping/css/default.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/tmpl/default.php" afterPath="$PROJECT_DIR$/modules/mod_ext_owl_carousel_k2_content/tmpl/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php" afterPath="$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/tmpl/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php" afterPath="$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php" afterPath="$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/js/custom.js" afterPath="$PROJECT_DIR$/templates/kolbaska/js/custom.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/index.php" afterPath="$PROJECT_DIR$/templates/kolbaska/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/css/less-style.css" afterPath="$PROJECT_DIR$/templates/kolbaska/css/less-style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/css/settings.css" afterPath="$PROJECT_DIR$/templates/kolbaska/css/settings.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/kolbaska/css/style.css" afterPath="$PROJECT_DIR$/templates/kolbaska/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kolbaska.com.ua.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,28 +30,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/kolbaska/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33224756" vertical-offset="4879" max-vertical-offset="11390">
-              <caret line="317" column="39" selection-start-line="317" selection-start-column="35" selection-end-line="317" selection-end-column="39" />
+            <state vertical-scroll-proportion="-4.462963" vertical-offset="1952" max-vertical-offset="11390">
+              <caret line="147" column="40" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="40" />
               <folding>
                 <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#jdoc:include#0;n#div#3;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#4;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#6;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#6;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#7;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#0;n#div#8;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1459416457197" expanded="true" signature="11671:11787" placeholder="SELECT COUNT..." />
+                <element signature="n#style#0;n#jdoc:include#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#jdoc:include#0;n#section#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#noscript#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#noscript#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1459858539623" expanded="true" signature="11745:11861" placeholder="SELECT COUNT..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php">
+      <file leaf-file-name="custom.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/kolbaska/js/custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="748">
-              <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.22330096" vertical-offset="1760" max-vertical-offset="6749">
+              <caret line="113" column="47" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/settings.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="11202" max-vertical-offset="41803">
+              <caret line="670" column="1" selection-start-line="670" selection-start-column="1" selection-end-line="670" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -69,8 +89,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2641509" vertical-offset="18867" max-vertical-offset="61183">
-              <caret line="1120" column="42" selection-start-line="1120" selection-start-column="42" selection-end-line="1120" selection-end-column="42" />
+            <state vertical-scroll-proportion="-8.490566" vertical-offset="2797" max-vertical-offset="61217">
+              <caret line="191" column="20" selection-start-line="191" selection-start-column="20" selection-end-line="191" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -81,16 +101,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="2414">
               <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="font-awesome.min.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.8214285" vertical-offset="0" max-vertical-offset="153">
-              <caret line="3" column="3136" selection-start-line="3" selection-start-column="3136" selection-end-line="3" selection-end-column="3136" />
               <folding />
             </state>
           </provider>
@@ -107,19 +117,9 @@
         </entry>
       </file>
       <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/mod_languages/tmpl/default.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.3846154" vertical-offset="234" max-vertical-offset="833">
-              <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.3461537" vertical-offset="234" max-vertical-offset="833">
+            <state vertical-scroll-proportion="-11.269231" vertical-offset="132" max-vertical-offset="833">
               <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
               <folding />
             </state>
@@ -177,7 +177,6 @@
         <option value="$PROJECT_DIR$/modules/mod_breadcrumbs/tmpl/default.php" />
         <option value="$PROJECT_DIR$/modules/mod_jshopping_bestseller_products/mod_jshopping_bestseller_products.php" />
         <option value="$PROJECT_DIR$/templates/kolbaska/html/mod_acymailing/default.php" />
-        <option value="$PROJECT_DIR$/templates/kolbaska/js/custom.js" />
         <option value="$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/product/product_default.php" />
         <option value="$PROJECT_DIR$/templates/kassa/html/com_jshopping/product/product_default.php" />
         <option value="$PROJECT_DIR$/templates/kassa/html/com_jshopping/list_products/product.php" />
@@ -193,10 +192,12 @@
         <option value="$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css" />
         <option value="$PROJECT_DIR$/templates/kolbaska/html/mod_jshopping_cart_ext/default.php" />
         <option value="$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php" />
-        <option value="$PROJECT_DIR$/templates/kolbaska/index.php" />
         <option value="$PROJECT_DIR$/modules/mod_jshopping_products_wfl/style.css" />
         <option value="$PROJECT_DIR$/templates/kolbaska/css/less-style.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/css/settings.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/js/custom.js" />
         <option value="$PROJECT_DIR$/templates/kolbaska/css/style.css" />
+        <option value="$PROJECT_DIR$/templates/kolbaska/index.php" />
       </list>
     </option>
   </component>
@@ -302,7 +303,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -359,7 +360,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19648738" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13282108" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -421,14 +422,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/mod_breadcrumbs/mod_breadcrumbs.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51403886" vertical-offset="0" max-vertical-offset="463">
-          <caret line="20" column="69" selection-start-line="20" selection-start-column="69" selection-end-line="20" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/com_jshopping/lib/jtableauto.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2222223" vertical-offset="81" max-vertical-offset="4165">
@@ -644,14 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/js/custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15559158" vertical-offset="2131" max-vertical-offset="6749">
-          <caret line="131" column="82" selection-start-line="131" selection-start-column="74" selection-end-line="131" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/com_jshopping/lang/de-DE.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16498993" vertical-offset="6072" max-vertical-offset="7667">
@@ -828,14 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8214285" vertical-offset="0" max-vertical-offset="153">
-          <caret line="3" column="3136" selection-start-line="3" selection-start-column="3136" selection-end-line="3" selection-end-column="3136" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administrator/components/com_update/views/update/tmpl/createpricetmrubak.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="34.807693" vertical-offset="1636" max-vertical-offset="2550">
@@ -847,6 +824,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/settings.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="11202" max-vertical-offset="41803">
+          <caret line="670" column="1" selection-start-line="670" selection-start-column="1" selection-end-line="670" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/com_jshopping/product/product_default.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="15.740741" vertical-offset="1530" max-vertical-offset="6970">
@@ -855,26 +840,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/mod_languages/tmpl/default.php">
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/font-awesome.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.3846154" vertical-offset="234" max-vertical-offset="833">
-          <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.07544379" vertical-offset="0" max-vertical-offset="676">
+          <caret line="3" column="3136" selection-start-line="3" selection-start-column="3136" selection-end-line="3" selection-end-column="3136" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/kolbaska/html/mod_languages/default.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.3461537" vertical-offset="234" max-vertical-offset="833">
+        <state vertical-scroll-proportion="-11.269231" vertical-offset="132" max-vertical-offset="833">
           <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_products_wfl/style.css">
+    <entry file="file://$PROJECT_DIR$/modules/mod_languages/tmpl/default.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="2414">
-          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.53352356" vertical-offset="0" max-vertical-offset="833">
+          <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -887,26 +872,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/mod_jshopping_products_wfl/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="2414">
+          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/kolbaska/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2641509" vertical-offset="18867" max-vertical-offset="61183">
-          <caret line="1120" column="42" selection-start-line="1120" selection-start-column="42" selection-end-line="1120" selection-end-column="42" />
+        <state vertical-scroll-proportion="-8.490566" vertical-offset="2797" max-vertical-offset="61217">
+          <caret line="191" column="20" selection-start-line="191" selection-start-column="20" selection-end-line="191" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/kolbaska/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33224756" vertical-offset="4879" max-vertical-offset="11390">
-          <caret line="317" column="39" selection-start-line="317" selection-start-column="35" selection-end-line="317" selection-end-column="39" />
+        <state vertical-scroll-proportion="-4.462963" vertical-offset="1952" max-vertical-offset="11390">
+          <caret line="147" column="40" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="40" />
           <folding>
             <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#jdoc:include#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#jdoc:include#0;n#div#3;n#div#1;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#4;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#5;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#6;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#6;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#7;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#0;n#div#8;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#jdoc:include#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#2;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1459416457197" expanded="true" signature="11671:11787" placeholder="SELECT COUNT..." />
+            <element signature="n#style#0;n#jdoc:include#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#jdoc:include#0;n#section#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#noscript#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#noscript#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1459858539623" expanded="true" signature="11745:11861" placeholder="SELECT COUNT..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kolbaska/js/custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22330096" vertical-offset="1760" max-vertical-offset="6749">
+          <caret line="113" column="47" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
