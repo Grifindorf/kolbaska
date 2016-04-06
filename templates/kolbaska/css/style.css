@@ -42,7 +42,7 @@ body{
 }
 
 h1,h2,h3,h4,h5,h6{
-	font-family: 'Droid Serif', serif;
+	font-family: 'PFAgoraSlabPro-Regular'; /*'Droid Serif', serif;*/
 	font-weight: 400;
 }
 
@@ -85,6 +85,14 @@ form input[type="text"], form input[type="password"], form input[type="email"],
 form select, form textarea{ box-shadow: none !important; }
 .table-responsive { border-radius: 4px; }
 table { background: #fff; }
+
+.main-page-wrapper{
+	padding-top: 0;
+}
+
+.inner-page-wrapper{
+	padding-top: 130px;
+}
 
 .padd{
 	padding: 45px 0;
@@ -499,7 +507,7 @@ table { background: #fff; }
  * Cart Link
  */
 
-.btn-cart-md { /*float: right;*/ padding-top: 15px; }
+.btn-cart-md { /*float: right;*/ padding-top: 15px; padding-bottom: 20px; }
 
 .btn-cart-md a i {
 	display: inline-block;
@@ -680,32 +688,32 @@ table { background: #fff; }
  * Default Heading
  */
 
-.default-heading {display: none; margin-bottom: 40px; text-align: center; }
+.default-heading {margin-bottom: 40px; text-align: center; }
 
 .default-heading img { margin: 0 auto; margin-bottom: 12px; }
 
 .default-heading h1{
 	margin: 0 0 10px 0;
-	font-family: 'Open Sans', Sans-Serif;
+	font-family: 'PFAgoraSlabPro-Black', Sans-Serif;
 	font-weight: 700;
 	font-size: 24px;
 	color: #5a533b;
 }
-
+/*
 .default-heading h1:after {
-	content: ""; /* Добавляемый текст */
+	content: "";
 	background: url('/templates/kolbaska/images/ico-right-header-title.png') no-repeat 50% 50%;
 	width: 26px;
 	height: 26px;
-	padding: 20px; /* Поля вокруг текста */
+	padding: 20px;
 }
 .default-heading h1:before {
-	content: ""; /* Добавляемый текст */
+	content: "";
 	background: url('/templates/kolbaska/images/ico-left-header-title.png') no-repeat 50% 50%;
 	width: 26px;
 	height: 26px;
-	padding: 20px; /* Поля вокруг текста */
-}
+	padding: 20px;
+}*/
 
 .default-heading p{
 	max-width: 500px;
@@ -717,9 +725,9 @@ table { background: #fff; }
 }
 
 .default-heading .border{
-	margin: 0px;
+	margin: 15px;
 	height: 5px;
-	border-top: 1px dashed #dedede;
+	border-top: 2px dotted #d3bdb2;
 }
 
 /*
@@ -1061,7 +1069,7 @@ table { background: #fff; }
  * Showcase Section
  */
  
-.showcase { margin-top: 80px; }
+/*.showcase { margin-top: 50px; }*/
  
 .showcase .showcase-item{
 	position: relative;
@@ -1338,6 +1346,9 @@ div.ppt { display:none !important; }
 	margin: 15px 0;
 	padding: 0;
 	background: transparent;
+	font-family: 'PFAgoraSlabPro-Regular';
+	font-size: 15px;
+	text-align: left;
 }
 
 .hidden {
@@ -1530,7 +1541,7 @@ div.ppt { display:none !important; }
  * Shopping, On-line Order Page
  */
  
-.inner-page .shopping { margin-top: 40px; margin-bottom: 20px; }
+.inner-page .shopping { /*margin-top: 40px;*/ margin-bottom: 20px; }
 .inner-page .single-item-content .shopping .shopping-item {
     position: relative;
     max-width: 400px;
@@ -1556,6 +1567,7 @@ div.ppt { display:none !important; }
 	text-align: center;
 	background: #fff;
 	border: 4px solid #eee;
+	border-radius: 10px;
 	overflow: hidden;
 	-webkit-transition: all 0.4s ease-in-out;
 	   -moz-transition: all 0.4s ease-in-out;
@@ -1684,7 +1696,7 @@ div.ppt { display:none !important; }
  * Shopping, Single item Page
  */
  
-.inner-page .single-item { margin-top: 40px; margin-bottom: 20px; }
+.inner-page .single-item { margin-top: 20px; margin-bottom: 20px; }
 .inner-page .single-item h3 {
 	margin-top: 0;
 	margin-bottom: 12px;
@@ -2892,15 +2904,20 @@ table.arcticmodal-container_i {
 }
 
 aside.vrfilterblock {
-    border: 4px solid #f75353;
+	border: 4px solid #ff9d00;
+	border-radius: 10px;
+	padding: 5px;
 }
 
 aside.vrfilterblock .title {
-    text-align: center;
-    font-size: 18px;
-    display: block;
-    background: #eee;
-    padding: 6px 0;
+	text-align: center;
+	font-family: 'PFAgoraSlabPro-Regular';
+	font-weight: bold;
+	font-size: 20px;
+	display: block;
+	background: #ffefc5;
+	border-radius: 10px;
+	padding: 6px 0;
 }
 
 
@@ -3547,7 +3564,7 @@ ul.category-menu > li > a {
 
 .menu-top{
 	position: relative;
-	top: 10px;
+	/*top: 10px;*/
 	padding: 0;
 	color:#fff;
 	background: #c17d4c;
@@ -3555,6 +3572,7 @@ ul.category-menu > li > a {
 	background: -webkit-linear-gradient(top, #c17d4c 0%,#c17d4c 1%,#8d4e29 100%);
 	background: linear-gradient(to bottom, #c17d4c 0%,#c17d4c 1%,#8d4e29 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c17d4c', endColorstr='#8d4e29',GradientType=0 );
+	z-index: 20;
 }
 
 .menu-top .container{
@@ -3562,8 +3580,17 @@ ul.category-menu > li > a {
 	top: -25px;
 }
 
+.inner-page-wrapper .menu-top .container{
+	top: 0;
+	padding: 10px 0;
+}
+
 .menu-bottom{
 	padding-bottom: 200px;
+}
+
+.menu-top .dishes .default-heading, .menu-bottom .dishes .default-heading{
+	display: none;
 }
 
 .carousel .container{

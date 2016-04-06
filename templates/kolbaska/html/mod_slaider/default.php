@@ -28,7 +28,7 @@
                         <!-- LAYERS NR. 2 -->
                         <div class="tp-caption lfr large_bold_grey heading white"
                              data-x="center"
-                             data-y="90"
+                             data-y="250"
                              data-speed="800"
                              data-start="1000"
                              data-easing="Power4.easeOut"

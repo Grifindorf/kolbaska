@@ -19,7 +19,7 @@ if(!defined('DS')){
 ?>
 
 <script type="text/javascript">
-	jQuery.noConflict();
+		jQuery.noConflict();
 jQuery(document).ready(function(){
 	jQuery("#owl-example-<?php echo $ext_id;?>").owlCarousel({
 		items : <?php echo $ext_items; ?>,

@@ -145,7 +145,7 @@ foreach($results as $result){
 <!-- Model End -->
 
 <!-- Page Wrapper -->
-<div class="wrapper" style="padding-top: <?=$_SERVER['REQUEST_URI'] == '/' ? '0' : '150px'?> ">
+<div class="wrapper <?=($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/uk/') ? 'main-page-wrapper' : 'inner-page-wrapper'?>">
 
     <!-- Header Start -->
 
@@ -255,16 +255,6 @@ foreach($results as $result){
 
         <!-- Dishes Start -->
 
-	    <?php if ($this->countModules( 'breadcrumbspos' )) : ?>
-		    <div class="banner">
-			    <div class="container">
-				    <!-- Image -->
-				    <jdoc:include type="modules" style="none" name="breadcrumbspos" />
-				    <div class="clearfix"></div>
-			    </div>
-		    </div>
-	    <?php endif; ?>
-
         <!-- Pricing Start -->
 
 	    <div class="testimonial padd menu-top">
@@ -274,6 +264,17 @@ foreach($results as $result){
 		        </div>
 			</div>
 	    </div>
+
+
+	    <?php if ($this->countModules( 'breadcrumbspos' )) : ?>
+		    <div class="banner">
+			    <div class="container">
+				    <!-- Image -->
+				    <jdoc:include type="modules" style="none" name="breadcrumbspos" />
+				    <div class="clearfix"></div>
+			    </div>
+		    </div>
+	    <?php endif; ?>
 
 
 	    <!-- Carousel -->
@@ -315,6 +316,7 @@ foreach($results as $result){
 	    <!-- Start Bestseller-block2-->
 
 	    <!-- Showcase Start -->
+		<?php if($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/uk/'){ ?>
 	    <div class="showcase customReviews">
 		    <div class="container">
 			    <div>
@@ -338,6 +340,7 @@ foreach($results as $result){
 			    </div>
 		    </div>
 	    </div>
+	    <?php } ?>
 	    <!-- Showcase End -->
 
         <!-- Showcase Start -->

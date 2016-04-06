@@ -661,7 +661,7 @@ span.prod_attr_img img{
 
 .bestseller_products .bestseller_block{
 	display: block;
-	margin: 70px 0 30px;
+	margin: 35px 0 30px;
 	font-size: 32px;
 	text-align: center;
 	/*padding-bottom: 20px;*/
@@ -673,6 +673,7 @@ span.prod_attr_img img{
 	text-align: center;
 	font-size: 16px;
 	font-weight: bold;
+	margin-bottom: 50px;
 }
 
 .bestseller_products .block_item{
