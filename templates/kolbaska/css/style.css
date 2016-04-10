@@ -784,6 +784,7 @@ table { background: #fff; }
 	display: table-cell;
 	vertical-align: middle;
 	z-index: 10;
+	padding-bottom: 15px;
 }
 
 .dishes .img-frame img{
@@ -847,9 +848,9 @@ table { background: #fff; }
 	/*margin-bottom: 5px;*/
 	font-size: 22px;
 	color: #5a533b;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'PFAgoraSlabPro-Medium', sans-serif;
 	font-weight: 700;
-	font-size: 12px;
+	font-size: 13px;
 	text-transform: uppercase;
 }
 
@@ -3478,8 +3479,12 @@ ul.category-menu > li > a {
 	font-size: 36px;
 }
 
+.bestseller-block1 .container .image_block img {
+	width: 90%;
+}
+
 .bestseller-block1 .bestseller_products .block_item .jshop_price{
-	margin: 20px 0;
+	margin: 10px 0;
 }
 
 .bestseller-block2 .bestseller_products .block_item .jshop_price{

@@ -116,9 +116,9 @@
 <?php 	print $product->_tmp_var_top_buttons;?>
 
         <div class="buttons">
-<?php 		if ($product->buy_link && $show_button_buy){?>
-            <a class="button_buy yellowButton middleButton" onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"><!--href="<?php print $product->buy_link?> <?php print _JSHOP_BUY?>"--><?=($product->in_cart==1 ? JText::_('INCART') : _JSHOP_BUY)?></a> &nbsp;
-<?php 		}?>
+<?php 		//if ($show_button_buy){ ?> <!-- TO DO СДЕЛАТЬ КНОПКОЙ ПОКУПКИ -->
+            <a class="button_buy yellowButton middleButton" href="<?php print $product->product_link?>" <!--onclick="addToCart(<?=$product->product_id?>,true)" href="javascript:void(null)"--><!--href="<?php print $product->buy_link?> <?php print _JSHOP_BUY?>"--><?=($product->in_cart==1 ? JText::_('INCART') : _JSHOP_BUY)?></a> &nbsp;
+<?php 		//}?>
 <?php 		/*if ($show_button_detal){ */?>
             <!--<a class="button_detail" href="<?php print $product->product_link?>"><?php print _JSHOP_DETAIL?></a>-->
 <?php		/*}*/ ?>
