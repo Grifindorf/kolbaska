@@ -3469,12 +3469,56 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar {
     border-radius: 2px;
   }
+	.navbar-header {
+		float: left;
+	}
+
+	.header .header-contact .main_tel {
+		font-size: 24px;
+	}
+
+	.btn-cart-md a.cart-link span {
+		margin-left: 50px;
+	}
 }
-@media (min-width: 768px) {
-  .navbar-header {
-    float: left;
-  }
+
+@media (max-width: 1024px){
+	.header .home_link{
+		display: none;
+	}
 }
+
+@media (max-width: 992px){
+	.header .search-block, .header .header-top{
+		display: none;
+	}
+}
+
+@media (max-width: 768px){
+	.header .logo_area, .header .contact-block{
+		float: left;
+	}
+
+	.header .header-contact .main_tel {
+		font-size: 15px;
+	}
+
+	.header .cart-block{
+		float: right;
+		margin-right: 65px;
+	}
+
+	.btn-cart-md a.cart-link span {
+		margin-left: 35px;
+	}
+}
+
+@media (max-width: 520px){
+	.header .cart-block{
+		margin-right: 35px;
+	}
+}
+
 .navbar-collapse {
   overflow-x: visible;
   padding-right: 15px;

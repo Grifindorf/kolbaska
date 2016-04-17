@@ -192,13 +192,13 @@ foreach($results as $result){
 	                    <div class="home_link">kolbaska.com.ua</div>
                     </a>
                 </div>
-	            <div class="col-md-4 col-sm-3">
+	            <div class="col-md-4 col-sm-3 search-block">
 		            <!-- Header top right content search box -->
 		            <div class=" header-search">
 			            <jdoc:include type="modules" style="none" name="search-pos" />
 		            </div>
 	            </div>
-	            <div class="col-md-2 col-sm-3">
+	            <div class="col-md-2 col-sm-3 contact-block">
 		            <!-- Header top left content contact -->
 		            <div class="header-contact">
 			            <!-- Contact number -->
@@ -231,7 +231,7 @@ foreach($results as $result){
                         </div>
                         <div class="clearfix"></div>
                     </div>-->
-	            <div class="col-md-2 col-sm-2">
+	            <div class="col-md-2 col-sm-2 cart-block">
 		            <!-- Button Kart -->
 		            <jdoc:include type="modules" style="none" name="cart" />
 		            <div class="clearfix"></div>
@@ -288,7 +288,7 @@ foreach($results as $result){
 	    </div>
 
 	    <!-- Start Bestseller-block1-->
-	    <div class="testimonial padd bestseller-block1">
+	    <div class="testimonial padd bestseller-block1" <?=($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/uk/') ? 'style="border-bottom: 2px dotted #d3bdb2"' : ''?>">
 		    <div class="container">
 			    <div class="row">
 					    <!-- BLock heading -->
@@ -446,8 +446,8 @@ foreach($results as $result){
                         <jdoc:include type="modules" style="none" name="footer-contactus" />
                         <!-- Social media icon -->
                         <div class="social">
-                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="facebook"><i class="fa fa-vk"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100010951020899" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://vk.com/id343056925" target="_blank" class="facebook"><i class="fa fa-vk"></i></a>
                         </div>
                     </div> <!--/ Footer widget end -->
                 </div>
