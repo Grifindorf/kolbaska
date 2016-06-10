@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      4.10.5 20.12.2011
+* @version      4.10.0 20.12.2011
 * @author       MAXXmarketing GmbH
 * @package      Jshopping
 * @copyright    Copyright (C) 2010 webdesigner-profi.de. All rights reserved.
@@ -65,7 +65,7 @@ class JshoppingControllerUpdate extends JControllerLegacy{
             $tmp_dest = $config->get('tmp_path').'/'.$userfile['name'];            
             $tmp_src = $userfile['tmp_name'];
             jimport('joomla.filesystem.file');
-            $uploaded = JFile::upload($tmp_src, $tmp_dest, false, true); 
+            $uploaded = JFile::upload($tmp_src, $tmp_dest, false, true);
             $archivename = $tmp_dest;            
             $tmpdir = uniqid('install_');
             $extractdir = JPath::clean(dirname($archivename).'/'.$tmpdir);

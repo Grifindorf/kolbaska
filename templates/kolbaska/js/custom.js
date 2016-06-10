@@ -1,4 +1,4 @@
-$(document).ready(function() {
+﻿$(document).ready(function() {
     $('#modalvideo .close').click(function(){
         $( '#modalvideoframe' ).attr( 'src', function ( i, val ) { return val; });
     });
@@ -53,14 +53,14 @@ $(document).ready(function() {
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		return false;
 	});
-    if($( window ).width() > 1200) {
+    if($( window ).width() > 1300) {
         var scroll = $(document).scrollTop();
         if (scroll > 105) {
             $('.navbar-nav .menuimage').hide();
             $('.navbar-nav .dropdown-menu img').show();
             $('.logo img').attr('style', 'max-width:150px;');
-            $('.header').attr('style', 'position: fixed; top: 0;');
-            /*$('.wrapper:eq(0)').attr('style','padding-top:150px;');*/
+            /*$('.header').attr('style', 'position: fixed; top: 0;');
+            $('.wrapper:eq(0)').attr('style','padding-top:150px;');*/
         }
     }
 
@@ -100,21 +100,21 @@ $(document).ready(function() {
 /* *************************************** */
 
 $(document).scroll(function(){
-    if($( window ).width() > 1200){
+    if($( window ).width() > 1300){
         var scroll = $(document).scrollTop();
         if(scroll>105){
             $('.navbar-nav .menuimage').hide();
             $('.navbar-nav .dropdown-menu img').show();
             $('.logo img').attr('style','max-width:150px;');
-            $('.header').attr('style','position: fixed; top: 0;');
+            /*$('.header').attr('style','position: fixed; top: 0;');
             $('.header-top').addClass('small');
-            /*$('.wrapper:eq(0)').attr('style','padding-top:150px;');*/
+            $('.wrapper:eq(0)').attr('style','padding-top:150px;');*/
         }else{
             $('.navbar-nav .menuimage').show();
             $('.logo img').removeAttr('style');
             /*$('.header').removeAttr('style');*/
-            $('.header-top').removeClass('small');
-            /*$('.wrapper:eq(0)').removeAttr('style');*/
+            /*$('.header-top').removeClass('small');
+            $('.wrapper:eq(0)').removeAttr('style');*/
         }
     }
 });
@@ -217,8 +217,8 @@ function UpdateCart(data){
             $('#jshop_module_cart .cart-dropdown li.delete').remove();
             $('#counttooptcart').html(parseInt(responce.price_product_opt).toFixed(2));
             if(responce.type_cart_price == 3){
-                $('#topcartinfoopt').text('Минимальная сумма заказа 500грн.');
-                $('#summoptfromrozn').text('Минимальная сумма заказа 500грн.');
+                $('#topcartinfoopt').text('Минимальная сумма заказа 50грн.');
+                $('#summoptfromrozn').text('Минимальная сумма заказа 50грн.');
                 $('#oneclickorderbutton').addClass('disabled');
                 $('#fullclickorderbutton').addClass('disabled');
             }
@@ -338,7 +338,7 @@ function checkorderpermission(type){
         data: {},
         success: function(data){
             var responce = JSON.parse(data);
-            if(responce.price_product >= 500){
+            if(responce.price_product >= 50){
                 if(type==1){
                     oneclickorder();
                 }

@@ -9,7 +9,6 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <div class="jshop list_product" id="comjshop_list_product">
-<?php print $this->_tmp_list_products_html_start?>
 <?php foreach ($this->rows as $k=>$product) : ?>
     <?php if ($k % $this->count_product_to_row == 0) : ?>
         <div class = "row-fluid">
@@ -31,5 +30,4 @@ defined('_JEXEC') or die('Restricted access');
     <div class = "clearfix"></div>
     </div>
 <?php endif; ?>
-<?php print $this->_tmp_list_products_html_end;?>
 </div>

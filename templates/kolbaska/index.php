@@ -20,7 +20,9 @@
     <link href="/templates/kolbaska/css/settings.css" rel="stylesheet">
     <link href="/templates/kolbaska/css/flexslider.css" rel="stylesheet" media="screen" />
     <link href="/templates/kolbaska/css/prettyPhoto.css" rel="stylesheet">
-
+    <? if ($_SERVER['REQUEST_URI'] == '/') { ?>
+    <link href="/templates/kolbaska/css/main.css" rel="stylesheet">
+    <? } ?>
     <script>
         $ = jQuery;
     </script>
@@ -83,7 +85,7 @@ foreach($results as $result){
             ?>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Корзина <span id="topcartinfoopt"><?=($cart->type_cart_price == 3 ? 'Минимальная сумма заказа 500грн.' : ($cart->type_cart_price == 2 ? JText::_('TPL_KOLBASKA_BYPRICE_ROZN') : JText::_('TPL_KOLBASKA_BYPRICE_OPT') ) )?></span></h4>
+                <h4 class="modal-title">Корзина <span id="topcartinfoopt"><?=($cart->type_cart_price == 3 ? 'Минимальная сумма заказа 50грн.' : ($cart->type_cart_price == 2 ? JText::_('TPL_KOLBASKA_BYPRICE_ROZN') : JText::_('TPL_KOLBASKA_BYPRICE_OPT') ) )?></span></h4>
             </div>
             <div class="modal-body modalcartproductsoverfloww">
                 <!-- Items table -->
@@ -121,7 +123,7 @@ foreach($results as $result){
                             <th style="width: 20%;"><span class="summ"><?=number_format($cart->price_product,2)?></span> грн.</th>
                         </tr>
                         <tr>
-                            <th><div id="summoptfromrozn"><?=($cart->type_cart_price == 3 ? 'Минимальная сумма заказа 500грн.' : ($cart->type_cart_price == 2 ? JText::_('TPL_KOLBASKA_SUMMOPTPRICEROZN')." ".number_format( (1500 - $cart->price_product_opt) ,2)." грн" : JText::_('TPL_KOLBASKA_BYPRICE_OPT') ) )?></div></th>
+                            <th><div id="summoptfromrozn"><?=($cart->type_cart_price == 3 ? 'Минимальная сумма заказа 50грн.' : ($cart->type_cart_price == 2 ? JText::_('TPL_KOLBASKA_SUMMOPTPRICEROZN')." ".number_format( (1500 - $cart->price_product_opt) ,2)." грн" : JText::_('TPL_KOLBASKA_BYPRICE_OPT') ) )?></div></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -137,7 +139,7 @@ foreach($results as $result){
                     <button type="button" id="oneclickorderbutton" class="btn btn-info <?=($cart->type_cart_price == 3 ? 'disabled' : '')?>" onclick="checkorderpermission(1)">Заказать в 1 клик</button>
                 </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-                <a href="javascript:void(null)" id="fullclickorderbutton" data-href="<?php print SEFLink('index.php?option=com_jshopping&controller=checkout&task=step2',1)?>" onclick="checkorderpermission(2)" class="btn btn-info <?=($cart->type_cart_price == 3 ? 'disabled' : '')?>">Оформить заказ</a>
+                <a href="javascript:void(null)" id="fullclickorderbutton" data-href="<?php print '/component/jshopping/checkout/step2'?>" onclick="checkorderpermission(2)" class="btn btn-info <?=($cart->type_cart_price == 3 ? 'disabled' : '')?>">Оформить заказ</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -192,13 +194,13 @@ foreach($results as $result){
 	                    <div class="home_link">kolbaska.com.ua</div>
                     </a>
                 </div>
-	            <div class="col-md-4 col-sm-3">
+	            <div class="col-md-4 col-sm-3 search-block">
 		            <!-- Header top right content search box -->
 		            <div class=" header-search">
 			            <jdoc:include type="modules" style="none" name="search-pos" />
 		            </div>
 	            </div>
-	            <div class="col-md-2 col-sm-3">
+	            <div class="col-md-2 col-sm-3 contact-block">
 		            <!-- Header top left content contact -->
 		            <div class="header-contact">
 			            <!-- Contact number -->
@@ -231,7 +233,7 @@ foreach($results as $result){
                         </div>
                         <div class="clearfix"></div>
                     </div>-->
-	            <div class="col-md-2 col-sm-2">
+	            <div class="col-md-2 col-sm-2 cart-block">
 		            <!-- Button Kart -->
 		            <jdoc:include type="modules" style="none" name="cart" />
 		            <div class="clearfix"></div>
@@ -288,7 +290,7 @@ foreach($results as $result){
 	    </div>
 
 	    <!-- Start Bestseller-block1-->
-	    <div class="testimonial padd bestseller-block1">
+	    <div class="testimonial padd bestseller-block1" <?=($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/uk/') ? 'style="border-bottom: 2px dotted #d3bdb2"' : ''?>">
 		    <div class="container">
 			    <div class="row">
 					    <!-- BLock heading -->
@@ -411,12 +413,12 @@ foreach($results as $result){
 	                    <h4>Наши магазины</h4>
 	                    <div class="custom">
 		                    <div class="contact-details shops">
-			                    <span>Оптово-розничный склад</span>
-			                    <span>Киев, ул. Волинская 34/1</span>
-			                    <div class="clearfix">&nbsp;</div>
+                                <!--<span>Оптово-розничный склад</span>
+                                <span>Киев, ул. Волинская 34/1</span>
+                                <div class="clearfix">&nbsp;</div>-->
 			                    <span>Магазин “Kolbaska.com.ua"</span>
-			                    <span>ст. м. Лесовая, ”Bazar” (выход со</span>
-			                    <span>стороны ул. Попудренко)</span>
+			                    <span>ст. м. Лесовая, ул. Попудренко 65 </span>
+			                    <span>рынок ”Bazar”, место 16Д</span>
 			                    <div class="clearfix">&nbsp;</div>
 		                    </div>
 	                    </div>
@@ -446,8 +448,8 @@ foreach($results as $result){
                         <jdoc:include type="modules" style="none" name="footer-contactus" />
                         <!-- Social media icon -->
                         <div class="social">
-                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="facebook"><i class="fa fa-vk"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100010951020899" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://vk.com/club103366284" target="_blank" class="facebook"><i class="fa fa-vk"></i></a>
                         </div>
                     </div> <!--/ Footer widget end -->
                 </div>

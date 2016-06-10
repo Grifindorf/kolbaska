@@ -434,6 +434,6 @@
 
         </ul>
         <!-- Banner Timer -->
-        <div class="tp-bannertimer"></div>
+        <!-- <div class="tp-bannertimer"></div> -->
     </div>
 </div>

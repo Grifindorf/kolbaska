@@ -341,11 +341,10 @@ include(dirname(__FILE__)."/load.js.php");
     <?php }?>
     
     <?php
-        print $this->_tmp_product_html_before_review;
-        include(dirname(__FILE__)."/review.php");
-        
         print $this->_tmp_product_html_before_related;
         include(dirname(__FILE__)."/related.php");
+        print $this->_tmp_product_html_before_review;
+        include(dirname(__FILE__)."/review.php");
     ?>
     
     <?php print $this->_tmp_product_html_end;?>

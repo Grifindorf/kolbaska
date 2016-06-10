@@ -154,7 +154,7 @@ class JshoppingControllerCategory extends JControllerLegacy{
         }
 
         if ( $manufacturer_ids ) {
-            $category_brend_meta_description = 'Производители: '.implode(',',$active_manufacturers).'. ';
+            $category_brend_meta_description = JText::_('VYROBNYK') . ': '.implode(',',$active_manufacturers).'. ';
         }
         if ($active_extra_fields) {
             foreach ($active_extra_fields as $key=>$extra) {

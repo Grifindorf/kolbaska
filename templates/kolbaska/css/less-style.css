@@ -148,6 +148,7 @@ a:hover {
   background: #f9f9f9;
   color: #555555;
   border: 1px solid #aaaaaa;
+	border-radius: 7px;
 }
 .btn.btn-default:hover {
   background: #eeeeee;

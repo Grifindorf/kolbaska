@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      4.10.5 24.08.2015
+* @version      4.3.1 13.08.2013
 * @author       MAXXmarketing GmbH
 * @package      Jshopping
 * @copyright    Copyright (C) 2010 webdesigner-profi.de. All rights reserved.
@@ -80,7 +80,6 @@ class jshopShippingMethodPrice extends JTable {
         foreach($extensions as $extension){
             if (isset($extension->exec->version) && $extension->exec->version==2){
                 $prices = $extension->exec->getPrices($cart, $this->getParams(), $prices, $extension, $this);
-                $price = $prices['shipping'];
             }else{
                 $price = $extension->exec->getPrice($cart, $this->getParams(), $price, $extension, $this);
                 $prices = array('shipping'=>$price,'package'=>$package);

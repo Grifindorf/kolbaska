@@ -1,14 +1,12 @@
 <?php 
 /**
-* @version      4.10.5 13.08.2013
+* @version      4.9.1 13.08.2013
 * @author       MAXXmarketing GmbH
 * @package      Jshopping
 * @copyright    Copyright (C) 2010 webdesigner-profi.de. All rights reserved.
 * @license      GNU/GPL
 */
 defined('_JEXEC') or die('Restricted access');
-
-print $this->_tmp_category_html_start;
 ?>
 <div class="jshop" id="comjshop">
     <h1><?php print $this->category->name?></h1>
@@ -58,8 +56,5 @@ print $this->_tmp_category_html_start;
         </div>
     <?php endif; ?>
     </div>
-    
-    <?php print $this->_tmp_category_html_end;?>
-    
     <?php include(dirname(__FILE__)."/products.php");?>
 </div>

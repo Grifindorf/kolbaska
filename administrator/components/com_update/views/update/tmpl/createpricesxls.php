@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 define('_JEXEC', 1);
 
@@ -10,18 +10,16 @@ define('JPATH_BASE', dirname(__FILE__) . '/../../../../../../' );
 
 define('DS', DIRECTORY_SEPARATOR);
 
-echo $_SERVER['DOCUMENT_ROOT'];
-
-//require_once('/var/www/kolbaska/includes/defines.php');
-//require_once('/var/www/kolbaska/includes/framework.php');
-//require_once('/var/www/kolbaska/administrator/components/com_update/PHPExcel/PHPExcel.php');
-//require_once('/var/www/kolbaska/administrator/components/com_update/PHPExcel/PHPExcel/Writer/Excel5.php');
+require_once('/var/www/kolbaska/includes/defines.php');
+require_once('/var/www/kolbaska/includes/framework.php');
+require_once('/var/www/kolbaska/administrator/components/com_update/PHPExcel/PHPExcel.php');
+require_once('/var/www/kolbaska/administrator/components/com_update/PHPExcel/PHPExcel/Writer/Excel5.php');
 
 
-require_once('/../../../../../../includes/defines.php');
-require_once('/../../../../../../includes/framework.php');
-require_once('/../../../../../../administrator/components/com_update/PHPExcel/PHPExcel.php');
-require_once('/../../../../../../administrator/components/com_update/PHPExcel/PHPExcel/Writer/Excel5.php');
+//require_once('/../../../../../../includes/defines.php');
+//require_once('/../../../../../../includes/framework.php');
+//require_once('/../../../../../../administrator/components/com_update/PHPExcel/PHPExcel.php');
+//require_once('/../../../../../../administrator/components/com_update/PHPExcel/PHPExcel/Writer/Excel5.php');
 
 $db = JFactory::getDbo();
 
@@ -72,7 +70,7 @@ foreach($categories as $category){
     $objDrawing = new PHPExcel_Worksheet_Drawing();
     $objDrawing->setWorksheet($list);
     $objDrawing->setName("kolbaska.com.ua");
-    $objDrawing->setPath($_SERVER['DOCUMENT_ROOT'].'/images/kolbaska.com.ua.png'); // /var/www/kolbaska/
+    $objDrawing->setPath("/var/www/kolbaska/images/kolbaska.com.ua.png");
     $objDrawing->setCoordinates("A1");
     $objDrawing->setOffsetX(1);
     $objDrawing->setOffsetY(5);
@@ -117,8 +115,7 @@ foreach($categories as $category){
 
             $i++;
             $nowRow = (5 + $i);
-
-            $query = "SELECT `product_ean`, `name_ru-RU` as `name`, `image`, `product_price`, `product_old_price`, `basic_price_unit_id` FROM `#__jshopping_products` WHERE `product_id` IN (SELECT `product_id` FROM `#__jshopping_products_to_categories` WHERE `category_id` = ".$c_category->category_id." OR `category_id` IN (SELECT `category_id` FROM `#__jshopping_categories` WHERE `category_parent_id` = ".$c_category->category_id." AND `category_publish` = 1) ) AND `product_original_price` > 0 AND `product_publish` = 1 ";
+            $query = "SELECT `product_ean`, `name_ru-RU` as `name`, `image`, `product_price`, `product_old_price`, `basic_price_unit_id` FROM `#__jshopping_products` WHERE `product_id` IN (SELECT `product_id` FROM `#__jshopping_products_to_categories` WHERE `category_id` = ".$c_category->category_id." OR `category_id` IN (SELECT `category_id` FROM `#__jshopping_categories` WHERE `category_parent_id` = ".$category->category_id." AND `category_publish` = 1) ) AND `product_original_price` > 0 AND `product_publish` = 1 ";
             $db->setQuery($query);
             $products = $db->loadObjectlist();
 
@@ -147,7 +144,7 @@ foreach($categories as $category){
     }else{
         $i++;
         $nowRow = (5 + $i);
-		$parentCategoryID = $category->category_id;
+	$parentCategoryID = $category->category_id;
         $query = "SELECT `product_ean`, `name_ru-RU` as `name`, `image`, `product_price`, `product_old_price`, `basic_price_unit_id` FROM `#__jshopping_products` WHERE `product_id` IN (SELECT `product_id` FROM `#__jshopping_products_to_categories` WHERE `category_id` = ".$category->category_id." OR `category_id` IN (SELECT `category_id` FROM `#__jshopping_categories` WHERE `category_parent_id` = ".$parentCategoryID." AND `category_publish` = 1) ) AND `product_original_price` > 0 AND `product_publish` = 1 ";
         $db->setQuery($query);
         $products = $db->loadObjectlist();

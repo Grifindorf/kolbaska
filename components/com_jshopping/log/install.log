@@ -3,28 +3,3 @@ Start install: /var/www/krasotaby/data/www/kolbaska.com.ua/tmp/JoomShopping_lang
 2015-08-27 10:00:18 Copy file: /administrator/components/com_jshopping/lang/uk-UA.php
 2015-08-27 10:00:18 Copy file: /administrator/language/uk-UA/uk-UA.com_jshopping.sys.ini
 2015-08-27 10:00:18 Copy file: /components/com_jshopping/lang/uk-UA.php
-2016-03-10 18:53:57 
-Start install: \var\www\kolbaska.com.ua\tmp\mod_jshopping_bestseller_products_4.0.3.zip
-2016-03-10 18:53:57 Archive error
-2016-03-10 18:54:41 
-Start install: \var\www\kolbaska.com.ua\tmp\mod_jshopping_bestseller_products_4.0.3.zip
-2016-03-10 18:54:41 Archive error
-2016-03-10 19:03:43 
-Start install: \var\www\kolbaska.com.ua\tmp\JoomShopping-update-4.10.4-4.10.5.zip
-2016-03-10 19:03:43 Copy file: /administrator/components/com_jshopping/jshopping.xml
-2016-03-10 19:03:43 Copy file: /administrator/components/com_jshopping/controllers/categories.php
-2016-03-10 19:03:43 Copy file: /administrator/components/com_jshopping/controllers/update.php
-2016-03-10 19:03:43 Copy file: /components/com_jshopping/addons/addon_core.php
-2016-03-10 19:03:43 Copy file: /components/com_jshopping/controllers/user.php
-2016-03-10 19:03:43 Copy file: /components/com_jshopping/lib/functions.php
-2016-03-10 19:03:44 Copy file: /components/com_jshopping/tables/shippingmethodprice.php
-2016-03-10 19:03:44 Copy file: /components/com_jshopping/templates/default/category/category_default.php
-2016-03-10 19:03:44 Copy file: /components/com_jshopping/templates/default/category/maincategory.php
-2016-03-10 19:03:44 Copy file: /components/com_jshopping/templates/default/list_products/list_products.php
-2016-03-10 19:03:44 Copy file: /components/com_jshopping/templates/default/product/product_default.php
-2016-03-10 19:03:44 Copy file: /components/com_jshopping/views/addons/view.html.php
-2016-03-10 19:04:12 
-Start install: \var\www\kolbaska.com.ua\tmp\mod_jshopping_bestseller_products_4.0.3.zip
-2016-03-10 19:04:12 Copy file: /helper.php
-2016-03-10 19:04:12 Copy file: /mod_jshopping_bestseller_products.php
-2016-03-10 19:04:12 INSTALL_THROUGH_JOOMLA
