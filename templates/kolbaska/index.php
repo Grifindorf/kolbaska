@@ -447,7 +447,7 @@ foreach($results as $result){
                         <!-- Social media icon -->
                         <div class="social">
                             <a href="https://www.facebook.com/profile.php?id=100010951020899" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="https://vk.com/id343056925" target="_blank" class="facebook"><i class="fa fa-vk"></i></a>
+                            <a href="https://vk.com/club103366284" target="_blank" class="facebook"><i class="fa fa-vk"></i></a>
                         </div>
                     </div> <!--/ Footer widget end -->
                 </div>
