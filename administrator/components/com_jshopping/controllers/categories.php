@@ -138,10 +138,10 @@ class JshoppingControllerCategories extends JControllerLegacy{
 
         foreach($languages as $lang){
             $post['name_'.$lang->language] = trim($post['name_'.$lang->language]);
-            if ($jshopConfig->create_alias_product_category_auto && $post['alias_'.$lang->language]=="") $post['alias_'.$lang->language] = $post['name_'.$lang->language];
+            if ($post['alias_'.$lang->language]=="") $post['alias_'.$lang->language] = JApplication::stringURLSafe($post['name_'.$lang->language]);
             $post['alias_'.$lang->language] = JApplication::stringURLSafe($post['alias_'.$lang->language]);
             if ($post['alias_'.$lang->language]!="" && !$_alias->checkExistAlias1Group($post['alias_'.$lang->language], $lang->language, $post['category_id'], 0)){
-                $post['alias_'.$lang->language] = "";
+                $post['alias_'.$lang->lang+uage] = "";
                 JError::raiseWarning("",_JSHOP_ERROR_ALIAS_ALREADY_EXIST);
             }
             $post['description_'.$lang->language] = JRequest::getVar('description'.$lang->id,'','post',"string", 2);
@@ -161,16 +161,14 @@ class JshoppingControllerCategories extends JControllerLegacy{
         }
 
         $this->_reorderCategory($category);
-        
-        $dispatcher->trigger('onBeforeStoreCategory', array(&$post, &$category));
-        
-        if (!$category->store()){
+         
+        if (!$category->store()) {
             JError::raiseWarning("",_JSHOP_ERROR_SAVE_DATABASE);
             $this->setRedirect("index.php?option=com_jshopping&controller=categories");
             return 0;
         }
         
-        $dispatcher->trigger('onAfterSaveCategory', array(&$category, &$post));
+        $dispatcher->trigger( 'onAfterSaveCategory', array(&$category) );
         
         $success = ($edit)?(_JSHOP_CATEGORY_SUCC_UPDATE):(_JSHOP_CATEGORY_SUCC_ADDED);
         

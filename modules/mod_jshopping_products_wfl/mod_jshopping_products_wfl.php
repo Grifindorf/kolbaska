@@ -1,5 +1,5 @@
 <?php
-# $Id: mod_jshopping_products_wfl.php
+# $Id: mod_jshopping_products_wfl.php 1.0.10 2013-10-14
 # package mod_jshopping_products_wfl
 # file mod_jshopping_products_wfl.php
 # author Aleksey M. Abrosimov wflab
@@ -7,7 +7,6 @@
 # copyright (C) 2013 Web Face Laboratory All rights reserved
 # license http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
     defined('_JEXEC') or die('Restricted access');
-    if(!defined('DS')) define('DS',DIRECTORY_SEPARATOR);
     if (!file_exists(JPATH_SITE.DS.'components'.DS.'com_jshopping'.DS.'jshopping.php')){
         JError::raiseError(500,"Please install component \"joomshopping\"");
     }
@@ -16,7 +15,7 @@
     require_once (JPATH_SITE.DS.'components'.DS.'com_jshopping'.DS.'tables'.DS.'config.php');
     require_once (JPATH_SITE.DS.'components'.DS.'com_jshopping'.DS."lib".DS."functions.php");
     require_once (JPATH_SITE.DS.'components'.DS.'com_jshopping'.DS."lib".DS."multilangfield.php");
-    $lang = JFactory::getLanguage();
+    $lang = &JFactory::getLanguage();
     if(file_exists(JPATH_SITE.DS.'components'.DS.'com_jshopping'.DS . 'lang'. DS . $lang->getTag() . '.php'))
         require_once (JPATH_SITE.DS.'components'.DS.'com_jshopping'.DS . 'lang'. DS . $lang->getTag() . '.php');
     else
@@ -24,8 +23,8 @@
 
     JTable::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_jshopping'.DS.'tables');
 
-    $document = JFactory::getDocument();
-    $jshopConfig = JSFactory::getConfig();    
+    $document = &JFactory::getDocument();
+    $jshopConfig = &JSFactory::getConfig();    
     $product_source = $params->get('products_source','random');
     $product_count = $params->get('count_products',0);
     $ribbon_orientation = $params->get('ribbon_orientation','hor');
@@ -40,11 +39,11 @@
     $additional_params = $params->get('additional_params');
     if(!is_array($additional_params)) $additional_params = array();
     if($product_source == 'manuf_logo'){
-        $manufacturers = JTable::getInstance('manufacturer', 'jshop');
+        $manufacturers = &JTable::getInstance('manufacturer', 'jshop');
         $on_image_click_behavior = 'link';
     }
     else{
-        $product = JTable::getInstance('product', 'jshop');
+        $product = &JTable::getInstance('product', 'jshop');
         $on_image_click_behavior = $params->get('on_image_click_behavior','link');
         if($on_image_click_behavior == 'lightbox'){
             $document->addStyleSheet(JURI::root().'components/com_jshopping/css/jquery.lightbox-0.5.css');

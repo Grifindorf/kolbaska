@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      4.10.5 09.01.2015
+* @version      4.10.4 09.01.2015
 * @author       MAXXmarketing GmbH
 * @package      Jshopping
 * @copyright    Copyright (C) 2010 webdesigner-profi.de. All rights reserved.
@@ -446,6 +446,9 @@ return getShopMainPageItemid();
 }
 
 function checkUserLogin(){
+
+	//TODO: fix this event using $jshopConfig->shop_user_guest variable
+	return 1;
     $jshopConfig = JSFactory::getConfig();
     $user = JFactory::getUser();
     header("Cache-Control: no-cache, must-revalidate");
@@ -675,8 +678,9 @@ function listProductUpdateData($products, $setUrl = 0){
     $noimage = $jshopConfig->noimage;
     
 	JPluginHelper::importPlugin('jshoppingproducts');
-    $dispatcher = JDispatcher::getInstance();    
-	
+    $dispatcher = JDispatcher::getInstance();
+    $units = JSFactory::getAllUnits();
+
     foreach($products as $key=>$value){
 		$dispatcher->trigger('onListProductUpdateDataProduct', array(&$products, &$key, &$value));
 		$use_userdiscount = 1;
@@ -691,7 +695,10 @@ function listProductUpdateData($products, $setUrl = 0){
         if ($jshopConfig->product_list_show_min_price && $value->different_prices){
             $products[$key]->show_price_from = 1;
         }
-		
+
+        $unit = $units[$products[$key]->basic_price_unit_id];
+
+        $products[$key]->basic_price_unit_id_name = $unit->name;
         $products[$key]->product_price = getPriceFromCurrency($products[$key]->product_price, $products[$key]->currency_id);
         $products[$key]->product_old_price = getPriceFromCurrency($products[$key]->product_old_price, $products[$key]->currency_id);
         $products[$key]->product_price_wp = getPriceFromCurrency($products[$key]->product_price_wp, $products[$key]->currency_id);
@@ -725,7 +732,8 @@ function listProductUpdateData($products, $setUrl = 0){
         }else{
             $products[$key]->manufacturer = new stdClass();
             $products[$key]->manufacturer->name = '';
-        }        
+        }
+        $products[$key]->extra_field = getProductExtraFieldForProduct($value);
         if ($jshopConfig->admin_show_product_extra_field){
             $products[$key]->extra_field = getProductExtraFieldForProduct($value);
         } else {
@@ -803,6 +811,7 @@ function getProductBasicPriceInfo($obj, $price){
 function getProductExtraFieldForProduct($product){
     $fields = JSFactory::getAllProductExtraField();
     $fieldvalues = JSFactory::getAllProductExtraFieldValue();
+    $fieldvaluesclass = JSFactory::getAllProductExtraFieldValueClass();
     $displayfields = JSFactory::getDisplayListProductExtraFieldForCategory($product->category_id);
     $rows = array();
     foreach($displayfields as $field_id){
@@ -815,14 +824,15 @@ function getProductExtraFieldForProduct($product){
                     $tmp[] = $fieldvalues[$extrafiledvalueid];
                 }
                 $extra_field_value = implode(", ", $tmp);
-                $rows[$field_id] = array("name"=>$fields[$field_id]->name, "description"=>$fields[$field_id]->description, "value"=>$extra_field_value);
+                $rows[$field_id] = array("name"=>$fields[$field_id]->name, "description"=>$fields[$field_id]->description, "value"=>$extra_field_value, "class"=>$fieldvaluesclass[$extrafiledvalueid]);
             }
         }else{
             if ($product->$field_name!=""){
-                $rows[$field_id] = array("name"=>$fields[$field_id]->name, "description"=>$fields[$field_id]->description, "value"=>$product->$field_name);
+                $rows[$field_id] = array("name"=>$fields[$field_id]->name, "description"=>$fields[$field_id]->description, "value"=>$product->$field_name, "class"=>$fieldvaluesclass[$extrafiledvalueid]);
             }
         }
     }
+
 return $rows;
 }
 
@@ -1098,9 +1108,9 @@ function getQueryListProductsExtraFields(){
     $jshopConfig = JSFactory::getConfig();
     $config_list = $jshopConfig->getProductListDisplayExtraFields();
     foreach($list as $v){
-        if (in_array($v->id, $config_list)){
+        //if (in_array($v->id, $config_list)){
             $query .= ", prod.`extra_field_".$v->id."` ";
-        }
+        //}
     }
 return $query;
 }
@@ -1233,13 +1243,12 @@ function sprintAtributeInCart($atribute){
         $html .= '<p class="jshop_cart_attribute"><span class="name">'.$attr->attr.'</span>: <span class="value">'.$attr->value.'</span></p>';
     }
     if (count($atribute)) $html .= '</div>';
-    $dispatcher->trigger('afterSprintAtributeInCartHtml', array(&$atribute, &$html));
 return $html;
 }
 
 function sprintFreeAtributeInCart($freeatribute){
     JPluginHelper::importPlugin('jshoppingproducts');
-    $dispatcher = JDispatcher::getInstance();
+    $dispatcher =JDispatcher::getInstance();
     $html = "";
     if (count($freeatribute)) $html .= '<div class="list_free_attribute">';
     foreach($freeatribute as $attr){
@@ -1247,7 +1256,6 @@ function sprintFreeAtributeInCart($freeatribute){
         $html .= '<p class="jshop_cart_attribute"><span class="name">'.$attr->attr.'</span>: <span class="value">'.$attr->value.'</span></p>';
     }
     if (count($freeatribute)) $html .= '</div>';
-    $dispatcher->trigger('afterSprintFreeAtributeInCartHtml', array(&$freeatribute, &$html));
 return $html;
 }
 
@@ -1273,7 +1281,6 @@ function sprintAtributeInOrder($atribute, $type="html"){
     }else{
         $html = $atribute;
     }
-	$dispatcher->trigger('afterSprintAtributeInOrderHtml', array(&$atribute, &$html) );
 return $html;
 }
 
@@ -1286,7 +1293,6 @@ function sprintFreeAtributeInOrder($freeatribute, $type="html"){
     }else{
         $html = $freeatribute;
     }
-	$dispatcher->trigger('afterSprintFreeAtributeInOrderHtml', array(&$freeatribute, &$html) );
 return $html;
 }
 

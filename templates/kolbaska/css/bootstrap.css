@@ -3521,6 +3521,29 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 	.btn-cart-md a.cart-link span {
 		margin-left: 35px;
 	}
+
+}
+
+@media (max-width: 520px){
+	.header .cart-block{
+		margin-right: 35px;
+	}
+}
+
+@media (max-width: 420px){
+	.header .logo_area, .header .cart-block{
+		padding: 0;
+	}
+
+	.header .contact-block{
+		padding-right: 0;
+	}
+
+}
+@media (max-width: 330px) {
+	.header .cart-block {
+		margin-right: 15px;
+	}
 }
 
 @media (max-width: 520px){
@@ -6111,3 +6134,21 @@ button.close {
     display: none !important;
   }
 }
+
+
+@media screen and (max-device-width: 1000px) {
+  .menu-top {
+    display: none;
+  }
+  .showcase {
+    display: none;
+  }
+  .tp-banner-container {
+    display: none;
+  }
+  .header {
+    position: relative;
+    display: block;
+  }
+}
+

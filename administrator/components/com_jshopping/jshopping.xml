@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0.0" method="new">
    <name>jshopping</name>
-   <creationDate>15.09.2015</creationDate>
+   <creationDate>07.08.2015</creationDate>
    <author>MAXXmarketing GmbH</author>
    <authorEmail>marketing@maxx-marketing.net</authorEmail>
    <authorUrl>http://www.webdesigner-profi.de</authorUrl>
    <copyright></copyright>
    <license>Open Source License, GNU/GPL</license>
-   <version>4.10.5</version>
+   <version>4.10.4</version>
    <description>Joomshopping - shop component. Note: JoomShopping code files are named as jshopping</description>
 
    <scriptfile>install/install.php</scriptfile>
@@ -28,7 +28,6 @@
         <folder>views</folder>
 		<folder>templates</folder>
         <folder>files</folder>
-		<folder>addons</folder>
 		<filename>jshopping.php</filename>
 		<filename>loadparams.php</filename>
         <filename>router.php</filename>

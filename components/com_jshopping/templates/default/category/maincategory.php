@@ -1,14 +1,12 @@
 <?php 
 /**
-* @version      4.10.5 13.08.2013
+* @version      4.9.1 13.08.2013
 * @author       MAXXmarketing GmbH
 * @package      Jshopping
 * @copyright    Copyright (C) 2010 webdesigner-profi.de. All rights reserved.
 * @license      GNU/GPL
 */
 defined('_JEXEC') or die('Restricted access');
-
-print $this->_tmp_maincategory_html_start;
 ?>
 <?php if ($this->params->get('show_page_heading') && $this->params->get('page_heading')){?>
 <div class="shophead<?php print $this->params->get('pageclass_sfx');?>">
@@ -60,6 +58,4 @@ print $this->_tmp_maincategory_html_start;
         
     <?php endif; ?>
     </div>
-    
-    <?php print $this->_tmp_maincategory_html_end;?>
 </div>

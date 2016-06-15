@@ -4,7 +4,7 @@ class JConfig {
 	public $offline_message = 'This site is down for maintenance.<br /> Please check back again soon.';
 	public $display_offline_message = '1';
 	public $offline_image = '';
-	public $sitename = '';
+	public $sitename = 'kolbaska.com.ua';
 	public $editor = 'jce';
 	public $captcha = '0';
 	public $list_limit = '20';
@@ -17,7 +17,7 @@ class JConfig {
 	public $password = '';
 	public $db = 'kolbaska';
 	public $dbprefix = 'wzjit_';
-	public $live_site = '';
+	public $live_site = 'http://kolbaska.com.ua/';
 	public $secret = 'MsGuHtugbQJdjBCQ';
 	public $gzip = '0';
 	public $error_reporting = 'default';
@@ -54,9 +54,9 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = '/var/www/kolbaska.com.ua/logs';
-	public $tmp_path = '/var/www/kolbaska.com.ua/tmp';
-	public $lifetime = '15';
+	public $log_path = '/var/www/kolbaska/logs';
+	public $tmp_path = '/var/www/kolbaska/tmp';
+	public $lifetime = '150';
 	public $session_handler = 'database';
 	public $memcache_persist = '1';
 	public $memcache_compress = '0';

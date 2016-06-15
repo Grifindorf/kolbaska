@@ -97,7 +97,7 @@ if($_FILES['file']["tmp_name"]){
         $product = $db->loadResult();
         
         if($product>0){
-            $query = "UPDATE `#__jshopping_products` SET `product_old_price` = '".$rowData[1]."' WHERE `product_id` = ".$product." ";
+            $query = "UPDATE `#__jshopping_products` SET `product_original_price` = '".$rowData[1]."' WHERE `product_id` = ".$product." ";
             $db->setQuery($query);
             $db->execute();
         }

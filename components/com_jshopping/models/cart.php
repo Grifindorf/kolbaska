@@ -84,10 +84,10 @@ class jshopCart{
                 $this->count_product += $prod['quantity'];
             }
         }
-        if($this->price_product_rozn<500){
+        if($this->price_product_rozn<50){
             $this->price_product = $this->price_product_rozn;
             $this->type_cart_price = 3;
-        }elseif($this->price_product_rozn>=500 && $this->price_product<1500){
+        }elseif($this->price_product_rozn>=50 && $this->price_product<1500){
             $this->price_product = $this->price_product_rozn;
             $this->type_cart_price = 2;
         }elseif($this->price_product>=1500){
