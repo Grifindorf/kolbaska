@@ -185,11 +185,14 @@ table { background: #fff; }
 .header{
 /*	border-bottom: 2px solid #eaeaea;
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    /*
 	min-width: 320px;
+    */
 	position: fixed;
 	top: 0;
 	z-index: 50;
-    width: 100%;
+    min-width: 1230px;
+	width: 100%;
 }
 
 .header .header-background{
@@ -199,10 +202,12 @@ table { background: #fff; }
 	background: #000;
 	opacity: 0.7;
 	position: fixed;
+	min-width: 1230px;
 }
 
 .header .container{
 	color: #fff;
+	min-width: 1100px;
 }
 
 /*
@@ -2303,7 +2308,7 @@ div.ppt { display:none !important; }
 		font-size: 10px;
 	}
 	
-	.main-content{ max-width: 350px; margin: 0 auto; }
+	.main-content{ max-width: ; margin: 0 auto; }
 	.testimonial .flexslider-recent p { display: none;}
 	
 	.about-company .about-company-inner span.company-feature { font-size: 15px !important; } 
@@ -2337,22 +2342,24 @@ div.ppt { display:none !important; }
 	.header .logo { 
 		max-width: 260px;
 		margin: 0 auto;
+        /*
 		margin-top: 10px;
+        */
 	}
 	
 	.header .logo h1 { font-size: 35px; }
 	.header .logo p { font-size: 13px; }
-	.header .navbar-default .navbar-nav { margin-top: 8px; }
+	.header .navbar-default .navbar-nav { margin-top: 10px; }
 	.header .navbar-default .navbar-nav>li>a{
-		padding-left: 23px;
+		/*padding-left: 23px;
 		padding-top: 10px;
 		padding-bottom: 10px;
-		font-size: 18px;
+		font-size: 18px;*/
 		text-align: left;
 	}
 	
 	.header .navbar-default .navbar-nav>li>a img { display: none; }
-	.header .navbar-collapse { border-top: 1px solid #f1f1f1; }
+	.header .navbar-collapse { /*border-top: 1px solid #f1f1f1;*/ }
 	.header .navbar-default .navbar-nav .open .dropdown-menu>li>a {
 		margin-left: 20px;
 		padding-left: 8px;
@@ -2406,9 +2413,9 @@ div.ppt { display:none !important; }
 	.menu .menu-container{ max-width: 400px; margin: 0 auto; }
 	.chefs .chefs-member{ margin-bottom: 40px; }
 	.showcase .showcase-item{
-		max-width: 400px;
+		/*max-width: 400px;
 		margin: 0 auto;
-		margin-top: 40px;
+		margin-top: 40px;*/
 	}
 	
 	
@@ -2510,21 +2517,21 @@ div.ppt { display:none !important; }
 		float: none !important;
 	}
 	
-	.showcase .showcase-item { padding: 20px; }
+	.showcase .showcase-item { /*padding: 20px;*/ }
 	.showcase .showcase-item img {
-		position: relative;
+		/*position: relative;
 		top: -40px;
-		margin: 0 auto;
+		margin: 0 auto;*/
 	}
 
 	.showcase .showcase-item h3, .showcase .showcase-item p {
-		position: relative;
+		/*position: relative;
 		top: -13px;
-		margin: 0;
+		margin: 0*/;
 	}
 	
-	.showcase .showcase-item h3{ margin-bottom: 10px; padding: 0; text-align: center; }
-	.showcase .showcase-item p { padding: 0; text-align: center; }
+	.showcase .showcase-item h3{/* margin-bottom: 10px; padding: 0; text-align: center;*/ }
+	.showcase .showcase-item p { /*padding: 0; text-align: center;*/ }
 	
 	.inner-page .booking .booking-form { margin-top: 40px; }
 	.inner-page .recipe .recipe-content{ padding-bottom: 15px; }
@@ -3594,6 +3601,7 @@ ul.category-menu > li > a {
 	background: linear-gradient(to bottom, #c17d4c 0%,#c17d4c 1%,#8d4e29 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c17d4c', endColorstr='#8d4e29',GradientType=0 );
 	z-index: 20;
+	display: block;
 }
 
 .menu-top .container{
