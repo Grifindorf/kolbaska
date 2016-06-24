@@ -25,6 +25,9 @@
     <? } ?>
     <script>
         $ = jQuery;
+        $(window).scroll(function(){
+            $('.header').css('left',-$(window).scrollLeft());
+        });
     </script>
 
 </head>
