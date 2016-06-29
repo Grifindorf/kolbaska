@@ -2260,9 +2260,9 @@ div.ppt { display:none !important; }
 		width: 100% !important;
 	}
     #topcartinfoopt {
-        display: block;
+       /* display: block;
         float: none !important;
-        margin-right: 0 !important;
+        margin-right: 0 !important;*/
     }
     .cartcheckout {
         display: none !important;
