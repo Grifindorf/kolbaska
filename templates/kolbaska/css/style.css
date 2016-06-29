@@ -191,7 +191,7 @@ table { background: #fff; }
 	position: fixed;
 	top: 0;
 	z-index: 50;
-    min-width: 1230px;
+    min-width: 1270px;
 	width: 100%;
 }
 
@@ -202,12 +202,12 @@ table { background: #fff; }
 	background: #000;
 	opacity: 0.7;
 	position: fixed;
-	min-width: 1230px;
+	min-width: 1270px;
 }
 
 .header .container{
 	color: #fff;
-	min-width: 1100px;
+	min-width: 1230px;
 }
 
 /*
@@ -2122,7 +2122,7 @@ div.ppt { display:none !important; }
  * Footer Section
  */
  
-.footer {position: absolute; left: 0; bottom: 0; width: 100%; height: 285px; background: #794526; border-top: 1px solid #eaeaea; margin-top:20px; color: #fff; overflow: hidden; }
+.footer {position: absolute; left: 0; bottom: 0; width: 100%; height: 285px; background: #794526; border-top: 1px solid #eaeaea; margin-top:20px; color: #fff; overflow: hidden; min-width: 1270px;}
 .footer .footer-widget { /*margin-bottom: 40px;*/}
 .footer .footer-widget .logo{ margin-top: 0; margin-bottom: 10px; }
 .footer .footer-widget .logo h1{ top: 10px; font-size: 30px; }
@@ -2274,13 +2274,15 @@ div.ppt { display:none !important; }
         width: 100% !important;
     }
     .modalcartproductsoverfloww .table tbody{
-        height: 200px !important;
+       /* height: 200px !important;
         display: block;
         overflow-y: auto;
-        overflow-x: hidden;
+        overflow-x: hidden;*/
     }
     .modalcartproductsoverfloww .delete td:first-child{
+        /*
         display: none;
+        */
     }
     .mod-countproducts {
         margin: 10px auto 0;
@@ -2300,7 +2302,9 @@ div.ppt { display:none !important; }
 	}
 
     .modal-dialog img {
+        /*
         display: none;
+        */
     }
 
 	.tp-banner .tp-caption a.btn{
@@ -3612,6 +3616,10 @@ ul.category-menu > li > a {
 .inner-page-wrapper .menu-top .container{
 	top: 0;
 	padding: 10px 0;
+}
+
+.inner-page-wrapper .main-content{
+	min-width: 1270px;
 }
 
 .menu-bottom{
