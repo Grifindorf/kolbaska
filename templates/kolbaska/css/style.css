@@ -3655,3 +3655,7 @@ ul.category-menu > li > a {
 .right_back_carousel{
 	right: 0;
 }
+
+.main-content{
+	min-width: 1270px;
+}
