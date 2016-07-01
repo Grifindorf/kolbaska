@@ -2157,6 +2157,19 @@ div.ppt { display:none !important; }
 	font-size: 14px;
 }
 
+.footer .footer-widget .card img{
+	margin-right: 20px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.footer .footer-widget .padd h3{
+	padding: 0px;
+	text-align: left;
+	font-size: 20px;
+	margin: 0px 0px 10px;
+}
+
 .footer .footer-widget img.payment {
 	display: inline-block;
 	margin-right: 5px;
