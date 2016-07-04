@@ -3539,7 +3539,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 @media (max-width: 420px){
 	.header .logo_area, .header .cart-block{
+        /*
 		padding: 0;
+        */
 	}
 
 	.header .contact-block{
@@ -3565,7 +3567,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 @media (max-width: 420px){
 	.header .logo_area, .header .cart-block{
+        /*
 		padding: 0;
+        */
 	}
 
 	.header .contact-block{

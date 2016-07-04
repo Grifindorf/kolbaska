@@ -2421,9 +2421,9 @@ div.ppt { display:none !important; }
 	
 	.btn-cart-md .cart-dropdown { right: 50%; margin-right: -125px; }
 	.dishes .dishes-item-container {
-		max-width: 400px;
+/*		max-width: 400px;
 		margin: 0 auto;
-		margin-top: 40px;
+		margin-top: 40px;*/
 	}
 	
 	.pricing .pricing-item{
@@ -2450,7 +2450,7 @@ div.ppt { display:none !important; }
 	.inner-page .booking{ max-width: 400px; margin: 0 auto; }
 	.inner-page .recipe{ max-width: 400px; margin: 0 auto; }
 	.inner-page .shopping { margin-bottom: 0px; }
-	.inner-page .single-item { max-width: 400px; margin: 0 auto 100px 0; }
+	.inner-page .single-item { /*max-width: 400px; margin: 0 auto 100px 0;*/ }
 	.inner-page .single-item h3 { margin-top: 10px; }
 	.inner-page .single-item .table-responsive { margin-top: 15px !important; }
 	.inner-page .contactus { max-width: 400px; margin: 0 auto; }
