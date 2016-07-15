@@ -78,17 +78,17 @@ $config->user_field_title = array(
     
 $config->sorting_products_field_select = array(
     1=>'name',
-    2=>'prod.product_price',        
-    3=>'prod.product_date_added', 
-    5=>'prod.average_rating', 
+    2=>'prod.product_price',
+    3=>'prod.product_date_added',
+    5=>'prod.average_rating',
     6=>'prod.hits',         
     4=>'pr_cat.product_ordering'
 );
 $config->sorting_products_name_select = array(
-    1=>_JSHOP_SORT_ALPH,  
-    2=>_JSHOP_SORT_PRICE,           
-    3=>_JSHOP_SORT_DATE,          
-    5=>_JSHOP_SORT_RATING,    
+    1=>_JSHOP_SORT_ALPH,
+    2=>_JSHOP_SORT_PRICE,
+    3=>_JSHOP_SORT_DATE,
+    5=>_JSHOP_SORT_RATING,
     6=>_JSHOP_SORT_POPULAR, 
     4=>_JSHOP_SORT_MANUAL
 );
@@ -102,10 +102,10 @@ $config->sorting_products_field_s_select = array(
     4=>'pr_cat.product_ordering'
 );
 $config->sorting_products_name_s_select = array(
-    1=>_JSHOP_SORT_ALPH, 
-    2=>_JSHOP_SORT_PRICE,           
-    3=>_JSHOP_SORT_DATE,          
-    5=>_JSHOP_SORT_RATING,    
+    1=>_JSHOP_SORT_ALPH,
+    2=>_JSHOP_SORT_PRICE,
+    3=>_JSHOP_SORT_DATE,
+    5=>_JSHOP_SORT_RATING,
     6=>_JSHOP_SORT_POPULAR,
     4=>_JSHOP_SORT_MANUAL
 );
@@ -165,12 +165,14 @@ $config->tax = 1;
 $config->show_manufacturer_in_cart = 0;
 $config->count_products_to_page_tophits = 12;
 $config->count_products_to_page_toprating = 12;
+$config->count_products_to_page_topordering = 12;
 $config->count_products_to_page_label = 12;
 $config->count_products_to_page_bestseller = 12;
 $config->count_products_to_page_random = 12;
 $config->count_products_to_page_last = 12;
 $config->count_products_to_row_tophits = 3;
 $config->count_products_to_row_toprating = 3;
+$config->count_products_to_row_topordering = 3;
 $config->count_products_to_row_label = 3;
 $config->count_products_to_row_bestseller = 3;
 $config->count_products_to_row_random = 3;
@@ -356,6 +358,7 @@ $checkout_other_config = array(
 $catprod_other_config = array(
     'count_products_to_page_tophits',
     'count_products_to_page_toprating',
+    'count_products_to_page_topordering',
     'count_products_to_page_label',
     'count_products_to_page_bestseller',
     'count_products_to_page_random',

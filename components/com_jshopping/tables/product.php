@@ -36,7 +36,7 @@ class jshopProduct extends JTableAvto{
                 foreach($dependent_attr as $k=>$v){
                     $where.=" and PA.attr_".$k." = '".$this->_db->escape($v)."' ";
                 }
-                $query = "select PA.* from `#__jshopping_products_attr` as PA where PA.product_id = '".$this->_db->escape($this->product_id)."' ".$where; 
+                $query = "select PA.* from `#__jshopping_products_attr` as PA where PA.product_id = '".$this->_db->escape($this->product_id)."' ".$where;
                 $this->_db->setQuery($query);
                 $this->attribute_active_data = $this->_db->loadObject();
                 if ($jshopConfig->use_extend_attribute_data && $this->attribute_active_data->ext_attribute_product_id){
@@ -157,7 +157,7 @@ class jshopProduct extends JTableAvto{
         }else{
             $sorting = $jshopConfig->attribut_nodep_sorting_in_product;
             if ($sorting=="") $sorting = "V.value_ordering";
-            $query = "select PA.attr_value_id as val_id, V.`".$lang->get("name")."` as value_name, V.image, price_mod, addprice 
+            $query = "select PA.attr_value_id as val_id, V.`".$lang->get("name")."` as value_name, V.image, price_mod, addprice
                       from #__jshopping_products_attr2 as PA INNER JOIN #__jshopping_attr_values as V ON PA.attr_value_id=V.value_id
                       where PA.product_id = '".$this->product_id."' and PA.attr_id='".$attr_id."'
                       ORDER BY ".$sorting;
@@ -1018,6 +1018,30 @@ class jshopProduct extends JTableAvto{
         $products = $db->loadObjectList();
         $products = listProductUpdateData($products);
         return $products;   
+    }
+
+    function getTopOrderingProducts($count, $array_categories = null, $filters = array()){
+        $jshopConfig = JSFactory::getConfig();
+        $db = JFactory::getDBO();
+
+        $adv_query = ""; $adv_from = ""; $adv_result = $this->getBuildQueryListProductDefaultResult();
+        $this->getBuildQueryListProductSimpleList("topordering", $array_categories, $filters, $adv_query, $adv_from,
+            $adv_result);
+
+        $dispatcher = JDispatcher::getInstance();
+        $dispatcher->trigger( 'onBeforeQueryGetProductList', array("top_ordering_products", &$adv_result, &$adv_from,
+            &$adv_query, &$order_query, &$filters));
+
+        $query = "SELECT $adv_result FROM `#__jshopping_products` AS prod
+                  INNER JOIN `#__jshopping_products_to_categories` AS pr_cat ON pr_cat.product_id = prod.product_id
+                  LEFT JOIN `#__jshopping_categories` AS cat ON pr_cat.category_id = cat.category_id
+                  $adv_from
+                  WHERE prod.product_publish = '1' AND cat.category_publish='1' ".$adv_query."
+                  GROUP BY prod.product_id ORDER BY pr_cat.product_ordering desc LIMIT ".$count;
+        $db->setQuery($query);
+        $products = $db->loadObjectList();
+        $products = listProductUpdateData($products);
+        return $products;
     }
     
     function getAllProducts($filters, $order = null, $orderby = null, $limitstart = 0, $limit = 0){

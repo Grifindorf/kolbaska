@@ -172,6 +172,7 @@ define('_JSHOP_SORT_DATE', 'Дата');
 define('_JSHOP_SORT_MANUAL', 'Предустановленная');
 define('_JSHOP_SORT_RATING', 'Рейтинг');
 define('_JSHOP_SORT_POPULAR', 'Популярность');
+define('_JSHOP_SORT_ORDERING', 'Сортировка');
 
 define('_JSHOP_RABATT_VALUE', 'Скидка');
 define('_JSHOP_RELATED_PRODUCTS', 'Сопутствующие товары');

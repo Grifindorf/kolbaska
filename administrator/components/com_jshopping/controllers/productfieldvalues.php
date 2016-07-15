@@ -147,7 +147,20 @@ class JshoppingControllerProductFieldValues extends JControllerLegacy{
         $cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
         $order = JRequest::getVar( 'order', array(), 'post', 'array' );
         $field_id = JRequest::getInt("field_id");
-        
+
+        $_ProductFieldValues = &$this->getModel("productFieldValues");
+        $ProductFieldValues = $_ProductFieldValues->getList($field_id);
+        UnSet($_ProductFieldValues);
+        UnSet($order);
+        $AllProductFieldValues = Array();
+        ForEach($ProductFieldValues As $ProductFieldValue){
+            $AllProductFieldValues[$ProductFieldValue->id] = $ProductFieldValue->name;
+        }
+        Array_MultiSort($AllProductFieldValues, SORT_STRING, $cid);
+        ForEach($AllProductFieldValues As $Key => $AllProductFieldValue){
+            $order[$Key] = $Key;
+        }
+
         foreach ($cid as $k=>$id){
             $table = JSFactory::getTable('productFieldValue', 'jshop');
             $table->load($id);

@@ -60,6 +60,7 @@ define('_JSHOP_SORT_DATE', 'Дата');
 define('_JSHOP_SORT_MANUAL', 'Предустановленная');
 define('_JSHOP_SORT_RATING', 'Рейтинг');
 define('_JSHOP_SORT_POPULAR', 'Популярность');
+define('_JSHOP_SORT_ORDERING', 'Сортировка');
 
 define('_JSHOP_STORE_INFO','Информация о магазине');
 define('_JSHOP_STORE','Магазин');
@@ -873,6 +874,7 @@ define('_JSHP_SEOPAGE_bestsellerproducts',"Бестселлер");
 define('_JSHP_SEOPAGE_labelproducts',"Меченые продукты");
 define('_JSHP_SEOPAGE_topratingproducts',"Топ рейтинг продукты");
 define('_JSHP_SEOPAGE_tophitsproducts',"Наиболее просматриваемые продукты");
+define('_JSHP_SEOPAGE_toporderingproducts',"По сортировке");
 define('_JSHP_SEOPAGE_all-products',"Все продукты");
 define('_JSHP_SEOPAGE_content-privacy_statement',"Заявление о конфиденциальности");
 

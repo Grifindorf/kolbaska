@@ -175,6 +175,7 @@ define('_JSHOP_SORT_DATE', 'Date');
 define('_JSHOP_SORT_MANUAL', 'Predefined');
 define('_JSHOP_SORT_RATING', 'Rating');
 define('_JSHOP_SORT_POPULAR', 'Popular');
+define('_JSHOP_SORT_ORDERING', 'Сортировка');
 
 define('_JSHOP_RABATT_VALUE', 'Discount');
 define('_JSHOP_RELATED_PRODUCTS', 'Related products');

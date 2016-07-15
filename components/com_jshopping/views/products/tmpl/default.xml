@@ -7,6 +7,7 @@
 				<option value="">All</option>
 				<option value="tophits">Top_Hits</option>
                 <option value="toprating">Top_Rating</option>
+                <option value="topordering">Top_Rating</option>
                 <option value="label">Label_Products</option>
                 <option value="bestseller">Bestseller</option>
                 <option value="random">Random</option>

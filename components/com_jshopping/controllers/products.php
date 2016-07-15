@@ -262,6 +262,59 @@ class JshoppingControllerProducts extends JControllerLegacy{
         $dispatcher->trigger('onBeforeDisplayProductListView', array(&$view) );
         $view->display();
     }
+
+    function topordering(){
+        $mainframe = JFactory::getApplication();
+        $jshopConfig = JSFactory::getConfig();
+        $session = JFactory::getSession();
+        $session->set("jshop_end_page_buy_product", $_SERVER['REQUEST_URI']);
+        $session->set("jshop_end_page_list_product", $_SERVER['REQUEST_URI']);
+
+        $dispatcher = JDispatcher::getInstance();
+        $dispatcher->trigger( 'onBeforeLoadProductList', array() );
+
+        $product = JSFactory::getTable('product', 'jshop');
+        $params = $mainframe->getParams();
+        $header = getPageHeaderOfParams($params);
+        $prefix = $params->get('pageclass_sfx');
+        $seo = JSFactory::getTable("seo", "jshop");
+        $seodata = $seo->loadData("toporderingproducts");
+        setMetaData($seodata->title, $seodata->keyword, $seodata->description, $params);
+
+        $count_product_to_row = $jshopConfig->count_products_to_row_topordering;
+        $contextfilter = "jshoping.list.front.product.topordering";
+        $filters = getBuildFilterListProduct($contextfilter, array());
+        $rows = $product->getTopOrderingProducts($jshopConfig->count_products_to_page_topordering, null, $filters);
+        addLinkToProducts($rows, 0, 1);
+
+        $_review = JSFactory::getTable('review', 'jshop');
+        $allow_review = $_review->getAllowReview();
+        $display_list_products = count($rows)>0;
+        $jshopConfig->show_sort_product = 0;
+        $jshopConfig->show_count_select_products = 0;
+        $jshopConfig->show_product_list_filters = 0;
+
+        $dispatcher->trigger( 'onBeforeDisplayProductList', array(&$rows) );
+
+        $view_name = "products";
+        $view_config = array("template_path"=>$jshopConfig->template_path.$jshopConfig->template."/".$view_name);
+        $view = $this->getView($view_name, getDocumentType(), '', $view_config);
+        $view->setLayout("products");
+        $view->assign('config', $jshopConfig);
+        $view->assign('template_block_list_product', "list_products/list_products.php");
+        $view->assign('template_block_form_filter', "list_products/form_filters.php");
+        $view->assign('template_block_pagination', "list_products/block_pagination.php");
+        $view->assign("header", $header);
+        $view->assign("prefix", $prefix);
+        $view->assign("rows", $rows);
+        $view->assign("count_product_to_row", $count_product_to_row);
+        $view->assign('allow_review', $allow_review);
+        $view->assign('display_list_products', $display_list_products);
+        $view->assign('display_pagination', 0);
+        $view->assign('shippinginfo', SEFLink($jshopConfig->shippinginfourl,1));
+        $dispatcher->trigger('onBeforeDisplayProductListView', array(&$view) );
+        $view->display();
+    }
     
     function label(){
         $mainframe = JFactory::getApplication();

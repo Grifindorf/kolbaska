@@ -61,6 +61,7 @@ define('_JSHOP_SORT_DATE', 'Neu/Alt');
 define('_JSHOP_SORT_MANUAL', 'Vordefinierte');
 define('_JSHOP_SORT_RATING', 'Rating');
 define('_JSHOP_SORT_POPULAR', 'Popular');
+define('_JSHOP_SORT_ORDERING', 'Сортировка');
 
 define('_JSHOP_STORE_INFO','Shop Informationen');
 define('_JSHOP_STORE','Shop');

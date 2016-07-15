@@ -379,6 +379,23 @@ JHtml::_('bootstrap.tooltip');
 
 
 <tr>
+    <td><b><?php print _JSHP_SEOPAGE_toporderingproducts?></b></td>
+</tr>
+<tr>
+    <td class="key">
+        <?php echo _JSHOP_COUNT_PRODUCTS_PAGE?>
+    </td>
+    <td><input type="text" name="count_products_to_page_topordering" class="inputbox middle" value="<?php echo $jshopConfig->count_products_to_page_topordering;?>" /></td>
+</tr>
+<tr>
+    <td class="key">
+        <?php echo _JSHOP_COUNT_PRODUCTS_ROW?>
+    </td>
+    <td><input type="text" name="count_products_to_row_topordering" class="inputbox middle" value="<?php echo $jshopConfig->count_products_to_row_topordering;?>" /></td>
+</tr>
+
+
+<tr>
     <td><b><?php print _JSHP_SEOPAGE_labelproducts?></b></td>
 </tr>
 <tr>

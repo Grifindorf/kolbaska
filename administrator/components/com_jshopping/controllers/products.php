@@ -1347,6 +1347,13 @@ class JshoppingControllerProducts extends JControllerLegacy{
 		$_productfields = JSFactory::getModel("productFields");
         $list = $_productfields->getList(1);
 
+        function mySort($f1,$f2){
+            if($f1->name < $f2->name) return -1;
+            elseif($f1->name > $f2->name) return 1;
+            else return 0;
+        }
+        uasort($list, "mySort");
+
         $_productfieldvalues = JSFactory::getModel("productFieldValues");
         $listvalue = $_productfieldvalues->getAllList();
         

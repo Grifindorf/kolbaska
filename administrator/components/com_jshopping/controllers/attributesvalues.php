@@ -209,6 +209,18 @@ class JshoppingControllerAttributesValues extends JControllerLegacy{
         $order = JRequest::getVar('order', array(), 'post', 'array');
         $attr_id = JRequest::getInt("attr_id");
 
+        $table = &JTable::getInstance('attributValue', 'jshop');
+        $AttributeValues = $table->getAllValues($attr_id);
+        UnSet($table);
+        $AllAttributeValues = Array();
+        ForEach($AttributeValues As $AttributeValue){
+            $AllAttributeValues[$AttributeValue->value_id] = $AttributeValue->name;
+        }
+        Array_MultiSort($AllAttributeValues, SORT_STRING, $cid);
+        ForEach($AllAttributeValues As $Key => $AllAttributeValue){
+            $order[$Key] = $Key;
+        }
+
         foreach($cid as $k=>$id){
             $table = JSFactory::getTable('attributValue', 'jshop');
             $table->load($id);

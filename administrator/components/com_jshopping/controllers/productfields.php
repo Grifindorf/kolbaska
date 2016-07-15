@@ -230,7 +230,20 @@ class JshoppingControllerProductFields extends JControllerLegacy{
     function saveorder(){
         $cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
         $order = JRequest::getVar( 'order', array(), 'post', 'array' );
-        
+
+        $_ProductFields = &$this->getModel("productFields");
+        $ProductFields = $_ProductFields->getList($field_id);
+        UnSet($_ProductFields);
+        UnSet($order);
+        $AllProductFields = Array();
+        ForEach($ProductFields As $ProductField){
+            $AllProductFields[$ProductField->id] = $ProductField->name;
+        }
+        Array_MultiSort($AllProductFields, SORT_STRING, $cid);
+        ForEach($AllProductFields As $Key => $AllProductField){
+            $order[$Key] = $Key;
+        }
+
         foreach ($cid as $k=>$id){
             $table = JSFactory::getTable('productField', 'jshop');
             $table->load($id);
