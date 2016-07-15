@@ -98,14 +98,16 @@ $config->sorting_products_field_s_select = array(
     2=>'prod.product_price',        
     3=>'prod.product_date_added', 
     5=>'prod.average_rating', 
-    6=>'prod.hits'
+    6=>'prod.hits',
+    4=>'product_ordering'
 );
 $config->sorting_products_name_s_select = array(
     1=>_JSHOP_SORT_ALPH, 
     2=>_JSHOP_SORT_PRICE,           
     3=>_JSHOP_SORT_DATE,          
     5=>_JSHOP_SORT_RATING,    
-    6=>_JSHOP_SORT_POPULAR
+    6=>_JSHOP_SORT_POPULAR,
+    4=>_JSHOP_SORT_ORDERING
 );
     
 $config->format_currency = array(
