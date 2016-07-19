@@ -211,7 +211,7 @@ class jshopProduct extends JTableAvto{
         $this->freeattributes = $this->_db->loadObjectList();
         return $this->freeattributes;
     }
-    
+
     /**
     * use after getListFreeAttributes()
     */

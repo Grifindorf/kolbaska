@@ -27,6 +27,12 @@ include(dirname(__FILE__)."/load.js.php");
                     <!-- Heading -->
                     <h1 itemprop="name"><?php print $this->product->name?></h1>
                     <p class="productcode"><?php print $product->product_ean?></p>
+                    <p class="productcode"><?php if ($product->unlimited > 0 or $product->product_quantity > 0) {
+                                                        echo "<div class='green'>Есть в наличии</div>";
+                                                    }
+                                                    else{
+                                                        echo "<div class='red'>Под заказ 1-5 дней</div>";
+                                                    };?>
                     <?php
                     JPluginHelper::importPlugin( 'content', 'vrvote' ); $dispatcher =& JDispatcher::getInstance(); $results = $dispatcher->trigger( 'vrvote', $product->product_id );
                     ?>

@@ -16,7 +16,7 @@ $in_row = $this->config->product_count_related_in_row;
     </div>
     <div class="jshop_list_product">
         <div class = "jshop list_related">
-            <?php foreach($this->related_prod as $k=>$product) : ?>        
+            <?php foreach($this->related_prod as $k=>$product) : ?>
                 <?php if ($k % $in_row == 0) : ?>
                     <div class = "row-fluid">
                 <?php endif; ?>

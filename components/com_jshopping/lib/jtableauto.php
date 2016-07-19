@@ -155,7 +155,7 @@ class JTableAvto extends JTable{
         $order_original = $order;
         $jshopConfig = JSFactory::getConfig();
         $multyCurrency = count(JSFactory::getAllCurrency());
-        if ($multyCurrency>1 && $order=="prod.product_price"){
+/*        if ($multyCurrency>1 && $order=="prod.product_price"){
             if (strpos($adv_from,"jshopping_currencies")===false){
                 $adv_from .= " LEFT JOIN `#__jshopping_currencies` AS cr USING (currency_id) ";
             }
@@ -167,7 +167,7 @@ class JTableAvto extends JTable{
         }
         if ($order=="prod.product_price" && $jshopConfig->product_list_show_min_price){
             $order = "prod.min_price";
-        }
+        }*/
         $order_query = " ORDER BY ".$order;
         if ($orderby){
             $order_query .= " ".$orderby;

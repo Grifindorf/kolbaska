@@ -682,8 +682,7 @@ function listProductUpdateData($products, $setUrl = 0){
     $units = JSFactory::getAllUnits();
 
     foreach($products as $key=>$value){
-		$dispatcher->trigger('onListProductUpdateDataProduct', array(&$products, &$key, &$value));
-		$use_userdiscount = 1;
+        $use_userdiscount = 1;
 		if ($jshopConfig->user_discount_not_apply_prod_old_price && $products[$key]->product_old_price>0) $use_userdiscount = 0;
         $products[$key]->_original_product_price = $products[$key]->product_price;
 		$products[$key]->product_price_wp = $products[$key]->product_price;

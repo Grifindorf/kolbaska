@@ -95,8 +95,8 @@ $config->sorting_products_name_select = array(
     
 $config->sorting_products_field_s_select = array(
     1 => 'name',         
-    2=>'prod.product_price',        
-    3=>'prod.product_date_added', 
+    2=>'prod.product_price',
+    3=>'prod.product_date_added',
     5=>'prod.average_rating', 
     6=>'prod.hits',
     4=>'pr_cat.product_ordering'

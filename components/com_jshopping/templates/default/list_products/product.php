@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * @version      4.8.0 05.11.2013
 * @author       MAXXmarketing GmbH
@@ -95,29 +95,29 @@ defined('_JEXEC') or die('Restricted access');
         
         <?php if ($product->basic_price_info['price_show']){?>
             <div class="base_price">
-                <?php print _JSHOP_BASIC_PRICE?>: 
-                <?php if ($product->show_price_from && !$this->config->hide_from_basic_price) print _JSHOP_FROM;?> 
+                <?php print _JSHOP_BASIC_PRICE?>:
+                <?php if ($product->show_price_from && !$this->config->hide_from_basic_price) print _JSHOP_FROM;?>
                 <span><?php print formatprice($product->basic_price_info['basic_price'])?> / <?php print $product->basic_price_info['name'];?></span>
             </div>
         <?php }?>
         
         <?php if ($product->manufacturer->name){?>
             <div class="manufacturer_name">
-                <?php print _JSHOP_MANUFACTURER;?>: 
+                <?php print _JSHOP_MANUFACTURER;?>:
                 <span><?php print $product->manufacturer->name?></span>
             </div>
         <?php }?>
         
         <?php if ($this->config->product_list_show_weight && $product->product_weight > 0){?>
             <div class="productweight">
-                <?php print _JSHOP_WEIGHT?>: 
+                <?php print _JSHOP_WEIGHT?>:
                 <span><?php print formatweight($product->product_weight)?></span>
             </div>
         <?php }?>
         
         <?php if ($product->delivery_time != ''){?>
             <div class="deliverytime">
-                <?php print _JSHOP_DELIVERY_TIME?>: 
+                <?php print _JSHOP_DELIVERY_TIME?>:
                 <span><?php print $product->delivery_time?></span>
             </div>
         <?php }?>
@@ -135,14 +135,14 @@ defined('_JEXEC') or die('Restricted access');
         
         <?php if ($product->vendor){?>
             <div class="vendorinfo">
-                <?php print _JSHOP_VENDOR?>: 
+                <?php print _JSHOP_VENDOR?>:
                 <a href="<?php print $product->vendor->products?>"><?php print $product->vendor->shop_name?></a>
             </div>
         <?php }?>
         
         <?php if ($this->config->product_list_show_qty_stock){?>
             <div class="qty_in_stock">
-                <?php print _JSHOP_QTY_IN_STOCK?>: 
+                <?php print _JSHOP_QTY_IN_STOCK?>:
                 <span><?php print sprintQtyInStock($product->qty_in_stock)?></span>
             </div>
         <?php }?>

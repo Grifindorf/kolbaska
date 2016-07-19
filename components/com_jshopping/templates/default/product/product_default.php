@@ -98,7 +98,7 @@ include(dirname(__FILE__)."/load.js.php");
                     <?php } ?>
                 <?php }?>
                 
-                <?php print $this->_tmp_product_html_after_video;?>                
+                <?php print $this->_tmp_product_html_after_video;?>
             </div>
         </div>
 
@@ -127,7 +127,7 @@ include(dirname(__FILE__)."/load.js.php");
                         <div>
                             <span class="attributgr_name"><?php print $attribut->groupname?></span>
                         </div>
-                    <?php }?>               
+                    <?php }?>
                     <div class = "row-fluid">
                         <div class="span2 attributes_title">
                             <span class="attributes_name"><?php print $attribut->attr_name?>:</span>
@@ -174,7 +174,7 @@ include(dirname(__FILE__)."/load.js.php");
                     <tr>
                         <td class="qty_from" <?php if ($add_price->product_quantity_finish==0){?>colspan="3"<?php } ?>>
                             <?php if ($add_price->product_quantity_finish==0) print _JSHOP_FROM?>
-                            <?php print $add_price->product_quantity_start?> 
+                            <?php print $add_price->product_quantity_start?>
                             <?php print $this->product->product_add_price_unit?>
                         </td>
                         
@@ -201,7 +201,7 @@ include(dirname(__FILE__)."/load.js.php");
 
         <?php if ($this->product->product_old_price > 0){?>
             <div class="old_price">
-                <?php print _JSHOP_OLD_PRICE?>: 
+                <?php print _JSHOP_OLD_PRICE?>:
                 <span class="old_price" id="old_price">
                     <?php print formatprice($this->product->product_old_price)?>
                     <?php print $this->product->_tmp_var_old_price_ext;?>
@@ -217,7 +217,7 @@ include(dirname(__FILE__)."/load.js.php");
 
         <?php if ($this->product->_display_price){?>
             <div class="prod_price">
-                <?php print _JSHOP_PRICE?>: 
+                <?php print _JSHOP_PRICE?>:
                 <span id="block_price">
                     <?php print formatprice($this->product->getPriceCalculate())?>
                     <?php print $this->product->_tmp_var_price_ext;?>
@@ -258,7 +258,7 @@ include(dirname(__FILE__)."/load.js.php");
                 <?php }?>
                 
                 <div class="extra_fields_el">
-                    <span class="extra_fields_name"><?php print $extra_field['name'];?></span><?php if ($extra_field['description']){?> 
+                    <span class="extra_fields_name"><?php print $extra_field['name'];?></span><?php if ($extra_field['description']){?>
                         <span class="extra_fields_description">
                             <?php print $extra_field['description'];?>
                         </span><?php } ?>:
@@ -280,7 +280,7 @@ include(dirname(__FILE__)."/load.js.php");
             <div class="vendorinfo">
                 <?php print _JSHOP_VENDOR?>: <?php print $this->product->vendor_info->shop_name?> (<?php print $this->product->vendor_info->l_name." ".$this->product->vendor_info->f_name;?>),
                 ( 
-                <?php if ($this->config->product_show_vendor_detail){?><a href="<?php print $this->product->vendor_info->urlinfo?>"><?php print _JSHOP_ABOUT_VENDOR?></a>,<?php }?> 
+                <?php if ($this->config->product_show_vendor_detail){?><a href="<?php print $this->product->vendor_info->urlinfo?>"><?php print _JSHOP_ABOUT_VENDOR?></a>,<?php }?>
                 <a href="<?php print $this->product->vendor_info->urllistproducts?>"><?php print _JSHOP_VIEW_OTHER_VENDOR_PRODUCTS?></a> )
             </div>
         <?php }?>
@@ -291,14 +291,14 @@ include(dirname(__FILE__)."/load.js.php");
 
         <?php if ($this->config->product_show_qty_stock){?>
             <div class="qty_in_stock">
-                <?php print _JSHOP_QTY_IN_STOCK?>: 
+                <?php print _JSHOP_QTY_IN_STOCK?>:
                 <span id="product_qty"><?php print sprintQtyInStock($this->product->qty_in_stock);?></span>
             </div>
         <?php }?>
 
         <?php print $this->_tmp_product_html_before_buttons;?>
         
-        <?php if (!$this->hide_buy){?>                         
+        <?php if (!$this->hide_buy){?>
             <div class="prod_buttons" style="<?php print $this->displaybuttons?>">
                 
                 <div class="prod_qty">
