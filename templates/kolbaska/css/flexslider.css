@@ -47,8 +47,17 @@
   padding: 0;
 }
 .flexslider .slides > li {
-  display: none;
+  /*display: none;*/
   -webkit-backface-visibility: hidden;
+  width: 100%;
+  float: left;
+  margin-right: -100%;
+  position: relative;
+  display: block;
+  z-index: 2;
+}
+.flexslider .slides > li:nth-child(2n) {
+  display: none;
 }
 .flexslider .slides img {
   width: 100%;

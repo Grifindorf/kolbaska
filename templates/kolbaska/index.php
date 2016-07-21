@@ -1,61 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <jdoc:include type="head" />
-
+<!--    <jdoc:include type="head" />-->
     <link rel="shortcut icon" href="/templates/kolbaska/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="/templates/kolbaska/css/bootstrap.css" rel="stylesheet">
-    <link href="/templates/kolbaska/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/templates/kolbaska/css/fontello.css" rel="stylesheet">
     <link href="/templates/kolbaska/css/style.css" rel="stylesheet">
-
-    <link href="/templates/kolbaska/css/style-pagination.css" rel="stylesheet">
-
     <!--[if IE]><link rel="stylesheet" href="/templates/kolbaska/css/ie-style.css"><![endif]-->
-
-    <link href="/templates/kolbaska/css/less-style.css" rel="stylesheet">
-    <link href="/templates/kolbaska/css/settings.css" rel="stylesheet">
-    <link href="/templates/kolbaska/css/flexslider.css" rel="stylesheet" media="screen" />
-    <link href="/templates/kolbaska/css/prettyPhoto.css" rel="stylesheet">
     <? if ($_SERVER['REQUEST_URI'] == '/') { ?>
-    <link href="/templates/kolbaska/css/main.css" rel="stylesheet">
     <? } ?>
+    <script src="http://kolbaska.com.ua/components/com_jshopping/js/jquery/jquery.lightbox.js" type="text/javascript"></script>
     <script>
         $ = jQuery;
         $(window).scroll(function(){
             $('.header').css('left',-$(window).scrollLeft());
         });
     </script>
-
 </head>
-
 <body>
-
-<?php
-/*$db = JFactory::getDbo();
-$query = "SELECT `product_id`,`alias_ru-RU` as `aliasru`,`alias_uk-UA` as `aliasua`,`name_ru-RU` as `nameru`,`name_uk-UA` as `nameua` FROM `#__jshopping_products`";
-$db->setQuery($query);
-$results = $db->loadObjectList();
-foreach($results as $result){
-    if($result->aliasru==''){
-        $aliasru=JApplication::stringURLSafe($result->nameru);
-        $query ="UPDATE `#__jshopping_products` SET `alias_ru-RU` = '".$aliasru."' WHERE `product_id` = '".$result->product_id."' ";
-        $db->setQuery($query);
-        $db->execute();
-    }
-    if($result->aliasua==''){
-        $aliasua=JApplication::stringURLSafe($result->nameua);
-        $query ="UPDATE `#__jshopping_products` SET `alias_ru-RU` = '".$aliasua."' WHERE `product_id` = '".$result->product_id."' ";
-        $db->setQuery($query);
-        $db->execute();
-    }
-
-}*/
-?>
-
 <div class="modal modal-vcenter fade" id="modalvideo" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -66,7 +28,6 @@ foreach($results as $result){
         </div>
     </div>
 </div>
-
 <!-- Shopping cart Modal -->
 <div class="modal modal-vcenter fade" id="shoppingcart1" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -476,25 +437,6 @@ foreach($results as $result){
 
 <!-- Javascript files -->
 <!-- jQuery -->
-<script src="/templates/kolbaska/js/jquery.js"></script>
-<script src="/templates/kolbaska/js/jquery.arcticmodal-0.3.min.js"></script>
-<script src="/templates/kolbaska/js/jquery.mask.js"></script>
-<!-- Bootstrap JS -->
-<script src="/templates/kolbaska/js/bootstrap.js"></script>
-<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-<script type="text/javascript" src="/templates/kolbaska/js/jquery.themepunch.tools.min.js"></script>
-<script type="text/javascript" src="/templates/kolbaska/js/jquery.themepunch.revolution.min.js"></script>
-<!-- FLEX SLIDER SCRIPTS  -->
-<script type="text/javascript" src="/templates/kolbaska/js/jquery.flexslider-min.js"></script>
-<!-- Pretty Photo JS -->
-<script src="/templates/kolbaska/js/jquery.prettyPhoto.js"></script>
-<!-- Respond JS for IE8 -->
-<script src="/templates/kolbaska/js/respond.min.js"></script>
-<!-- HTML5 Support for IE -->
-<script src="/templates/kolbaska/js/html5shiv.js"></script>
-<!-- Custom JS -->
-<script src="/templates/kolbaska/js/custom.js"></script>
-
 <!-- JS code for this page -->
 <script>
     $("#telephone").mask("+38 (000) 000-00-00");
@@ -527,25 +469,6 @@ foreach($results as $result){
                 fullWidth:"on",
                 fullScreen:"off"
             });
-    });
-    /* ******************************************** */
-    /*  JS for FlexSlider  */
-    /* ******************************************** */
-
-    jQuery(window).load(function(){
-        jQuery('.flexslider-recent').flexslider({
-            animation:		"fade",
-            animationSpeed:	1000,
-            controlNav:		true,
-            directionNav:	false
-        });
-        jQuery('.flexslider-testimonial').flexslider({
-            animation: 		"fade",
-            slideshowSpeed:	5000,
-            animationSpeed:	1000,
-            controlNav:		true,
-            directionNav:	false
-        });
     });
 
     /* Gallery */
