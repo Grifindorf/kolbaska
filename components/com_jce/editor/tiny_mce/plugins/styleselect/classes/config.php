@@ -2,7 +2,7 @@
 
 /**
  * @package   	JCE
- * @copyright 	Copyright (c) 2009-2015 Ryan Demmer. All rights reserved.
+ * @copyright 	Copyright (c) 2009-2016 Ryan Demmer. All rights reserved.
  * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
@@ -16,58 +16,69 @@ class WFStyleselectPluginConfig {
         $model = new WFModelEditor();
         $wf = WFEditor::getInstance();
 
-        $custom_styles      = json_decode($wf->getParam('styleselect.custom_styles', $wf->getParam('editor.custom_styles', '')));
-        $include            = (array) $wf->getParam('styleselect.styles', array('stylesheet', 'custom')); 
+        $include = (array) $wf->getParam('styleselect.styles', array('stylesheet', 'custom'));
 
-        if (!empty($custom_styles) && in_array('custom', $include)) {
-            // Styles list (legacy)
+        if (in_array('custom', $include)) {
+            // theme styles list (legacy)
             $theme_advanced_styles = $wf->getParam('editor.theme_advanced_styles', '');
 
+            // list of custom styles
+            $custom_classes = $wf->getParam('styleselect.custom_classes', '');
+
+            if (!empty($custom_classes)) {
+                $settings['styleselect_custom_classes'] = $custom_classes;
+            }
+
+            // add legacy to custom_style_classes
             if (!empty($theme_advanced_styles)) {
-                $settings['theme_advanced_styles'] = implode(';', explode(',', $theme_advanced_styles));
-            }
-            
-            $styles = array();
+                $list1 = explode(",", $custom_classes);
+                $list2 = explode(",", $theme_advanced_styles);
 
-            $blocks = array('section', 'nav', 'article', 'aside', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'footer', 'address', 'main', 'p', 'pre', 'blockquote', 'figure', 'figcaption', 'div');
-
-            foreach ((array) $custom_styles as $style) {
-                if (isset($style->styles)) {
-                    $style->styles = self::cleanJSON($style->styles);
-                }
-                
-                if (isset($style->attributes)) {
-                    $style->attributes = self::cleanJSON($style->attributes, " ", "=");
-                }
-
-                if (isset($style->element)) {
-                    if (in_array($style->element, $blocks)) {
-                        $style->block = $style->element;
-                    } else {
-                        $style->inline = $style->element;
-                    }
-                    // remove
-                    $style->remove = "all";
-
-                    $selector[] = $style->element;
-
-                    unset($style->element);
-                } else {
-                    $style->element = 'span';
-
-                    if (!isset($style->selector)) {
-                        $style->selector = '*';
-                    }
-                }
-
-                $styles[] = $style;
+                $settings['styleselect_custom_classes'] = implode(",", array_merge($list1, $list2));
             }
 
-            if (!empty($styles)) {
-                $settings['style_formats'] = htmlentities(json_encode($styles), ENT_NOQUOTES, "UTF-8");
+            $custom_styles = json_decode($wf->getParam('styleselect.custom_styles', $wf->getParam('editor.custom_styles', '')));
+
+            if (!empty($custom_styles)) {
+              $styles = array();
+
+              $blocks = array('section', 'nav', 'article', 'aside', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'footer', 'address', 'main', 'p', 'pre', 'blockquote', 'figure', 'figcaption', 'div');
+
+              foreach ((array) $custom_styles as $style) {
+                  if (isset($style->styles)) {
+                      $style->styles = self::cleanJSON($style->styles);
+                  }
+
+                  if (isset($style->attributes)) {
+                      $style->attributes = self::cleanJSON($style->attributes, " ", "=");
+                  }
+
+                  if (!isset($style->element)) {
+                      $style->element = 'span';
+
+                      if (!isset($style->selector)) {
+                          $style->selector = '*';
+                      }
+                  }
+
+                  if (in_array($style->element, $blocks)) {
+                      $style->block = $style->element;
+                  } else {
+                      $style->inline = $style->element;
+                  }
+
+                  // remove
+                  $style->remove = "all";
+
+                  $styles[] = $style;
+              }
+
+              if (!empty($styles)) {
+                  $settings['style_formats'] = htmlentities(json_encode($styles), ENT_NOQUOTES, "UTF-8");
+              }
             }
         }
-        
+
         // set this value false if stylesheet not included
         if (in_array('stylesheet', $include) === false) {
             $settings['styleselect_stylesheet'] = false;

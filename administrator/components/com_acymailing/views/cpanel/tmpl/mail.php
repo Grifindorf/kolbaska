@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -240,16 +240,6 @@ defined('_JEXEC') or die('Restricted access');
 						</tr>
 						<tr>
 							<td class="acykey">
-								<?php
-								$defaultHostName = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost.localdomain';
-								echo acymailing_tooltip(JText::_('HOSTNAME_DESC').'<br /><br />'.JText::_('FIELD_DEFAULT').' : '.$defaultHostName, JText::_('HOSTNAME'), '', JText::_('HOSTNAME')); ?>
-							</td>
-							<td>
-								<input class="inputbox" type="text" name="config[hostname]" style="width:160px" value="<?php echo $this->escape($this->config->get('hostname')); ?>">
-							</td>
-						</tr>
-						<tr>
-							<td class="acykey">
 								<?php echo acymailing_tooltip(JText::_('ACY_SSLCHOICE_DESC'), JText::_('ACY_SSLCHOICE'), '', JText::_('ACY_SSLCHOICE')); ?>
 							</td>
 							<td>
@@ -381,7 +371,7 @@ defined('_JEXEC') or die('Restricted access');
 							} ?>
 							<span class="acymailing_button_grey">
 								<i class="acyicon-help"></i>
-								<a style="color:#666;text-decoration: none;" href="https://www.acyba.com/index.php?option=com_content&amp;view=article&amp;catid=34:documentation-acymailing&amp;Itemid=30&amp;id=156:acymailing-dkim" target="_blank"><?php echo JText::_('ACY_HELP'); ?></a>
+								<a style="color:#666;text-decoration: none;" href="https://www.acyba.com/acymailing/156-acymailing-dkim.html" target="_blank"><?php echo JText::_('ACY_HELP'); ?></a>
 							</span>
 						</div>
 						<?php

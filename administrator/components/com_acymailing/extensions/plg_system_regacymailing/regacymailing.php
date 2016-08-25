@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -13,7 +13,7 @@ class plgSystemRegacymailing extends JPlugin{
 	var $option = '';
 	var $view = '';
 
-	function plgSystemRegacymailing(&$subject, $config){
+	function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('system', 'regacymailing');
@@ -409,14 +409,15 @@ class plgSystemRegacymailing extends JPlugin{
 			$allLists = $listsClass->onlyCurrentLanguage($allLists);
 		}
 
+		$isAdmin = $app->isAdmin();
 		if(strpos($visibleLists, ',') OR is_numeric($visibleLists)){
 			$allvisiblelists = explode(',', $visibleLists);
 			foreach($allLists as $oneList){
-				if($oneList->published AND in_array($oneList->listid, $allvisiblelists)) $visibleListsArray[] = $oneList->listid;
+				if($oneList->published && ($oneList->visible || $isAdmin) && in_array($oneList->listid, $allvisiblelists)) $visibleListsArray[] = $oneList->listid;
 			}
 		}elseif(strtolower($visibleLists) == 'all'){
 			foreach($allLists as $oneList){
-				if($oneList->published){
+				if($oneList->published && ($oneList->visible || $isAdmin)){
 					$visibleListsArray[] = $oneList->listid;
 				}
 			}
@@ -493,7 +494,26 @@ class plgSystemRegacymailing extends JPlugin{
 		$return = '';
 		if($this->params->get('displaymode', 'dispall') == 'dispall'){
 			$return = '<table class="acy_lists" style="border:0px">';
+
+			$displayCategories = $this->params->get('addcategory', '0');
+			if($displayCategories){
+				$listsByCategory = array();
+				foreach($allLists as $id => $oneList){
+					if(in_array($id,$visibleListsArray)) $listsByCategory[$oneList->category][] = $id;
+				}
+				ksort($listsByCategory);
+
+				$visibleListsArray = array();
+				foreach($listsByCategory as $oneCat => $itsLists){
+					$visibleListsArray = array_merge($visibleListsArray, $itsLists);
+				}
+			}
+			$currentCategory = '';
 			foreach($visibleListsArray as $oneList){
+				if(!empty($displayCategories) && !empty($allLists[$oneList]->category) && $currentCategory != $allLists[$oneList]->category){
+					$return .= '<tr style="border:0px"><td style="border:0px" nowrap="nowrap" colspan="2"><div class="acylistcategory'.htmlspecialchars($allLists[$oneList]->category, ENT_QUOTES, 'UTF-8').'">'.htmlspecialchars($allLists[$oneList]->category, ENT_QUOTES, 'UTF-8').'</div></td></tr>';
+					$currentCategory = $allLists[$oneList]->category;
+				}
 				$check = in_array($oneList, $checkedListsArray) ? 'checked="checked"' : '';
 				$return .= '<tr style="border:0px"><td style="border:0px"><input type="checkbox" id="acy_list_'.$oneList.'" class="acymailing_checkbox" name="acysub[]" '.$check.' value="'.$oneList.'"/></td><td style="border:0px;padding-left:10px;" nowrap="nowrap"><label for="acy_list_'.$oneList.'" class="acylabellist">';
 				$return .= $allLists[$oneList]->name;
@@ -549,47 +569,42 @@ class plgSystemRegacymailing extends JPlugin{
 			JResponse::setBody($body);
 			return true;
 		}
-		if(preg_match('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</li>)#Uis', $body)){
-			if(in_array($this->params->get('displaymode', 'dispall'), array('dispall', 'dropdown'))){
-				$return = '<li class="acysubscribe"><label class="labelacysubscribe'.(empty($this->components[$option]['labelclass']) ? '' : ' '.$this->components[$option]['labelclass'].'"').'">'.$subText.$listsDisplayed.'</label><div '.(empty($this->components[$option]['fieldclass']) ? '' : ' class="'.$this->components[$option]['fieldclass'].'"').' >'.$return.'</div></li>';
-			}else{
-				$return = '<li class="acysubscribe" '.$this->components[$option]['acysubscribestyle'].' >'.$return.'</li>';
+
+		$formats = array('li' => array('li', 'li'), 'div' => array('div', 'div'), 'p' => array('div', 'div'), 'dd' => array('dt', 'div'));
+		foreach($formats as $oneFormat => $dispall){
+			if(preg_match('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</'.$oneFormat.'>)#Uis', $body)){
+				if(in_array($this->params->get('displaymode', 'dispall'), array('dispall', 'dropdown'))){
+					if($oneFormat == 'dd'){
+						$return = '<dt class="acysubscribe"><label class="labelacysubscribe">'.$subText.$listsDisplayed.'</label></dt><dd>'.$return.'</dd>';
+					}else{
+						$return = '<'.$dispall[0].' class="acysubscribe"><label class="labelacysubscribe">'.$subText.$listsDisplayed.'</label>'.$return.'</'.$dispall[0].'>';
+					}
+				}else{
+					$return = '<'.$dispall[1].' class="acysubscribe" '.$this->components[$option]['acysubscribestyle'].' >'.$return.'</'.$dispall[1].'>';
+				}
+				$body = preg_replace('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</'.$oneFormat.'>)#Uis', '$1'.$return, $body, 1);
+				JResponse::setBody($body);
+				return true;
 			}
-			$body = preg_replace('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</li>)#Uis', '$1'.$return, $body, 1);
-			JResponse::setBody($body);
-			return true;
-		}
-		if(preg_match('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</div>)#Uis', $body)){
-			if(in_array($this->params->get('displaymode', 'dispall'), array('dispall', 'dropdown'))){
-				$return = '<div class="acysubscribe"><label class="labelacysubscribe">'.$subText.$listsDisplayed.'</label>'.$return.'</div>';
-			}else{
-				$return = '<div class="acysubscribe" '.$this->components[$option]['acysubscribestyle'].' >'.$return.'</div>';
-			}
-			$body = preg_replace('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</div>)#Uis', '$1'.$return, $body, 1);
-			JResponse::setBody($body);
-			return true;
 		}
 
-		if(preg_match('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</p>)#Uis', $body)){
-			if(in_array($this->params->get('displaymode', 'dispall'), array('dispall', 'dropdown'))){
-				$return = '<div class="acysubscribe"><label class="labelacysubscribe">'.$subText.$listsDisplayed.'</label>'.$return.'</div>';
-			}else{
-				$return = '<div class="acysubscribe">'.$return.'</div>';
+		foreach($formats as $oneFormat => $dispall){
+			if(preg_match('#(name *= *"'.preg_quote($after).'"((?!</'.$oneFormat.'>).)*</'.$oneFormat.'>)#Uis', $body)){
+				if(in_array($this->params->get('displaymode', 'dispall'), array('dispall', 'dropdown'))){
+					if($oneFormat == 'dd'){
+						$return = '<dt class="acysubscribe"><label class="labelacysubscribe">'.$subText.$listsDisplayed.'</label></dt><dd>'.$return.'</dd>';
+					}else{
+						$return = '<'.$dispall[0].' class="acysubscribe"><label class="labelacysubscribe">'.$subText.$listsDisplayed.'</label>'.$return.'</'.$dispall[0].'>';
+					}
+				}else{
+					$return = '<'.$dispall[1].' class="acysubscribe" '.$this->components[$option]['acysubscribestyle'].' >'.$return.'</'.$dispall[1].'>';
+				}
+				$body = preg_replace('#(name *= *"'.preg_quote($after).'"((?!</'.$oneFormat.'>).)*</'.$oneFormat.'>)#Uis', '$1'.$return, $body, 1);
+				JResponse::setBody($body);
+				return true;
 			}
-			$body = preg_replace('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</p>)#Uis', '$1'.$return, $body, 1);
-			JResponse::setBody($body);
-			return true;
 		}
-		if(preg_match('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</dd>)#Uis', $body)){
-			if(in_array($this->params->get('displaymode', 'dispall'), array('dispall', 'dropdown'))){
-				$return = '<dt class="acysubscribe"><label class="labelacysubscribe">'.$subText.$listsDisplayed.'</label></dt><dd>'.$return.'</dd>';
-			}else{
-				$return = '<div class="acysubscribe">'.$return.'</div>';
-			}
-			$body = preg_replace('#(name *= *"'.preg_quote($after).'".{'.$this->components[$option]['lengthaftermin'].','.$this->components[$option]['lengthafter'].'}</dd>)#Uis', '$1'.$return, $body, 1);
-			JResponse::setBody($body);
-			return true;
-		}
+
 		return false;
 	}
 

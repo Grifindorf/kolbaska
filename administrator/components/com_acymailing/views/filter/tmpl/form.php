@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -74,6 +74,10 @@ defined('_JEXEC') or die('Restricted access');
 			$acyToolbar->setTitle(JText::_('ACTIONS'), '');
 			$acyToolbar->topfixed = false;
 			$acyToolbar->display();
+
+			$subIds = explode(',', $this->subid);
+			JArrayHelper::toInteger($subIds);
+			$this->subid = implode(',', $subIds);
 			?>
 
 			<input type="hidden" name="subid" value="<?php echo $this->subid; ?>"/>
@@ -148,83 +152,96 @@ defined('_JEXEC') or die('Restricted access');
 		<input type="hidden" name="task" value="process"/>
 		<input type="hidden" name="ctrl" value="filter"/>
 		<input type="hidden" name="filid" value="<?php echo @$this->filter->filid; ?>"/>
+		<input type="hidden" name="limitstart" value="0">
+		<input type="hidden" name="filter_order" value="<?php echo $this->pageInfo->filter->order->value; ?>"/>
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $this->pageInfo->filter->order->dir; ?>"/>
+
 		<?php echo JHTML::_('form.token'); ?>
-	</form>
-	<?php if(!empty($this->subid)){ ?>
-		<div class="acyblockoptions" id="selectedUsers">
-			<span class="acyblocktitle"><?php echo JText::_('USERS'); ?></span>
+		<!--</form>-->
+		<?php if(!empty($this->subid)){ ?>
+			<div class="acyblockoptions" id="selectedUsers">
+				<span class="acyblocktitle"><?php echo JText::_('USERS'); ?></span>
 
-			<div id="allfilters" style="display:none"></div>
-			<table class="acymailing_table" cellpadding="1">
-				<?php
-				$k = 0;
-				foreach($this->users as $row){
-					?>
-					<tr class="<?php echo "row$k"; ?>">
-						<td><?php echo $row->name; ?></td>
-						<td><?php echo $row->email; ?></td>
-					</tr>
-					<?php $k = 1 - $k;
-				}
-
-				if(count($this->users) >= 10){
-					?>
-					<tr class="<?php echo "row$k"; ?>">
-						<td>...</td>
-						<td>...</td>
-					</tr>
-				<?php } ?>
-			</table>
-		</div>
-	<?php } ?>
-	<?php if(!empty($this->filters)){ ?>
-		<br/><br/>
-		<div class="acyblockoptions">
-			<span class="acyblocktitle"><?php echo JText::_('EXISTING_FILTERS'); ?></span>
-			<table class="acymailing_table" cellpadding="1">
-				<thead>
-				<tr>
-					<th class="title">
-						<?php echo JText::_('ACY_FILTER'); ?>
-					</th>
-					<th class="title titletoggle">
-						<?php echo JText::_('ACY_PUBLISHED'); ?>
-					</th>
-					<th class="title titletoggle">
-						<?php echo JText::_('ACY_DELETE'); ?>
-					</th>
-					<th class="title titleid">
-						<?php echo JText::_('ACY_ID'); ?>
-					</th>
-				</tr>
-				</thead>
-				<tbody>
-				<?php
-				$k = 0;
-				foreach($this->filters as $row){
-					$publishedid = 'published_'.$row->filid;
-					$id = 'filter_'.$row->filid;
-					?>
-					<tr class="<?php echo "row$k"; ?>" id="<?php echo $id; ?>">
-						<td>
-							<?php echo acymailing_tooltip($row->description, $row->name, '', $row->name, acymailing_completeLink('filter&task=edit&filid='.$row->filid)); ?>
-						</td>
-						<td align="center" style="text-align:center">
-							<span id="<?php echo $publishedid ?>" class="loading"><?php echo $this->toggleClass->toggle($publishedid, (int)$row->published, 'filter') ?></span>
-						</td>
-						<td align="center" style="text-align:center">
-							<?php echo $this->toggleClass->delete($id, $row->filid.'_'.$row->filid, 'filter', true); ?>
-						</td>
-						<td width="1%" align="center">
-							<?php echo $row->filid; ?>
-						</td>
-					</tr>
+				<div id="allfilters" style="display:none"></div>
+				<table class="acymailing_table" cellpadding="1">
 					<?php
-					$k = 1 - $k;
-				}
-				?>
-				</tbody>
-			</table>
-		</div>
-	<?php } ?>
+					$k = 0;
+					foreach($this->users as $row){
+						?>
+						<tr class="<?php echo "row$k"; ?>">
+							<td><?php echo $row->name; ?></td>
+							<td><?php echo $row->email; ?></td>
+						</tr>
+						<?php $k = 1 - $k;
+					}
+
+					if(count($this->users) >= 10){
+						?>
+						<tr class="<?php echo "row$k"; ?>">
+							<td>...</td>
+							<td>...</td>
+						</tr>
+					<?php } ?>
+				</table>
+			</div>
+		<?php } ?>
+		<?php if(!(empty($this->filters) && $this->pageInfo->search == "")){ ?>
+			<br/><br/>
+			<div class="acyblockoptions" id="existing_filters">
+				<span class="acyblocktitle"><?php echo JText::_('EXISTING_FILTERS'); ?></span>
+				<table class="acymailing_table_options">
+					<tr>
+						<td width="100%">
+							<?php acymailing_listingsearch($this->pageInfo->search); ?>
+						</td>
+					</tr>
+				</table>
+				<table class="acymailing_table" cellpadding="1">
+					<thead>
+					<tr>
+						<th class="title">
+							<?php echo JHTML::_('grid.sort', JText::_('ACY_FILTER'), 'name', $this->pageInfo->filter->order->dir, $this->pageInfo->filter->order->value); ?>
+						</th>
+						<th class="title titletoggle">
+							<?php echo JText::_('ACY_PUBLISHED'); ?>
+						</th>
+						<th class="title titletoggle">
+							<?php echo JText::_('ACY_DELETE'); ?>
+						</th>
+						<th class="title titleid">
+							<?php echo JHTML::_('grid.sort', JText::_('ACY_ID'), 'filid', $this->pageInfo->filter->order->dir, $this->pageInfo->filter->order->value); ?>
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					<?php
+					$k = 0;
+					foreach($this->filters as $row){
+						$publishedid = 'published_'.$row->filid;
+						$id = 'filter_'.$row->filid;
+						?>
+						<tr class="<?php echo "row$k"; ?>" id="<?php echo $id; ?>">
+							<td>
+								<?php echo acymailing_tooltip($row->description, $row->name, '', $row->name, acymailing_completeLink('filter&task=edit&filid='.$row->filid)); ?>
+							</td>
+							<td align="center" style="text-align:center">
+								<span id="<?php echo $publishedid ?>" class="loading"><?php echo $this->toggleClass->toggle($publishedid, (int)$row->published, 'filter') ?></span>
+							</td>
+							<td align="center" style="text-align:center">
+								<?php echo $this->toggleClass->delete($id, $row->filid.'_'.$row->filid, 'filter', true); ?>
+							</td>
+							<td width="1%" align="center">
+								<?php echo $row->filid; ?>
+							</td>
+						</tr>
+						<?php
+						$k = 1 - $k;
+					}
+					?>
+					</tbody>
+				</table>
+			</div>
+		<?php } ?>
+		<div class="clr"></div>
+	</form>
 </div>

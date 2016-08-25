@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -25,8 +25,7 @@ if(acymailing_isAllowed($this->config->get('acl_newsletters_lists', 'all')) || a
 			echo '<span>'.JText::_('LIST_CREATE').'</span>';
 		}else{
 			echo '<span>'.JText::_('LIST_RECEIVERS').'</span>';
-			$currentPage = 'newsletter';
-			include_once(ACYMAILING_BACK.'views'.DS.'list'.DS.'tmpl'.DS.'filter.lists.php');
+			include_once(ACYMAILING_BACK.'views'.DS.'newsletter'.DS.'tmpl'.DS.'filter.lists.php');
 
 			if(acymailing_level(2) && acymailing_isAllowed($this->config->get('acl_lists_filter', 'all'))) include_once(dirname(__FILE__).DS.'filters.php');
 		}
@@ -103,9 +102,36 @@ if(acymailing_isAllowed($this->config->get('acl_newsletters_lists', 'all')) || a
 					<input onchange="validateEmail(this.value, '<?php echo addslashes(JText::_('REPLYTO_ADDRESS')); ?>')" placeholder="<?php echo JText::_('USE_DEFAULT_VALUE'); ?>" class="inputbox" id="replyemail" type="text" name="data[mail][replyemail]" style="width:200px; max-width:80%;" value="<?php echo $this->escape(@$this->mail->replyemail); ?>"/>
 				</td>
 			</tr>
+			<tr>
+				<td class="paramlist_key">
+					<label for="replyemail">BCC</label>
+				</td>
+				<td class="paramlist_value">
+					<input placeholder="address@example.com" class="inputbox" id="bccaddresses" type="text" name="data[mail][bccaddresses]" style="width:200px; max-width:80%;" value="<?php echo $this->escape(@$this->mail->bccaddresses); ?>"/>
+				</td>
+			</tr>
+			<?php
+			if(acymailing_level(1)){
+				JHTML::_('behavior.modal', 'a.modal');
+				echo '<tr>
+					<td class="paramlist_key">'.JText::_('FAVICON').'</td><td class="paramlist_value">';
+				if(!empty($this->mail->favicon) && !empty($this->mail->favicon->filename)){
+					echo '<div id="attach_favicon">'.$this->mail->favicon->filename.' ('.(round($this->mail->favicon->size / 1000, 1)).' Ko)';
+					echo $this->toggleClass->delete('attach_favicon', $this->mail->mailid.'_favicon', 'favicon');
+					echo '</div>';
+				}
+				?>
+				<div id="loadfile">
+					<?php
+					echo '<div id="favicondiv">'.$uploadfileType->display(false, 'favicon', '').'</div>';
+					?>
+				</div>
+				<?php echo JText::sprintf('MAX_UPLOAD', $this->values->maxupload);
+				echo '</td></tr>';
+			} ?>
 		</table>
-		<?php
-		echo acymailing_getFunctionsEmailCheck();
+
+		<?php echo acymailing_getFunctionsEmailCheck();
 
 		if(!acymailing_isAllowed($this->config->get('acl_newsletters_sender_informations', 'all'))){
 			echo '</div>';

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -60,7 +60,7 @@ $backend = $app->isAdmin(); ?>
 				form.email.value = form.email.value.replace(/ /g, "");
 				var filter = /^([a-z0-9_'&\.\-\+=])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,10})+$/i;
 				if(!filter.test(form.email.value)){
-					alert("<?php echo JText::_( 'VALID_EMAIL', true ); ?>");
+					alert("<?php echo JText::_('VALID_EMAIL', true); ?>");
 					return false;
 				}
 			}
@@ -92,11 +92,11 @@ $backend = $app->isAdmin(); ?>
 			<?php
 			$myData = array();
 			foreach($this->geoloc_city as $key => $city){
-				$toolTipTxt = str_replace("'", "\'", JText::_('GEOLOC_NB_ACTIONS')) . ': ' . $this->geoloc_details[$key]['nbInCity'];
-				$lineData = "['" . str_replace("'", "\'", $this->geoloc_details[$key]['address']). "', 1, " . $this->geoloc_details[$key]['nbInCity'] . ", '" . $toolTipTxt . "']";
+				$toolTipTxt = str_replace("'", "\'", JText::_('GEOLOC_NB_ACTIONS')).': '.$this->geoloc_details[$key]['nbInCity'];
+				$lineData = "['".str_replace("'", "\'", $this->geoloc_details[$key]['address'])."', 1, ".$this->geoloc_details[$key]['nbInCity'].", '".$toolTipTxt."']";
 				array_push($myData, $lineData);
 			}
-			echo "data.addRows([" . implode(", ", $myData) . "]);";
+			echo "data.addRows([".implode(", ", $myData)."]);";
 			?>
 			chart = new google.visualization.GeoChart(document.getElementById('mapGeoloc_div'));
 			chart.draw(data, mapOptions);
@@ -125,6 +125,9 @@ $backend = $app->isAdmin(); ?>
 			<span class="acyblocktitle"><?php echo JText::_('USER_INFORMATIONS'); ?></span>
 
 			<div>
+				<?php if(!acymailing_level(3) || empty($this->extraFields)){
+					echo '<div class="acytable_userinfo">';
+				} ?>
 				<table class="acymailing_table" cellspacing="1">
 					<tr id="trname">
 						<td width="150" class="acykey">
@@ -204,7 +207,9 @@ $backend = $app->isAdmin(); ?>
 						</tr>
 						<?php
 					}
-					?>
+					if(!acymailing_level(3) || empty($this->extraFields)){
+						echo '</table></div><div class="acytable_userinfo"><table class="acymailing_table" cellspacing="1">';
+					} ?>
 					<tr id="trhtml">
 						<td class="acykey">
 							<label for="html">
@@ -246,6 +251,9 @@ $backend = $app->isAdmin(); ?>
 						</td>
 					</tr>
 				</table>
+				<?php if(!acymailing_level(3) || empty($this->extraFields)){
+					echo '</div>';
+				} ?>
 			</div>
 		</div>
 		<?php
@@ -261,9 +269,25 @@ $backend = $app->isAdmin(); ?>
 
 				echo $tabs->startPane('user_tabs');
 				echo $tabs->startPanel(JText::_('SUBSCRIPTION'), 'user_subscription');
-				?>
-				<div>
 
+				if(count($this->subscription) > 10){ ?>
+					<script language="javascript" type="text/javascript">
+						<!--
+						function acymailing_searchAList(){
+							var filter = document.getElementById("acymailing_searchList").value.toLowerCase();
+							for(var i = 0; i <<?php echo count($this->subscription); ?>; i++){
+								var itemName = document.getElementById("listName_" + i).innerHTML.toLowerCase();
+								if(itemName.indexOf(filter) > -1){
+									document.getElementById("acylistrow_" + i).style.display = "table-row";
+								}else{
+									document.getElementById("acylistrow_" + i).style.display = "none";
+								}
+							}
+						}
+						//-->
+					</script>
+				<?php } ?>
+				<div>
 					<table class="acymailing_table">
 						<thead>
 						<tr>
@@ -273,11 +297,14 @@ $backend = $app->isAdmin(); ?>
 							<th class="title titlecolor">
 							</th>
 							<th class="title" nowrap="nowrap">
-								<?php echo JText::_('LIST_NAME'); ?>
+								<?php echo JText::_('LIST_NAME');
+								if(count($this->subscription) > 10){ ?>
+									<input onkeyup="acymailing_searchAList();" type="text" style="width:170px;max-width:100%;margin-left:50px;margin-top:5px;" placeholder="<?php echo JText::_('ACY_SEARCH'); ?>" id="acymailing_searchList">
+								<?php } ?>
 							</th>
 							<th class="title" nowrap="nowrap">
-								<?php echo JText::_('STATUS');
-								echo '<span class="quickstatuschange" style="display:inline-block;font-style:italic;margin-left:50px">'.$this->filters->statusquick.'</span>'; ?>
+								<?php echo JText::_('STATUS'); ?>
+								<span class="quickstatuschange" style="display:inline-block;font-style:italic;margin-left:50px"><?php echo $this->filters->statusquick; ?></span>
 							</th>
 							<th class="title titledate">
 								<?php echo JText::_('SUBSCRIPTION_DATE'); ?>
@@ -294,9 +321,9 @@ $backend = $app->isAdmin(); ?>
 						<?php
 						$k = 0;
 						$i = 0;
-						foreach($this->subscription as $row){
+						foreach($this->subscription as $j => $row){
 							$listClass = 'acy_list_status_'.str_replace('-', 'm', (int)@$row->status); ?>
-							<tr class="<?php echo "row$k $listClass"; ?>">
+							<tr class="<?php echo "row$k $listClass"; ?>" id="acylistrow_<?php echo $i; ?>">
 								<td align="center" style="text-align:center">
 									<?php echo $i + 1; ?>
 								</td>
@@ -304,9 +331,8 @@ $backend = $app->isAdmin(); ?>
 									<?php echo '<div class="roundsubscrib rounddisp" style="background-color:'.$row->color.'"></div>'; ?>
 								</td>
 								<td>
-									<?php
-									echo acymailing_tooltip($row->description, $row->name, 'tooltip.png', $row->name);
-									?>
+									<span style="display:none;" id="listName_<?php echo $i; ?>"><?php echo $row->name; ?></span>
+									<?php echo acymailing_tooltip($row->description, $row->name, 'tooltip.png', $row->name); ?>
 								</td>
 								<td align="center" style="text-align:center" nowrap="nowrap">
 									<?php echo $this->statusType->display('data[listsub]['.$row->listid.'][status]', (empty($this->subscriber->subid) && JRequest::getInt('filter_lists') == $row->listid) ? 1 : @$row->status); ?>
@@ -386,8 +412,13 @@ $backend = $app->isAdmin(); ?>
 									</td>
 									<td>
 										<?php
-										$link = acymailing_frontendLink('index.php?option=com_acymailing&ctrl=archive&task=view&subid='.$this->subscriber->subid.'-'.$this->subscriber->key.'&mailid='.$row->mailid.'-'.strip_tags($row->alias), (bool)$this->config->get('open_popup', 1));
-										echo '<a '.($this->config->get('open_popup', 1) ? 'class="modal" rel="{handler: \'iframe\', size: {x: '.$width.', y: '.$height.'}}"' : '').' href="'.$link.'">'.$row->subject.'</a>';
+										if($app->isAdmin()){
+											$link = acymailing_completeLink('queue&task=preview&mailid='.$row->mailid.'&subid='.$this->subscriber->subid, true);
+											echo '<a class="modal" rel="{handler: \'iframe\', size: {x: '.$width.', y: '.$height.'}}" href="'.$link.'">'.$row->subject.'</a>';
+										}else{
+											$text = '<b>'.JText::_('ACY_ID').' : </b>'.$row->mailid;
+											echo acymailing_tooltip( $text, $row->subject, '', $row->subject);
+										}
 										?>
 									</td>
 									<td align="center" style="text-align:center">

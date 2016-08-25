@@ -62,7 +62,7 @@ $(document).ready(function() {
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		return false;
 	});
-    if($( window ).width() > 1000) {
+    if($( window ).width() > 1200) {
         var scroll = $(document).scrollTop();
         if (scroll > 120) {
             $('.navbar-nav img').hide();

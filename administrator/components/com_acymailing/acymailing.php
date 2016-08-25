@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -56,7 +56,8 @@ if(!($taskGroup == 'send' && $action == 'send') && $taskGroup !== 'toggle' && JR
 	$menuHelper = acymailing_get('helper.acymenu');
 	echo '<div id="acyallcontent" class="acyallcontent">';
 	echo $menuHelper->display($taskGroup);
-	echo '<div id="acymainarea">';
+
+	echo '<div id="acymainarea" class="acymaincontent_'.$taskGroup.'">';
 	$menuDisplayed = true;
 }
 
@@ -70,8 +71,7 @@ if(($taskGroup == 'cpanel' || ($taskGroup == 'update' && $action == 'listing')) 
 	return;
 }
 
-
-if(!include(ACYMAILING_CONTROLLER.$taskGroup.'.php')){
+if(!include_once(ACYMAILING_CONTROLLER.$taskGroup.'.php')){
 	$app->redirect('index.php?option=com_acymailing');
 	return;
 }

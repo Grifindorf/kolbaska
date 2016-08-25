@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -84,7 +84,7 @@ class FileViewFile extends acymailingView{
 			}
 		}else{
 			$loadLatest = true;
-			acymailing_display(JText::_('LOAD_ENGLISH_1').'<br />'.JText::_('LOAD_ENGLISH_2').'<br />'.JText::_('LOAD_ENGLISH_3'), 'info');
+			acymailing_enqueueMessage(JText::_('LOAD_ENGLISH_1').'<br />'.JText::_('LOAD_ENGLISH_2').'<br />'.JText::_('LOAD_ENGLISH_3'), 'info');
 			$file->content = JFile::read(JLanguage::getLanguagePath(JPATH_ROOT).DS.'en-GB'.DS.'en-GB.com_acymailing.ini');
 		}
 
@@ -94,10 +94,16 @@ class FileViewFile extends acymailingView{
 		}
 
 		if($loadLatest OR JRequest::getCmd('task') == 'latest'){
-			$doc = JFactory::getDocument();
-			$doc->addScript(ACYMAILING_UPDATEURL.'languageload&code='.JRequest::getCmd('code'));
+			if(file_exists(JPATH_ROOT.DS.'language'.DS.$code)){
+				$doc = JFactory::getDocument();
+				$doc->addScript(ACYMAILING_UPDATEURL.'languageload&code='.JRequest::getCmd('code'));
+			}else{
+				acymailing_enqueueMessage('The specified language "'.htmlspecialchars($code, ENT_COMPAT, 'UTF-8').'" is not installed on your site', 'warning');
+			}
 			$showLatest = false;
-		}elseif(JRequest::getCmd('task') == 'save') $showLatest = false;
+		}elseif(JRequest::getCmd('task') == 'save'){
+			$showLatest = false;
+		}
 
 		if(JRequest::getString('tmpl') == 'component'){
 			$acyToolbar = acymailing::get('helper.toolbar');
@@ -135,11 +141,11 @@ class FileViewFile extends acymailingView{
 		$uploadPath = JPath::clean(ACYMAILING_ROOT.trim(str_replace('/', DS, trim($uploadFolder)), DS));
 		$map = JRequest::getString('id');
 
+		$doc = JFactory::getDocument();
 		$uploadedFile = JRequest::getVar('uploadedFile', array(), 'files', 'array');
 		if(!empty($uploadedFile) && !empty($uploadedFile['name'])){
 			$uploaded = acymailing_importFile($uploadedFile, $uploadPath, in_array($map, array('thumb', 'readmore')));
 			if($uploaded){
-				$doc = JFactory::getDocument();
 				$script = 'parent.document.getElementById("'.$map.'").value = "'.str_replace(DS, '/', $uploadFolder).'/'.$uploaded.'";';
 				if(in_array($map, array('thumb', 'readmore'))){
 					$script .= 'parent.document.getElementById("'.$map.'preview").src = "'.JURI::root().str_replace(DS, '/', $uploadFolder).'/'.$uploaded.'";';
@@ -151,10 +157,29 @@ class FileViewFile extends acymailingView{
 			}
 		}
 
+		$fileToDelete = JRequest::getString('filename', '');
+		if(!empty($fileToDelete) && file_exists($uploadPath.DS.$fileToDelete) && empty($uploadedFile)){
+			$db = JFactory::getDBO();
+			$db->setQuery('SELECT mailid FROM #__acymailing_mail WHERE attach LIKE \'%"'.$uploadFolder.'/'.$fileToDelete.'"%\'');
+			$checkAttach = acymailing_loadResultArray($db);
+
+			if(!empty($checkAttach)){
+				acymailing_display(JText::sprintf('ACY_CANT_DELETEFILE', implode($checkAttach, ', ')), 'error');
+			}else{
+				if(JFile::delete($uploadPath.DS.$fileToDelete)){
+					acymailing_display(JText::_('ACY_DELETED_FILE_SUCCESS'), 'success');
+				}else{
+					acymailing_display(JText::_('ACY_DELETED_FILE_ERROR'), 'error');
+				}
+			}
+		}
+
+		$displayType = JRequest::getString('displayType', 'icons');
 		$this->assignRef('config', $config);
 		$this->assignRef('uploadFolder', $uploadFolder);
 		$this->assignRef('uploadFolders', $uploadFolders);
 		$this->assignRef('uploadPath', $uploadPath);
 		$this->assignRef('map', $map);
+		$this->assignRef('displayType', $displayType);
 	}
 }

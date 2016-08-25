@@ -207,20 +207,39 @@ class acymailingEmogrifier{
 				'/(\w+)\s+\+\s+(\w+)/', // Matches any F element that is a child of an element E.
 				'/\s+/', // Matches any F element that is a descendant of an E element.
 				'/(\w)\[(\w+)\]/', // Matches element with attribute
-				'/(\w)\[(\w+)\=[\'"]?(\w+)[\'"]?\]/', // Matches element with EXACT attribute
+				'/(\w)\[(\w+)\=[\'"]?(\w+)[\'"]?\]/'/*, // Matches element with EXACT attribute
 				'/(\w+)?\#([\w\-]+)/e', // Matches id attributes
 				'/(\w+|\*)?((\.[\w\-]+)+)/e', // Matches class attributes
-			);
+			*/);
 			$replace = array(
 				'/',
 				'\\1/following-sibling::*[1]/self::\\2',
 				'//',
 				'\\1[@\\2]',
-				'\\1[@\\2="\\3"]',
+				'\\1[@\\2="\\3"]'/*,
 				"(strlen('\\1') ? '\\1' : '*').'[@id=\"\\2\"]'",
 				"(strlen('\\1') ? '\\1' : '*').'[contains(concat(\" \",@class,\" \"),concat(\" \",\"'.implode('\",\" \"))][contains(concat(\" \",@class,\" \"),concat(\" \",\"',explode('.',substr('\\2',1))).'\",\" \"))]'",
-			);
-			$xpathcache[$xpathkey] = '//'.preg_replace($search, $replace, $css_selector);
+			*/);
+
+			// The preg_replace doesn't handle the "e" modifier anymore in PHP 7+, use preg_replace_callback instead
+			$value = preg_replace($search, $replace, $css_selector);
+			$value = preg_replace_callback('/(\w+)?\#([\w\-]+)/',
+				function($matches){
+					return (strlen($matches[1]) ? $matches[1] : '*').'[@id="'.$matches[2].'"]';
+				}
+				, $value);
+			$value = preg_replace_callback('/(\w+|\*)?((\.[\w\-]+)+)/',
+				function($matches){
+					$result = (strlen($matches[1]) ? $matches[1] : '*');
+					$result .= '[contains(concat(" ",@class," "),concat(" ","';
+					$result .= implode('"," "))][contains(concat(" ",@class," "),concat(" ","', explode('.', substr($matches[2],1)));
+					$result .= '"," "))]';
+
+					return $result;
+				}
+				, $value);
+
+			$xpathcache[$xpathkey] = '//'.$value;
 		}
 		return $xpathcache[$xpathkey];
 	}

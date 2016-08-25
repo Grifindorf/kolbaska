@@ -73,24 +73,6 @@ abstract class Uk_UALocalise {
         			'yu' => 'ю',
         			'ya' => 'я',
                     '' => '—',
-                    '' => '!',
-                    '' => '?',
-                    '' => ':',
-                    '' => ';',
-                    '' => ',',
-                    '' => '’',
-                    '' => '\'',
-                    '' => '--',
-                    '' => '.',
-                    '' => '@',
-                    '' => '',
-                    '' => '^',
-                    '' => '*',
-                    '' => '(',
-                    '' => ')',
-                    '' => '_',
-                    '' => '=',
-                    '' => '+',
                     'uah' => '₴',
                     'eur' => '€',
                     'usd' => '$',
@@ -425,15 +407,11 @@ abstract class Uk_UALocalise {
 					'Œ' => 'Oe'
                 );
 
-                if(preg_match("/[а-яА-Яa-zA-Z]/", $string)) {
-                    $str = strtr($string, $trans);
+                if(preg_match("/[а-яА-Я]/", $string)) {
+                    return strtr($string, $trans);
                 } else {
-                    $str = $string;
+                    return $string;
                 }
-
-				$str = preg_replace('#\&\#?[a-z0-9]+\;#ismu', '', $str);
-
-				return $str;
 
             break;
         }

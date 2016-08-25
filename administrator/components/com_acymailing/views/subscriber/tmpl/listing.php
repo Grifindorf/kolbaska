@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -72,7 +72,7 @@ defined('_JEXEC') or die('Restricted access');
 					<th class="title titleid">
 						<?php echo JHTML::_('grid.sort', JText::_('USER_ID'), 'a.userid', $this->pageInfo->filter->order->dir, $this->pageInfo->filter->order->value); ?>
 					</th>
-					<th class="title titleid" >
+					<th class="title titleid">
 						<?php echo JHTML::_('grid.sort', JText::_('ACY_ID'), 'a.subid', $this->pageInfo->filter->order->dir, $this->pageInfo->filter->order->value); ?>
 					</th>
 				<?php } ?>
@@ -127,7 +127,7 @@ defined('_JEXEC') or die('Restricted access');
 							foreach($this->lists as $listid => $list){
 								if(empty($row->subscription->$listid)) continue;
 								$statuslistid = 'status_'.$listid.'_'.$row->subid;
-								echo '<div id="'.$statuslistid.'" class="loading">';
+								echo '<div id="'.$statuslistid.'" class="loading"  onclick="hideTooltip()">';
 								$extra = array();
 								$extra['color'] = $this->lists[$listid]->color;
 								$extra['tooltiptitle'] = $this->lists[$listid]->name;
@@ -203,4 +203,12 @@ defined('_JEXEC') or die('Restricted access');
 		<?php if(!empty($this->Itemid)) echo '<input type="hidden" name="Itemid" value="'.$this->Itemid.'" />';
 		echo JHTML::_('form.token'); ?>
 	</form>
+	<script type="text/javascript">
+		function hideTooltip(){
+			var nodes = document.getElementsByClassName('tooltip');
+			for(var i = 0; i < nodes.length; i++){
+				nodes[i].style.display = 'none';
+			}
+		}
+	</script>
 </div>

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -42,7 +42,7 @@ defined('_JEXEC') or die('Restricted access');
 
 		<input type="hidden" name="option" value="<?php echo ACYMAILING_COMPONENT; ?>"/>
 		<input type="hidden" name="ctrl" value="tag"/>
-		<input type="hidden" name="task" value=""/>
+		<input type="hidden" name="task" value="store"/>
 		<input type="hidden" name="plugin" value="<?php echo $this->plugin; ?>"/>
 		<?php echo JHTML::_('form.token'); ?>
 	</form>

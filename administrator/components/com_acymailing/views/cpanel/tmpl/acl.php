@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -26,12 +26,13 @@ defined('_JEXEC') or die('Restricted access');
 			<table class="acymailing_table" cellspacing="1">
 				<?php
 				$acltable = acymailing_get('type.acltable');
-				$aclcats['subscriber'] = array('view', 'manage', 'delete', 'export', 'import');
+				$aclcats['subscriber'] = array('view', 'manage', 'delete', 'export', 'import', 'zohoimport');
 				$aclcats['extra_fields'] = array('import');
 				$aclcats['lists'] = array('manage', 'delete', 'filter');
+				$aclcats['distribution'] = array('manage', 'copy', 'delete');
 				$aclcats['newsletters'] = array('manage', 'delete', 'send', 'schedule', 'spam_test', 'copy', 'lists', 'attachments', 'sender_informations', 'meta_data', 'abtesting', 'inbox_actions');
 				$aclcats['autonewsletters'] = array('manage', 'delete');
-				$aclcats['campaign'] = array('manage', 'delete');
+				$aclcats['campaign'] = array('manage', 'delete', 'copy');
 				$aclcats['tags'] = array('view');
 				$aclcats['templates'] = array('view', 'manage', 'delete', 'copy');
 				$aclcats['queue'] = array('manage', 'delete', 'process');

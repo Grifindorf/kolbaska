@@ -2,12 +2,12 @@
 <!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/plugin-install.dtd">
 <install type="plugin" version="1.5" method="upgrade" group="system">
 	<name>AcyMailing : (auto)Subscribe during Joomla registration</name>
-	<creationDate>octobre 2015</creationDate>
-	<version>5.0.1</version>
+	<creationDate>juillet 2016</creationDate>
+	<version>5.5.0</version>
 	<author>Acyba</author>
 	<authorEmail>dev@acyba.com</authorEmail>
 	<authorUrl>http://www.acyba.com</authorUrl>
-	<copyright>Copyright (C) 2009-2015 ACYBA SAS - All rights reserved.</copyright>
+	<copyright>Copyright (C) 2009-2016 ACYBA SAS - All rights reserved.</copyright>
 	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
 	<description>Automatically subscribe the user to AcyMailing during the Joomla registration process</description>
 	<files>
@@ -52,6 +52,10 @@
             <option value="1">Keep AcyMailing user</option>
         </param>
         <param label="Excluded components" name="excluded" size="50" type="text" value="" description="Acy won't display the subscription lists on the components you exclude with this option. Each value should be separated by a coma, here are the possible values: com_user, com_users, com_alpharegistration, com_ccusers, com_community, com_extendedreg, com_gcontact, com_hikashop, com_jblance, com_jshopping, com_juser, com_mijoshop, com_osemsc, com_redshop, com_tienda, com_virtuemart." />
+		<param name="addcategory" type="radio" default="0" label="Display category name" description="Order the lists by category and display their category name above them.">
+			<option value="0">JOOMEXT_NO</option>
+			<option value="1">JOOMEXT_YES</option>
+		</param>
     </params>
 	<config>
 		<fields name="params" addfieldpath="/components/com_acymailing/params">
@@ -111,6 +115,10 @@
                     <option value="com_tienda">com_tienda</option>
                     <option value="com_virtuemart">com_virtuemart</option>
                 </field>
+				<field name="addcategory" type="radio" default="0" label="Display category name" description="Order the lists by category and display their category name above them.">
+					<option value="0">JOOMEXT_NO</option>
+					<option value="1">JOOMEXT_YES</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>

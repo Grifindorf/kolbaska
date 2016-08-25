@@ -59,7 +59,7 @@ foreach ($results as $res) {
 
 $query = "SELECT jp.*,jpc.category_id FROM #__jshopping_products as jp
           INNER JOIN #__jshopping_products_to_categories as jpc ON jp.product_id=jpc.product_id
-          WHERE jp.product_original_price > 0 ";
+          WHERE jp.product_original_price > 0 AND jp.product_publish = 1 ";
 $db->setQuery($query);
 $products = $results = $db->loadObjectList();
 

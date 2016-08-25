@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -16,12 +16,12 @@ defined('_JEXEC') or die('Restricted access');
 		<input type="hidden" name="import_type" id="import_type" value="<?php echo $this->type; ?>"/>
 		<input type="hidden" name="filename" id="filename" value="<?php echo JRequest::getCmd('filename'); ?>"/>
 		<input type="hidden" name="import_columns" id="import_columns" value=""/>
-		<input type="hidden" name="createlist" id="createlist" value="<?php echo JRequest::getCmd('createlist'); ?>"/>
+		<input type="hidden" name="createlist" id="createlist" value="<?php echo JRequest::getString('createlist'); ?>"/>
 		<?php
 		$app = JFactory::getApplication();
 		$checkedLists = JRequest::getVar('importlists', array(), '', 'array');
 		foreach($checkedLists as $key => $oneList){
-			echo '<input type="hidden" name="importlists['.$key.']" id="importlists'.$key.'-'.$oneList.'" value="'.$oneList.'"/>';
+			echo '<input type="hidden" name="importlists['.intval($key).']" id="importlists'.intval($key).'-'.intval($oneList).'" value="'.intval($oneList).'"/>';
 		}
 
 		if(!empty($this->Itemid)) echo '<input type="hidden" name="Itemid" value="'.$this->Itemid.'" />';
@@ -51,6 +51,7 @@ defined('_JEXEC') or die('Restricted access');
 						}
 						echo $charsetType->display('charsetconvert', $default);
 						?>
+						<span id="loadingEncoding"></span>
 					</td>
 				</tr>
 				<?php if($this->config->get('require_confirmation')){ ?>
@@ -90,12 +91,13 @@ defined('_JEXEC') or die('Restricted access');
 			</table>
 		</div>
 		<div class="onelineblockoptions">
-			<span class="acyblocktitle"><?php echo JText::_('IMPORT_SUBSCRIBE'); ?></span>
+			<span class="acyblocktitle"><?php echo JText::_('SUBSCRIPTION'); ?></span>
 			<table class="acymailing_table" cellspacing="1">
 				<tr id="trsumup">
 					<td>
 						<?php
-						echo JText::_('ACY_IMPORT_LISTS').' : '.(empty($this->lists) ? JText::_('ACY_NONE') : $this->lists);
+						echo JText::_('ACY_IMPORT_LISTS').' : '.(empty($this->lists) ? JText::_('ACY_NONE') : htmlspecialchars($this->lists, ENT_COMPAT, 'UTF-8'));
+						echo '<br />'.JText::_('ACY_IMPORT_UNSUB_LISTS').' : '.(empty($this->unsublists) ? JText::_('ACY_NONE') : htmlspecialchars($this->unsublists, ENT_COMPAT, 'UTF-8'));
 						?>
 					</td>
 				</tr>
@@ -124,11 +126,11 @@ defined('_JEXEC') or die('Restricted access');
 					}else{
 						if(!string.match(/^[A-Za-z][A-Za-z0-9_]+$/)){
 							subval = false;
-							errors += "\nPlease enter a valid field name (column " + (i + 1) + ")";
+							errors += "\nPlease enter a valid field name for the column n°" + (i + 1) + ": spaces, uppercase and special characters are not allowed";
 						}else{
 							if(string != 1 && selectedFields.indexOf(string) != -1){
 								subval = false;
-								errors += "\nDuplicate field \"" + string + "\" for the column " + (i + 1);
+								errors += "\nDuplicate field \"" + string + "\" for the column n°" + (i + 1);
 							}else{
 								if(string != 0){
 									selectedFields.push(string);

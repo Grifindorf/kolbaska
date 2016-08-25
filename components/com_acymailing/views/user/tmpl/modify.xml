@@ -13,6 +13,10 @@
 			<param name="@spacer" type="spacer" default="" label="" description="" />
 			<param name="introtext" type="textarea" rows="5" cols="35" default="" label="INTRO_TEXT" description="This text will be displayed before the form inside a span class=acymailing_introtext" />
 			<param name="finaltext" type="textarea" rows="5" cols="35" default="" label="POST_TEXT" description="This text will be displayed after the form inside a span class=acymailing_finaltext" />
+			<param name="dropdown" type="radio" default="0" label="DROPDOWN_LISTS" description="Display the visible lists in a dropdown">
+				<option value="0">JOOMEXT_NO</option>
+				<option value="1">JOOMEXT_YES</option>
+			</param>
 		</params>
 	</state>
 	<fields name="params" addfieldpath="/components/com_acymailing/params">
@@ -24,6 +28,10 @@
 			<field name="@spacer" type="spacer" default="" label="" description="" />
 			<field name="introtext" type="textarea" rows="5" cols="35" default="" label="INTRO_TEXT" description="This text will be displayed before the form inside a span class=acymailing_introtext" filter="SAFEHTML" />
 			<field name="finaltext" type="textarea" rows="5" cols="35" default="" label="POST_TEXT" description="This text will be displayed after the form inside a span class=acymailing_finaltext" filter="SAFEHTML" />
+			<field name="dropdown" type="radio" default="0" label="DROPDOWN_LISTS" description="Display the visible lists in a dropdown">
+				<option value="0">JOOMEXT_NO</option>
+				<option value="1">JOOMEXT_YES</option>
+			</field>
 		</fieldset>
 	</fields>
 </metadata>

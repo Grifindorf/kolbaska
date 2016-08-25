@@ -4,7 +4,7 @@ defined('_JEXEC') or die('Restricted access');
 
 
 /**
- * @copyright	Copyright (C) 2009-2015 ACYBA SAS - All rights reserved..
+ * @copyright	Copyright (C) 2009-2016 ACYBA SAS - All rights reserved..
  * @license		GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 class acymailingElasticemail {
@@ -34,7 +34,8 @@ class acymailingElasticemail {
 		$info = $header.$data;
 		$result = $this->sendinfo($info);
 		//We take the last value of the server's response which correspond of the file's ID.
-		$res = end(explode("\r\n", $result));
+		$explodedResult = explode("\r\n", $result);
+		$res = end($explodedResult);
 		//If the ID is correct and we have no Errors
 		if(preg_match('#[^a-z0-9\-]#i',$res) || strpos($result,'200 OK') === false){
 			$this->error = "Error while uploading file : ".$res;

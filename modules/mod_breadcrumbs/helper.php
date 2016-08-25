@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  mod_breadcrumbs
  *
- * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -21,55 +21,46 @@ class ModBreadCrumbsHelper
 	/**
 	 * Retrieve breadcrumb items
 	 *
-	 * @param   JRegistry  &$params  module parameters
+	 * @param   \Joomla\Registry\Registry  &$params  module parameters
 	 *
 	 * @return array
 	 */
 	public static function getList(&$params)
 	{
 		// Get the PathWay object from the application
-		$app		= JFactory::getApplication();
-		$pathway	= $app->getPathway();
-		$items		= $pathway->getPathWay();
+		$app     = JFactory::getApplication();
+		$pathway = $app->getPathway();
+		$items   = $pathway->getPathWay();
+		$lang    = JFactory::getLanguage();
+		$menu    = $app->getMenu();
+
+		// Look for the home menu
+		if (JLanguageMultilang::isEnabled())
+		{
+			$home = $menu->getDefault($lang->getTag());
+		}
+		else
+		{
+			$home  = $menu->getDefault();
+		}
 
 		$count = count($items);
 
 		// Don't use $items here as it references JPathway properties directly
-		$crumbs	= array();
+		$crumbs = array();
 
 		for ($i = 0; $i < $count; $i ++)
 		{
-			if ($items[$i]->name == 'product') {
-				$vr_dot = 2;
-			}
-			if ($items[$i]->name != 'product') {
-				$crumbs[$i] = new stdClass;
-				$crumbs[$i]->name = stripslashes(htmlspecialchars($items[$i]->name, ENT_COMPAT, 'UTF-8'));
-				if ($vr_dot == 2) {
-					$items[$i]->link = str_replace('product','category',$items[$i]->link);
-					$crumbs[$i]->link = JRoute::_($items[$i]->link);
-					if (!$items[$i]->link) {
-						$db = JFactory::getDBO();
-						$query = "SELECT jsm.`name_ru-RU`,jsm.`alias_ru-RU` FROM `#__jshopping_manufacturers` as jsm
-                              INNER JOIN `#__jshopping_products` jsh ON jsh.product_manufacturer_id = jsm.manufacturer_id
-                            WHERE jsh.product_id = ".$app->input->get('product_id')." ";
-						$db->setQuery($query);
-						$manufacturer_result = $db->LoadAssoc();
-						$crumbs[$i]->name = $manufacturer_result['name_ru-RU'];
-						$items[$i]->link = $crumbs[$i-1]->link.'/'.$manufacturer_result['alias_ru-RU'];
-						$crumbs[$i]->link = $crumbs[$i-1]->link.'/'.$manufacturer_result['alias_ru-RU'];
-					}
-				} else {
-					$crumbs[$i]->link = JRoute::_($items[$i]->link);
-				}
-			}
+			$crumbs[$i]       = new stdClass;
+			$crumbs[$i]->name = stripslashes(htmlspecialchars($items[$i]->name, ENT_COMPAT, 'UTF-8'));
+			$crumbs[$i]->link = JRoute::_($items[$i]->link);
 		}
 
 		if ($params->get('showHome', 1))
 		{
-			$item = new stdClass;
-			$item->name = htmlspecialchars($params->get('homeText', JText::_('MOD_BREADCRUMBS_HOME')));
-			$item->link = JRoute::_('index.php?Itemid=' . $app->getMenu()->getDefault()->id);
+			$item       = new stdClass;
+			$item->name = htmlspecialchars($params->get('homeText', JText::_('MOD_BREADCRUMBS_HOME')), ENT_COMPAT, 'UTF-8');
+			$item->link = JRoute::_('index.php?Itemid=' . $home->id);
 			array_unshift($crumbs, $item);
 		}
 
@@ -94,7 +85,7 @@ class ModBreadCrumbsHelper
 		// specific one first, and if that is not present we load the default separator
 		if ($custom == null)
 		{
-			if ($lang->isRTL())
+			if ($lang->isRtl())
 			{
 				$_separator = JHtml::_('image', 'system/arrow_rtl.png', null, null, true);
 			}
@@ -105,7 +96,7 @@ class ModBreadCrumbsHelper
 		}
 		else
 		{
-			$_separator = htmlspecialchars($custom);
+			$_separator     = htmlspecialchars($custom, ENT_COMPAT, 'UTF-8');
 		}
 
 		return $_separator;

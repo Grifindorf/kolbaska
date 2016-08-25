@@ -38,9 +38,7 @@ defined('_JEXEC') or die('Restricted access');
             <td class="key"><?php print _JSHOP_FILE_SALE?></td>
             <td id='product_file_<?php print $file->id?>'>
             <?php if ($file->file){?>
-                <a target="_blank" href="index.php?option=com_jshopping&controller=products&task=getfilesale&id=<?php print $file->id?>">
                     <?php print $file->file?>
-                </a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="#" onclick="if (confirm('<?php print _JSHOP_DELETE;?>')) deleteFileProduct('<?php echo $file->id?>','file');return false;"><img src="components/com_jshopping/images/publish_r.png"> <?php print _JSHOP_DELETE;?></a>
             <?php } ?>

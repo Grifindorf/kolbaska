@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -14,13 +14,16 @@ class plgAcymailingTagsubscription extends JPlugin{
 	var $lists = array();
 	var $listsowner = array();
 	var $listsinfo = array();
+	var $campaigns = array();
 
-	function plgAcymailingTagsubscription(&$subject, $config){
+	function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('acymailing', 'tagsubscription');
 			$this->params = new acyParameter($plugin->params);
 		}
+		$this->db = JFactory::getDBO();
+		$this->acypluginsHelper = acymailing_get('helper.acyplugins');
 	}
 
 	function acymailing_getPluginType(){
@@ -41,31 +44,75 @@ class plgAcymailingTagsubscription extends JPlugin{
 		$others['unsubscribe'] = array('name' => JText::_('UNSUBSCRIBE_LINK'), 'default' => JText::_('UNSUBSCRIBE', true));
 		$others['modify'] = array('name' => JText::_('MODIFY_SUBSCRIPTION_LINK'), 'default' => JText::_('MODIFY_SUBSCRIPTION', true));
 		$others['confirm'] = array('name' => JText::_('CONFIRM_SUBSCRIPTION_LINK'), 'default' => JText::_('CONFIRM_SUBSCRIPTION', true));
+		$others['subscribe'] = array('name' => JText::_('SUBSCRIBE_LINK'), 'default' => JText::_('SUBSCRIBE', true));
 
 		?>
 		<script language="javascript" type="text/javascript">
 			<!--
+			var openLists = true;
 			var selectedTag = '';
 			function changeTag(tagName){
 				selectedTag = tagName;
 				defaultText = new Array();
 				<?php
-								$k = 0;
-								foreach($others as $tagname => $tag){
-									echo "document.getElementById('tr_$tagname').className = 'row$k';";
-									echo "defaultText['$tagname'] = '".$tag['default']."';";
-								}
-								$k = 1-$k;
+				$k = 0;
+				foreach($others as $tagname => $tag){
+					echo "document.getElementById('tr_$tagname').className = 'row$k';";
+					echo "defaultText['$tagname'] = '".$tag['default']."';";
+				}
+				$k = 1 - $k;
 				?>
 				document.getElementById('tr_' + tagName).className = 'selectedrow';
 				document.adminForm.tagtext.value = defaultText[tagName];
+				if(tagName == 'subscribe'){
+					document.getElementById('subscriptionlists').style.display = '';
+					if(openLists) displayLists();
+				}else{
+					document.getElementById('subscriptionlists').style.display = 'none';
+				}
 				setSubscriptionTag();
 			}
 
 			function setSubscriptionTag(){
-				setTag('{' + selectedTag + '}' + document.adminForm.tagtext.value + '{/' + selectedTag + '}');
+				var tag = '{' + selectedTag;
+
+				if(document.getElementById('tagmenu').value != 0) tag += "|itemid:" + document.getElementById('tagmenu').value;
+				if(selectedTag == 'subscribe') tag += "|lists:" + document.getElementById('paramslistids').value;
+
+				tag += '}' + document.adminForm.tagtext.value + '{/' + selectedTag + '}'
+				setTag(tag);
 			}
 
+			function displayLists(){
+				var box = $('iframelists');
+				if(openLists){
+					box.setStyle('display','block');
+				}
+
+				try{
+					var fx = box.effects({duration: 1500, transition: Fx.Transitions.Quart.easeOut});
+					if(openLists){
+						fx.start({'height': 300});
+					}else{
+						fx.start({'height': 0}).chain(function(){
+							box.setStyle('display','none');
+						});
+					};
+				}catch(err){
+					box.style.height = '300px';
+					var myVerticalSlide = new Fx.Slide('iframelists');
+					if(openLists){
+						myVerticalSlide.slideIn();
+					}else{
+						myVerticalSlide.slideOut().chain(function(){
+							box.setStyle('display','none');
+						});
+					}
+				}
+
+				if(!openLists) setSubscriptionTag();
+				openLists = !openLists;
+			}
 			//-->
 		</script>
 		<?php
@@ -73,10 +120,23 @@ class plgAcymailingTagsubscription extends JPlugin{
 		$doc = JFactory::getDocument();
 		$doc->addScriptDeclaration("window.addEvent('domready', function(){ changeTag('unsubscribe'); });");
 
-		$text = JText::_('FIELD_TEXT').' : <input type="text" name="tagtext" onchange="setSubscriptionTag();"><br /><br />';
-
-		$text .= '<div class="onelineblockoptions">
+		$text = '<div id="iframelists" style="display:none;"><iframe src="index.php?option=com_acymailing&tmpl=component&ctrl=chooselist&popup=0&task=listids" width="98%" height="100%" scrolling="auto"></iframe></div>
+				<div class="onelineblockoptions">
 					<span class="acyblocktitle">'.JText::_('SUBSCRIPTION').'</span>
+					<table class="acymailing_table" cellpadding="1">';
+		$this->db->setQuery('SELECT 0 AS id, "- - -" AS title UNION SELECT id, title FROM #__menu WHERE link LIKE "%com_acymailing%" AND client_id = 0 AND published = 1');
+		$menus = $this->db->loadObjectList();
+		$text .= '<tr>
+					<td><label for="tagtext">'.JText::_('FIELD_TEXT').': </label><input type="text" name="tagtext" id="tagtext" onchange="setSubscriptionTag();"></td>
+					<td><label for="tagmenu">'.JText::_('ACY_MENU').': </label>'.JHTML::_('select.genericlist', $menus, "tagmenu", 'class="inputbox" size="1" onchange="setSubscriptionTag();"', 'id', 'title', '').'</td>
+				</tr>
+				<tr id="subscriptionlists">
+					<td colspan="2">
+						<button class="acymailing_button_grey" onclick="displayLists();return false;">'.JText::_('LISTS').'</button>
+						<input class="inputbox" id="paramslistids" name="listids" type="text" style="width:100px" value="">
+					</td>
+				</tr>';
+		$text .= '</table>
 					<table class="acymailing_table" cellpadding="1">';
 
 		$k = 0;
@@ -88,6 +148,7 @@ class plgAcymailingTagsubscription extends JPlugin{
 
 		$others = array();
 		$others['name'] = JText::_('LIST_NAME');
+		$others['names'] = JText::_('ACY_LIST_NAMES');
 		$others['description'] = JText::_('ACY_DESCRIPTION');
 		$others['count'] = trim(JText::_('GEOLOC_NB_USERS', true), ':');
 		$others['count|listid:0'] = trim(JText::_('GEOLOC_NB_USERS', true), ':').' ('.JText::_('ALL_LISTS').')';
@@ -195,6 +256,16 @@ class plgAcymailingTagsubscription extends JPlugin{
 		return $this->allLists;
 	}
 
+	private function _getCampaigns(){
+
+		$list = acymailing_get('class.list');
+		$app = JFactory::getApplication();
+		if($app->isAdmin()){
+			return $list->getAllCampaigns();
+		}
+		return $list->getFrontendCampaigns();
+	}
+
 	function onAcyDisplayFilters(&$type, $context = "massactions"){
 
 		if($this->params->get('displayfilter_'.$context, true) == false) return;
@@ -204,9 +275,21 @@ class plgAcymailingTagsubscription extends JPlugin{
 		$status->extra = 'onchange="countresults(__num__);"';
 
 		$lists = $this->_getLists();
+		$campaigns = $this->_getCampaigns();
 		$listsdrop = array();
+
+		$listsdrop[] = JHTML::_('select.option', '<OPTGROUP>', JText::_('LISTS'));
 		foreach($lists as $oneList){
 			$listsdrop[] = JHTML::_('select.option', $oneList->listid, $oneList->name);
+		}
+		$listsdrop[] = JHTML::_('select.option', '</OPTGROUP>');
+
+		if(count($campaigns) > 0){
+			$listsdrop[] = JHTML::_('select.option', '<OPTGROUP>', JText::_('ACY_CAMPAIGNS'));
+			foreach($campaigns as $campaign){
+				$listsdrop[] = JHTML::_('select.option', $campaign->listid, $campaign->name);
+			}
+			$listsdrop[] = JHTML::_('select.option', '</OPTGROUP>');
 		}
 
 		$dates = array();
@@ -599,6 +682,7 @@ class plgAcymailingTagsubscription extends JPlugin{
 	}
 
 	private function _listowner(&$email, &$user, &$parameter){
+		if(empty($user->subid)) return '';
 		$listid = $this->_getattachedlistid($email, $user->subid);
 		if(empty($listid)) return "";
 
@@ -622,6 +706,7 @@ class plgAcymailingTagsubscription extends JPlugin{
 	}
 
 	private function _listname(&$email, &$user, &$parameter){
+		if(empty($user->subid)) return '';
 		$listid = $this->_getattachedlistid($email, $user->subid);
 		if(empty($listid)) return "No list => no name!";
 
@@ -631,6 +716,7 @@ class plgAcymailingTagsubscription extends JPlugin{
 	}
 
 	private function _listdescription(&$email, &$user, &$parameter){
+		if(empty($user->subid)) return '';
 		$listid = $this->_getattachedlistid($email, $user->subid);
 		if(empty($listid)) return "No list => no description!";
 
@@ -640,6 +726,7 @@ class plgAcymailingTagsubscription extends JPlugin{
 	}
 
 	private function _listid(&$email, &$user, &$parameter){
+		if(empty($user->subid)) return '';
 		$listid = $this->_getattachedlistid($email, $user->subid);
 		if(empty($listid)) return "No list => no ID!";
 
@@ -647,6 +734,7 @@ class plgAcymailingTagsubscription extends JPlugin{
 	}
 
 	private function loadlistmembers(&$email, &$user){
+		if(empty($user->subid)) return '';
 		$listid = $this->_getattachedlistid($email, $user->subid);
 		if(empty($listid)) return array();
 
@@ -656,9 +744,10 @@ class plgAcymailingTagsubscription extends JPlugin{
 	}
 
 	private function _replacesubscriptiontags(&$email, &$user){
-		$match = '#(?:{|%7B)(modify|confirm|unsubscribe)(?:}|%7D)(.*)(?:{|%7B)/(modify|confirm|unsubscribe)(?:}|%7D)#Uis';
+		$match = '#(?:{|%7B)(modify[^}]*|confirm[^}]*|unsubscribe[^}]*|subscribe[^}]*)(?:}|%7D)(.*)(?:{|%7B)/(modify|confirm|unsubscribe|subscribe)(?:}|%7D)#Uis';
 		$variables = array('subject', 'body', 'altbody');
 		$found = false;
+		$results = array();
 		foreach($variables as $var){
 			if(empty($email->$var)) continue;
 			$found = preg_match_all($match, $email->$var, $results[$var]) || $found;
@@ -694,26 +783,30 @@ class plgAcymailingTagsubscription extends JPlugin{
 		}
 
 		$config = acymailing_config();
-		$itemId = $config->get('itemid', 0);
-		$item = empty($itemId) ? '' : '&Itemid='.$itemId;
 		$lang = empty($email->language) ? '' : '&lang='.$email->language;
 
-		if($allresults[1][$i] == 'confirm'){ //confirm your subscription link
-			$itemId = $this->params->get('confirmitemid', 0);
-			if(!empty($itemId)) $item = '&Itemid='.$itemId;
+		$parameters = $this->acypluginsHelper->extractTag($allresults[1][$i]);
+		$itemId = $this->params->get(strtolower($parameters->id).'itemid', $config->get('itemid', 0));
+		$itemId = empty($parameters->itemid) ? $itemId : intval($parameters->itemid);
+		$item = empty($itemId) ? '' : '&Itemid='.$itemId;
+
+		if($parameters->id == 'confirm'){ //confirm your subscription link
 			$myLink = acymailing_frontendLink('index.php?subid='.$user->subid.'&option=com_acymailing&ctrl=user&task=confirm&key='.urlencode($user->key).$item.$lang, (bool)$this->params->get('confirmtemplate', false));
 			if(empty($allresults[2][$i])) return $myLink;
 			return '<a target="_blank" href="'.$myLink.'">'.$allresults[2][$i].'</a>';
-		}elseif($allresults[1][$i] == 'modify'){ //modify your subscription link
-			$itemId = $this->params->get('modifyitemid', 0);
-			if(!empty($itemId)) $item = '&Itemid='.$itemId;
+		}elseif($parameters->id == 'modify'){ //modify your subscription link
 			$myLink = acymailing_frontendLink('index.php?subid='.$user->subid.'&option=com_acymailing&ctrl=user&task=modify&key='.urlencode($user->key).$item.$lang, (bool)$this->params->get('modifytemplate', false));
 			if(empty($allresults[2][$i])) return $myLink;
 			return '<a style="text-decoration:none;" target="_blank" href="'.$myLink.'"><span class="acymailing_unsub">'.$allresults[2][$i].'</span></a>';
+		}elseif($parameters->id == 'subscribe'){ //add a direct subscription link
+			if(empty($parameters->lists)) return 'You must select at least one list';
+			$lists = explode(',', $parameters->lists);
+			JArrayHelper::toInteger($lists);
+			$captchaKey = $config->get('captcha_plugin') == 'acycaptcha' ? '&seckey='.$config->get('security_key', '') : '';
+			$myLink = acymailing_frontendLink('index.php?option=com_acymailing&ctrl=sub&task=optin&hiddenlists='.implode(',', $lists).'&user[email]='.urlencode($user->email).$item.$lang.$captchaKey, false);
+			if(empty($allresults[2][$i])) return $myLink;
+			return '<a style="text-decoration:none;" target="_blank" href="'.$myLink.'"><span class="acymailing_unsub">'.$allresults[2][$i].'</span></a>';
 		}//unsubscribe link
-
-		$itemId = $this->params->get('unsubscribeitemid', 0);
-		if(!empty($itemId)) $item = '&Itemid='.$itemId;
 		$myLink = acymailing_frontendLink('index.php?subid='.$user->subid.'&option=com_acymailing&ctrl=user&task=out&mailid='.$email->mailid.'&key='.urlencode($user->key).$item.$lang, (bool)$this->params->get('unsubscribetemplate', false));
 
 		if(!$this->listunsubscribe && $this->params->get('listunsubscribe', 0) && method_exists($email, 'addCustomHeader')){

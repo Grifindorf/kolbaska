@@ -920,7 +920,7 @@ table { background: #fff; }
  * Testimonial
  */
 
-.testimonial h1, .testimonial h3 {
+.testimonial h3 {
 	margin-top:0px;
 	margin-bottom: 20px;
 	padding-bottom: 10px;
@@ -2188,7 +2188,7 @@ div.ppt { display:none !important; }
  */
 @media (max-width: 991px){
 	.header .navbar-default .navbar-nav > li ul.dropdown-md { width: 450px;	}
-	.testimonial h1, .testimonial h3  { text-align: center; }
+	.testimonial h3 { text-align: center; }
 	.testimonial .flexslider-testimonial,
 	.testimonial .flexslider-recent {
 		max-width: 600px;

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 
 class contentType{
 	var $onclick = 'updateTag();';
-	function contentType(){
+	function __construct(){
 		$this->values = array();
 		$this->values[] = JHTML::_('select.option', "|type:title",JText::_('TITLE_ONLY'));
 		$this->values[] = JHTML::_('select.option', "|type:intro",JText::_('INTRO_ONLY'));

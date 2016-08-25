@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -41,6 +41,20 @@ defined('_JEXEC') or die('Restricted access');
 	<div id="dashboard_mainview">
 
 		<?php include(dirname(__FILE__).DS.'stats.php'); ?>
+
+		<!-- Special content -->
+		<?php
+		if(!empty($this->contentToDisplay['displayType'])){
+			echo '<div class="acydashboard_specialcontent">';
+			if($this->contentToDisplay['displayType'] == 'url'){
+				$height = !empty($this->contentToDisplay['height']) ? $this->contentToDisplay['height'] : 'auto';
+				echo '<iframe frameborder="0" src="'.$this->contentToDisplay['content'].'" width="100%" height="'.$height.'" scrolling="auto"></iframe>';
+			}else{
+				echo $this->contentToDisplay['content'];
+			}
+			echo '</div>';
+		}
+		?>
 
 		<!-- dashboard progress bar -->
 		<div id="dashboard_progress">
@@ -108,6 +122,7 @@ defined('_JEXEC') or die('Restricted access');
 					<input type="hidden" name="option" value="com_acymailing"/>
 					<input type="hidden" name="visiblelists" value=""/>
 					<input type="hidden" name="hiddenlists" value="23"/>
+					<input type="hidden" name="redirect" value="https://www.acyba.com"/>
 				</form>
 			</div>
 		</div>

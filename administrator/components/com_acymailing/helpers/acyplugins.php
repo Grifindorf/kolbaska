@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -146,6 +146,7 @@ class acypluginsHelper{
 		$text = preg_replace('#\[embed=videolink][^}]*youtube[^=]*=([^"/}]*)[^}]*}\[/embed]#i', '<a href="http://www.youtube.com/watch?v=$1"><img src="http://img.youtube.com/vi/$1/0.jpg"/></a>', $text);
 		$text = preg_replace('#<video[^>]*youtube\.com/embed/([^"/]*)[^>]*>[^>]*</video>#i', '<a href="http://www.youtube.com/watch?v=$1"><img src="http://img.youtube.com/vi/$1/0.jpg"/></a>', $text);
 		$text = preg_replace('#{JoooidContent[^}]*youtube[^}]*id"[^"]*"([^}"]*)"[^}]*}#i', '<a href="http://www.youtube.com/watch?v=$1"><img src="http://img.youtube.com/vi/$1/0.jpg"/></a>', $text);
+		$text = preg_replace('#<iframe[^>]*src="[^"]*youtube[^"]*embed/([^"?]*)(\?[^"]*)?"[^>]*>[^<]*</iframe>#Uis', '<a href="http://www.youtube.com/watch?v=$1"><img src="http://img.youtube.com/vi/$1/0.jpg"/></a>', $text);
 
 		$text = preg_replace('#\[embed=videolink][^}]*video":"([^"]*)[^}]*}\[/embed]#i', '<a href="$1"><img src="'.ACYMAILING_IMAGES.'/video.png"/></a>', $text);
 		$text = preg_replace('#<video[^>]*src="([^"]*)"[^>]*>[^>]*</video>#i', '<a href="$1"><img src="'.ACYMAILING_IMAGES.'/video.png"/></a>', $text);
@@ -195,7 +196,7 @@ class acypluginsHelper{
 
 			if(in_array($extension, array('gif', 'png'))){
 				imagealphablending($img, false);
-				imagesavealpha($img, true);
+				imagesavealpha($img, false);
 			}
 
 			ob_start();
@@ -208,7 +209,7 @@ class acypluginsHelper{
 					$status = imagejpeg($img, null, 100);
 					break;
 				case 'png':
-					$status = imagepng($img, null, 0);
+					$status = imagepng($img, null, 1);
 					break;
 			}
 			$imageContent = ob_get_clean();
@@ -244,6 +245,7 @@ class acypluginsHelper{
 		$this->_removecontenttags($html);
 		$this->_convertbase64pictures($html);
 		$this->cleanEditorCode($html);
+		$this->_removeEditorFromTemplate($html);
 	}
 
 	public function fixPictureDim(&$html){
@@ -290,6 +292,11 @@ class acypluginsHelper{
 		if(!strpos($html, 'cke_edition_en_cours')) return;
 
 		$html = preg_replace('#<div[^>]*cke_edition_en_cours.*$#Uis', '', $html);
+	}
+
+	private function _removeEditorFromTemplate(&$html){
+		if(strpos($html, 'acyeditor_sharedspace') == -1) return;
+		$html = preg_replace('#<div .* class="acyeditor_sharedspace".*><\/div>#', '', $html);
 	}
 
 	function replaceTags(&$email, &$tags, $html = false){
@@ -413,7 +420,7 @@ class acypluginsHelper{
 			if(empty($arg0)) continue;
 			if(isset($args[1])){
 				$tag->$arg0 = $args[1];
-				if(isset($args[2])) $tag->$args[0] .= ':'.$args[2];
+				if(isset($args[2])) $tag->{$args[0]} .= ':'.$args[2];
 			}else{
 				$tag->$arg0 = true;
 			}
@@ -526,12 +533,10 @@ class acypluginsHelper{
 			$image = '';
 		}
 
+		if(!empty($format->link) && !empty($image)) $image = '<a href="'.$format->link.'">'.$image.'</a>';
+
 		if($format->tag->format == 'TOP_IMG' && !empty($image)){
-			if(!empty($format->link)){
-				$result = '<a href="'.$format->link.'">'.$image.'</a>';
-			}else{
-				$result = $image;
-			}
+			$result = $image;
 			$image = '';
 		}
 

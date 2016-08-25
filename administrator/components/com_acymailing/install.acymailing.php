@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -18,7 +18,7 @@ function installAcyMailing(){
 	$success = true;
 	try{
 		include_once(rtrim(JPATH_ADMINISTRATOR, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_acymailing'.DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'helper.php');
-	} catch(Exception $e){
+	}catch(Exception $e){
 		$updateHelper = acymailing_get('helper.update');
 		$updateHelper->installTables();
 		$success = false;
@@ -78,13 +78,13 @@ class com_acymailingInstallerScript{
 class acymailingInstall{
 
 	var $level = 'starter';
-	var $version = '5.0.1';
+	var $version = '5.5.0';
 	var $update = false;
 	var $fromLevel = '';
 	var $fromVersion = '';
 	var $db;
 
-	function acymailingInstall(){
+	function __construct(){
 		$this->db = JFactory::getDBO();
 	}
 
@@ -102,7 +102,7 @@ class acymailingInstall{
 		$this->db->setQuery("SELECT `namekey`, `value` FROM `#__acymailing_config` WHERE `namekey` IN ('version','level') LIMIT 2");
 		try{
 			$results = $this->db->loadObjectList('namekey');
-		} catch(Exception $e){
+		}catch(Exception $e){
 			$results = null;
 		}
 
@@ -194,8 +194,7 @@ class acymailingInstall{
 
 			if(!ACYMAILING_J16){
 				$this->updateQuery("UPDATE #__plugins SET `params` = REPLACE(`params`,'components/com_acymailing/images','media/com_acymailing/images') ");
-			}
-			else{
+			}else{
 				$this->updateQuery("UPDATE #__extensions SET `params` = REPLACE(`params`,'components\/com_acymailing\/images','media\/com_acymailing\/images') ");
 			}
 
@@ -290,8 +289,7 @@ class acymailingInstall{
 
 			if(!ACYMAILING_J16){
 				$this->updateQuery("DELETE FROM `#__plugins` WHERE folder = 'acymailing' AND element LIKE 'tagvm%'");
-			}
-			else{
+			}else{
 				$this->updateQuery("DELETE FROM `#__extensions` WHERE folder = 'acymailing' AND element LIKE 'tagvm%'");
 			}
 		}
@@ -375,8 +373,7 @@ class acymailingInstall{
 		if(version_compare($this->fromVersion, '4.3.0', '<')){
 			if(!ACYMAILING_J16){
 				$queryReplace = "UPDATE `#__plugins` SET `name` = REPLACE(`name`,'(beta)','') WHERE `element` = 'acyeditor'";
-			}
-			else{
+			}else{
 				$queryReplace = "UPDATE `#__extensions` SET `name` = REPLACE(`name`,'(beta)','') WHERE `element` = 'acyeditor'";
 			}
 			$this->updateQuery($queryReplace);
@@ -384,8 +381,7 @@ class acymailingInstall{
 			if(!ACYMAILING_J16){
 				$this->db->setQuery("SELECT `params` FROM #__plugins WHERE `element` = 'urltracker' LIMIT 1");
 				$pattern = '#trackingsystem=(.*)#i';
-			}
-			else{
+			}else{
 				$this->db->setQuery("SELECT `params` FROM #__extensions WHERE `element` = 'urltracker' LIMIT 1");
 				$pattern = '#"trackingsystem":"([^"]*)"#i';
 			}
@@ -419,8 +415,7 @@ class acymailingInstall{
 			if(!ACYMAILING_J16){
 				$this->db->setQuery("SELECT `params` FROM #__plugins WHERE `element` = 'regacymailing' LIMIT 1");
 				$pattern = '#customfields=(.*)#i';
-			}
-			else{
+			}else{
 				$this->db->setQuery("SELECT `params` FROM #__extensions WHERE `element` = 'regacymailing' LIMIT 1");
 				$pattern = '#"customfields":"([^"]*)"#i';
 			}
@@ -495,7 +490,7 @@ class acymailingInstall{
 				if(!empty($res)){
 					$this->updateQuery("INSERT IGNORE INTO `#__acymailing_config` (`namekey`,`value`) VALUES ('acl_newsletters_abtesting', 'all')");
 				}
-			} catch(Exception $e){
+			}catch(Exception $e){
 				$res = null;
 			}
 			if($res === null) acymailing_enqueueMessage(isset($e) ? $e->getMessage() : substr(strip_tags($this->db->getErrorMsg()), 0, 200).'...', 'error');
@@ -560,13 +555,95 @@ class acymailingInstall{
 			$this->updateQuery("ALTER TABLE `#__acymailing_fields` ADD `frontform` TINYINT NULL DEFAULT 1");
 			$this->updateQuery("UPDATE `#__acymailing_fields` SET frontform = backend");
 		}
+
+		if(version_compare($this->fromVersion, '5.1.0', '<')){
+			$this->updateQuery("CREATE TABLE IF NOT EXISTS `#__acymailing_action` (`action_id` int unsigned NOT NULL AUTO_INCREMENT,`name` varchar(255) DEFAULT NULL,`description` text,`frequency` int unsigned NOT NULL,
+	`nextdate` int unsigned NOT NULL,`server` varchar(255) NOT NULL,`port` varchar(50) NOT NULL,`connection_method` varchar(10) NOT NULL DEFAULT '0',`secure_method` varchar(10) NOT NULL DEFAULT '0',
+	`self_signed` tinyint NOT NULL DEFAULT '0',`username` varchar(255) NOT NULL,`password` varchar(50) NOT NULL,`userid` int unsigned DEFAULT NULL,`conditions` text,`actions` text,`report` text,
+	`published` tinyint NOT NULL DEFAULT '0',`ordering` smallint unsigned NULL DEFAULT '0',PRIMARY KEY (`action_id`)) ;");
+
+			$this->updateQuery("ALTER TABLE `#__acymailing_mail` ADD `favicon` text");
+		}
+
+		if(version_compare($this->fromVersion, '5.2.0', '<')){
+			$config = acymailing_config();
+			$this->updateQuery("ALTER TABLE `#__acymailing_mail` MODIFY `type` ENUM('news','autonews','followup','unsub','welcome','notification','joomlanotification','action') NOT NULL DEFAULT 'news'");
+
+			$this->updateQuery("ALTER TABLE `#__acymailing_mail` ADD `bccaddresses` varchar(250) DEFAULT NULL");
+			$managetext = JPluginHelper::getPlugin('acymailing', 'managetext');
+			$managetextParams = new acyParameter($managetext->params);
+
+			$possibleVars = array('', 2, 3);
+			foreach($possibleVars as $oneSuffix){
+				$bcc = $managetextParams->get('bccaddresses'.$oneSuffix);
+				$mailids = trim(str_replace(array(',', ' '), ';', $managetextParams->get('bccmailids'.$oneSuffix)));
+				if(empty($mailids) || empty($bcc)) continue;
+
+				$emails = explode(';', $mailids);
+				JArrayHelper::toInteger($emails);
+
+				$this->updateQuery('UPDATE `#__acymailing_mail` SET bccaddresses = '.$this->db->quote($bcc).' WHERE mailid IN ('.implode(',', $emails).')');
+			}
+
+			$this->updateQuery('UPDATE `#__acymailing_rules` SET name = (CASE name WHEN "Action Required" THEN "ACY_RULE_ACTION"
+																					 WHEN "Acknowledgement of receipt - in subject" THEN "ACY_RULE_ACKNOWLEDGE"
+																					 WHEN "Feedback loop" THEN "ACY_RULE_LOOP"
+																					 WHEN "Feedback loop - in body" THEN "ACY_RULE_LOOP_BODY"
+																					 WHEN "Mailbox Full" THEN "ACY_RULE_FULL"
+																					 WHEN "Blocked by Google Groups" THEN "ACY_RULE_GOOGLE"
+																					 WHEN "Mailbox does not exist 1" THEN "ACY_RULE_EXIST1"
+																					 WHEN "Message blocked by recipient filters" THEN "ACY_RULE_FILTERED"
+																					 WHEN "Mailbox does not exist 2" THEN "ACY_RULE_EXIST2"
+																					 WHEN "Domain does not exist" THEN "ACY_RULE_DOMAIN"
+																					 WHEN "Temporary failures" THEN "ACY_RULE_TEMPORAR"
+																					 WHEN "Failed Permanently" THEN "ACY_RULE_PERMANENT"
+																					 WHEN "Acknowledgement of receipt - in body" THEN "ACY_RULE_ACKNOWLEDGE_BODY"
+																					 WHEN "Final Rule" THEN "ACY_RULE_FINAL"
+																					 ELSE name
+																					 END)');
+
+			$this->updateQuery("ALTER TABLE #__acymailing_geolocation ADD `geolocation_continent` varchar(255) NOT NULL DEFAULT '', ADD `geolocation_timezone` varchar(255) NOT NULL DEFAULT ''");
+			$this->updateQuery("UPDATE #__acymailing_geolocation SET geolocation_continent = 'Asia' WHERE geolocation_country_code IN ('AF', 'AM', 'AZ', 'BH', 'BD', 'BT', 'BN', 'IO', 'KH', 'CN', 'CX', 'CC', 'CY', 'GE', 'HK', 'IN', 'ID', 'IR', 'IQ', 'IL', 'JP', 'JO', 'KZ', 'KP', 'KR', 'KW', 'KG', 'LA', 'LB', 'MO', 'MY', 'MV', 'MN', 'MM', 'NP', 'OM', 'PK', 'PS', 'PH', 'QA', 'SA', 'SG', 'LK', 'SY', 'TW', 'TJ', 'TH', 'TL', 'TR', 'TM', 'AE', 'UZ', 'VN', 'YE')");
+			$this->updateQuery("UPDATE #__acymailing_geolocation SET geolocation_continent = 'Africa' WHERE geolocation_country_code IN ('AO', 'BJ', 'DZ', 'BW', 'BF', 'BI', 'CM', 'CV', 'CF', 'TD', 'KM', 'CD', 'CG', 'CI', 'DJ', 'EG', 'GQ', 'ER', 'ET', 'GA', 'GM', 'GH', 'GN', 'GW', 'KE', 'LS', 'LR', 'LY', 'MG', 'MW', 'ML', 'MR', 'MU', 'YT', 'MA', 'MZ', 'NA', 'NE', 'NG', 'RE', 'RW', 'SH', 'ST', 'SN', 'SC', 'SL', 'SO', 'ZA', 'SD', 'SZ', 'TZ', 'TG', 'TN', 'UG', 'EH', 'ZM', 'ZW')");
+			$this->updateQuery("UPDATE #__acymailing_geolocation SET geolocation_continent = 'Europe' WHERE geolocation_country_code IN ('AX', 'AL', 'AT', 'AD', 'BY', 'BE', 'BA', 'BG', 'HR', 'CZ', 'DK', 'EE', 'FO', 'FI', 'FR', 'DE', 'GI', 'GR', 'GG', 'VA', 'HU', 'IS', 'IE', 'IM', 'IT', 'JE', 'LV', 'LI', 'LT', 'LU', 'MK', 'MT', 'MD', 'MC', 'ME', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'SM', 'RS', 'SK', 'SI', 'ES', 'SJ', 'SE', 'CH', 'UA', 'GB')");
+			$this->updateQuery("UPDATE #__acymailing_geolocation SET geolocation_continent = 'Oceania' WHERE geolocation_country_code IN ('AS', 'AU', 'CK', 'FJ', 'PF', 'GU', 'KI', 'MH', 'FM', 'NR', 'NC', 'NZ', 'NU', 'NF', 'MP', 'PW', 'PG', 'PN', 'WS', 'SB', 'TK', 'TO', 'TV', 'UM', 'VU', 'WF')");
+			$this->updateQuery("UPDATE #__acymailing_geolocation SET geolocation_continent = 'North America' WHERE geolocation_country_code IN ('AI', 'AG', 'AW', 'BS', 'BB', 'BZ', 'BM', 'VG', 'CA', 'KY', 'CR', 'CU', 'DM', 'DO', 'SV', 'GL', 'GD', 'GP', 'GT', 'HT', 'HN', 'JM', 'MQ', 'MX', 'MS', 'AN', 'NI', 'PA', 'PR', 'BL', 'KN', 'LC', 'MF', 'PM', 'VC', 'TT', 'TC', 'US', 'VI')");
+			$this->updateQuery("UPDATE #__acymailing_geolocation SET geolocation_continent = 'South America' WHERE geolocation_country_code IN ('AR', 'BO', 'BR', 'CL', 'CO', 'EC', 'FK', 'GF', 'GY', 'PY', 'PE', 'SR', 'UY', 'VE')");
+			$this->updateQuery("UPDATE #__acymailing_geolocation SET geolocation_continent = 'Antartica' WHERE geolocation_country_code IN ('AQ', 'BV', 'TF', 'HM', 'GS')");
+
+			if($config->get('captcha_enabled') == 1){
+				$this->updateQuery('INSERT INTO `#__acymailing_config` (namekey, value) VALUES ("captcha_plugin", "acycaptcha") ON DUPLICATE KEY UPDATE value="acycaptcha"');
+			}else{
+				$this->updateQuery('INSERT INTO `#__acymailing_config` (namekey, value) VALUES ("captcha_plugin", "no") ON DUPLICATE KEY UPDATE value="no"');
+			}
+			try{
+				$this->db->setQuery('SELECT tempid, stylesheet FROM #__acymailing_template');
+				$res = $this->db->loadObjectList('tempid');
+				foreach($res as $oneTmpl){
+					$changedStyle = preg_replace('/(table *(,[^{}]*)?)({[^}]*font-family)/', '$1, td$3', $oneTmpl->stylesheet);
+					$this->updatequery('UPDATE #__acymailing_template SET stylesheet = '.$this->db->Quote($changedStyle).' WHERE tempid = '.$oneTmpl->tempid);
+				}
+			}catch(Exception $e){
+				$res = null;
+			}
+			if($res === null) acymailing_enqueueMessage(isset($e) ? $e->getMessage() : substr(strip_tags($this->db->getErrorMsg()), 0, 200).'...', 'error');
+		}
+
+		if(version_compare($this->fromVersion, '5.5.0', '<')){
+			$this->updateQuery("ALTER TABLE #__acymailing_action ADD `delete_wrong_emails` tinyint NOT NULL DEFAULT 0");
+		}
+
+		if(version_compare($this->fromVersion, '5.6.0', '<')){
+			$this->updateQuery("ALTER TABLE #__acymailing_action ADD `senderfrom` tinyint NOT NULL DEFAULT 0");
+			$this->updateQuery("ALTER TABLE #__acymailing_action ADD `senderto` tinyint NOT NULL DEFAULT 0");
+		}
 	}
 
 	function updateQuery($query){
 		try{
 			$this->db->setQuery($query);
 			$res = $this->db->query();
-		} catch(Exception $e){
+		}catch(Exception $e){
 			$res = null;
 		}
 		if($res === null) acymailing_enqueueMessage(isset($e) ? $e->getMessage() : substr(strip_tags($this->db->getErrorMsg()), 0, 200).'...', 'error');
@@ -658,8 +735,7 @@ class acymailingInstall{
 			$allPref['smtp_auth'] = $conf->get('smtpauth');
 			$allPref['smtp_username'] = $conf->get('smtpuser');
 			$allPref['smtp_password'] = $conf->get('smtppass');
-		}
-		else{
+		}else{
 			$allPref['from_name'] = $conf->getValue('config.fromname');
 			$allPref['from_email'] = $conf->getValue('config.mailfrom');
 			$allPref['bounce_email'] = $conf->getValue('config.mailfrom');
@@ -725,6 +801,7 @@ class acymailingInstall{
 		$allPref['description_essential'] = $descriptions[rand(0, 4)];
 		$allPref['description_business'] = $descriptions[rand(0, 4)];
 		$allPref['description_enterprise'] = $descriptions[rand(0, 4)];
+		$allPref['description_sidekick'] = $descriptions[rand(0, 4)];
 
 		$allPref['priority_followup'] = '2';
 		$allPref['unsub_redirect'] = '';
@@ -747,6 +824,7 @@ class acymailingInstall{
 		$allPref['Essential'] = '1';
 		$allPref['Business'] = '2';
 		$allPref['Enterprise'] = '3';
+		$allPref['Sidekick'] = '4';
 
 		$query = "INSERT IGNORE INTO `#__acymailing_config` (`namekey`,`value`) VALUES ";
 		foreach($allPref as $namekey => $value){
@@ -757,7 +835,7 @@ class acymailingInstall{
 		$this->db->setQuery($query);
 		try{
 			$res = $this->db->query();
-		} catch(Exception $e){
+		}catch(Exception $e){
 			$res = null;
 		}
 		if($res === null){
@@ -771,7 +849,7 @@ class acymailingInstall{
 class acymailingUninstall{
 	var $db;
 
-	function acymailingUninstall(){
+	function __construct(){
 		$this->db = JFactory::getDBO();
 	}
 
@@ -785,8 +863,7 @@ class acymailingUninstall{
 		$this->db->setQuery("SHOW TABLES LIKE '".$this->db->getPrefix()."acymailing%' ");
 		if(version_compare(JVERSION, '3.0.0', '>=')){
 			echo implode(' , ', $this->db->loadColumn());
-		}
-		else{
+		}else{
 			echo implode(' , ', $this->db->loadResultArray());
 		}
 

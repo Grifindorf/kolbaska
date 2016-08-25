@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -21,7 +21,7 @@ class listsubClass extends acymailingClass{
 	var $campaigndelay = 0;
 	var $skipedfollowups = 0;
 
-	function updateSubscription($subid,$lists){
+	function updateSubscription($subid, $lists){
 
 		$result = true;
 		$time = time();
@@ -37,27 +37,28 @@ class listsubClass extends acymailingClass{
 			if(empty($listids)) continue;
 
 			JArrayHelper::toInteger($listids);
-			if($status == '-1') $column = 'unsubdate';
-			else $column = 'subdate';
+			if($status == '-1'){
+				$column = 'unsubdate';
+			}else $column = 'subdate';
 
-			$query = 'UPDATE '.acymailing_table('listsub').' SET `status` = '.intval($status).','.$column.'='.$time.' WHERE subid = '.intval($subid).' AND listid IN ('.implode(',',$listids).')';
+			$query = 'UPDATE '.acymailing_table('listsub').' SET `status` = '.intval($status).','.$column.'='.$time.' WHERE subid = '.intval($subid).' AND listid IN ('.implode(',', $listids).')';
 			$this->database->setQuery($query);
 			$result = $this->database->query() && $result;
 
 			if($status == 1){
-				$listHelper->subscribe($subid,$listids);
+				$listHelper->subscribe($subid, $listids);
 			}elseif($status == -1){
-				$listHelper->unsubscribe($subid,$listids);
+				$listHelper->unsubscribe($subid, $listids);
 			}
 		}
 
 		return $result;
 	}
 
-	function removeSubscription($subid,$listids){
+	function removeSubscription($subid, $listids){
 
 		JArrayHelper::toInteger($listids);
-		$query = 'DELETE FROM '.acymailing_table('listsub').' WHERE subid = '.intval($subid).' AND listid IN ('.implode(',',$listids).')';
+		$query = 'DELETE FROM '.acymailing_table('listsub').' WHERE subid = '.intval($subid).' AND listid IN ('.implode(',', $listids).')';
 		$this->database->setQuery($query);
 		$this->database->query();
 
@@ -65,13 +66,12 @@ class listsubClass extends acymailingClass{
 		$listHelper->sendNotif = $this->sendNotif;
 		$listHelper->sendConf = $this->sendConf;
 		$listHelper->forceConf = $this->forceConf;
-		$listHelper->unsubscribe($subid,$listids);
+		$listHelper->unsubscribe($subid, $listids);
 
 		return true;
-
 	}
 
-	function addSubscription($subid,$lists){
+	function addSubscription($subid, $lists){
 		$app = JFactory::getApplication();
 
 		$my = JFactory::getUser();
@@ -91,19 +91,20 @@ class listsubClass extends acymailingClass{
 			$status = intval($status);
 			JArrayHelper::toInteger($listids);
 
-			$this->database->setQuery('SELECT `listid`,`access_sub` FROM '.acymailing_table('list').' WHERE `listid` IN ('.implode(',',$listids).') AND `type` = \'list\'');
+			$this->database->setQuery('SELECT `listid`,`access_sub` FROM '.acymailing_table('list').' WHERE `listid` IN ('.implode(',', $listids).') AND `type` = \'list\'');
 			$allResults = $this->database->loadObjectList('listid');
 			$listids = array_keys($allResults);
 
-			if($status == '-1') $column = 'unsubdate';
-			else $column = 'subdate';
+			if($status == '-1'){
+				$column = 'unsubdate';
+			}else $column = 'subdate';
 
 			$values = array();
 			foreach($listids as $listid){
 				if(empty($listid)) continue;
 				if($status > 0 && acymailing_level(3)){
 					if((!$app->isAdmin() || !empty($this->gid)) && $this->checkAccess && $allResults[$listid]->access_sub != 'all'){
-						if(!acymailing_isAllowed($allResults[$listid]->access_sub,$this->gid)) continue;
+						if(!acymailing_isAllowed($allResults[$listid]->access_sub, $this->gid)) continue;
 					}
 				}
 				$values[] = intval($listid).','.$subid.','.$status.','.$time;
@@ -111,12 +112,12 @@ class listsubClass extends acymailingClass{
 
 			if(empty($values)) continue;
 
-			$query = 'INSERT IGNORE INTO '.acymailing_table('listsub').' (listid,subid,`status`,'.$column.') VALUES ('.implode('),(',$values).')';
+			$query = 'INSERT IGNORE INTO '.acymailing_table('listsub').' (listid,subid,`status`,'.$column.') VALUES ('.implode('),(', $values).')';
 			$this->database->setQuery($query);
 			$result = $this->database->query() && $result;
 
 			if($status == 1){
-				$listHelper->subscribe($subid,$listids);
+				$listHelper->subscribe($subid, $listids);
 			}
 		}
 
@@ -129,20 +130,20 @@ class listsubClass extends acymailingClass{
 		return $this->database->loadObjectList('listid');
 	}
 
-	function getSubscriptionString($subid){
+	function getSubscriptionString($subid, $dates = false){
 		$usersubscription = $this->getSubscription($subid);
 		$subscriptionString = '';
 		if(!empty($usersubscription)){
 			$subscriptionString = '<ul>';
 			foreach($usersubscription as $onesub){
 				$status = ($onesub->status == 1) ? JText::_('SUBSCRIBED') : (($onesub->status == -1) ? JText::_('UNSUBSCRIBED') : JText::_('PENDING_SUBSCRIPTION'));
-				$subscriptionString .= '<li>['.$onesub->listid.'] '.$onesub->name.' : '.$status.'</li>';
+				$subscriptionString .= '<li>['.$onesub->listid.'] '.$onesub->name.' : '.$status;
+				if($dates) $subscriptionString .= ' - '.acymailing_getDate($onesub->status == -1 ? $onesub->unsubdate : $onesub->subdate, JText::_('DATE_FORMAT_LC'));
+				$subscriptionString .= '</li>';
 			}
 			$subscriptionString .= '</ul>';
 		}
 
 		return $subscriptionString;
 	}
-
 }
-

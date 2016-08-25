@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -27,15 +27,14 @@ class acytoolbarHelper{
 
 	function custom($task, $text, $class, $listSelect = true, $onClick = ''){
 
-		$confirm = !ACYMAILING_J16 ? 'PLEASE MAKE A SELECTION FROM THE LIST TO' : 'JLIB_HTML_PLEASE_MAKE_A_SELECTION_FROM_THE_LIST';
+		$confirm = !ACYMAILING_J16 ? JText::sprintf('PLEASE MAKE A SELECTION FROM THE LIST TO', strtolower(JText::_('ACY_'.strtoupper($task)))) : JText::_('JLIB_HTML_PLEASE_MAKE_A_SELECTION_FROM_THE_LIST');
 		$submit = !ACYMAILING_J16 ? "submitbutton('".$task."')" : "Joomla.submitbutton('".$task."')";
-		$js = !empty($listSelect) ? "if(document.adminForm.boxchecked.value==0){alert('".str_replace(array("'", '"'), array("\'", '\"'), JText::_($confirm))."');return false;}else{".$submit."}" : $submit;
+		$js = !empty($listSelect) ? "if(document.adminForm.boxchecked.value==0){alert('".str_replace(array("'", '"'), array("\'", '\"'), $confirm)."');return false;}else{".$submit."}" : $submit;
 
 		$onClick = !empty($onClick) ? $onClick : $js;
 
-
 		if(empty($this->buttonOptions)){
-			$this->buttons[] = '<button id="toolbar-'.$class.'" onclick="'.$onClick.'" class="acytoolbar_'.$class.'"><i class="acyicon-'.$class.'"></i><span>'.$text.'</span></button>';
+			$this->buttons[] = '<button id="toolbar-'.$class.'" onclick="'.$onClick.'" class="acytoolbar_'.$class.'" title="'.$text.'"><i class="acyicon-'.$class.'"></i><span>'.$text.'</span></button>';
 			return;
 		}
 
@@ -45,7 +44,7 @@ class acytoolbarHelper{
 		}
 		$dropdownOptions .= '</ul>';
 
-		$buttonArea = '<button onclick="'.$onClick.'" class="acytoolbar_'.$class.'"><i class="acyicon-'.$class.'"></i><span>'.$text.'</span></button>';
+		$buttonArea = '<button onclick="'.$onClick.'" class="acytoolbar_'.$class.'" title="'.$text.'"><i class="acyicon-'.$class.'"></i><span>'.$text.'</span></button>';
 
 
 		$this->buttons[] = '<div style="display:inline;" class="subbuttonactions">'.$buttonArea.'<span class="acytoolbar_hover"><span style="vertical-align: top; display:inline-block; padding-top:10px;" class="acyicon-down"></span><span class="acytoolbar_hover_display">'.$dropdownOptions.'</span></span></div>';
@@ -54,7 +53,8 @@ class acytoolbarHelper{
 	}
 
 	function display(){
-		echo '<div '.(empty($this->topfixed) ? '' : 'id="acymenu_top"').' class="acytoolbarmenu donotprint '.(empty($this->topfixed) ? '' : 'acyaffix-top ').$this->htmlclass.'" >';
+		$classCtrl = JRequest::getCmd('ctrl', '');
+		echo '<div '.(empty($this->topfixed) ? '' : 'id="acymenu_top"').' class="acytoolbarmenu donotprint '.(empty($this->topfixed) ? '' : 'acyaffix-top ').(!empty($classCtrl) ? 'acytopmenu_'.$classCtrl.' ' : '').$this->htmlclass.'" >';
 		if(!empty($this->title)){
 			$title = htmlspecialchars($this->title, ENT_COMPAT, 'UTF-8');
 			if(!empty($this->titleLink)) $title = '<a style="color:white;" href="'.acymailing_completeLink($this->titleLink).'">'.$title.'</a>';
@@ -81,8 +81,9 @@ class acytoolbarHelper{
 	}
 
 	function delete(){
+		$selectMessage = ACYMAILING_J16 ? JText::_('JLIB_HTML_PLEASE_MAKE_A_SELECTION_FROM_THE_LIST') : JText::sprintf('PLEASE MAKE A SELECTION FROM THE LIST TO', strtolower(JText::_('ACY_DELETE')));
 		$onClick = 'if(document.adminForm.boxchecked.value==0){
-						alert(\''.str_replace("'", "\\'", JText::_('JLIB_HTML_PLEASE_MAKE_A_SELECTION_FROM_THE_LIST')).'\');
+						alert(\''.str_replace("'", "\\'", $selectMessage).'\');
 					}else{
 						if(confirm(\''.str_replace("'", "\\'", JText::_('ACY_VALIDDELETEITEMS', true)).'\')){
 							'.(ACYMAILING_J16 ? 'Joomla.' : '').'submitbutton(\'remove\');
@@ -92,7 +93,7 @@ class acytoolbarHelper{
 	}
 
 	function copy(){
-		$this->custom('copy', JTEXT::_('ACY_COPY'), 'copy', false);
+		$this->custom('copy', JTEXT::_('ACY_COPY'), 'copy', true);
 	}
 
 	function link($link, $text, $class){
@@ -189,11 +190,11 @@ class acytoolbarHelper{
 		if(!ACYMAILING_J30){
 			JHTML::_('behavior.modal', 'a.modal');
 			$html = '<a'.$onClick.' id="a_'.$name.'" class="modal" href="'.$url.'" rel="{handler: \'iframe\', size: {x: '.$width.', y: '.$height.'}}">';
-			$html .= '<button ><i class="acyicon-'.$name.'"></i><span>'.$text.'</span></button></a>';
+			$html .= '<button class="acytoolbar_'.$name.'" title="'.$text.'"><i class="acyicon-'.$name.'"></i><span>'.$text.'</span></button></a>';
 			return $html;
 		}
 
-		$html = '<button id="toolbar-'.$name.'" class="acytoolbar_'.$name.'" data-toggle="modal" data-target="#modal-'.$name.'"><i class="acyicon-'.$name.'"></i><span>'.$text.'</span></button>';
+		$html = '<button id="toolbar-'.$name.'" class="acytoolbar_'.$name.'" data-toggle="modal" data-target="#modal-'.$name.'" title="'.$text.'"><i class="acyicon-'.$name.'"></i><span>'.$text.'</span></button>';
 
 		$params['height'] = $height;
 		$params['width'] = $width;
@@ -215,7 +216,7 @@ class acytoolbarHelper{
 
 		$function = "if(document.getElementById('iframepreview')){document.getElementById('iframepreview').contentWindow.focus();document.getElementById('iframepreview').contentWindow.print();}else{window.print();}return false;";
 
-		return '<button class="acytoolbar_print" onclick="'.$function.'"><i class="acyicon-print"></i><span>'.JText::_('ACY_PRINT', true).'</span></button>';
+		return '<button class="acytoolbar_print" onclick="'.$function.'" title="'.JText::_('ACY_PRINT', true).'"><i class="acyicon-print"></i><span>'.JText::_('ACY_PRINT', true).'</span></button>';
 	}
 
 	function addButtonOption($task, $text, $class, $listSelect){
@@ -226,6 +227,6 @@ class acytoolbarHelper{
 
 		$onClick = !empty($onClick) ? $onClick : $js;
 
-		$this->buttonOptions[] = '<button onclick="'.$onClick.'" class="acytoolbar_'.$class.'"><span class="acyicon-'.$class.'"></span><span>'.$text.'</span></button>';
+		$this->buttonOptions[] = '<button onclick="'.$onClick.'" class="acytoolbar_'.$class.'" title="'.$text.'"><span class="acyicon-'.$class.'"></span><span>'.$text.'</span></button>';
 	}
 }

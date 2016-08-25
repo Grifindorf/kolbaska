@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -46,16 +46,16 @@ defined('_JEXEC') or die('Restricted access');
 //-->
 </script>
 <style type="text/css">
-	table.adminlist tr.selectedrow td{
+	table.acymailing_table tr.selectedrow td{
 		background-color:#FDE2BA;
 	}
 </style>
 <form action="index.php?option=<?php echo ACYMAILING_COMPONENT ?>" method="post" name="adminForm" id="adminForm" >
 <div style="float:right;margin-bottom : 10px">
-	<button class="btn" id="insertButton" onclick="insertTag(); return false;"><?php echo JText::_('ACY_APPLY'); ?></button>
+	<button class="acymailing_button_grey" id="insertButton" onclick="insertTag(); return false;"><?php echo JText::_('ACY_APPLY'); ?></button>
 </div>
 <div style="clear:both"/>
-	<table class="adminlist table table-striped table-hover" cellpadding="1">
+	<table class="acymailing_table" cellpadding="1">
 		<thead>
 			<tr>
 				<th class="title">

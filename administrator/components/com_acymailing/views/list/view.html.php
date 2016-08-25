@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -127,8 +127,9 @@ class ListViewList extends acymailingView{
 		}
 
 		$filters = new stdClass();
-		$listcreatorType = acymailing_get('type.listcreator');
-		$filters->creator = $listcreatorType->display('filter_creator', $selectedCreator);
+		$creatorfilterType = acymailing_get('type.creatorfilter');
+		$creatorfilterType->type = 'list';
+		$filters->creator = $creatorfilterType->display('filter_creator', $selectedCreator, 'list');
 		$listcategoryType = acymailing_get('type.categoryfield');
 		$filters->category = $listcategoryType->getFilter('list', 'filter_category', $selectedCategory, ' onchange="document.adminForm.submit();"');
 

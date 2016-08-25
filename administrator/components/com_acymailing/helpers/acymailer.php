@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -49,13 +49,15 @@ class acymailerHelper extends acymailingPHPMailer{
 
 	public $FromName = '';
 
-	public function acymailerHelper(){
+	function __construct(){
 
 		static $loaded = false;
 		if(!$loaded){
 			$loaded = true;
 			JPluginHelper::importPlugin('acymailing');
 		}
+
+		$this->SMTPAutoTLS = false;
 
 		$this->dispatcher = JDispatcher::getInstance();
 
@@ -88,8 +90,8 @@ class acymailerHelper extends acymailingPHPMailer{
 				break;
 			case 'sendmail' :
 				$this->isSendmail();
-				$this->SendMail = trim($this->config->get('sendmail_path'));
-				if(empty($this->SendMail)) $this->SendMail = '/usr/sbin/sendmail';
+				$this->Sendmail = trim($this->config->get('sendmail_path'));
+				if(empty($this->Sendmail)) $this->Sendmail = '/usr/sbin/sendmail';
 				break;
 			case 'qmail' :
 				$this->isQmail();
@@ -129,8 +131,6 @@ class acymailerHelper extends acymailingPHPMailer{
 
 		$this->Encoding = $this->config->get('encoding_format');
 		if(empty($this->Encoding)) $this->Encoding = '8bit';
-
-		$this->Hostname = trim($this->config->get('hostname', ''));
 
 		$this->WordWrap = intval($this->config->get('word_wrapping', 0));
 
@@ -188,6 +188,11 @@ class acymailerHelper extends acymailingPHPMailer{
 				}
 				return false;
 			}
+		}
+
+		if(!empty($this->favicon)){
+			$faviconHeader = '<link rel="shortcut icon" href="'.$this->favicon.'" type="image/x-icon" />';
+			$this->Body = str_replace('</head>', $faviconHeader.'</head>', $this->Body);
 		}
 
 		if(function_exists('mb_convert_encoding') && !empty($this->sendHTML)){
@@ -259,6 +264,12 @@ class acymailerHelper extends acymailingPHPMailer{
 				$attach->url = ACYMAILING_LIVE.$oneAttach->filename;
 				$this->defaultMail[$mailid]->attachments[] = $attach;
 			}
+		}
+
+		if(!empty($this->defaultMail[$mailid]->favicon) && !empty($this->defaultMail[$mailid]->favicon->filename)){
+			$this->defaultMail[$mailid]->favicon = ACYMAILING_LIVE.str_replace(DS, '/', $this->defaultMail[$mailid]->favicon->filename);
+		}else{
+			$this->defaultMail[$mailid]->favicon = '';
 		}
 
 		if(!empty($this->defaultMail[$mailid]->tempid)){
@@ -383,10 +394,13 @@ class acymailerHelper extends acymailingPHPMailer{
 			$testTag = preg_match_all('/\[(.*)\]/U', $nameTmp, $matches);
 			if($testTag != 0){
 				foreach($matches[0] as $i => $oneMatch){
-					if(!empty($receiver->$matches[1][$i])) $nameTmp = str_replace($oneMatch, $receiver->$matches[1][$i], $nameTmp);
+					$replaceValue = '';
+					if(!empty($receiver->{$matches[1][$i]})) $replaceValue = $receiver->{$matches[1][$i]};
+					$nameTmp = str_replace($oneMatch, $replaceValue, $nameTmp);
 				}
 			}
 			$addedName = $this->cleanText($nameTmp);
+			if($addedName == $this->cleanText($receiver->email)) $addedName = '';
 		}
 		$this->addAddress($this->cleanText($receiver->email), $addedName);
 
@@ -409,6 +423,16 @@ class acymailerHelper extends acymailingPHPMailer{
 
 		$this->setFrom($this->defaultMail[$mailid]->fromemail, $this->defaultMail[$mailid]->fromname);
 		$this->_addReplyTo($this->defaultMail[$mailid]->replyemail, $this->defaultMail[$mailid]->replyname);
+
+		$this->defaultMail[$mailid]->bccaddresses = isset($this->defaultMail[$mailid]->bccaddresses) ? $this->defaultMail[$mailid]->bccaddresses : '';
+		$bcc = trim(str_replace(array(',', ' '), ';', $this->defaultMail[$mailid]->bccaddresses));
+		if(!empty($bcc)){
+			$allBcc = explode(';', $bcc);
+			foreach($allBcc as $oneBcc){
+				if(empty($oneBcc)) continue;
+				$this->AddBCC($oneBcc);
+			}
+		}
 
 		if(!empty($this->defaultMail[$mailid]->attachments)){
 			if($this->config->get('embed_files')){
@@ -474,6 +498,7 @@ class acymailerHelper extends acymailingPHPMailer{
 		$this->filter = $this->defaultMail[$mailid]->filter;
 		$this->template = @$this->defaultMail[$mailid]->template;
 		$this->language = @$this->defaultMail[$mailid]->language;
+		$this->favicon = @$this->defaultMail[$mailid]->favicon;
 
 		if(empty($receiver->key) && !empty($receiver->subid)){
 			$receiver->key = acymailing_generateKey(14);
@@ -482,7 +507,14 @@ class acymailerHelper extends acymailingPHPMailer{
 			$db->query();
 		}
 
-		$this->dispatcher->trigger('acymailing_replaceusertags', array(&$this, &$receiver, true));
+		if(strpos($receiver->email, '@mail-tester.com') !== false){
+			$my = JFactory::getUser();
+			$currentUser = $this->subscriberClass->get($my->email);
+			if(empty($currentUser)) $currentUser = $receiver;
+			$this->dispatcher->trigger('acymailing_replaceusertags', array(&$this, &$currentUser, true));
+		}else{
+			$this->dispatcher->trigger('acymailing_replaceusertags', array(&$this, &$receiver, true));
+		}
 
 		if($this->sendHTML){
 			if(!empty($this->AltBody)) $this->AltBody = $this->textVersion($this->AltBody, false);
@@ -538,7 +570,6 @@ class acymailerHelper extends acymailingPHPMailer{
 				$result = false;
 			}
 		}
-
 		return $result;
 	}
 

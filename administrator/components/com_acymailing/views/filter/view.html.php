@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -21,8 +21,28 @@ class FilterViewFilter extends acymailingView{
 	}
 
 	function form(){
-		$db = JFactory::getDBO();
+
+		$app = JFactory::getApplication();
 		$config = acymailing_config();
+		$pageInfo = new stdClass();
+		$pageInfo->filter = new stdClass();
+		$pageInfo->filter->order = new stdClass();
+		$pageInfo->limit = new stdClass();
+		$pageInfo->elements = new stdClass();
+
+		$paramBase = ACYMAILING_COMPONENT.'.'.$this->getName();
+
+		$pageInfo->filter->order->value = $app->getUserStateFromRequest($paramBase.".filter_order", 'filter_order', 'name', 'cmd');
+		$pageInfo->filter->order->dir = $app->getUserStateFromRequest($paramBase.".filter_order_Dir", 'filter_order_Dir', 'asc', 'word');
+		if(strtolower($pageInfo->filter->order->dir) !== 'desc') $pageInfo->filter->order->dir = 'asc';
+		$pageInfo->search = $app->getUserStateFromRequest($paramBase.".search", 'search', '', 'string');
+		$pageInfo->search = JString::strtolower(trim($pageInfo->search));
+
+
+		$pageInfo->limit->value = $app->getUserStateFromRequest($paramBase.'.list_limit', 'limit', $app->getCfg('list_limit'), 'int');
+		$pageInfo->limit->start = $app->getUserStateFromRequest($paramBase.'.limitstart', 'limitstart', 0, 'int');
+
+		$db = JFactory::getDBO();
 
 		if(JRequest::getVar('task') == 'filterDisplayUsers'){
 			$action = array();
@@ -239,6 +259,7 @@ class FilterViewFilter extends acymailingView{
 		$this->assignRef('outputFilters', $outputFilters);
 		$this->assignRef('outputActions', $outputActions);
 		$this->assignRef('filter', $filter);
+		$this->assignRef('pageInfo', $pageInfo);
 
 		$this->assignRef('triggers', $triggers);
 		if(JRequest::getCmd('tmpl') == 'component'){
@@ -246,7 +267,18 @@ class FilterViewFilter extends acymailingView{
 		}
 
 		if(acymailing_level(3) AND JRequest::getCmd('tmpl') != 'component'){
-			$db->setQuery('SELECT * FROM #__acymailing_filter ORDER BY `published` DESC, `filid` DESC');
+			$query = 'SELECT * FROM '.acymailing_table('filter');
+
+			if(!empty($pageInfo->search)){
+				$searchVal = '\'%'.acymailing_getEscaped($pageInfo->search, true).'%\'';
+				$query .= ' WHERE LOWER(name) LIKE'.$searchVal;
+			}
+
+			if(!empty($pageInfo->filter->order->value) && (($pageInfo->filter->order->value === "name") || ($pageInfo->filter->order->value === "filid"))){
+				$query .= ' ORDER BY '.$pageInfo->filter->order->value.' '.$pageInfo->filter->order->dir;
+			}
+
+			$db->setQuery($query);
 			$filters = $db->loadObjectList();
 
 			$toggleClass = acymailing_get('helper.toggle');

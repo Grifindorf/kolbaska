@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -12,8 +12,12 @@ defined('_JEXEC') or die('Restricted access');
 	<form action="index.php?option=<?php echo ACYMAILING_COMPONENT ?>&amp;ctrl=stats" method="post" name="adminForm" id="adminForm">
 		<table class="acymailing_table_options">
 			<tr>
-				<td width="100%">
+				<td width="min-width:325px;">
 					<?php acymailing_listingsearch($this->pageInfo->search); ?>
+				</td>
+				<td align="right">
+					<span class="statistics_filter" id="statfilter" align="left"><?php echo $this->filterMsg; ?></span>
+
 				</td>
 			</tr>
 		</table>
@@ -87,8 +91,7 @@ defined('_JEXEC') or die('Restricted access');
 				$row =& $this->rows[$i];
 				if(acymailing_level(3)){
 					$cleanSent = $row->senthtml + $row->senttext - $row->bounceunique;
-				}
-				else{
+				}else{
 					$cleanSent = $row->senthtml + $row->senttext;
 				}
 				?>
@@ -174,10 +177,7 @@ defined('_JEXEC') or die('Restricted access');
 					</td>
 					<?php if(acymailing_level(3)){ ?>
 						<td align="center" style="text-align:center">
-							<?php
-							if($row->type != 'followup'){
-								echo '<a class="modal" href="'.acymailing_completeLink('stats&task=mailinglist&mailid='.$row->mailid, true).'" rel="{handler: \'iframe\', size: {x: 800, y: 590}}"><i class="acyicon-statistic"></i></a>';
-							} ?>
+							<?php echo '<a class="modal" href="'.acymailing_completeLink('stats&task=mailinglist&mailid='.$row->mailid, true).'" rel="{handler: \'iframe\', size: {x: 800, y: 590}}"><i class="acyicon-statistic"></i></a>'; ?>
 						</td>
 					<?php } ?>
 					<td align="center" style="text-align:center">

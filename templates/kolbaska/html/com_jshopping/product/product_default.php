@@ -26,7 +26,10 @@ include(dirname(__FILE__)."/load.js.php");
                 <div class="col-md-8 col-sm-7">
                     <!-- Heading -->
                     <h1 itemprop="name"><?php print $this->product->name?></h1>
-                    <p class="productcode"><?php print $product->product_ean?></p>
+                    <p class="productcode" itemprop="sku"><?php print $product->product_ean?></p> <!-- Я тут добавил микроразметку !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+                    <!--<p class="productcode">--><?php /*if ($product->product_quantity > 0) {echo 'Есть в наличии';} else
+                        {echo 'Нет в наличии';}; */?>
                     <?php
                     JPluginHelper::importPlugin( 'content', 'vrvote' ); $dispatcher =& JDispatcher::getInstance(); $results = $dispatcher->trigger( 'vrvote', $product->product_id );
                     ?>
@@ -37,10 +40,10 @@ include(dirname(__FILE__)."/load.js.php");
                                 <!-- Paragraph -->
                                 <p class="text-justify" itemprop="description"><?php print $this->product->description; ?></p>
                             </div>
-                            <div class="shopping">
+                            <div class="shopping" itemscope itemtype = "https://schema.org/Offer">  <!-- Я тут добавил микроразметку !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
                                 <div class="shopping-item">
                                     <div class="prices-category" itemprop="offers">
-                                        <span itemprop="price" class="item-price <?=($this->count_products_in_cart > 0 ? 'active' : 'active')?>"><?= formatprice($product->product_price)?>/<?=$product->basic_price_unit_id_name?></span>
+                                       <span> <span itemprop="price" class="item-price <?=($this->count_products_in_cart > 0 ? 'active' : 'active')?>"><?= formatprice($product->product_price)?>/<?=$product->basic_price_unit_id_name?></span>
                                         <span class="item-price <?=($this->count_products_in_cart < 5 ? '' : '')?>">розница - <?= formatprice($product->product_old_price)?>/<?=$product->basic_price_unit_id_name?></span>
 
                                         <div class="form-group">

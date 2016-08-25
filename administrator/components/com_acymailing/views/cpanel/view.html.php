@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -47,6 +47,11 @@ class CpanelViewCpanel extends acymailingView{
 				$notremind = '<small style="'.$styleRemind.'">'.$toggleClass->delete('acymailing_messages_warning', 'errortemplatenotisis_0', 'config', false, JText::_('DONT_REMIND')).'</small>';
 				acymailing_enqueueMessage('You should rather use the isis template in the Back-End which suits more AcyMailing.'.$message.$notremind, 'warning');
 			}
+		}
+
+		if($config->get('migratefromj2', 1) && ACYMAILING_J16 && !ACYMAILING_J30){
+			$notremind = '<small style="'.$styleRemind.'">'.$toggleClass->delete('acymailing_messages_error', 'migratefromj2_0', 'config', false, JText::_('DONT_REMIND')).'</small>';
+			acymailing_enqueueMessage(JText::sprintf('ACY_MIGRATE', '<a target="_blank" href="http://www.acyba.com/index.php?option=com_updateme&ctrl=redirect&page=j25migration">'.JText::_('ACY_MIGRATE_HELP').'</a>').$notremind, 'warning');
 		}
 
 		$indexes = array('listsub', 'stats', 'list', 'mail', 'userstats', 'urlclick', 'history', 'template', 'queue', 'subscriber');
@@ -117,16 +122,39 @@ class CpanelViewCpanel extends acymailingView{
 		$elements->unsub_message = JHTML::_('acyselect.booleanlist', "config[unsub_message]", '', $config->get('unsub_message', 1));
 		$elements->confirm_message = JHTML::_('acyselect.booleanlist', "config[confirm_message]", '', $config->get('confirm_message', 0));
 
+
 		if(acymailing_level(1)){
+			$js = 'var selectedForward = '.$config->get('forward', 0).'
+					function confirmForward(clickedForward){
+						if(clickedForward == selectedForward || clickedForward != 1) return true;
+
+						var cnfrm = confirm(\''.str_replace("'", "\'", JText::_('ACY_FORWARDCHOICE_CONFIRMATION')).'\');
+						if(!cnfrm) return true;';
+
+				if(ACYMAILING_J30){
+					$js .= '
+					var labels = document.getElementById("config_forwardfieldset").getElementsByTagName("label");
+					for(oneLabel in labels){
+						if(isNaN(oneLabel)) continue;
+						if(labels[oneLabel].getAttribute("for") == "config_forward2"){
+							labels[oneLabel].click();
+						}
+					}';
+				}else{
+					$js .= 'document.getElementById("config[forward]2").checked = true;';
+				}
+
+				$js .= '}';
+			$doc->addScriptDeclaration($js);
+
 			$forwardValues = array();
 			$forwardValues[] = JHTML::_('select.option', 0, JTEXT::_('JOOMEXT_NO'));
 			$forwardValues[] = JHTML::_('select.option', 1, JTEXT::_('JOOMEXT_YES'));
 			$forwardValues[] = JHTML::_('select.option', 2, JTEXT::_('JOOMEXT_YES_FORWARD'));
-			$elements->forward = JHTML::_('acyselect.radiolist', $forwardValues, "config[forward]", '', 'value', 'text', $config->get('forward', 0));
+			$elements->forward = JHTML::_('acyselect.radiolist', $forwardValues, "config[forward]", 'onclick="confirmForward(this.value);"', 'value', 'text', $config->get('forward', 0));
 		}else{
 			$elements->forward = acymailing_getUpgradeLink('essential');
 		}
-
 
 		if(acymailing_level(1)){
 			$js = "function updateDKIM(dkimval){
@@ -206,7 +234,7 @@ class CpanelViewCpanel extends acymailingView{
 		}";
 		$maxexecutiontime = $config->get('max_execution_time');
 		if(empty($maxexecutiontime) && (intval($config->get('last_maxexec_check')) < (time() - 60))){
-			$js .= 'window.addEvent(\'domready\', function(){ detectTimeout(\'timeoutcheck\');return; });';
+			$js .= 'window.addEventListener("load", function() {detectTimeout(\'timeoutcheck\')});';
 		}
 		$doc = JFactory::getDocument();
 		$doc->addScriptDeclaration($js);
@@ -327,7 +355,7 @@ class CpanelViewCpanel extends acymailingView{
 			$query = 'SELECT a.name, a.id as itemid, b.title  FROM `#__menu` as a JOIN `#__menu_types` as b on a.menutype = b.menutype WHERE a.access = 0 ORDER BY b.title ASC,a.ordering ASC';
 		}else{
 			$orderby = ACYMAILING_J30 ? 'a.lft' : 'a.ordering';
-			$query = 'SELECT a.alias as name, a.id as itemid, b.title  FROM `#__menu` as a JOIN `#__menu_types` as b on a.menutype = b.menutype WHERE a.access NOT IN (2, 3) AND a.client_id=0 AND a.parent_id != 0 ORDER BY b.title ASC,'.$orderby.' ASC';
+			$query = 'SELECT a.alias as name, a.id as itemid, b.title  FROM `#__menu` as a JOIN `#__menu_types` as b on a.menutype = b.menutype WHERE a.access = 1 AND a.client_id=0 AND a.parent_id != 0 ORDER BY b.title ASC,'.$orderby.' ASC';
 		}
 
 		$db->setQuery($query);
@@ -455,25 +483,19 @@ class CpanelViewCpanel extends acymailingView{
 
 
 		if(!ACYMAILING_J16){
-			$db->setQuery("SELECT name,published,id FROM `#__plugins` WHERE `folder` = 'acymailing' AND `element` NOT LIKE 'plg%' ORDER BY published DESC, ordering ASC");
+			$db->setQuery("SELECT name,published,id FROM `#__plugins` WHERE `folder` = 'acymailing' AND `element` NOT LIKE 'plg%' ORDER BY published DESC, name ASC");
 		}else{
-			$db->setQuery("SELECT name,enabled as published,extension_id as id FROM `#__extensions` WHERE `state` <> -1 AND `folder` = 'acymailing' AND `type`= 'plugin' AND `element` NOT LIKE 'plg%' ORDER BY enabled DESC, ordering ASC");
+			$db->setQuery("SELECT name,enabled as published,extension_id as id FROM `#__extensions` WHERE `state` <> -1 AND `folder` = 'acymailing' AND `type`= 'plugin' AND `element` NOT LIKE 'plg%' ORDER BY enabled DESC, name ASC");
 		}
 		$plugins = $db->loadObjectList();
 
 		if(!ACYMAILING_J16){
-			$db->setQuery("SELECT name,published,id FROM `#__plugins` WHERE (`folder` != 'acymailing' OR `element` LIKE 'plg%') AND (`name` LIKE '%acymailing%' OR `element` LIKE '%acymailing%') ORDER BY published DESC, ordering ASC");
+			$db->setQuery("SELECT name,published,id FROM `#__plugins` WHERE (`folder` != 'acymailing' OR `element` LIKE 'plg%') AND (`name` LIKE '%acymailing%' OR `element` LIKE '%acymailing%') ORDER BY published DESC, name ASC");
 		}else{
-			$db->setQuery("SELECT name,enabled as published ,extension_id as id FROM `#__extensions` WHERE `state` <> -1 AND (`folder` != 'acymailing' OR `element` LIKE 'plg%') AND `type` = 'plugin' AND (`name` LIKE '%acymailing%' OR `element` LIKE '%acymailing%') ORDER BY enabled DESC, ordering ASC");
+			$db->setQuery("SELECT name,enabled as published ,extension_id as id FROM `#__extensions` WHERE `state` <> -1 AND (`folder` != 'acymailing' OR `element` LIKE 'plg%') AND `type` = 'plugin' AND (`name` LIKE '%acymailing%' OR `element` LIKE '%acymailing%') ORDER BY enabled DESC, name ASC");
 		}
 
 		$integrationplugins = $db->loadObjectList();
-
-		if(ACYMAILING_J16){
-			$db->setQuery("SELECT COUNT(*) FROM #__extensions WHERE `enabled` = 1 AND `state` = -1 AND `type` = 'plugin' AND (`folder` = 'acymailing' OR `name` LIKE '%acymailing%' OR `element` LIKE '%acymailing%')");
-			$discoveredPlugins = $db->loadResult();
-			if(!empty($discoveredPlugins)) acymailing_display('Some AcyMailing plugins are placed in the Joomla "Discover" feature and will not work, you should install them through the "Discover" menu in the Extension manager.', 'warning');
-		}
 
 		$bounceaction = acymailing_get('type.bounceaction');
 		$this->assignRef('bounceaction', $bounceaction);

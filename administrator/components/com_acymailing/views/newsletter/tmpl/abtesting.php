@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -35,7 +35,7 @@ defined('_JEXEC') or die('Restricted access');
 					echo '<thead><tr><th width="45%">'.JText::_('NEWSLETTER').'</th>';
 					if(!empty($this->savedValues)){
 						echo '<th>'.JText::_('OPEN').'</th><th>'.JText::_('CLICKED_LINK').'</th><th>'.JText::_('ACY_CLICK_EFFICIENCY').'</th><th>'.JText::_('ACY_SENT_EMAILS').'</th>';
-						if(!empty($this->abTestDetail['status']) && $this->abTestDetail['status'] == 'testSendOver' && $this->validationStatus != 'abTestAdd' && $this->abTestDetail['action'] == 'manual') echo '<th>Send</th>';
+						if(!empty($this->abTestDetail['status']) && $this->abTestDetail['status'] == 'testSendOver' && $this->validationStatus != 'abTestAdd' && $this->abTestDetail['action'] == 'manual') echo '<th>'.JText::_('SEND').'</th>';
 					}
 					echo '</tr></thead>';
 					foreach($this->mailsdetails as $oneMail){
@@ -65,7 +65,7 @@ defined('_JEXEC') or die('Restricted access');
 							echo '<td style="text-align:center">'.$sent.'</td>';
 						}
 						if(!empty($this->abTestDetail['status']) && $this->abTestDetail['status'] == 'testSendOver' && $this->validationStatus != 'abTestAdd' && $this->abTestDetail['action'] == 'manual'){
-							echo '<td><a href="index.php?option=com_acymailing&ctrl=newsletter&task=complete_abtest&tmpl=component&mailToSend='.$oneMail->mailid.'">Send</a></td>';
+							echo '<td><a class="acymailing_button" href="index.php?option=com_acymailing&ctrl=newsletter&task=complete_abtest&tmpl=component&mailToSend='.$oneMail->mailid.'">'.JText::_('SEND').'</a></td>';
 						}
 						echo '</tr>';
 					} ?>

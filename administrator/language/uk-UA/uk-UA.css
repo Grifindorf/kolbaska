@@ -3,7 +3,7 @@
 * Fix Back-end for Ukrainian language
 *
 * @author Denys Nosov
-* @copyright Copyright (C) 2011-2012 Denys Nosov. All rights reserved.
+* @copyright Copyright (C) 2011-2016 Denys Nosov. All rights reserved.
 * @license GNU General Public License version 2 or later; see LICENSE.txt
 *
 */
@@ -18,11 +18,20 @@
 }
 
 #status .btn-toolbar .pull-right p:before{
-	content: "© 2015 Joomla! Україна";
+	content: "© 2016 Joomla! Україна";
 	margin-right: 6px;
 }
 
 input.cke_dialog_ui_input_text, input.cke_dialog_ui_input_password, textarea.cke_dialog_ui_input_textarea {
 	box-sizing: content-box !important;
 	width: 95% !important;
+}
+
+div.modal-body {
+	height: 400px !important;
+}
+
+.break-word {
+    word-break: inherit !important;
+    word-wrap: inherit !important;
 }

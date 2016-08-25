@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -88,13 +88,30 @@ class testreceiverType{
 					document.getElementById("userSelection").style.display = "none";
 					document.getElementById("groupSelection").style.display = "";
 				}
+			}
+
+			function myKeyPress(e, value){
+				var keynum;
+
+				if(window.event) {
+				  keynum = e.keyCode;
+				}else if(e.which){
+				  keynum = e.which;
+				}
+
+				if(keynum == 13){
+					setUser(value);
+					return false;
+				}
+
+				return true;
 			}';
 
 		$doc = JFactory::getDocument();
-		$doc->addScriptDeclaration( $js );
-	?>
+		$doc->addScriptDeclaration($js);
+		?>
 		<style>
-			.removeUser {
+			.removeUser{
 				width: 20px;
 				background-image: url(<?php echo ACYMAILING_LIVE; ?>/media/com_acymailing/images/closecross.png);
 				background-size: cover;
@@ -102,7 +119,8 @@ class testreceiverType{
 				cursor: pointer;
 				float: right;
 			}
-			.selectedUsers {
+
+			.selectedUsers{
 				background-color: #F5F5F5;
 				padding-left: 5px;
 				display: inline-block;
@@ -112,67 +130,69 @@ class testreceiverType{
 				margin-top: 5px;
 				line-height: 20px;
 			}
-			#acymailing_divSelectReceiver {
+
+			#acymailing_divSelectReceiver td{
+				padding: 10px 5px;
+			}
+
+			#acymailing_divSelectReceiver{
 				position: absolute;
 				width: 400px;
-				border: solid 1px #858585;
-				z-index:9999;
+				border: solid 1px #D3D3D3;
+				z-index: 9999;
 				background: white;
+				box-shadow: 1px 1px 5px #D5D5DD;
 			}
-			#acymailing_receiversTable .row_user:hover {
+
+			#acymailing_receiversTable .row_user:hover{
 				background-color: #EBEBEB;
-				cursor:pointer;
+				cursor: pointer;
 			}
+
 			.row_user{
-				border-top:solid 1px #EBEBEB;
+				border-top: solid 1px #EBEBEB;
 			}
-			#usersSelected {
-				margin-bottom:2px;
-				width:100%;
-				display:block;
+
+			#usersSelected{
+				margin-bottom: 2px;
+				width: 100%;
+				display: block;
 			}
 		</style>
-	<?php
+		<?php
 		echo acymailing_getFunctionsEmailCheck();
 		if($app->isAdmin()){
 			$values = array();
-			$values[] = JHTML::_('select.option', 'users',JText::_('ACY_SUBSCRIBER'));
-			$values[] = JHTML::_('select.option', 'group',JText::_('ACY_GROUP'));
-			echo JHTML::_('select.genericlist', $values, 'test_selection' , 'size="1" style="margin:0;" onchange="showOptions(this.value);"', 'value', 'text', $selection);
+			$values[] = JHTML::_('select.option', 'users', JText::_('ACY_SUBSCRIBER'));
+			$values[] = JHTML::_('select.option', 'group', JText::_('ACY_GROUP'));
+			echo JHTML::_('select.genericlist', $values, 'test_selection', 'size="1" style="margin:0;" onchange="showOptions(this.value);"', 'value', 'text', $selection);
 		}else{
 			echo '<input class="inputbox" type="hidden" id="test_selection" name="test_selection" value="users" />';
 		}
-	?>
+		?>
 		<div id="userSelection" style="margin-top:5px;<?php if($selection == 'group') echo 'display:none;'; ?>">
-			<input style="width:212px;margin:0;" placeholder="<?php echo JText::_('EMAIL_ADDRESS'); ?>..." type="text" id="message_receivers" onkeyup="timeoutAddNewTestAddress(this.value);" class="inputbox" autocomplete="off"/>
+			<input onkeypress="return myKeyPress(event, this.value);" style="width:212px;margin:0;" placeholder="<?php echo JText::_('EMAIL_ADDRESS'); ?>..." type="text" id="message_receivers" onkeyup="timeoutAddNewTestAddress(this.value);" class="inputbox" autocomplete="off"/>
 			<span id="usersSelected">
 				<?php
-					$allEmails = explode(',', $emails);
-					foreach($allEmails as $oneEmail){
-						echo '<span class="selectedUsers">'.htmlspecialchars($oneEmail,ENT_COMPAT, 'UTF-8').'<span class="removeUser" onclick="removeUser(this, \''.htmlspecialchars($oneEmail,ENT_COMPAT, 'UTF-8').'\');"></span></span>';
-					}
+				$allEmails = explode(',', $emails);
+				foreach($allEmails as $oneEmail){
+					echo '<span class="selectedUsers">'.htmlspecialchars($oneEmail, ENT_COMPAT, 'UTF-8').'<span class="removeUser" onclick="removeUser(this, \''.htmlspecialchars($oneEmail, ENT_COMPAT, 'UTF-8').'\');"></span></span>';
+				}
 				?>
 			</span>
+
 			<div id="acymailing_divSelectReceiver" style="display:none; overflow-y:scroll !important;">
 				<div id="acymailing_receiversTable"></div>
 			</div>
-			<input class="inputbox" type="hidden" id="test_emails" name="test_emails" value="<?php echo htmlspecialchars($emails,ENT_COMPAT, 'UTF-8'); ?>" />
+			<input class="inputbox" type="hidden" id="test_emails" name="test_emails" value="<?php echo htmlspecialchars($emails, ENT_COMPAT, 'UTF-8'); ?>"/>
 		</div>
-	<?php
+		<?php
 		if($app->isAdmin()){
 			$db = JFactory::getDBO();
 			if(ACYMAILING_J16){
-				$db->setQuery('SELECT ug.id, ug.parent_id, ug.title AS text, COUNT(ugm.user_id) AS nbusers ' .
-								'FROM #__usergroups AS ug ' .
-								'LEFT JOIN #__user_usergroup_map ugm ' .
-									'ON ug.id = ugm.group_id ' .
-								'GROUP BY ug.id');
+				$db->setQuery('SELECT ug.id, ug.parent_id, ug.title AS text, COUNT(ugm.user_id) AS nbusers '.'FROM #__usergroups AS ug '.'LEFT JOIN #__user_usergroup_map ugm '.'ON ug.id = ugm.group_id '.'GROUP BY ug.id');
 			}else{
-				$db->setQuery('SELECT ug.id, ug.parent_id, ug.name AS text, COUNT(u.id) AS nbusers ' .
-								'FROM #__core_acl_aro_groups AS ug ' .
-								'LEFT JOIN #__users u ' .
-									'ON ug.id = u.gid ' .
-								'GROUP BY ug.id');
+				$db->setQuery('SELECT ug.id, ug.parent_id, ug.name AS text, COUNT(u.id) AS nbusers '.'FROM #__core_acl_aro_groups AS ug '.'LEFT JOIN #__users u '.'ON ug.id = u.gid '.'GROUP BY ug.id');
 			}
 			$values = $db->loadObjectList();
 			$this->cats = array();
@@ -184,17 +204,17 @@ class testreceiverType{
 			$this->catvalues = array();
 			$this->catvalues[] = JHTML::_('select.option', -1, '- - -');
 			$this->_handleChildren();
-			echo '<div id="groupSelection" style="'.($selection != 'group' ? 'display:none;' : '').'margin-top:5px;">'.JHTML::_('select.genericlist', $this->catvalues, 'test_group' , 'size="1"', 'value', 'text', $group).'</div>';
+			echo '<div id="groupSelection" style="'.($selection != 'group' ? 'display:none;' : '').'margin-top:5px;">'.JHTML::_('select.genericlist', $this->catvalues, 'test_group', 'size="1"', 'value', 'text', $group).'</div>';
 		}
 	}
 
 	private function _handleChildren($parent_id = 0, $level = 0){
 		if(empty($this->cats[$parent_id])) return;
 		foreach($this->cats[$parent_id] as $cat){
-			$addValue = JHTML::_('select.option', $cat->id,str_repeat(" - - ",$level).$cat->text);
+			$addValue = JHTML::_('select.option', $cat->id, str_repeat(" - - ", $level).$cat->text);
 			if($cat->nbusers > 10 || $cat->nbusers == 0) $addValue->disable = true;
 			$this->catvalues[] = $addValue;
-			$this->_handleChildren($cat->id,$level+1);
+			$this->_handleChildren($cat->id, $level + 1);
 		}
 	}
 }

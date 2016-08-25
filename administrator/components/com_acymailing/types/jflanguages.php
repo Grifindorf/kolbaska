@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -18,7 +18,7 @@ class jflanguagesType{
 	var $languages;
 	var $found = false;
 
-	function jflanguagesType(){
+	function __construct(){
 		$this->values = array();
 
 		if((ACYMAILING_J16 && file_exists(JPATH_SITE.DS.'components'.DS.'com_joomfish'.DS.'helpers'.DS.'defines.php') && file_exists(JPATH_SITE.DS.'libraries'.DS.'joomfish'.DS.'manager.php')) || (!ACYMAILING_J16 && file_exists(JPATH_SITE.DS.'components'.DS.'com_joomfish'.DS.'helpers'.DS.'defines.php') && file_exists(JPATH_SITE.DS.'administrator'.DS.'components'.DS.'com_joomfish'.DS.'classes'.DS.'JoomfishManager.class.php'))){

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -40,6 +40,7 @@ class mailClass extends acymailingClass{
 
 		if(!empty($mail)){
 			$mail->attach = empty($mail->attach) ? array() : unserialize($mail->attach);
+			$mail->favicon = empty($mail->favicon) ? new stdClass() : unserialize($mail->favicon);
 			$mail->params = empty($mail->params) ? array() : unserialize($mail->params);
 			$mail->filter = empty($mail->filter) ? array() : unserialize($mail->filter);
 		}
@@ -79,7 +80,7 @@ class mailClass extends acymailingClass{
 			foreach($attachments as $id => $filepath){
 				if(empty($filepath)) continue;
 				$attachment = new stdClass();
-				$attachment->filename = strtolower($filepath);
+				$attachment->filename = $filepath;
 				$attachment->size = filesize(JPATH_SITE.'/'.$filepath);
 				$extension = substr($attachment->filename, strrpos($attachment->filename, '.'));
 
@@ -91,6 +92,22 @@ class mailClass extends acymailingClass{
 
 				$mail->attach[] = $attachment;
 			}
+		}
+
+		$faviconRequest = JRequest::getVar('favicon', '');
+		if(!empty($faviconRequest[0])){
+			$faviconRequest = $faviconRequest[0];
+			$favicon = new stdClass();
+			$favicon->filename = $faviconRequest;
+			$favicon->size = filesize(JPATH_SITE.'/'.$faviconRequest);
+			$extension = substr($favicon->filename, strrpos($favicon->filename, '.'));
+			if(preg_match('#\.(php.?|.?htm.?|pl|py|jsp|asp|sh|cgi)#Ui', $favicon->filename)){
+				acymailing_enqueueMessage(JText::sprintf('ACCEPTED_TYPE', substr($favicon->filename, strrpos($favicon->filename, '.') + 1), $config->get('allowedfiles')), 'notice');
+			}
+
+			$favicon->filename = str_replace(array('.', ' '), '_', substr($favicon->filename, 0, strpos($favicon->filename, $extension))).$extension;
+
+			$mail->favicon = $favicon;
 		}
 
 		if(isset($mail->filter)){
@@ -117,13 +134,17 @@ class mailClass extends acymailingClass{
 		}
 
 		if(preg_match('#<a[^>]*subid=[0-9].*</a>#Uis', $mail->body, $pregResult)){
-			acymailing_enqueueMessage('There is a personal link in your Newsletter ( '.$pregResult[0].' ) instead of a tag...<br />Please make sure to not copy/paste the link you received in your e-mail as it may break your unsubscribe or confirmation links.<br />Use our tags instead!', 'notice');
+			acymailing_enqueueMessage(JText::sprintf('ACY_PERSONAL_LINK', $pregResult[0]), 'warning');
 		}
 
 		if(empty($mail->thumb)){
 			unset($mail->thumb);
-		}elseif($mail->thumb == 'delete') $mail->thumb = '';
-
+		}elseif($mail->thumb == 'delete'){
+			$mail->thumb = '';
+		}
+		if(isset($mail->published) && $mail->published != 1) $mail->published = 0;
+		if(isset($mail->html) && $mail->html != 1) $mail->html = 0;
+		if(isset($mail->visible) && $mail->visible != 1) $mail->visible = 0;
 		$mailid = $this->save($mail);
 		if(!$mailid) return false;
 		JRequest::setVar('mailid', $mailid);
@@ -219,7 +240,9 @@ class mailClass extends acymailingClass{
 
 		if(isset($mail->alias) OR empty($mail->mailid)){
 			if(empty($mail->alias)) $mail->alias = $mail->subject;
-			$mail->alias = JFilterOutput::stringURLSafe(trim($mail->alias));
+			$jconfig = JFactory::getConfig();
+			$method = $jconfig->get('unicodeslugs', 0) == 1 ? 'stringURLUnicodeSlug' : 'stringURLSafe';
+			$mail->alias = JFilterOutput::$method(trim($mail->alias));
 		}
 
 		if(empty($mail->mailid)){
@@ -232,13 +255,14 @@ class mailClass extends acymailingClass{
 		}else{
 			if(!empty($mail->attach)){
 				$oldMailObject = $this->get($mail->mailid);
-				if(!empty($oldMailObject)){
+				if(!empty($oldMailObject) && is_array($oldMailObject->attach)){
 					$mail->attach = array_merge($oldMailObject->attach, $mail->attach);
 				}
 			}
 		}
 
 		if(!empty($mail->attach) AND !is_string($mail->attach)) $mail->attach = serialize($mail->attach);
+		if(!empty($mail->favicon) AND !is_string($mail->favicon)) $mail->favicon = serialize($mail->favicon);
 		if(isset($mail->filter) AND !is_string($mail->filter)) $mail->filter = serialize($mail->filter);
 
 		if(!empty($mail->params)){
@@ -269,9 +293,62 @@ class mailClass extends acymailingClass{
 
 		if(!empty($mail->params) AND is_string($mail->params)) $mail->params = unserialize($mail->params);
 		if(!empty($mail->attach) AND is_string($mail->attach)) $mail->attach = unserialize($mail->attach);
+		if(!empty($mail->favicon) AND is_string($mail->favicon)) $mail->favicon = unserialize($mail->favicon);
 
 		if($status) return empty($mail->mailid) ? $this->database->insertid() : $mail->mailid;
 		return false;
+	}
+
+	function saveastmpl(){
+		$tmplClass = acymailing_get('class.template');
+		$newTmpl = new stdClass();
+
+		$formData = JRequest::getVar('data', array(), '', 'array');
+		if(!empty($formData['mail']['tempid'])){
+			$template = $tmplClass->get($formData['mail']['tempid']);
+			$newTmpl->styles = $template->styles;
+			$newTmpl->stylesheet = $template->stylesheet;
+			$newTmpl->category = $template->category;
+		}
+		if(!empty($formData['mail']['subject'])){
+			$formData['mail']['subject'] = str_replace(chr(226).chr(128).chr(168), '', $formData['mail']['subject']);
+			$newTmpl->subject = strip_tags($formData['mail']['subject']);
+			$newTmpl->name = strip_tags($formData['mail']['subject']);
+		}
+
+		$newTmpl->body = JRequest::getVar('editor_body', '', '', 'string', JREQUEST_ALLOWRAW);
+		if(ACYMAILING_J25) $newTmpl->body = JComponentHelper::filterText($newTmpl->body);
+		$acypluginsHelper = acymailing_get('helper.acyplugins');
+		$acypluginsHelper->cleanHtml($newTmpl->body);
+
+		if(!empty($formData['mail']['thumb']) && $formData['mail']['thumb'] == 'delete'){
+			$newTmpl->thumb = null;
+		}elseif(!empty($formData['mail']['thumb'])){
+			$newTmpl->thumb = strip_tags($formData['mail']['thumb']);
+		}else{
+			$mailid = acymailing_getCID('mailid');
+			if(!empty($mailid)){
+				$mail = $this->get($mailid);
+				$newTmpl->thumb = $mail->thumb;
+			}
+		}
+		if(!empty($formData['mail']['altbody'])) $newTmpl->altbody = strip_tags($formData['mail']['altbody']);
+		if(!empty($formData['mail']['fromname'])) $newTmpl->fromname = strip_tags($formData['mail']['fromname']);
+		if(!empty($formData['mail']['fromemail'])) $newTmpl->fromemail = strip_tags($formData['mail']['fromemail']);
+		if(!empty($formData['mail']['replyname'])) $newTmpl->replyname = strip_tags($formData['mail']['replyname']);
+		if(!empty($formData['mail']['replyemail'])) $newTmpl->replyemail = strip_tags($formData['mail']['replyemail']);
+		if(!empty($formData['mail']['summary'])) $newTmpl->description = strip_tags($formData['mail']['summary']);
+		$newTmpl->ordering = 1;
+
+		$tempid = $tmplClass->save($newTmpl);
+		if(!empty($tempid)){
+			$formData['mail']['tempid'] = $tempid;
+			acymailing_enqueueMessage(JText::_('ACY_SAVEASTMPL_VALID'), 'message');
+		}else{
+			acymailing_enqueueMessage(JText::_('ERROR_SAVING'), 'error');
+		}
+
+		return true;
 	}
 
 
@@ -312,6 +389,9 @@ class mailClass extends acymailingClass{
 			$db->setQuery($query);
 			$db->query();
 		}
+		$query = "UPDATE #__acymailing_mail SET senddate=".$time." WHERE mailid IN (".implode(',', $mailsArray).")";
+		$db->setQuery($query);
+		$db->query();
 		return $nbReceiversTest;
 	}
 
@@ -384,11 +464,11 @@ class mailClass extends acymailingClass{
 	function copyOneNewsletter($mailid, $subject = ''){
 		$db = JFactory::getDBO();
 		$time = time();
-		$query = 'INSERT INTO `#__acymailing_mail` (`subject`, `fromname`, `fromemail`, `replyname`, `replyemail`, `body`, `altbody`, `published`, `created`, `type`, `visible`, `userid`, `alias`, `attach`, `html`, `tempid`, `key`, `frequency`, `params`,`filter`,`metakey`,`metadesc`,`summary`,`thumb`)';
+		$query = 'INSERT INTO `#__acymailing_mail` (`subject`, `fromname`, `fromemail`, `replyname`, `replyemail`, `body`, `altbody`, `published`, `created`, `type`, `visible`, `userid`, `alias`, `attach`, `html`, `tempid`, `key`, `frequency`, `params`,`filter`,`metakey`,`metadesc`,`summary`,`thumb`,`senddate`)';
 		if(empty($subject)){
 			$query .= " SELECT `subject`, `fromname`, `fromemail`, `replyname`, `replyemail`";
 		}else $query .= " SELECT ".$db->Quote($subject->subject).", ".$db->Quote($subject->fromname).", ".$db->Quote($subject->fromemail).", ".$db->Quote($subject->replyname).", ".$db->Quote($subject->replyemail);
-		$query .= ", `body`, `altbody`, `published`, '.$time.', `type`, `visible`, `userid`, `alias`, `attach`, `html`, `tempid`, ".$db->Quote(md5(rand(1000, 999999))).', `frequency`, `params`,`filter`,`metakey`,`metadesc`,`summary`,`thumb` FROM `#__acymailing_mail` WHERE `mailid` = '.(int)$mailid;
+		$query .= ", `body`, `altbody`, `published`, '.$time.', `type`, `visible`, `userid`, `alias`, `attach`, `html`, `tempid`, ".$db->Quote(md5(rand(1000, 999999))).', `frequency`, `params`,`filter`,`metakey`,`metadesc`,`summary`,`thumb`,'.time().' FROM `#__acymailing_mail` WHERE `mailid` = '.(int)$mailid;
 		$db->setQuery($query);
 		$db->query();
 		$newMailid = $db->insertid();

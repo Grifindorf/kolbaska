@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -13,7 +13,7 @@ class plgAcymailingTaguser extends JPlugin{
 
 	var $sendervalues = array();
 
-	function plgAcymailingTaguser(&$subject, $config){
+	function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('acymailing', 'taguser');
@@ -272,14 +272,14 @@ class plgAcymailingTaguser extends JPlugin{
 
 			$query->where[] = $query->convertQuery('joomlauserprofiles'.$num, 'profile_value', $filter['operator'], $val, $type);
 		}else{
-			$query->leftjoin['joomlauser'] = '#__users AS joomlauser ON joomlauser.id = sub.userid';
+			$query->leftjoin['joomlauser'.$num] = '#__users AS joomlauser'.$num.' ON joomlauser'.$num.'.id = sub.userid';
 			if(in_array($filter['map'], array('registerDate', 'lastvisitDate'))){
 				$filter['value'] = acymailing_replaceDate($filter['value']);
 				if(!is_numeric($filter['value']) && strtotime($filter['value']) !== false) $filter['value'] = strtotime($filter['value']);
 				if(is_numeric($filter['value'])) $filter['value'] = strftime('%Y-%m-%d %H:%M:%S', $filter['value']);
 				$type = 'datetime';
 			}
-			$query->where[] = $query->convertQuery('joomlauser', $filter['map'], $filter['operator'], $filter['value'], $type);
+			$query->where[] = $query->convertQuery('joomlauser'.$num, $filter['map'], $filter['operator'], $filter['value'], $type);
 		}
 	}
 

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -52,7 +52,7 @@ class TemplateViewTemplate extends acymailingView{
 			$this->filters[] = "a.name LIKE $searchVal OR a.description LIKE $searchVal OR a.tempid LIKE $searchVal";
 		}
 
-		if(!empty($pageInfo->category)){
+		if(!empty($pageInfo->category) && $pageInfo->category != JText::_('ACY_ALL_CATEGORIES')){
 			$this->filters[] = 'a.category LIKE '.$database->Quote($pageInfo->category);
 		}
 
@@ -130,6 +130,10 @@ class TemplateViewTemplate extends acymailingView{
 			}
 		}
 
+		$filters = new stdClass();
+
+
+		$this->assignRef('filters', $filters);
 		$this->assignRef('order', $order);
 		$this->assignRef('toggleClass', $toggleClass);
 		$this->assignRef('rows', $this->rows);
@@ -138,6 +142,7 @@ class TemplateViewTemplate extends acymailingView{
 	}
 
 	function form(){
+		JHTML::_('behavior.modal', 'a.modal');
 		$tempid = acymailing_getCID('tempid');
 		$app = JFactory::getApplication();
 		$config = acymailing_config();

@@ -2,7 +2,7 @@
 
 /**
  * @package   	JCE
- * @copyright 	Copyright (c) 2009-2015 Ryan Demmer. All rights reserved.
+ * @copyright 	Copyright (c) 2009-2016 Ryan Demmer. All rights reserved.
  * @license   	GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
@@ -34,18 +34,21 @@ class WFPopupsExtension_Jcemediabox {
 
             $files = JFolder::files($path, '.js');
 
-            foreach ($files as $file) {
-                if (strpos('-src.js', $file) === false) {
-                    $scripts[] = 'plugins/system/jcemediabox/addons/' . JFile::stripExt($file);
-                }
+            if (!empty($files)) {
+              foreach ($files as $file) {
+                  if (strpos($file, '-src.js') === false) {
+                      $scripts[] = 'plugins/system/jcemediabox/addons/' . JFile::stripExt($file);
+                  }
+              }
             }
+
             $document->addScript($scripts, 'joomla');
         }
     }
 
     public function getParams() {
         $wf = WFEditorPlugin::getInstance();
-        
+
         return array(
             'width'                 => 600,
             'album'                 => '#jcemediabox_popup_group',
@@ -69,7 +72,7 @@ class WFPopupsExtension_Jcemediabox {
 
         return false;
     }
-    
+
     public function checkVersion() {
         return true;
     }

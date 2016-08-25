@@ -439,9 +439,9 @@ $print = $this->print;
 <tr>
     <td><?=$i?></td>
  <td>
-   <a target="_blank" href="index.php?option=com_jshopping&controller=products&task=edit&product_id=<?php print $item->product_id?>">
+
     <?php echo $item->product_name?>
-   </a><br />
+   <br />
    <?php print sprintAtributeInOrder($item->product_attributes).sprintFreeAtributeInOrder($item->product_freeattributes);?>
    <?php print $item->_ext_attribute_html;?>
    <?php if (count($files)){?>

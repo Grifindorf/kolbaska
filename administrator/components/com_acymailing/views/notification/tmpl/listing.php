@@ -1,15 +1,25 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
 ?><div id="acy_content">
 	<div id="iframedoc"></div>
 	<form action="index.php?option=<?php echo ACYMAILING_COMPONENT ?>&amp;ctrl=<?php echo JRequest::getCmd('ctrl'); ?>" method="post" name="adminForm" id="adminForm">
+		<table class="acymailing_table_options">
+			<tr>
+				<td width="100%">
+					<?php acymailing_listingsearch($this->pageInfo->search); ?>
+				</td>
+				<td nowrap="nowrap">
+					<?php if(!empty($this->filters->category)) echo $this->filters->category; ?>
+				</td>
+			</tr>
+		</table>
 		<table class="acymailing_table" cellpadding="1">
 			<thead>
 			<tr>
@@ -33,6 +43,15 @@ defined('_JEXEC') or die('Restricted access');
 				</th>
 			</tr>
 			</thead>
+			<tfoot>
+			<tr>
+				<td colspan="7">
+					<?php echo $this->pagination->getListFooter();
+					echo $this->pagination->getResultsCounter();
+					if(ACYMAILING_J30) echo '<br />'.$this->pagination->getLimitBox(); ?>
+				</td>
+			</tr>
+			</tfoot>
 			<tbody>
 			<?php
 			$k = 0;
@@ -67,7 +86,7 @@ defined('_JEXEC') or die('Restricted access');
 						?>
 					</td>
 					<td align="center" style="text-align:center">
-						<span id="<?php echo $publishedid ?>" class="loading"><?php echo $this->toggleClass->toggle($publishedid, (int) $row->published, 'mail') ?></span>
+						<span id="<?php echo $publishedid ?>" class="loading"><?php echo $this->toggleClass->toggle($publishedid, (int)$row->published, 'mail') ?></span>
 					</td>
 					<td width="1%" align="center">
 						<?php echo $row->mailid; ?>

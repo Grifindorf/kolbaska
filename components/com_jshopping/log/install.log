@@ -3,3 +3,83 @@ Start install: /var/www/krasotaby/data/www/kolbaska.com.ua/tmp/JoomShopping_lang
 2015-08-27 10:00:18 Copy file: /administrator/components/com_jshopping/lang/uk-UA.php
 2015-08-27 10:00:18 Copy file: /administrator/language/uk-UA/uk-UA.com_jshopping.sys.ini
 2015-08-27 10:00:18 Copy file: /components/com_jshopping/lang/uk-UA.php
+2016-06-07 15:05:24 
+Start install: /var/www/kolbaska/tmp/cimexf 4.9.zip
+2016-06-07 15:05:24 Archive error
+2016-06-07 15:06:08 
+Start install: /var/www/kolbaska/tmp/cimexf.zip
+2016-06-07 15:06:08 Archive error
+2016-06-07 15:09:58 
+Start install: /var/www/kolbaska/tmp/cimexf.zip
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/cimex.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/cimex_5.2.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/cimex_5.3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/cimexf.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/index.html
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/add.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/cimex.js
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/copy.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/index.html
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/info-green.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/remove.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/rm.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/assets/style.css
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/attr.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/attr.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/cats.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/cats.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/cron.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/cron.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/default.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/default.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/efields.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/efields.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/files.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/files.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/index.html
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/license.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/license.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/lockscreen.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/price.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/price.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/products.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/products.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/settings.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimex/tmpl/settings.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/cimex.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/cimex_5.2.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/cimex_5.3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/cimexf.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/index.html
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/add.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/cimex.js
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/copy.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/index.html
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/info-green.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/remove.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/rm.png
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/assets/style.css
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/attr.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/attr.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/cats.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/cats.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/cron.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/cron.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/default.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/default.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/efields.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/efields.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/files.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/files.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/index.html
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/license.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/license.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/lockscreen.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/price.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/price.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/products.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/products.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/settings.j3.php
+2016-06-07 15:09:58 Copy file: /administrator/components/com_jshopping/importexport/cimexf/tmpl/settings.php
+2016-06-07 15:09:58 Copy file: /administrator/language/ru-RU/ru-RU.com_jshopping.cimex.ini
+2016-06-07 15:09:58 Copy file: /administrator/language/ru-RU/ru-RU.com_jshopping.cimexf.ini

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -49,13 +49,16 @@ class dataViewdata extends acymailingView{
 		$allLists = $app->isAdmin() ? $listClass->getLists() : $listClass->getFrontendLists();
 
 		$listsName = array();
+		$unsubListsName = array();
 		foreach($allLists as $oneList){
+			if($lists[$oneList->listid] == -1) $unsubListsName[] = $oneList->name;
 			if($lists[$oneList->listid] == 1) $listsName[] = $oneList->name;
 			if($lists[$oneList->listid] == 2) $listsName[] = $oneList->name.' + '.JText::_('CAMPAIGN');
 		}
-		$createList = JRequest::getCmd('createlist');
+		$createList = JRequest::getString('createlist');
 		if(!empty($createList)) $listsName[] = $createList;
 		if(!empty($listsName)) $this->assign('lists', implode(', ', $listsName));
+		if(!empty($unsubListsName)) $this->assign('unsublists', implode(', ', $unsubListsName));
 
 		$importFrom = JRequest::getCmd('importfrom');
 		$this->assignRef('type', $importFrom);
@@ -87,6 +90,7 @@ class dataViewdata extends acymailingView{
 		$importData = array();
 		$importData['textarea'] = JText::_('IMPORT_TEXTAREA');
 		$importData['file'] = JText::_('ACY_FILE');
+		if(acymailing_isAllowed($config->get('acl_subscriber_zohoimport', 'all'))) $importData['zohocrm'] = 'ZohoCRM';
 
 
 		$isAdmin = false;
@@ -148,7 +152,13 @@ class dataViewdata extends acymailingView{
 		$this->assignRef('importdata', $importData);
 
 		$lists = $app->isAdmin() ? $listClass->getLists() : $listClass->getFrontendLists();
-		$campaignValues = array();
+
+		$subscribeOptions = array();
+		$subscribeOptions[] = JHTML::_('select.option', 0, JTEXT::_('JOOMEXT_NO'));
+		$subscribeOptions[] = JHTML::_('select.option', -1, JTEXT::_('UNSUBSCRIBE'));
+		$subscribeOptions[] = JHTML::_('select.option', 1, JTEXT::_('SUBSCRIBE'));
+		$campaignValues = $subscribeOptions;
+		$campaignValues[] = JHTML::_('select.option', 2, JTEXT::_('JOOMEXT_YES_CAMPAIGN'));
 		if(acymailing_level(3)){
 			$listsOfId = array();
 			foreach($lists as $oneList){
@@ -158,15 +168,12 @@ class dataViewdata extends acymailingView{
 			foreach($lists as $key => $oneList){
 				if(!empty($listCampaign[$oneList->listid])){
 					$lists[$key]->campaign = implode(',', $listCampaign[$oneList->listid]);
-					$campaignValues[$oneList->listid] = array();
-					$campaignValues[$oneList->listid][] = JHTML::_('select.option', 0, JTEXT::_('JOOMEXT_NO'));
-					$campaignValues[$oneList->listid][] = JHTML::_('select.option', 1, JTEXT::_('JOOMEXT_YES'));
-					$campaignValues[$oneList->listid][] = JHTML::_('select.option', 2, JTEXT::_('JOOMEXT_YES_CAMPAIGN'));
 				}
 			}
 		}
 
 		$this->assignRef('lists', $lists);
+		$this->assignRef('subscribeOptions', $subscribeOptions);
 		$this->assignRef('campaignValues', $campaignValues);
 		$this->assignRef('config', $config);
 		$this->assignRef('isAdmin', $isAdmin);

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -134,6 +134,7 @@ class FileController extends acymailingController{
 		$code = JRequest::getCmd('code');
 		JRequest::setVar('code', $code);
 		$content = JRequest::getVar('content', '', '', 'string', JREQUEST_ALLOWHTML);
+		$content = str_replace('</textarea>', '', $content);
 
 		if(empty($code) OR empty($content)) return;
 
@@ -152,6 +153,7 @@ class FileController extends acymailingController{
 		}
 
 		$customcontent = JRequest::getVar('customcontent', '', '', 'string', JREQUEST_ALLOWHTML);
+		$customcontent = str_replace('</textarea>', '', $customcontent);
 		$custompath = JLanguage::getLanguagePath(JPATH_ROOT).DS.$code.DS.$code.'.com_acymailing_custom.ini';
 		$customresult = JFile::write($custompath, $customcontent);
 		if(!$customresult) acymailing_enqueueMessage(JText::sprintf('FAIL_SAVE', $custompath), 'error');

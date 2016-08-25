@@ -1,16 +1,16 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
 ?><?php
 
 class plgAcymailingStats extends JPlugin{
-	function plgAcymailingStats(&$subject, $config){
+	function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('acymailing', 'stats');
@@ -23,7 +23,7 @@ class plgAcymailingStats extends JPlugin{
 			$email->altbody = str_replace(array('{statpicture}', '{nostatpicture}'), '', $email->altbody);
 		}
 
-		if(!$email->sendHTML OR empty($email->type) OR !in_array($email->type, array('news', 'autonews', 'followup', 'welcome', 'unsub', 'joomlanotification')) OR strpos($email->body, '{nostatpicture}')){
+		if(!$email->sendHTML OR empty($email->type) OR !in_array($email->type, array('news', 'autonews', 'followup', 'welcome', 'unsub', 'joomlanotification', 'action')) OR strpos($email->body, '{nostatpicture}')){
 			$email->body = str_replace(array('{statpicture}', '{nostatpicture}'), '', $email->body);
 			return;
 		}
@@ -65,7 +65,7 @@ class plgAcymailingStats extends JPlugin{
 		$type['deliverstat'] = JText::_('STATISTICS');
 
 		$db = JFactory::getDBO();
-		$db->setQuery("SELECT `mailid`,CONCAT(`subject`,' [',".$db->Quote(JText::_('ACY_ID').' ').",`mailid`,']') as 'value' FROM `#__acymailing_mail` WHERE `type` IN('news','welcome','unsub','followup','notification','joomlanotification') ORDER BY `senddate` DESC LIMIT 5000");
+		$db->setQuery("SELECT `mailid`,CONCAT(`subject`,' [',".$db->Quote(JText::_('ACY_ID').' ').", CAST(`mailid` AS char),']') as 'value' FROM `#__acymailing_mail` WHERE `type` IN('news','welcome','unsub','followup','notification','joomlanotification') ORDER BY `senddate` DESC LIMIT 5000");
 		$allemails = $db->loadObjectList();
 		$element = new stdClass();
 		$element->mailid = 0;

@@ -146,7 +146,7 @@ class jshopCategory extends JTableAvto{
         $jshopConfig = JSFactory::getConfig();        
         $adv_query = ""; $adv_from = ""; $adv_result = $this->getBuildQueryListProductDefaultResult();
         $this->getBuildQueryListProduct("category", "list", $filters, $adv_query, $adv_from, $adv_result);
-        $order = "prod.product_date_added";
+        $order = "pr_cat.product_ordering";
         $order_query = $this->getBuildQueryOrderListProduct($order, $orderby, $adv_from);
 
         $dispatcher = JDispatcher::getInstance();

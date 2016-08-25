@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -123,7 +123,12 @@ defined('_JEXEC') or die('Restricted access');
 							if($row->bounce == 0){
 								echo $row->bounce;
 							}else{
-								$text = (empty($row->bouncerule) ? JText::_('NO_RULE_SAVED') : $row->bouncerule);
+								if(empty($row->bouncerule)){
+									$text = JText::_('NO_RULE_SAVED');
+								}else{
+									$found = preg_match('#^([A-Z0-9_]*) \[#Uis', $row->bouncerule, $match);
+									$text = $found ? str_replace($match[1], JText::_($match[1]), $row->bouncerule) : $row->bouncerule;
+								}
 								echo acymailing_tooltip($text, JText::_('ACY_RULE'), '', $row->bounce);
 							} ?>
 						</td>

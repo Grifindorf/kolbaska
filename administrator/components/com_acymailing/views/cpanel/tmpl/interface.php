@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -273,6 +273,14 @@ defined('_JEXEC') or die('Restricted access');
 			</tr>
 			<tr>
 				<td class="acykey">
+					<?php echo JText::_('ACY_ORDER'); ?>
+				</td>
+				<td>
+					<?php echo JHTML::_('acyselect.booleanlist', "config[show_order]", '', $this->config->get('show_order', 1)); ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="acykey">
 					<?php echo acymailing_tooltip(JText::_('SHOW_SENDDATE_DESC'), JText::_('SHOW_SENDDATE'), '', JText::_('SHOW_SENDDATE')); ?>
 				</td>
 				<td>
@@ -328,6 +336,14 @@ defined('_JEXEC') or die('Restricted access');
 				</td>
 				<td>
 					<?php echo JHTML::_('acyselect.booleanlist', "config[unsub_dispoptions]", '', $this->config->get('unsub_dispoptions', 1)); ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="acykey">
+					<?php echo JText::_('ACY_UNSUB_DISP_OTHER_SUBS'); ?>
+				</td>
+				<td>
+					<?php echo JHTML::_('acyselect.booleanlist', "config[unsub_dispothersubs]", '', $this->config->get('unsub_dispothersubs', 0)); ?>
 				</td>
 			</tr>
 			<tr>

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -115,11 +115,11 @@ class UpdateController extends acymailingController{
 		$config = acymailing_config();
 		ob_start();
 		$url = ACYMAILING_UPDATEURL.'loadUserInformation&component=acymailing&level='.strtolower($config->get('level', 'starter'));
-		$userInformation = acymailing_fileGetContent($url);
+		$userInformation = acymailing_fileGetContent($url, 30);
 		$warnings = ob_get_clean();
 		$result = (!empty($warnings) && defined('JDEBUG') && JDEBUG) ? $warnings : '';
 
-		if(empty($userInformation)){
+		if(empty($userInformation) || $userInformation === false){
 			echo json_encode(array('content' => '<br/><span style="color:#C10000;">Could not load your information from our server</span><br/>'.$result));
 			exit;
 		}

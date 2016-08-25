@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -19,8 +19,14 @@ class FieldsController extends acymailingController{
 		if(!acymailing_level(3)){
 			$acyToolbar = acymailing::get('helper.toolbar');
 			$acyToolbar->setTitle(JText::_('EXTRA_FIELDS'), 'fields');
+			$acyToolbar->help('customfields');
 			$acyToolbar->display();
-			acymailing_display(JText::_('ACY_CUSTOMFIELDS_UPGRADE').'<br /><br /><a target="_blank" href="'.ACYMAILING_REDIRECT.'acymailing-features">'.JText::_('ACY_FEATURES').'</a>','info');
+			$config = acymailing_config();
+
+			$level = $config->get('level');
+			$url = ACYMAILING_HELPURL.'fields-paidversion&utm_source=acymailing-'.$level.'&utm_medium=back-end&utm_content=customfields-display&utm_campaign=upgrade';
+			$iFrame = "<iframe class='paidversion' frameborder='0' src='$url' width='100%' height='100%' scrolling='auto'></iframe>";
+			echo $iFrame.'<div id="iframedoc"></div>';
 			return;
 		}
 

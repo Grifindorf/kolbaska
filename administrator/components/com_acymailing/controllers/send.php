@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -99,9 +99,57 @@ class SendController extends acymailingController{
 
 
 	function spamtest(){
-		if(!acymailing_level(1)){
-			acymailing_display(JText::_('ACY_STARTER_SPAMTEST').'<br /><br /><a target="_blank" href="'.ACYMAILING_REDIRECT.'acymailing-features">'.JText::_('ACY_FEATURES').'</a>', 'info');
+		$mailid = JRequest::getInt('mailid');
+		if(empty($mailid)) return;
+
+		$config = acymailing_config();
+		ob_start();
+		$urlSite = trim(base64_encode(preg_replace('#https?://(www\.)?#i', '', ACYMAILING_LIVE)), '=/');
+		$url = ACYMAILING_SPAMURL.'spamTestSystem&component=acymailing&level='.strtolower($config->get('level', 'starter')).'&urlsite='.$urlSite;
+		$spamtestSystem = acymailing_fileGetContent($url, 30);
+
+		$warnings = ob_get_clean();
+
+		if(empty($spamtestSystem) || $spamtestSystem === false || !empty($warnings)){
+			acymailing_display('Could not load your information from our server'.((!empty($warnings) && defined('JDEBUG') && JDEBUG) ? $warnings : ''), 'error');
 			return;
 		}
+		$decodedInformation = json_decode($spamtestSystem, true);
+		if(!empty($decodedInformation['messages']) || !empty($decodedInformation['error'])){
+			$msgError = (!empty($decodedInformation['messages'])) ? $decodedInformation['messages'].'<br />' : '';
+			$msgError .= (!empty($decodedInformation['error'])) ? $decodedInformation['error'] : '';
+			acymailing_display($msgError, 'error');
+			return;
+		}
+		if(empty($decodedInformation['email'])){
+			acymailing_display('Missing test mail address', 'error');
+			return;
+		}
+
+		$receiver = new stdClass();
+		$receiver->subid = 0;
+		$receiver->email = $decodedInformation['email'];
+		$receiver->name = $decodedInformation['name'];
+		$receiver->html = 1;
+		$receiver->confirmed = 1;
+		$receiver->enabled = 1;
+
+		$mailerHelper = acymailing_get('helper.mailer');
+		$mailerHelper->checkConfirmField = false;
+		$mailerHelper->checkEnabled = false;
+		$mailerHelper->checkPublished = false;
+		$mailerHelper->checkAccept = false;
+		$mailerHelper->loadedToSend = true;
+		$mailerHelper->report = false;
+
+		if(!$mailerHelper->sendOne($mailid, $receiver)){
+			acymailing_display($mailerHelper->reportMessage, 'error');
+			return;
+		}
+
+		$app = JFactory::getApplication();
+		$app->redirect($decodedInformation['displayURL']);
+
+		return;
 	}
 }

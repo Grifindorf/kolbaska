@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -19,7 +19,7 @@ class plgAcymailingTemplate extends JPlugin{
 	var $templateClass = '';
 	var $config;
 
-	function plgAcymailingTemplate(&$subject, $config){
+	function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('acymailing', 'template');
@@ -39,6 +39,14 @@ class plgAcymailingTemplate extends JPlugin{
 			$this->headerstyles[$email->tempid][] = '.ReadMsgBody{width: 100%;}';
 			$this->headerstyles[$email->tempid][] = '.ExternalClass{width: 100%;}';
 			$this->headerstyles[$email->tempid][] = 'div, p, a, li, td { -webkit-text-size-adjust:none; }';
+			$this->headerstyles[$email->tempid][] = 'a[x-apple-data-detectors]{
+			color: inherit !important;
+			text-decoration: inherit !important;
+			font-size: inherit !important;
+			font-family: inherit !important;
+			font-weight: inherit !i mportant;
+			line-height: inherit !important;
+			}';
 
 			$this->templates[$email->tempid] = array();
 			if(empty($this->templateClass)){
@@ -143,8 +151,8 @@ class plgAcymailingTemplate extends JPlugin{
 
 		if(!$email->sendHTML) return;
 
-		if(!acymailing_level(1) && !empty($email->type) && $email->type == 'news'){
-			$pict = '<div style="text-align:center;margin:10px auto;display:block;"><a target="_blank" href="https://www.acyba.com"><img alt="Powered by AcyMailing" src="media/com_acymailing/images/poweredby.png" /></a></div>';
+		if((!acymailing_level(1) || acymailing_level(4)) && !empty($email->type) && in_array($email->type,array('news','followup'))){
+			$pict = '<div style="text-align:center;margin:10px auto;display:block;"><a target="_blank" href="https://www.acyba.com/?utm_source=acymailing&utm_medium=e-mail&utm_content=img&utm_campaign=powered-by"><img alt="Powered by AcyMailing" src="media/com_acymailing/images/poweredby.png" /></a></div>';
 
 			if(strpos($email->body, '</body>')){
 				$email->body = str_replace('</body>', $pict.'</body>', $email->body);

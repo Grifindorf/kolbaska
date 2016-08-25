@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -27,7 +27,7 @@ class fieldsClass extends acymailingClass{
 
 	var $origin;
 
-	function  __construct($config = array()){
+	function __construct($config = array()){
 		JPluginHelper::importPlugin('acymailing');
 		$this->dispatcher = JDispatcher::getInstance();
 		return parent::__construct($config);
@@ -49,6 +49,7 @@ class fieldsClass extends acymailingClass{
 			$where[] = 'a.`frontcomp` = 1';
 		}elseif($area == 'frontform'){
 			$where[] = 'a.`frontform` = 1';
+			$where[] = 'a.`core` = 0';
 		}elseif($area == 'frontlisting'){
 			$where[] = 'a.`frontlisting` = 1';
 			$where[] = 'a.`type` != \'category\'';

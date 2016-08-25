@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -81,9 +81,8 @@ class filterClass extends acymailingClass{
 
 		if(!empty($actions['type'])){
 			$this->didAnAction = $this->didAnAction || $query->count() > 0;
-
 			foreach($actions['type'] as $num => $oneType){
-				if(empty($oneType)) continue;
+				if(empty($oneType) || !isset($actions[$num][$oneType])) continue;
 				$this->report = array_merge($this->report, $this->dispatcher->trigger('onAcyProcessAction_'.$oneType, array(&$query, $actions[$num][$oneType], $num)));
 			}
 		}
@@ -127,10 +126,12 @@ class filterClass extends acymailingClass{
 		foreach($data as $oneData){
 			$filter->$oneData = array();
 			$formData = JRequest::getVar($oneData);
-			foreach($formData['type'] as $num => $oneType){
-				if(empty($oneType)) continue;
-				$filter->{$oneData}['type'][$num] = $oneType;
-				$filter->{$oneData}[$num][$oneType] = $formData[$num][$oneType];
+			if(!empty($formData['type'])){
+				foreach($formData['type'] as $num => $oneType){
+					if(empty($oneType)) continue;
+					$filter->{$oneData}['type'][$num] = $oneType;
+					$filter->{$oneData}[$num][$oneType] = $formData[$num][$oneType];
+				}
 			}
 			$filter->$oneData = serialize($filter->$oneData);
 		}
@@ -358,12 +359,19 @@ class filterClass extends acymailingClass{
 									document.getElementById('dateDetail_operator').value = 'after'
 								}
 							}
+							dateTmp = new Date();
+							document.getElementById('dateDetail_year').value = dateTmp.getFullYear();
+							month = dateTmp.getMonth() + 1;
+							if(month < 10){ month = '0'+ month; }
+							document.getElementById('dateDetail_month').value = month;
+							if(dateTmp.getDate() < 10){ day = '0'+ dateTmp.getDate(); }
+							else{ day = dateTmp.getDate();}
+							document.getElementById('dateDetail_day').value = day;
 						} else{
 							toggleDateBtn('specific');
 							if(currentVal == '' || currentVal == parseInt(currentVal)){
 								if(currentVal == ''){ dateTmp = new Date();}
 								else{ dateTmp = new Date(1000*currentVal); }
-
 								document.getElementById('dateDetail_year').value = dateTmp.getFullYear();
 								month = dateTmp.getMonth() + 1;
 								if(month < 10){ month = '0'+ month; }
@@ -392,6 +400,7 @@ class filterClass extends acymailingClass{
 					if(btnToActive == 'specific'){
 						if(typeof jQuery != 'undefined'){
 							jQuery('#dateDetail_typefieldset label[for=dateDetail_typespecificdate]').click();
+							jQuery('#dateDetail_typespecificdate').click();
 						}else{
 							document.getElementById('dateDetail_typerelativedate').checked='';
 							document.getElementById('dateDetail_typespecificdate').checked='checked';
@@ -401,6 +410,7 @@ class filterClass extends acymailingClass{
 					} else{
 						if(typeof jQuery != 'undefined'){
 							jQuery('#dateDetail_type label[for=dateDetail_typerelativedate]').click();
+							jQuery('#dateDetail_typerelativedate').click();
 						}else{
 							document.getElementById('dateDetail_typerelativedate').checked='checked';
 							document.getElementById('dateDetail_typespecificdate').checked='';
@@ -413,7 +423,7 @@ class filterClass extends acymailingClass{
 		$doc = JFactory::getDocument();
 		$doc->addScriptDeclaration($js);
 
-		$dateDetails = '<div id="dateDetails" style="display:none;">';
+		$dateDetails = '<div id="dateDetails" style="display:none;z-index: 60;">';
 		$dateTypeData = array();
 		$dateTypeData[] = JHTML::_('select.option', 'relativedate', JText::_('ACY_RELATIVE_DATE'));
 		$dateTypeData[] = JHTML::_('select.option', 'specificdate', JText::_('ACY_SPECIFIC_DATE'));
@@ -434,7 +444,7 @@ class filterClass extends acymailingClass{
 		$dateDetails .= '<div id="specificDate" style="display:none;">';
 		$tempData = array();
 		$currentYear = (int)date('Y');
-		for($i = 1900; $i <= $currentYear + 5; $i++){
+		for($i = 1970; $i <= $currentYear + 5; $i++){
 			$tempData[] = JHTML::_('select.option', $i, $i);
 		}
 		$dateDetails .= JHTML::_('select.genericlist', $tempData, 'dateDetail_year', 'style="width:80px"', 'value', 'text');
@@ -465,7 +475,7 @@ class acyQuery{
 	var $limit = '';
 	var $orderBy = '';
 
-	function acyQuery(){
+	function __construct(){
 		$this->db = JFactory::getDBO();
 	}
 
@@ -484,6 +494,7 @@ class acyQuery{
 		if(!empty($this->where)) $query .= ' WHERE ('.implode(') AND (', $this->where).')';
 		if(!empty($this->orderBy)) $query .= ' ORDER BY '.$this->orderBy;
 		if(!empty($this->limit)) $query .= ' LIMIT '.$this->limit;
+
 
 		return $query;
 	}
@@ -516,6 +527,15 @@ class acyQuery{
 		$replace = array('{year}', '{month}', '{weekday}', '{day}');
 		$replaceBy = array(date('Y'), date('m'), date('N'), date('d'));
 		$value = str_replace($replace, $replaceBy, $value);
+
+		if(preg_match_all('#{(year|month|weekday|day)\|(add|remove):([^}]*)}#Uis', $value, $results)){
+
+			foreach($results[0] as $i => $oneMatch){
+				$format = str_replace(array('year', 'month', 'weekday', 'day'), array('Y', 'm', 'N', 'd'), $results[1][$i]);
+				$delay = str_replace(array('add', 'remove'), array('+', '-'), $results[2][$i]).intval($results[3][$i]).' '.str_replace('weekday', 'day', $results[1][$i]);
+				$value = str_replace($oneMatch, date($format, strtotime($delay)), $value);
+			}
+		}
 
 		if(!is_numeric($value) OR in_array($operator, array('REGEXP', 'NOT REGEXP', 'NOT LIKE', 'LIKE', '=', '!='))){
 			$value = $this->db->Quote($value);

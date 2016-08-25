@@ -14,10 +14,10 @@ class JConfig {
 	public $dbtype = 'mysqli';
 	public $host = 'localhost';
 	public $user = 'root';
-	public $password = '8546';
+	public $password = '';
 	public $db = 'kolbaska';
 	public $dbprefix = 'wzjit_';
-	public $live_site = 'http://kolbaska.com.ua/';
+	public $live_site = 'http://kolbasa/';
 	public $secret = 'MsGuHtugbQJdjBCQ';
 	public $gzip = '0';
 	public $error_reporting = 'default';

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -29,9 +29,10 @@ class QueueViewQueue extends acymailingView{
 		$mailerHelper->loadedToSend = false;
 		$mail = $mailerHelper->load($mailid);
 
-		$user = JFactory::getUser();
 		$userClass = acymailing_get('class.subscriber');
 		$receiver = $userClass->get($subid);
+		if(empty($receiver)) die(JText::sprintf('SEND_ERROR_USER', $subid));
+		if(empty($mail)) die('Newsletter not found: '.$mailid);
 		$mail->sendHTML = $mail->html && $receiver->html;
 
 		$db = JFactory::getDBO();
@@ -47,6 +48,12 @@ class QueueViewQueue extends acymailingView{
 		}
 
 		$this->assignRef('mail', $mail);
+
+		$acyToolbar = acymailing::get('helper.toolbar');
+		$acyToolbar->setTitle($this->mail->subject);
+		$acyToolbar->directPrint();
+		$acyToolbar->topfixed = false;
+		$acyToolbar->display();
 	}
 
 	function listing(){

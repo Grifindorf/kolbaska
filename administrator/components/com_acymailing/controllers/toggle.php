@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -18,6 +18,7 @@ class ToggleController extends acymailingController{
 		parent::__construct($config);
 		$this->registerDefaultTask('toggle');
 		$this->allowedTablesColumn['list'] = array('published' => 'listid', 'visible' => 'listid');
+		$this->allowedTablesColumn['action'] = array('published' => 'action_id');
 		$this->allowedTablesColumn['subscriber'] = array('confirmed' => 'subid', 'html' => 'subid', 'enabled' => 'subid');
 		$this->allowedTablesColumn['template'] = array('published' => 'tempid', 'premium' => 'tempid');
 		$this->allowedTablesColumn['mail'] = array('published' => 'mailid', 'visible' => 'mailid');
@@ -37,6 +38,8 @@ class ToggleController extends acymailingController{
 	}
 
 	function toggle(){
+		acymailing_checkToken();
+
 		$completeTask = JRequest::getCmd('task');
 		$task = substr($completeTask, 0, strpos($completeTask, '_'));
 		$elementId = substr($completeTask, strpos($completeTask, '_') + 1);
@@ -44,6 +47,7 @@ class ToggleController extends acymailingController{
 		$value = JRequest::getVar('value', '0', '', 'int');
 		$table = JRequest::getVar('table', '', '', 'word');
 
+		if(empty($this->allowedTablesColumn[$table]) || empty($this->allowedTablesColumn[$table][$task])) exit;
 		$pkey = $this->allowedTablesColumn[$table][$task];
 		if(empty($pkey)) exit;
 
@@ -240,9 +244,10 @@ class ToggleController extends acymailingController{
 		exit;
 	}
 
-
 	function delete(){
-		list($value1, $value2) = explode('_', JRequest::getCmd('value'));
+		$value = JRequest::getCmd('value');
+		if(strpos($value, '_') === false) exit;
+		list($value1, $value2) = explode('_', $value);
 		$table = JRequest::getVar('table', '', '', 'word');
 		if(empty($table)) exit;
 
@@ -252,9 +257,11 @@ class ToggleController extends acymailingController{
 			exit;
 		}
 
+		if(empty($this->deleteColumns[$table])) exit;
+
 		list($key1, $key2) = $this->deleteColumns[$table];
 
-		if(empty($key1) OR empty($key2) OR empty($value1) OR empty($value2)) exit;
+		if(empty($key1) || empty($key2) || empty($value1) || empty($value2)) exit;
 
 		$db = JFactory::getDBO();
 		$db->setQuery('DELETE FROM '.acymailing_table($table).' WHERE '.$key1.' = '.intval($value1).' AND '.$key2.' = '.intval($value2));
@@ -271,11 +278,15 @@ class ToggleController extends acymailingController{
 	}
 
 	function deletefollowup($campaignid, $mailid){
+		acymailing_checkToken();
+
 		$mailClass = acymailing_get('class.mail');
 		$mailClass->delete((int)$mailid);
 	}
 
 	function deleteMail($mailid, $attachid){
+		acymailing_checkToken();
+
 		$mailid = intval($mailid);
 		if(empty($mailid)) return false;
 
@@ -293,8 +304,21 @@ class ToggleController extends acymailingController{
 		return $db->query();
 	}
 
-	function subscriberconfirmed($subid, $value){
+	function deleteFavicon($mailid, $favicon){
+		acymailing_checkToken();
 
+		if($favicon != 'favicon') return;
+
+		$mailid = intval($mailid);
+		if(empty($mailid)) return false;
+
+		$db = JFactory::getDBO();
+		$db->setQuery('UPDATE '.acymailing_table('mail').' SET favicon = "" WHERE mailid = '.$mailid.' LIMIT 1');
+
+		return $db->query();
+	}
+
+	function subscriberconfirmed($subid, $value){
 		if(!empty($value)){
 			$subscriberClass = acymailing_get('class.subscriber');
 			$subscriberClass->confirmSubscription($subid);
@@ -321,6 +345,7 @@ class ToggleController extends acymailingController{
 	}
 
 	function pluginspublished($id, $publish){
+		acymailing_checkToken();
 
 		$db = JFactory::getDBO();
 		if(!ACYMAILING_J16){

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -137,6 +137,7 @@ $app = JFactory::getApplication();
 
 	$fields = array_keys(acymailing_getColumns('#__acymailing_subscriber'));
 	$fields[] = 'listids';
+	$fields[] = 'listname';
 
 	foreach($fields as $oneField){
 		$fieldAssignment[] = JHTML::_('select.option', $oneField, $oneField);
@@ -148,7 +149,7 @@ $app = JFactory::getApplication();
 
 	$alreadyFound = array();
 	foreach($columnNames as $key => &$oneColumn){
-		$oneColumn = trim($oneColumn, '\'" ');
+		$oneColumn = strtolower(trim($oneColumn, '\'" '));
 		$customValue = '';
 		$default = JRequest::getCmd('fieldAssignment'.$key);
 		if(empty($default) && $default !== 0){

@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -13,7 +13,7 @@ class plgAcymailingTagsubscriber extends JPlugin{
 
 	var $fields = array();
 
-	function plgAcymailingTagsubscriber(&$subject, $config){
+	function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('acymailing', 'tagsubscriber');
@@ -284,10 +284,20 @@ class plgAcymailingTagsubscriber extends JPlugin{
 		$replace = array('{year}', '{month}', '{weekday}', '{day}');
 		$replaceBy = array(date('Y'), date('m'), date('N'), date('d'));
 		$value = str_replace($replace, $replaceBy, $value);
+
+		if(preg_match_all('#{(year|month|weekday|day)\|(add|remove):([^}]*)}#Uis', $value, $results)){
+			foreach($results[0] as $i => $oneMatch){
+				$format = str_replace(array('year', 'month', 'weekday', 'day'), array('Y','m','N','d'), $results[1][$i]);
+				$delay = str_replace(array('add', 'remove'), array('+', '-'), $results[2][$i]).intval($results[3][$i]).' '.str_replace('weekday', 'day', $results[1][$i]);
+				$value = str_replace($oneMatch, date($format, strtotime($delay)), $value);
+			}
+		}
+
 		if(empty($action['operator'])) $action['operator'] = '=';
 
 		preg_match_all('#(?:{|%7B)field:(.*)(?:}|%7D)#Ui', $value, $tags);
 		$fields = array_keys(acymailing_getColumns('#__acymailing_subscriber'));
+		if(!in_array($action['map'], $fields)) return 'Unexisting field: '.$action['map'].' | The available fields are: '.implode(', ', $fields);
 
 		if(in_array($action['operator'], array('+', '-'))){
 			if(empty($tags) || empty($tags[1])){
@@ -310,7 +320,7 @@ class plgAcymailingTagsubscriber extends JPlugin{
 			}
 		}
 
-		$query = 'UPDATE #__acymailing_subscriber as sub';
+		$query = 'UPDATE #__acymailing_subscriber AS sub';
 		if(!empty($cquery->join)) $query .= ' JOIN '.implode(' JOIN ', $cquery->join);
 		if(!empty($cquery->leftjoin)) $query .= ' LEFT JOIN '.implode(' LEFT JOIN ', $cquery->leftjoin);
 

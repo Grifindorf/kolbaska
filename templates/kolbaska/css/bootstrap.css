@@ -805,6 +805,7 @@ pre code {
   padding-left: 15px;
   padding-right: 15px;
 }
+
 @media (min-width: 0px) {
   .container {
     width: 1230px;

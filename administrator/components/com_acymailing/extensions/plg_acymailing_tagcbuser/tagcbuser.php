@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 class plgAcymailingTagcbuser extends JPlugin{
 	var $sendervalues = array();
 
-	function plgAcymailingTagcbuser(&$subject, $config){
+	function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('acymailing', 'tagcbuser');
@@ -23,6 +23,7 @@ class plgAcymailingTagcbuser extends JPlugin{
 	function acymailing_getPluginType(){
 
 		$app = JFactory::getApplication();
+		if(!file_exists(ACYMAILING_ROOT.'components'.DS.'com_comprofiler'.DS.'comprofiler.php')) return;
 		if($this->params->get('frontendaccess') == 'none' && !$app->isAdmin()) return;
 		$onePlugin = new stdClass();
 		$onePlugin->name = JText::_('CB User');
@@ -182,9 +183,9 @@ class plgAcymailingTagcbuser extends JPlugin{
 					foreach($arguments as $onearg){
 						$args = explode(':', $onearg);
 						if(isset($args[1])){
-							$mytag->$args[0] = $args[1];
+							$mytag->{$args[0]} = $args[1];
 						}else{
-							$mytag->$args[0] = 1;
+							$mytag->{$args[0]} = 1;
 						}
 					}
 				}
@@ -250,5 +251,55 @@ class plgAcymailingTagcbuser extends JPlugin{
 		foreach($results as $var => $allresults){
 			$email->$var = str_replace(array_keys($tags), $tags, $email->$var);
 		}
-	}//endfct
+	}
+
+	function onAcyDisplayActions(&$type){
+		$fields = acymailing_getColumns('#__comprofiler');
+
+		$field = array();
+		$field[] = JHTML::_('select.option', 0, '- - -');
+		foreach($fields as $oneField => $fieldType){
+			if(in_array($oneField, array('id', 'user_id', 'hits', 'message_last_sent', 'message_number_sent', 'canvas', 'cbactivation'))) continue;
+			$field[] = JHTML::_('select.option', $oneField, $oneField);
+		}
+
+		$content = '<div id="action__num__cbfieldval">'.JHTML::_('select.genericlist', $field, "action[__num__][cbfieldval][map]", 'class="inputbox" size="1"', 'value', 'text');
+		$content .= ' = <input class="inputbox" type="text" id="action__num__cbfieldvalvalue" name="action[__num__][cbfieldval][value]" style="width:200px" value=""></div>';
+
+		$type['cbfieldval'] = 'Community Builder: '.jtext::_('FIELD');
+
+		return $content;
+	}
+
+	function onAcyProcessAction_cbfieldval($cquery, $action, $num){
+
+		$replace = array('{year}', '{month}', '{weekday}', '{day}', '{hour}', '{minute}');
+		$replaceBy = array(date('Y'), date('m'), date('N'), date('d'), date('H'), date('i'));
+		$newValue = str_replace($replace, $replaceBy, acymailing_replaceDate($action['value']));
+
+		if(preg_match_all('#{(year|month|weekday|day)\|(add|remove):([^}]*)}#Uis', $newValue, $results)){
+			foreach($results[0] as $i => $oneMatch){
+				$format = str_replace(array('year', 'month', 'weekday', 'day'), array('Y','m','N','d'), $results[1][$i]);
+				$delay = str_replace(array('add', 'remove'), array('+', '-'), $results[2][$i]).intval($results[3][$i]).' '.str_replace('weekday', 'day', $results[1][$i]);
+				$newValue = str_replace($oneMatch, date($format, strtotime($delay)), $newValue);
+			}
+		}
+
+		if(empty($action['operator'])) $action['operator'] = '=';
+
+		$fields = array_keys(acymailing_getColumns('#__comprofiler'));
+		if(!in_array($action['map'], $fields)) return 'Unexisting field: '.$action['map'].' | The available fields are: '.implode(', ', $fields);
+
+		$query = 'UPDATE #__comprofiler AS cb JOIN #__acymailing_subscriber AS sub ON cb.user_id = sub.userid';
+		if(!empty($cquery->join)) $query .= ' JOIN '.implode(' JOIN ', $cquery->join);
+		if(!empty($cquery->leftjoin)) $query .= ' LEFT JOIN '.implode(' LEFT JOIN ', $cquery->leftjoin);
+
+		$query .= " SET cb.`".acymailing_secureField($action['map'])."` = ".$cquery->db->Quote($newValue);
+		if(!empty($cquery->where)) $query .= ' WHERE ('.implode(') AND (', $cquery->where).')';
+
+		$cquery->db->setQuery($query);
+		$cquery->db->query();
+		$nbAffected = $cquery->db->getAffectedRows();
+		return JText::sprintf('NB_MODIFIED', $nbAffected);
+	}
 }//endclass

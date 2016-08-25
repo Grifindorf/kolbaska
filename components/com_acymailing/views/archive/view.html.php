@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -43,6 +43,7 @@ class archiveViewArchive extends acymailingView{
 		$this->assignRef('config', $config);
 
 		$js = 'var numForwarders = 1;function addLine(){
+							if(numForwarders > 4) return;
 							var myTable = window.document.getElementById("friend_table");
 							var line1 = document.createElement("tr");
 							var tdname = document.createElement("td");
@@ -175,7 +176,6 @@ class archiveViewArchive extends acymailingView{
 		$db = JFactory::getDBO();
 		$pathway = $app->getPathway();
 		$config = acymailing_config();
-
 
 		if(!empty($menuparams)){
 			$values->suffix = $menuparams->get('pageclass_sfx', '');
@@ -310,14 +310,17 @@ class archiveViewArchive extends acymailingView{
 		$orderValues[] = JHTML::_('select.option', 'created', JText::_('CREATED_DATE'));
 		$orderValues[] = JHTML::_('select.option', 'mailid', JText::_('ACY_ID'));
 
-		$ordering = '<span style="float:right;" id="orderingoption">';
-		$ordering .= JHTML::_('select.genericlist', $orderValues, 'ordering', 'size="1" style="width:100px;" onchange="this.form.submit();"', 'value', 'text', $pageInfo->filter->order->value);
+		$ordering = '';
+		if($config->get('show_order', 1) == 1){
+			$ordering = '<span style="float:right;" id="orderingoption">';
+			$ordering .= JHTML::_('select.genericlist', $orderValues, 'ordering', 'size="1" style="width:100px;" onchange="this.form.submit();"', 'value', 'text', $pageInfo->filter->order->value);
 
-		$orderDir = array();
-		$orderDir[] = JHTML::_('select.option', 'ASC', 'ASC');
-		$orderDir[] = JHTML::_('select.option', 'DESC', 'DESC');
-		$ordering .= ' '.JHTML::_('select.genericlist', $orderDir, 'ordering_dir', 'size="1" style="width:75px;" onchange="this.form.submit();"', 'value', 'text', $pageInfo->filter->order->dir);
-		$ordering .= '</span>';
+			$orderDir = array();
+			$orderDir[] = JHTML::_('select.option', 'ASC', JText::_('ACY_ASC'));
+			$orderDir[] = JHTML::_('select.option', 'DESC', JText::_('ACY_DESC'));
+			$ordering .= ' '.JHTML::_('select.genericlist', $orderDir, 'ordering_dir', 'size="1" style="width:75px;" onchange="this.form.submit();"', 'value', 'text', $pageInfo->filter->order->dir);
+			$ordering .= '</span>';
+		}
 
 		$this->assignRef('ordering', $ordering);
 		$this->assignRef('rows', $rows);

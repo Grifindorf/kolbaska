@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -44,7 +44,7 @@ class StatsViewStats extends acymailingView{
 		}
 
 		$acyToolbar = acymailing::get('helper.toolbar');
-		$acyToolbar->link(acymailing_completeLink('stats&task=unsubchart&export=1&mailid='.JRequest::getInt('mailid'),true), JText::_('ACY_EXPORT'), 'export');
+		$acyToolbar->link(acymailing_completeLink('stats&task=unsubchart&export=1&mailid='.JRequest::getInt('mailid'), true), JText::_('ACY_EXPORT'), 'export');
 		$acyToolbar->directPrint();
 		$acyToolbar->setTitle(JText::_('ACTION_UNSUBSCRIBED'));
 		$acyToolbar->display();
@@ -340,6 +340,51 @@ class StatsViewStats extends acymailingView{
 			$filters[] = implode(" LIKE $searchVal OR ", $this->searchFields)." LIKE $searchVal";
 		}
 
+		$listClass = acymailing_get('class.list');
+		$lists = $listClass->getLists();
+		$msgType = array();
+		$msgType[] = JHTML::_('select.option', '0', JText::_('ALL_EMAILS'));
+		$msgType[] = JHTML::_('select.option', '<OPTGROUP>', JText::_('NEWSLETTER'));
+		$msgType[] = JHTML::_('select.option', 'news', JText::_('ALL_LISTS'));
+		foreach($lists as $oneList){
+			$msgType[] = JHTML::_('select.option', 'list_'.$oneList->listid, $oneList->name);
+		}
+		$msgType[] = JHTML::_('select.option', '</OPTGROUP>');
+		$msgType[] = JHTML::_('select.option', 'notification', JText::_('NOTIFICATIONS'));
+		if(acymailing_level(1)){
+			$msgType[] = JHTML::_('select.option', 'autonews', JText::_('AUTONEW'));
+			$msgType[] = JHTML::_('select.option', 'joomlanotification', JText::_('JOOMLA_NOTIFICATIONS'));
+		}
+		if(acymailing_level(3)){
+			$listCampaign = acymailing_get('class.list');
+			$listCampaign->type = 'campaign';
+			$campaigns = $listCampaign->getLists();
+			$msgType[] = JHTML::_('select.option', '<OPTGROUP>', JText::_('FOLLOWUP'));
+			$msgType[] = JHTML::_('select.option', 'followup', JText::_('ACY_ALL_CAMPAIGNS'));
+			foreach($campaigns as $oneCamp){
+				$msgType[] = JHTML::_('select.option', 'camp_'.$oneCamp->listid, $oneCamp->name);
+			}
+			$msgType[] = JHTML::_('select.option', '</OPTGROUP>');
+		}
+		$msgType[] = JHTML::_('select.option', 'welcome', JText::_('MSG_WELCOME'));
+		$msgType[] = JHTML::_('select.option', 'unsub', JText::_('MSG_UNSUB'));
+		if(acymailing_level(3)){
+			$msgType[] = JHTML::_('select.option', 'action', JText::_('ACY_DISTRIBUTION'));
+		}
+		$selectedMsgType = $app->getUserStateFromRequest($paramBase."filter_msg", 'filter_msg', 0, 'string');
+		$msgTypeChoice = JHTML::_('select.genericlist', $msgType, "filter_msg", 'class="inputbox" style="max-width: 200px;" onchange="document.adminForm.limitstart.value=0;document.adminForm.submit( );"', 'value', 'text', $selectedMsgType);
+		$extraJoin = '';
+		if(!empty($selectedMsgType)){
+			$subfilter = substr($selectedMsgType, 0, 5);
+			if($subfilter == 'camp_' || $subfilter == 'list_'){
+				$filters[] = " b.type = '".($subfilter == 'camp_' ? 'followup' : 'news')."'";
+				$filters[] = " lm.listid = ".substr($selectedMsgType, 5);
+				$extraJoin = " JOIN #__acymailing_listmail AS lm ON a.mailid = lm.mailid";
+			}else{
+				$filters[] = " b.type = '".$selectedMsgType."'";
+			}
+		}
+
 		$query = 'SELECT '.implode(' , ', $this->selectFields);
 		$query .= ', CASE WHEN (a.senthtml+a.senttext) <= a.bounceunique THEN 0 ELSE (a.openunique/(a.senthtml+a.senttext-a.bounceunique)) END AS openprct';
 		$query .= ', CASE WHEN (a.senthtml+a.senttext) <= a.bounceunique THEN 0 ELSE (a.clickunique/(a.senthtml+a.senttext-a.bounceunique)) END AS clickprct';
@@ -349,6 +394,7 @@ class StatsViewStats extends acymailingView{
 		$query .= ', CASE WHEN (a.senthtml+a.senttext) = 0 THEN 0 ELSE (a.bounceunique/(a.senthtml+a.senttext)) END AS bounceprct';
 		$query .= ' FROM '.acymailing_table('stats').' as a';
 		$query .= ' JOIN '.acymailing_table('mail').' as b on a.mailid = b.mailid';
+		if(!empty($extraJoin)) $query .= $extraJoin;
 		if(!empty($filters)) $query .= ' WHERE ('.implode(') AND (', $filters).')';
 		if(!empty($pageInfo->filter->order->value)){
 			$query .= ' ORDER BY '.$pageInfo->filter->order->value.' '.$pageInfo->filter->order->dir;
@@ -369,8 +415,9 @@ class StatsViewStats extends acymailingView{
 		}
 
 		$queryCount = 'SELECT COUNT(a.mailid) FROM '.acymailing_table('stats').' as a';
-		if(!empty($pageInfo->search)){
+		if(!empty($pageInfo->search) || !empty($filters)){
 			$queryCount .= ' JOIN '.acymailing_table('mail').' as b on a.mailid = b.mailid';
+			if(!empty($extraJoin)) $queryCount .= $extraJoin;
 		}
 		if(!empty($filters)) $queryCount .= ' WHERE ('.implode(') AND (', $filters).')';
 
@@ -394,6 +441,7 @@ class StatsViewStats extends acymailingView{
 		$this->assignRef('rows', $rows);
 		$this->assignRef('pageInfo', $pageInfo);
 		$this->assignRef('pagination', $pagination);
+		$this->assign('filterMsg', $msgTypeChoice);
 	}
 
 	function mailinglist($export = 0){
@@ -410,11 +458,21 @@ class StatsViewStats extends acymailingView{
 		$isData = true;
 
 		$db = JFactory::getDBO();
-		$query = 'SELECT lm.listid, l.name, l.color FROM #__acymailing_list l';
-		$query .= ' JOIN #__acymailing_listmail lm ON l.listid=lm.listid';
-		$query .= ' WHERE lm.mailid='.intval($mailid).' ORDER BY l.ordering';
-		$db->setQuery($query);
-		$sqlRes = $db->loadObjectList();
+
+		if($mailing->type == 'followup'){
+			$query = 'SELECT l.listid, l.name, l.color FROM #__acymailing_list l';
+			$query .= ' JOIN #__acymailing_listcampaign lc ON l.listid = lc.listid';
+			$query .= ' JOIN #__acymailing_listmail lm ON lc.campaignid = lm.listid';
+			$query .= ' WHERE lm.mailid = '.intval($mailid).' ORDER BY l.ordering';
+			$db->setQuery($query);
+			$sqlRes = $db->loadObjectList();
+		}else{
+			$query = 'SELECT lm.listid, l.name, l.color FROM #__acymailing_list l';
+			$query .= ' JOIN #__acymailing_listmail lm ON l.listid=lm.listid';
+			$query .= ' WHERE lm.mailid='.intval($mailid).' ORDER BY l.ordering';
+			$db->setQuery($query);
+			$sqlRes = $db->loadObjectList();
+		}
 
 		if(empty($sqlRes)){
 			$query = 'SELECT listid, name, color FROM #__acymailing_list';

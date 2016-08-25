@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -105,29 +105,12 @@ defined('_JEXEC') or die('Restricted access');
 	<?php if($this->displayLists){?>
 	<fieldset class="adminform acy_subscription_list">
 		<legend><span><?php echo JText::_( 'SUBSCRIPTION' ); ?></span></legend>
-		<div id="acyusersubscription">
-			<?php
-			$k = 0;
-			foreach($this->subscription as $row){
-				if(empty($row->published) OR !$row->visible) continue;
-				$listClass = 'acy_list_status_' . str_replace('-','m',(int) @$row->status);
-				?>
-			<div class="<?php echo "row$k $listClass"; ?> acy_onelist">
-				<div class="acystatus">
-					<span><?php echo $this->status->display("data[listsub][".$row->listid."][status]",@$row->status); ?></span>
-				</div>
-				<div class="acyListInfo">
-					<div class="list_name"><?php echo $row->name ?></div>
-					<div class="list_description"><?php echo $row->description ?></div>
-				</div>
-			</div>
-			<?php
-				$k = 1 - $k;
-			} ?>
 
-		</div>
+		<?php if(empty($this->dropdown)) include('subs_default.php'); else include('subs_dropdown.php'); ?>
 	</fieldset>
-	<?php } ?>
+	<?php }
+
+	?>
 
 	<br />
 	<input type="hidden" name="option" value="<?php echo ACYMAILING_COMPONENT; ?>" />

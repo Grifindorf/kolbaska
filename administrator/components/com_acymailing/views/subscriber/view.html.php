@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -36,7 +36,7 @@ class SubscriberViewSubscriber extends acymailingView{
 		$pageInfo->filter->order->value = $app->getUserStateFromRequest($paramBase.".filter_order", 'filter_order', 'a.subid', 'cmd');
 		$pageInfo->filter->order->dir = $app->getUserStateFromRequest($paramBase.".filter_order_Dir", 'filter_order_Dir', 'desc', 'word');
 		if(strtolower($pageInfo->filter->order->dir) !== 'desc') $pageInfo->filter->order->dir = 'asc';
-		$selectedList = $app->getUserStateFromRequest($paramBase."filter_lists", 'filter_lists', 0, 'int');
+		$selectedList = $app->getUserStateFromRequest($paramBase."filter_lists", 'filter_lists', 0, 'string');
 		$selectedStatus = $app->getUserStateFromRequest($paramBase."filter_status", 'filter_status', 0, 'int');
 		$selectedStatusList = $app->getUserStateFromRequest($paramBase."filter_statuslist", 'filter_statuslist', 0, 'int');
 		$pageInfo->search = $app->getUserStateFromRequest($paramBase.".search", 'search', '', 'string');
@@ -82,23 +82,30 @@ class SubscriberViewSubscriber extends acymailingView{
 		$leftJoinQuery = array();
 		$joinQuery = array();
 
+		if(strpos($selectedList, ',') !== false){
+			$lists = explode(',', rtrim($selectedList, ','));
+			JArrayHelper::toInteger($lists);
+			$selection = implode(',', $lists);
+		}else{
+			$selection = intval($selectedList);
+		}
+
 		if(empty($selectedList) || ($selectedStatusList == -2 && $app->isAdmin())){
 			if(empty($selectedList) && $selectedStatusList == -2) $selectedStatusList = 0;
 			$fromQuery = ' FROM '.acymailing_table('subscriber').' as a ';
-			$countField = "a.subid";
 			$leftJoinQuery[] = acymailing_table('users', false).' as b ON a.userid = b.id';
 
 			if($selectedStatusList == -2){
-				$leftJoinQuery[] = acymailing_table('listsub').' as c on a.subid = c.subid AND listid = '.intval($selectedList);
+				$leftJoinQuery[] = acymailing_table('listsub').' AS c on a.subid = c.subid AND listid IN ('.$selection.')';
 				$filters[] = 'c.listid IS NULL';
 			}
-		}
-		else{
+			$countField = "a.subid";
+		}else{
 			$fromQuery = ' FROM '.acymailing_table('listsub').' as c';
 			$countField = "c.subid";
 			$joinQuery[] = acymailing_table('subscriber').' as a ON a.subid = c.subid';
 			$leftJoinQuery[] = acymailing_table('users', false).' as b ON a.userid = b.id';
-			$filters[] = 'c.listid = '.intval($selectedList);
+			$filters[] = 'c.listid IN ('.$selection.')';
 
 			if(!in_array($selectedStatusList, array(-1, 1, 2))) $selectedStatusList = 1;
 			$filters[] = 'c.status = '.intval($selectedStatusList);
@@ -106,17 +113,13 @@ class SubscriberViewSubscriber extends acymailingView{
 
 		if($selectedStatus == 1){
 			$filters[] = 'a.accept > 0';
-		}
-		elseif($selectedStatus == -1){
+		}elseif($selectedStatus == -1){
 			$filters[] = 'a.accept < 1';
-		}
-		elseif($selectedStatus == 2){
+		}elseif($selectedStatus == 2){
 			$filters[] = 'a.confirmed < 1';
-		}
-		elseif($selectedStatus == 3){
+		}elseif($selectedStatus == 3){
 			$filters[] = 'a.enabled > 0';
-		}
-		elseif($selectedStatus == -3){
+		}elseif($selectedStatus == -3){
 			$filters[] = 'a.enabled < 1';
 		}
 
@@ -127,6 +130,7 @@ class SubscriberViewSubscriber extends acymailingView{
 		if(!empty($filters)){
 			$query .= ' WHERE ('.implode(') AND (', $filters).')';
 		}
+		$query .= ' GROUP BY a.subid';
 		if(!empty($pageInfo->filter->order->value)){
 			$query .= ' ORDER BY '.$pageInfo->filter->order->value.' '.$pageInfo->filter->order->dir;
 		}
@@ -138,9 +142,8 @@ class SubscriberViewSubscriber extends acymailingView{
 
 		if($pageInfo->limit->value > $pageInfo->elements->page){
 			$pageInfo->elements->total = $pageInfo->limit->start + $pageInfo->elements->page;
-		}
-		else{
-			$queryCount = 'SELECT COUNT('.$countField.') '.$fromQuery;
+		}else{
+			$queryCount = 'SELECT COUNT(DISTINCT '.$countField.') '.$fromQuery;
 			if(!empty($pageInfo->search) || !empty($selectedStatus) || $selectedStatusList == -2 || !empty($fieldfilter)){
 				if(!empty($joinQuery)) $queryCount .= ' JOIN '.implode(' JOIN ', $joinQuery);
 				if(!empty($leftJoinQuery)) $queryCount .= ' LEFT JOIN '.implode(' LEFT JOIN ', $leftJoinQuery);
@@ -165,7 +168,7 @@ class SubscriberViewSubscriber extends acymailingView{
 
 		if(empty($pageInfo->limit->value)){
 			if($pageInfo->elements->total > 500){
-				acymailing_display('We do not want you to crash your server so we displayed only the first 500 users', 'warning');
+				acymailing_enqueueMessage('We do not want you to crash your server so we displayed only the first 500 users', 'warning');
 			}
 			$pageInfo->limit->value = 100;
 		}
@@ -183,16 +186,14 @@ class SubscriberViewSubscriber extends acymailingView{
 
 		$listsType = acymailing_get('type.lists');
 		if($app->isAdmin()){
-			$filters->lists = $listsType->display('filter_lists', $selectedList);
+			$filters->lists = $listsType->display('filter_lists', $selectedList, true, true);
 			$filters->status = $statusType->display('filter_status', $selectedStatus);
-		}
-		else{
+		}else{
 			$listClass = acymailing_get('class.list');
 			$allLists = $listClass->getFrontendLists();
 			if(count($allLists) > 1){
-				$filters->lists = JHTML::_('select.genericlist', $allLists, "filter_lists", 'class="inputbox" size="1" onchange="document.adminForm.limitstart.value=0;document.adminForm.submit( );"', 'listid', 'name', (int) $selectedList, "filter_lists");
-			}
-			else{
+				$filters->lists = JHTML::_('select.genericlist', $allLists, "filter_lists", 'class="inputbox" size="1" onchange="document.adminForm.limitstart.value=0;document.adminForm.submit();"', 'listid', 'name', (int)$selectedList, "filter_lists");
+			}else{
 				$filters->lists = '<input type="hidden" name="filter_lists" value="'.$selectedList.'"/>';
 			}
 			$filters->status = '<input type="hidden" name="filter_status" value="0"/>';
@@ -371,8 +372,7 @@ class SubscriberViewSubscriber extends acymailingView{
 						array_push($markCities, $mark->geolocation_city);
 						$addressTmp = $mark->geolocation_city.' '.$mark->geolocation_state.' '.$mark->geolocation_country;
 						array_push($dataDetails, array('nbInCity' => 1, 'actions' => $mark->geolocation_type, 'address' => $addressTmp));
-					}
-					else{
+					}else{
 						$dataDetails[$indexCity]['nbInCity'] += 1;
 						$dataDetails[$indexCity]['actions'] .= ", ".$mark->geolocation_type;
 					}
@@ -381,8 +381,7 @@ class SubscriberViewSubscriber extends acymailingView{
 						if(!empty($region) && $region != $mark->geolocation_country_code){
 							$region = 'world';
 							$diffCountries = true;
-						}
-						else{
+						}else{
 							$region = $mark->geolocation_country_code;
 						}
 					}
@@ -414,11 +413,9 @@ class SubscriberViewSubscriber extends acymailingView{
 			if(!empty($subscriber->userid)){
 				if(file_exists(ACYMAILING_ROOT.'components'.DS.'com_comprofiler'.DS.'comprofiler.php')){
 					$editLink = 'index.php?option=com_comprofiler&task=edit&cid[]=';
-				}
-				elseif(!ACYMAILING_J16){
+				}elseif(!ACYMAILING_J16){
 					$editLink = 'index.php?option=com_users&task=edit&cid[]=';
-				}
-				else{
+				}else{
 					$editLink = 'index.php?option=com_users&task=user.edit&id=';
 				}
 				$acyToolbar->link($editLink.$subscriber->userid, JText::_('EDIT_JOOMLA_USER'), 'edit');
@@ -434,7 +431,7 @@ class SubscriberViewSubscriber extends acymailingView{
 		$quickstatusType = acymailing_get('type.statusquick');
 		$filters->statusquick = $quickstatusType->display('statusquick');
 
-		if($config->get('open_popup', 1)) JHTML::_('behavior.modal', 'a.modal');
+		JHTML::_('behavior.modal', 'a.modal');
 
 		$this->assignRef('config', $config);
 		$this->assignRef('subscriber', $subscriber);

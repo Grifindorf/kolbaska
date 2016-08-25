@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -66,14 +66,10 @@ defined('_JEXEC') or die('Restricted access');
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<img title="<?php echo JText::_('ERROR_CAPTCHA'); ?>" id="captcha_picture" width="<?php echo $this->config->get('captcha_width_component') ?>" height="<?php echo $this->config->get('captcha_height_component') ?>" class="captchaimagecomponent" src="<?php if(ACYMAILING_J16){ echo JRoute::_('index.php?option=com_acymailing&ctrl=captcha&val='.rand(0,10000)); }else{ echo rtrim(JURI::root(),'/').'/index.php?option=com_acymailing&amp;ctrl=captcha&amp;val='.rand(0,10000);} ?>" alt="captcha" />
-							<span class="refreshCaptcha" onClick="refreshCaptcha()">&nbsp;</span>
-
-						</td>
-						<td>
-							<input id="user_captcha" title="<?php echo JText::_('ERROR_CAPTCHA'); ?>" class="inputbox captchafield required" type="text" name="acycaptcha" style="width:50px" />
-						</td>
+						<?php
+							$captchaClass = acymailing_get('class.acycaptcha');
+							$captchaClass->display();
+						?>
 					</tr>
 				</table>
 				<button class="btn btn-primary" type="submit" value="sendarchive" name="task"/><?php echo JText::_('SEND'); ?></button>

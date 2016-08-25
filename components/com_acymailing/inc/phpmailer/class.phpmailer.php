@@ -1164,7 +1164,6 @@ class acymailingPHPMailer
             // Choose the mailer and send through it
             switch ($this->Mailer) {
                 case 'sendmail':
-                case 'qmail':
                     return $this->sendmailSend($this->MIMEHeader, $this->MIMEBody);
                 case 'smtp':
                     return $this->smtpSend($this->MIMEHeader, $this->MIMEBody);
@@ -1174,6 +1173,7 @@ class acymailingPHPMailer
 					if (!$result) $this->setError($this->{$this->Mailer}->error);
 					return $result;
                 case 'mail':
+				case 'qmail':
                     return $this->mailSend($this->MIMEHeader, $this->MIMEBody);
                 default:
                     $sendMethod = $this->Mailer.'Send';

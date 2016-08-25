@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -34,8 +34,8 @@ class NewsletterController extends acymailingController{
 		if(!empty($this->copySendDate)) $addSendDate = ', `senddate`';
 
 		foreach($cids as $oneMailid){
-			$query = 'INSERT INTO `#__acymailing_mail` (`subject`, `body`, `altbody`, `published`'.$addSendDate.', `created`, `fromname`, `fromemail`, `replyname`, `replyemail`, `type`, `visible`, `userid`, `alias`, `attach`, `html`, `tempid`, `key`, `frequency`, `params`,`filter`,`metakey`,`metadesc`)';
-			$query .= " SELECT CONCAT('copy_',`subject`), `body`, `altbody`, 0".$addSendDate.", '.$time.', `fromname`, `fromemail`, `replyname`, `replyemail`, `type`, `visible`, '.$creatorId.', `alias`, `attach`, `html`, `tempid`, ".$db->Quote(acymailing_generateKey(8)).', `frequency`, `params`,`filter`,`metakey`,`metadesc` FROM `#__acymailing_mail` WHERE `mailid` = '.(int)$oneMailid;
+			$query = 'INSERT INTO `#__acymailing_mail` (`subject`, `body`, `altbody`, `published`'.$addSendDate.', `created`, `fromname`, `fromemail`, `replyname`, `replyemail`, `bccaddresses`, `type`, `visible`, `userid`, `alias`, `attach`, `html`, `tempid`, `key`, `frequency`, `params`,`filter`,`metakey`,`metadesc`)';
+			$query .= " SELECT CONCAT('copy_',`subject`), `body`, `altbody`, 0".$addSendDate.", '.$time.', `fromname`, `fromemail`, `replyname`, `replyemail`, `bccaddresses`, `type`, `visible`, '.$creatorId.', `alias`, `attach`, `html`, `tempid`, ".$db->Quote(acymailing_generateKey(8)).', `frequency`, `params`,`filter`,`metakey`,`metadesc` FROM `#__acymailing_mail` WHERE `mailid` = '.(int)$oneMailid;
 			$db->setQuery($query);
 			$db->query();
 			$newMailid = $db->insertid();
@@ -99,6 +99,14 @@ class NewsletterController extends acymailingController{
 	function savepreview(){
 		$this->store();
 		return $this->preview();
+	}
+
+
+	function saveastmpl(){
+		$this->store();
+		$mailclass = acymailing_get('class.mail');
+		$mailclass->saveastmpl();
+		return $this->edit();
 	}
 
 	function preview(){
@@ -212,7 +220,7 @@ class NewsletterController extends acymailingController{
 		$newMailid = $mailClass->complete_abtest('manual', $mailid);
 
 		$finalMail = $mailClass->get($newMailid);
-		acymailing_display(JText::sprintf('ABTESTING_FINALSEND', $finalMail->subject), 'info');
+		acymailing_enqueueMessage(JText::sprintf('ABTESTING_FINALSEND', $finalMail->subject), 'info');
 		JRequest::setVar('validationStatus', 'abTestFinalSend');
 		$this->abtesting();
 	}

@@ -37,7 +37,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
 	//-----------------------//
-	// Changes by Acymailing from previous version
+	// Changes by AcyMailing from previous version
 	config.startupFocus = false;
 	config.fillEmptyBlocks = false;
 	config.filebrowserBrowseUrl = '';
@@ -50,4 +50,5 @@ CKEDITOR.editorConfig = function( config ) {
 	config.disableNativeSpellChecker = false;
 	// Acyba: Added to prevent default styles in style dropdown
 	config.stylesSet = [];
+	config.entities_greek = false;
 };

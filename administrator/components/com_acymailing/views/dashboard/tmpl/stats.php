@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -19,7 +19,7 @@ defined('_JEXEC') or die('Restricted access');
 						<circle class="bar" r="80" cx="89" cy="89" fill="transparent" stroke-dasharray="502.4" stroke-dashoffset="0"></circle>
 					</svg>
 				</div>
-				<span class="circle_title"><?php echo JText::_('USERS'); ?></span>
+				<span class="circle_title"><?php echo JText::_('ACY_DASHBOARD_USERS'); ?></span>
 				<span class="circle_informations">
 					<span class="stats_blue_point"></span> <?php echo JText::_('ENABLED'); ?>
 					<span class="stats_grey_point"></span> <?php echo JText::_('DISABLED'); ?>
@@ -37,7 +37,7 @@ defined('_JEXEC') or die('Restricted access');
 						<circle class="bar" r="80" cx="89" cy="89" fill="transparent" stroke-dasharray="502.4" stroke-dashoffset="0"></circle>
 					</svg>
 				</div>
-				<span class="circle_title"><?php echo JText::_('LISTS'); ?></span>
+				<span class="circle_title"><?php echo JText::_('ACY_DASHBOARD_LISTS'); ?></span>
 				<span class="circle_informations">
 					<span class="stats_green_point"></span> <?php echo JText::_('ACY_ATLEASTONE'); ?>
 					<span class="stats_grey_point"></span> <?php echo JText::_('ACY_NOSUB'); ?>
@@ -54,7 +54,7 @@ defined('_JEXEC') or die('Restricted access');
 						<circle class="bar" r="80" cx="89" cy="89" fill="transparent" stroke-dasharray="502.4" stroke-dashoffset="0"></circle>
 					</svg>
 				</div>
-				<span class="circle_title"><?php echo JText::_('NEWSLETTER'); ?></span>
+				<span class="circle_title"><?php echo JText::_('ACY_DASHBOARD_NEWSLETTERS'); ?></span>
 				<span class="circle_informations">
 					<span class="stats_darkblue_point"></span> <?php echo JText::_('ACY_PUBLISHED'); ?>
 					<span class="stats_grey_point"></span> <?php echo JText::_('ACY_UNPUBLISHED'); ?>

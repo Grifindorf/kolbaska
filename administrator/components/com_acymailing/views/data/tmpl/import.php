@@ -1,13 +1,14 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
-?><div id="acy_content">
+?><?php $config = acymailing_config(); ?>
+<div id="acy_content">
 	<div id="iframedoc"></div>
 	<form action="<?php echo JRoute::_('index.php?option='.ACYMAILING_COMPONENT); ?>" method="post" name="adminForm" enctype="multipart/form-data" id="adminForm">
 		<input type="hidden" name="option" value="<?php echo ACYMAILING_COMPONENT; ?>"/>
@@ -33,7 +34,7 @@ defined('_JEXEC') or die('Restricted access');
 				} ?>
 			</div>
 			<div class="<?php echo $this->isAdmin ? 'acyblockoptions' : 'onelineblockoptions'; ?>" id="importlists">
-				<span class="acyblocktitle"><?php echo JText::_('IMPORT_SUBSCRIBE'); ?></span>
+				<span class="acyblocktitle"><?php echo JText::_('SUBSCRIPTION'); ?></span>
 				<?php if(acymailing_isAllowed($this->config->get('acl_lists_manage', 'all'))){ ?>
 					<table class="acymailing_table" cellpadding="1">
 						<tr class="<?php echo "row1"; ?>" id="importcreatelist">

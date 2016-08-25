@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -97,11 +97,15 @@ class templateClass extends acymailingClass{
 
 		if(empty($template->thumb)){
 			unset($template->thumb);
-		}elseif($template->thumb == 'delete') $template->thumb = '';
+		}elseif($template->thumb == 'delete'){
+			$template->thumb = '';
+		}
 
 		if(empty($template->readmore)){
 			unset($template->readmore);
-		}elseif($template->readmore == 'delete') $template->readmore = '';
+		}elseif($template->readmore == 'delete'){
+			$template->readmore = '';
+		}
 
 		$template->body = JRequest::getVar('editor_body', '', '', 'string', JREQUEST_ALLOWRAW);
 		if(ACYMAILING_J25) $template->body = JComponentHelper::filterText($template->body);
@@ -826,12 +830,8 @@ class templateClass extends acymailingClass{
 		$tmp_url_dest = $jpathURL.DS.$tmpdir;
 		$jpath = ACYMAILING_MEDIA.'tmp';
 		$tmp_dest = JPath::clean($jpath.DS.$tmpdir);
-		if(!JFolder::exists($jpath)){
-			if(!JFolder::create($jpath)){
-				acymailing_enqueueMessage('Error creating temp folder in directory: '.$jpath, 'error');
-				return false;
-			}
-		}
+		acymailing_createDir($jpath, true);
+
 		if(!JFolder::create($tmp_dest)){
 			acymailing_enqueueMessage('Error creating folder in temp directory: '.$tmp_dest, 'error');
 			return false;

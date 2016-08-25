@@ -1,9 +1,9 @@
 <?php
 /**
  * @package	AcyMailing for Joomla!
- * @version	5.0.1
+ * @version	5.5.0
  * @author	acyba.com
- * @copyright	(C) 2009-2015 ACYBA S.A.R.L. All rights reserved.
+ * @copyright	(C) 2009-2016 ACYBA S.A.R.L. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 <?php
 
 class plgAcymailingTagcontent extends JPlugin{
-	public function plgAcymailingTagcontent(&$subject, $config){
+	public function __construct(&$subject, $config){
 		parent::__construct($subject, $config);
 		if(!isset($this->params)){
 			$plugin = JPluginHelper::getPlugin('acymailing', 'tagcontent');
@@ -293,7 +293,7 @@ class plgAcymailingTagcontent extends JPlugin{
 			</table>
 		</div>
 		<div class="onelineblockoptions">
-			<table>
+			<table class="acymailing_table_options">
 				<tr>
 					<td width="100%">
 						<?php acymailing_listingsearch($pageInfo->search); ?>
@@ -535,8 +535,7 @@ class plgAcymailingTagcontent extends JPlugin{
 					tag += '| lang:' + window.document.getElementById('jflangauto').value;
 				}
 				if(window.document.getElementById('jlang') && window.document.getElementById('jlang').value != ''){
-					tag += '| language:';
-					tag += window.document.getElementById('jlang').value;
+					tag += '| language:' + window.document.getElementById('jlang').value;
 				}
 
 				if(window.document.getElementById('tagsauto')){
@@ -645,6 +644,7 @@ class plgAcymailingTagcontent extends JPlugin{
 					<td>
 						<?php
 						$values = array('id' => 'ACY_ID', 'ordering' => 'ACY_ORDERING', 'created' => 'CREATED_DATE', 'modified' => 'MODIFIED_DATE', 'title' => 'FIELD_TITLE');
+						if(ACYMAILING_J16) $values['publish_up'] = 'COM_CONTENT_PUBLISHED_DATE';
 						echo $this->acypluginsHelper->getOrderingField($values, 'id', 'DESC', 'updateAutoTag');
 						?>
 					</td>
@@ -714,7 +714,7 @@ class plgAcymailingTagcontent extends JPlugin{
 						</td>
 					</tr>
 
-				<?php
+					<?php
 				}
 
 				$k = 1 - $k;
@@ -752,7 +752,7 @@ class plgAcymailingTagcontent extends JPlugin{
 								?>
 							</td>
 						</tr>
-					<?php
+						<?php
 					}else{ ?>
 						<tr id="content_cat<?php echo $row->id ?>" class="<?php echo "row$k"; ?>" onclick="applyAutoContent(<?php echo $row->id ?>,'<?php echo "row$k" ?>');" style="cursor:pointer;">
 							<td class="acytdcheckbox"></td>
@@ -809,7 +809,6 @@ class plgAcymailingTagcontent extends JPlugin{
 	}
 
 	private function _replaceContent(&$tag){
-
 		$oldFormat = empty($tag->format);
 
 		if(!ACYMAILING_J16){
@@ -890,7 +889,7 @@ class plgAcymailingTagcontent extends JPlugin{
 
 		if(!empty($tag->itemid)) $link .= '&Itemid='.$tag->itemid;
 
-		if(!empty($tag->lang)) $link .= (strpos($link, '?') ? '&' : '?').'lang='.substr($tag->lang, 0, strpos($tag->lang, ','));
+		if(!empty($tag->lang)) $link .= (strpos($link, '?') ? '&' : '?').'lang='.substr($tag->lang, 0, strpos($tag->lang, ACYMAILING_J16 ? '-' : ','));
 		if(!empty($tag->autologin)) $link .= (strpos($link, '?') ? '&' : '?').'user={usertag:username|urlencode}&passw={usertag:password|urlencode}';
 
 		if(empty($tag->lang) && !empty($article->language) && $article->language != '*'){
@@ -1022,13 +1021,6 @@ class plgAcymailingTagcontent extends JPlugin{
 				}
 			}
 
-			$readMoreText = empty($tag->readmore) ? $this->readmore : $tag->readmore;
-			$varFields['{readmore}'] = '<a style="text-decoration:none;" target="_blank" href="'.$link.'"><span class="acymailing_readmore">'.$readMoreText.'</span></a>';
-
-			if($tag->type == "intro" && empty($tag->noreadmore) && (!empty($article->fulltext) || $forceReadMore)){
-				$contentText .= ' '.$varFields['{readmore}'];
-			}
-
 			if(!empty($tag->share)){
 				$links = array();
 				$shareOpt = explode(',', $tag->share);
@@ -1081,6 +1073,14 @@ class plgAcymailingTagcontent extends JPlugin{
 					$afterArticle .= ' <a href="index.php?option=com_tags&view=tag&id='.$oneTag->id.'-'.$oneTag->alias.'">'.$oneTag->title.'</a> ';
 				}
 			}
+		}
+
+		$readMoreText = empty($tag->readmore) ? $this->readmore : $tag->readmore;
+		$varFields['{readmore}'] = '<a class="acymailing_readmore_link" style="text-decoration:none;" target="_blank" href="'.$link.'"><span class="acymailing_readmore">'.$readMoreText.'</span></a>';
+
+		if($tag->type == "intro" && empty($tag->noreadmore) && (!empty($article->fulltext) || $forceReadMore)){
+			if(!empty($afterArticle)) $afterArticle .= '<br />';
+			$afterArticle .= $varFields['{readmore}'];
 		}
 
 		$format = new stdClass();
